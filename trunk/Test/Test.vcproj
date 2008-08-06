@@ -283,14 +283,6 @@
 				RelativePath=".\res\Test.rc2"
 				>
 			</File>
-			<File
-				RelativePath=".\res\TestDoc.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\res\Toolbar.bmp"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
