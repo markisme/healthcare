@@ -1,11 +1,6 @@
-// ScrollDlg.cpp : 구현 파일입니다.
-//
-
 #include "stdafx.h"
 #include "ScrollDlg.h"
 
-
-// ScrollDlg 대화 상자입니다.
 
 IMPLEMENT_DYNAMIC(ScrollDlg, CDialog)
 ScrollDlg::ScrollDlg(DWORD id, CWnd* pParent /*=NULL*/)
