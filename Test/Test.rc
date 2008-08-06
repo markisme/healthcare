@@ -66,34 +66,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\Test.ico"
-IDR_TestTYPE            ICON                    "res\\TestDoc.ico"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Toolbar
-//
-
-IDR_MAINFRAME TOOLBAR  16, 15
-BEGIN
-    BUTTON      ID_FILE_NEW
-    BUTTON      ID_FILE_OPEN
-    BUTTON      ID_FILE_SAVE
-    SEPARATOR
-    BUTTON      ID_EDIT_CUT
-    BUTTON      ID_EDIT_COPY
-    BUTTON      ID_EDIT_PASTE
-    SEPARATOR
-    BUTTON      ID_FILE_PRINT
-    BUTTON      ID_APP_ABOUT
-END
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
