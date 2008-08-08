@@ -35,6 +35,14 @@ public:
 private:
 	CListBox _userList;
 	CListCtrl _dataList;
+	CListCtrl _userDataList;
+
+	CComboBox _yearList;
+	CComboBox _monthList;
+	CComboBox _dayList;
+	CComboBox _hourList;
+
+	CStatic _image;
 	CTestView * m_wndView;
 
 	struct HealthInfo
@@ -48,6 +56,7 @@ private:
 	
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);	
+public:
 	afx_msg void OnLbnSelchangeUserList();
 };
