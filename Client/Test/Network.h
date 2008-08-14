@@ -7,10 +7,19 @@
 #include "RakNetTypes.h"
 #include "BitStream.h"
 #include <assert.h>
-//#include <cstdio>
-//#include <cstring>
-//#include <stdlib.h>
-//#include <windows.h> // Sleep
+#include <vector>
+
+struct PacketData
+{
+	PacketData( int x = 0, int y = 0 ) : _x( x ), _y( y ) {};
+	~PacketData() {};
+
+	int _x;
+	int _y;
+	int _temp;
+};
+
+typedef std::vector<PacketData> DataList;
 
 class Network
 {
@@ -26,8 +35,10 @@ public:
 
 	static Network & GetInstance() { return _instance; }
 
+	DataList & GetDataList() { return _dataList; }
+
 private:
 	static Network _instance;
-
 	RakPeerInterface * _client;
+	DataList _dataList;
 };

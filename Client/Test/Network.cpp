@@ -3,8 +3,6 @@
 
 Network Network::_instance;
 
-unsigned char GetPacketIdentifier(Packet *p);
-
 Network::Network()
 {
 }
@@ -22,7 +20,7 @@ void Network::Init()
 	char ip[30], serverPort[30], clientPort[30];
 
 	strcpy(clientPort, "200");
-	strcpy(ip, "211.189.19.161");
+	strcpy(ip, "211.189.19.160");
 	strcpy(serverPort, "10000");
 
 	_client->AllowConnectionResponseIPMigration(false);	
@@ -51,13 +49,16 @@ void Network::ProcPacket()
 		Sleep(30);
 
 		Packet* p;
-		unsigned char packetIdentifier;
-
 		p = _client->Receive();
+
 		if (p==0)
 			return; // Didn't get any packets
 
-		packetIdentifier = GetPacketIdentifier(p);
+		RakNet::BitStream inStream( p->data, p->bitSize, false );
+
+		unsigned char packetIdentifier;
+		inStream.Read( packetIdentifier );
+
 		switch (packetIdentifier)
 		{
 			case ID_DISCONNECTION_NOTIFICATION:
@@ -97,24 +98,13 @@ void Network::ProcPacket()
 				printf("ID_CONNECTION_REQUEST_ACCEPTED\n");
 				break;
 			default:
-					printf("%s\n", p->data);
+				PacketData data;
+				inStream.Read( data );
+
+				_dataList.push_back( data );
 				break;
 		}
 
 		_client->DeallocatePacket(p);
 	}
-}
-
-unsigned char GetPacketIdentifier(Packet *p)
-{
-	if (p==0)
-		return 255;
-
-	if ((unsigned char)p->data[0] == ID_TIMESTAMP)
-	{
-		assert(p->length > sizeof(unsigned char) + sizeof(unsigned long));
-		return (unsigned char) p->data[sizeof(unsigned char) + sizeof(unsigned long)];
-	}
-	else
-		return (unsigned char) p->data[0];
 }
