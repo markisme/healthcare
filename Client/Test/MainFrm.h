@@ -2,8 +2,6 @@
 
 #include "MainDlg.h"
 
-class RakPeerInterface;
-
 class CMainFrame : public CMDIFrameWnd
 {
 	DECLARE_DYNAMIC(CMainFrame)
@@ -11,9 +9,6 @@ class CMainFrame : public CMDIFrameWnd
 public:
 	CMainFrame();
 	virtual ~CMainFrame();
-
-	RakPeerInterface * GetClient() { return _client; }
-	void SetClient( RakPeerInterface * client ) { _client = client; }
 
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
@@ -24,7 +19,6 @@ protected:
 
 private:
 	MainDlg _mainDlg;
-	RakPeerInterface * _client;
 };
 
 

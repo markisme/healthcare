@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Test.h"
 #include "TestView.h"
+#include "Network.h"
 
 // CTestView
 
@@ -44,23 +45,24 @@ void CTestView::OnDraw(CDC* pDC)
 
 	pDC->MoveTo(0,100);
 
-	for(int num=0; num<50; num++)
+	for(int num=0; num<30; num++)
 	{
 		for(int cnt=0; cnt<10; cnt++)
 		{
 			int x = (num*10) + cnt;
 			int y = 50 + rand() % 10 * 10;
 			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
-			pDC->LineTo(x,y);
+
+			char message[100];
+			sprintf( message, "%d,%d", x, y );
+
+			RakPeerInterface * client = Network::GetInstance().GetClient();
+			if( client )
+			{
+				client->Send(message, (int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+			}
+
+			Sleep(10);
 		}		
 	}
 

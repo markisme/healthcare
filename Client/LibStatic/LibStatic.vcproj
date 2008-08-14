@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="LibStatic"
 	ProjectGUID="{8EE9988F-7557-430F-B3E3-7FB5505BBB94}"
+	RootNamespace="LibStatic"
 	>
 	<Platforms>
 		<Platform
@@ -15,6 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			>
 			<Tool
