@@ -52,7 +52,7 @@ void CTestView::OnDraw(CDC* pDC)
 	for( int num = 0; num < count; num++ )
 	{
 		PacketData data = dataList[ num ];
-		pDC->LineTo( data->_x, data->_y );
+		pDC->LineTo( data._x, data._y );
 	}
 
 	//for(int num=0; num<20; num++)
