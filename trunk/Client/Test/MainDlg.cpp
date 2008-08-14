@@ -3,7 +3,7 @@
 #include "MainFrm.h"
 
 #include "RakPeerInterface.h"
-#include "BitStream.h"
+#include "Network.h"
 
 
 IMPLEMENT_DYNAMIC(MainDlg, ScrollDlg)
@@ -314,13 +314,9 @@ void MainDlg::OnLbnSelchangeUserList()
 
 void MainDlg::OnBnClickedButton1()
 {
-	RakNet::BitStream bitStream;
-	bitStream.Write("ttt");
-
-	RakPeerInterface * client = m_mainFrame->GetClient();
-	//SystemAddress addr = client->GetSystemAddressFromIndex(0);
-	//client->Send(&bitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, false);
 	char message[100];
 	strcpy(message,"aaa");
+
+	RakPeerInterface * client = Network::GetInstance().GetClient();
 	client->Send(message, (int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
 }
