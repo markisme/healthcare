@@ -7,6 +7,8 @@
 #include <map>
 #include <string>
 
+class CMainFrame;
+
 class MainDlg : public ScrollDlg
 {
 	DECLARE_DYNAMIC(MainDlg)
@@ -44,6 +46,7 @@ private:
 
 	CStatic _image;
 	CTestView * m_wndView;
+	CMainFrame * m_mainFrame;
 
 	struct HealthInfo
 	{
@@ -59,4 +62,6 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);	
 public:
 	afx_msg void OnLbnSelchangeUserList();
+public:
+	afx_msg void OnBnClickedButton1();
 };

@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "MainDlg.h"
+#include "MainFrm.h"
+
+#include "RakPeerInterface.h"
+#include "BitStream.h"
 
 
 IMPLEMENT_DYNAMIC(MainDlg, ScrollDlg)
@@ -30,6 +34,7 @@ BEGIN_MESSAGE_MAP(MainDlg, ScrollDlg)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
 	ON_LBN_SELCHANGE(IDC_USER_LIST, &MainDlg::OnLbnSelchangeUserList)
+	ON_BN_CLICKED(IDC_BUTTON1, &MainDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 BOOL MainDlg::OnInitDialog()
@@ -136,6 +141,10 @@ BOOL MainDlg::OnInitDialog()
 
 BOOL MainDlg::Init( CWnd* parent )
 {
+	//
+	m_mainFrame = (CMainFrame*)parent;
+
+	//
 	this->Create( IDD_FORMVIEW, parent );
 	this->SetParent( parent );
 	this->ShowWindow( true );
@@ -301,4 +310,17 @@ void MainDlg::OnLbnSelchangeUserList()
 		HBITMAP hBmp = (HBITMAP)LoadImage(NULL, pic, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		_image.SetBitmap( hBmp );
 	}
+}
+
+void MainDlg::OnBnClickedButton1()
+{
+	RakNet::BitStream bitStream;
+	bitStream.Write("ttt");
+
+	RakPeerInterface * client = m_mainFrame->GetClient();
+	//SystemAddress addr = client->GetSystemAddressFromIndex(0);
+	//client->Send(&bitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, false);
+	char message[100];
+	strcpy(message,"aaa");
+	client->Send(message, (int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
 }
