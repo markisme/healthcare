@@ -37,6 +37,8 @@ public:
 
 	DataList & GetDataList() { return _dataList; }
 
+	BOOL _isHost;
+
 private:
 	static Network _instance;
 	RakPeerInterface * _client;

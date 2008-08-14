@@ -20,8 +20,6 @@
 #include "Console2SampleIncludes.h"
 #endif
 
-unsigned char GetPacketIdentifier(Packet *p);
-
 #ifdef _CONSOLE_2
 _CONSOLE_2_SetSystemProcessParams
 #endif
@@ -69,7 +67,11 @@ int main(void)
 		if (p==0)
 			continue;
 
-		packetIdentifier = GetPacketIdentifier(p);
+		RakNet::BitStream inStream( p->data, p->length, false );
+		
+		unsigned char packetIdentifier;
+		inStream.Read( packetIdentifier );
+
 		switch (packetIdentifier)
 		{
 			case ID_DISCONNECTION_NOTIFICATION:
@@ -91,15 +93,21 @@ int main(void)
 				break;
 
 			default:
-				printf("%s\n", p->data);
+				//int x = 0;
+				//inStream.Read( x );
+				//
+				//int y = 0;
+				//inStream.Read( y );
 
-				//int count = _clientList.size();
-				//for( int num = 0; num < count; num++ )
+				//printf("%d, %d\n", x, y );
+
+				int count = _clientList.size();
+				for( int num = 0; num < count; num++ )
 				{
-					//if( _clientList[ num ] != p->systemAddress )
+					if( _clientList[ num ] != p->systemAddress )
 					{
 						sprintf(message, "%s", p->data);
-						server->Send(message, (const int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, true);
+						server->Send(&inStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, _clientList[ num ], false);
 					}
 				}
 			
@@ -113,18 +121,4 @@ int main(void)
 	RakNetworkFactory::DestroyRakPeerInterface(server);
 
 	return 0;
-}
-
-unsigned char GetPacketIdentifier(Packet *p)
-{
-	if (p==0)
-		return 255;
-
-	if ((unsigned char)p->data[0] == ID_TIMESTAMP)
-	{
-		assert(p->length > sizeof(unsigned char) + sizeof(unsigned long));
-		return (unsigned char) p->data[sizeof(unsigned char) + sizeof(unsigned long)];
-	}
-	else
-		return (unsigned char) p->data[0];
 }
