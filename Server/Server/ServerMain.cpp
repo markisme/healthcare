@@ -14,6 +14,7 @@
 #endif
 #include <stdio.h>
 #include <string.h>
+#include <vector>
 
 #if defined(_CONSOLE_2)
 #include "Console2SampleIncludes.h"
@@ -37,6 +38,7 @@ int main(void)
 
 	unsigned char packetIdentifier;
 
+	std::vector<SystemAddress> _clientList;
 	SystemAddress clientID=UNASSIGNED_SYSTEM_ADDRESS;
 
 	char portstring[30];
@@ -77,6 +79,7 @@ int main(void)
 			case ID_NEW_INCOMING_CONNECTION:
 				printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
 				clientID=p->systemAddress;
+				_clientList.push_back( clientID );
 				break;
 
 			case ID_MODIFIED_PACKET:
@@ -90,8 +93,15 @@ int main(void)
 			default:
 				printf("%s\n", p->data);
 
-				//sprintf(message, "%s", p->data);
-				//server->Send(message, (const int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, true);
+				//int count = _clientList.size();
+				//for( int num = 0; num < count; num++ )
+				{
+					//if( _clientList[ num ] != p->systemAddress )
+					{
+						sprintf(message, "%s", p->data);
+						server->Send(message, (const int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, true);
+					}
+				}
 			
 				break;
 		}
