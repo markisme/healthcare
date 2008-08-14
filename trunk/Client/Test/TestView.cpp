@@ -46,39 +46,44 @@ void CTestView::OnDraw(CDC* pDC)
 
 	pDC->MoveTo(0,100);
 
-	DataList dataList = Network::GetInstance().GetDataList();
-
-	int count = dataList.size();
-	for( int num = 0; num < count; num++ )
+	if( Network::GetInstance()._isHost )
 	{
-		PacketData data = dataList[ num ];
-		pDC->LineTo( data._x, data._y );
+		// 호스트 이면 받은 데이터로 라인 그리기
+		DataList dataList = Network::GetInstance().GetDataList();
+		
+		int count = dataList.size();
+		for( int num = 0; num < count; num++ )
+		{
+			PacketData data = dataList[ num ];
+			pDC->LineTo( data._x, data._y );
+		}
 	}
+	else
+	{
+		// 호스트가 아니면 라인 그려서 보내기
+		for(int num=0; num<20; num++)
+		{
+			for(int cnt=0; cnt<10; cnt++)
+			{
+				int x = (num*20) + cnt;
+				int y = 50 + rand() % 10 * 10;
+				pDC->LineTo(x,y);
 
-	//for(int num=0; num<20; num++)
-	//{
-	//	for(int cnt=0; cnt<10; cnt++)
-	//	{
-	//		int x = (num*20) + cnt;
-	//		int y = 50 + rand() % 10 * 10;
-	//		pDC->LineTo(x,y);
+				char message[100];
+				sprintf( message, "%d,%d", x, y );
 
-	//		char message[100];
-	//		sprintf( message, "%d,%d", x, y );
+				RakNet::BitStream outBuffer;
+				outBuffer.Write( (unsigned char)13 );
+				outBuffer.Write( PacketData( x, y ) );
 
-	//		RakNet::BitStream outBuffer;
-	//		outBuffer.Write( (unsigned char)13 );
-	//		outBuffer.Write( PacketData( x, y ) );
+				RakPeerInterface * client = Network::GetInstance().GetClient();
+				if( client )
+				{
+					client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+				}
 
-	//		RakPeerInterface * client = Network::GetInstance().GetClient();
-	//		if( client )
-	//		{
-	//			client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
-	//		}
-
-	//		Sleep(10);
-	//	}		
-	//}
-
-	//Sleep(1000);
+				Sleep(10);
+			}		
+		}
+	}
 }
