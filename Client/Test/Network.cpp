@@ -19,7 +19,9 @@ void Network::Init()
 	SystemAddress clientID=UNASSIGNED_SYSTEM_ADDRESS;
 	char ip[30], serverPort[30], clientPort[30];
 
+	Network::GetInstance()._isHost = true;
 	strcpy(clientPort, "200");
+
 	strcpy(ip, "211.189.19.160");
 	strcpy(serverPort, "10000");
 
