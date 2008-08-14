@@ -16,13 +16,14 @@
 #include <string.h>
 #include <vector>
 
-#if defined(_CONSOLE_2)
-#include "Console2SampleIncludes.h"
-#endif
+#include "CommonType.h"
+#include "msgID.h"
 
-#ifdef _CONSOLE_2
-_CONSOLE_2_SetSystemProcessParams
-#endif
+struct PeerType
+{
+	SystemAddress _addr;
+	bool _isHost;
+};
 
 int main(void)
 {
@@ -36,7 +37,7 @@ int main(void)
 
 	unsigned char packetIdentifier;
 
-	std::vector<SystemAddress> _clientList;
+	std::vector<PeerType> _peerList;
 	SystemAddress clientID=UNASSIGNED_SYSTEM_ADDRESS;
 
 	char portstring[30];
@@ -75,42 +76,62 @@ int main(void)
 		switch (packetIdentifier)
 		{
 			case ID_DISCONNECTION_NOTIFICATION:
-				printf("ID_DISCONNECTION_NOTIFICATION\n");
+				{
+					printf("ID_DISCONNECTION_NOTIFICATION\n");
+				}
 				break;
 		
 			case ID_NEW_INCOMING_CONNECTION:
-				printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
-				clientID=p->systemAddress;
-				_clientList.push_back( clientID );
-				break;
+				{
+					printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
 
-			case ID_MODIFIED_PACKET:
-				printf("ID_MODIFIED_PACKET\n");
+					RakNet::BitStream stream;
+					stream.Write( MessageType::S2CH_SUCCESS_CONNECTED );
+					server->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+				}
 				break;
 
 			case ID_CONNECTION_LOST:
-				printf("ID_CONNECTION_LOST\n");
+				{
+					printf("ID_CONNECTION_LOST\n");
+				}
+				break;
+
+			case C2S_CLIENT_REQ:
+				{
+					PeerType type;
+					type._addr = p->systemAddress;
+					type._isHost = false;
+					_peerList.push_back( type );
+				}
+				break;
+
+			case H2S_HOST_REQ:
+				{
+					PeerType type;
+					type._addr = p->systemAddress;
+					type._isHost = true;
+					_peerList.push_back( type );
+				}
 				break;
 
 			default:
-				//int x = 0;
-				//inStream.Read( x );
-				//
-				//int y = 0;
-				//inStream.Read( y );
-
-				//printf("%d, %d\n", x, y );
-
-				int count = _clientList.size();
-				for( int num = 0; num < count; num++ )
 				{
-					if( _clientList[ num ] != p->systemAddress )
+					PacketData data;				
+					inStream.Read( data );
+
+					printf("%d, %d\n", data._x, data._y );
+
+					int count = _peerList.size();
+					for( int num = 0; num < count; num++ )
 					{
-						sprintf(message, "%s", p->data);
-						server->Send(&inStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, _clientList[ num ], false);
+						if( _peerList[ num ]._isHost )
+						{
+							sprintf(message, "%s", p->data);
+							server->Send(&inStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, _peerList[ num ]._addr, false);
+						}
 					}
 				}
-			
 				break;
 		}
 

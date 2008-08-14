@@ -43,68 +43,74 @@ void Network::Uninit()
 
 void Network::ProcPacket()
 {
-	// Loop for input
-	//while (1)
+	Sleep(30);
+
+	Packet* p;
+	p = _client->Receive();
+
+	if (p==0)
+		return; // Didn't get any packets
+
+	RakNet::BitStream inStream( p->data, p->length, false );
+
+	unsigned char packetIdentifier;
+	inStream.Read( packetIdentifier );
+
+	switch (packetIdentifier)
 	{
-		Sleep(30);
-
-		Packet* p;
-		p = _client->Receive();
-
-		if (p==0)
-			return; // Didn't get any packets
-
-		RakNet::BitStream inStream( p->data, p->bitSize, false );
-
-		unsigned char packetIdentifier;
-		inStream.Read( packetIdentifier );
-
-		switch (packetIdentifier)
+	case ID_DISCONNECTION_NOTIFICATION:
+		printf("ID_DISCONNECTION_NOTIFICATION\n");
+		break;
+	case ID_ALREADY_CONNECTED:
+		printf("ID_ALREADY_CONNECTED\n");
+		break;
+	case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+		printf("ID_REMOTE_DISCONNECTION_NOTIFICATION\n");
+		break;
+	case ID_REMOTE_CONNECTION_LOST:
+		printf("ID_REMOTE_CONNECTION_LOST\n");
+		break;
+	case ID_CONNECTION_ATTEMPT_FAILED:
+		printf("Connection attempt failed\n");
+		break;
+	case ID_NO_FREE_INCOMING_CONNECTIONS:
+		printf("ID_NO_FREE_INCOMING_CONNECTIONS\n");
+		break;
+	case ID_MODIFIED_PACKET:
+		printf("ID_MODIFIED_PACKET\n");
+		break;
+	case ID_INVALID_PASSWORD:
+		printf("ID_INVALID_PASSWORD\n");
+		break;
+	case ID_CONNECTION_LOST:
+		printf("ID_CONNECTION_LOST\n");
+		break;
+	case ID_CONNECTION_REQUEST_ACCEPTED:
+		printf("ID_CONNECTION_REQUEST_ACCEPTED\n");
+		break;
+	case S2CH_SUCCESS_CONNECTED:
 		{
-			case ID_DISCONNECTION_NOTIFICATION:
-				printf("ID_DISCONNECTION_NOTIFICATION\n");
-				break;
-			case ID_ALREADY_CONNECTED:
-				printf("ID_ALREADY_CONNECTED\n");
-				break;
-			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				printf("ID_REMOTE_DISCONNECTION_NOTIFICATION\n");
-				break;
-			case ID_REMOTE_CONNECTION_LOST:
-				printf("ID_REMOTE_CONNECTION_LOST\n");
-				break;
-			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				printf("ID_REMOTE_NEW_INCOMING_CONNECTION\n");
-				break;
-			case ID_CONNECTION_BANNED:
-				printf("We are banned from this server.\n");
-				break;			
-			case ID_CONNECTION_ATTEMPT_FAILED:
-				printf("Connection attempt failed\n");
-				break;
-			case ID_NO_FREE_INCOMING_CONNECTIONS:
-				printf("ID_NO_FREE_INCOMING_CONNECTIONS\n");
-				break;
-			case ID_MODIFIED_PACKET:
-				printf("ID_MODIFIED_PACKET\n");
-				break;
-			case ID_INVALID_PASSWORD:
-				printf("ID_INVALID_PASSWORD\n");
-				break;
-			case ID_CONNECTION_LOST:
-				printf("ID_CONNECTION_LOST\n");
-				break;
-			case ID_CONNECTION_REQUEST_ACCEPTED:
-				printf("ID_CONNECTION_REQUEST_ACCEPTED\n");
-				break;
-			default:
-				PacketData data;
-				inStream.Read( data );
+			RakNet::BitStream stream;
+			if( Network::GetInstance()._isHost )
+			{
+				stream.Write( MessageType::C2S_CLIENT_REQ );
+			}
+			else
+			{
+				stream.Write( MessageType::H2S_HOST_REQ );
+			}
 
-				_dataList.push_back( data );
-				break;
+			_client->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 		}
+	default:
+		{
+			PacketData data;
+			inStream.Read( data );
 
-		_client->DeallocatePacket(p);
+			_dataList.push_back( data );
+		}
+		break;
 	}
+
+	_client->DeallocatePacket(p);
 }
