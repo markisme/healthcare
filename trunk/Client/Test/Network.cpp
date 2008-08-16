@@ -108,10 +108,10 @@ void Network::ProcPacket()
 		}
 	default:
 		{
-			PacketData data;
-			inStream.Read( data );
+			_dataList.clear();
+			inStream.Read( _dataList );
 
-			_dataList.push_back( data );
+			//_dataList.push_back( data );
 		}
 		break;
 	}

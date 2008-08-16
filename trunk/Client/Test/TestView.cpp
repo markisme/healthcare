@@ -63,6 +63,8 @@ void CTestView::OnDraw(CDC* pDC)
 	else
 	{
 		// 호스트가 아니면 라인 그려서 보내기
+		std::vector<PacketData> dataList;
+
 		for(int num=0; num<20; num++)
 		{
 			for(int cnt=0; cnt<10; cnt++)
@@ -71,21 +73,19 @@ void CTestView::OnDraw(CDC* pDC)
 				int y = 50 + rand() % 10 * 10;
 				pDC->LineTo(x,y);
 
-				char message[100];
-				sprintf( message, "%d,%d", x, y );
-
-				RakNet::BitStream outBuffer;
-				outBuffer.Write( (unsigned char)13 );
-				outBuffer.Write( PacketData( x, y ) );
-
-				RakPeerInterface * client = Network::GetInstance().GetClient();
-				if( client )
-				{
-					client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
-				}
-
+				dataList.push_back( PacketData( x, y ) );
 				Sleep(10);
 			}		
+		}
+
+		RakNet::BitStream outBuffer;
+		outBuffer.Write( (unsigned char)13 );
+		outBuffer.Write( dataList );
+
+		RakPeerInterface * client = Network::GetInstance().GetClient();
+		if( client )
+		{
+			client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
 		}
 	}
 }
