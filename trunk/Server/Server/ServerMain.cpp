@@ -133,20 +133,20 @@ int main(void)
 
 					// 보낼 패킷 쓰기
 					RakNet::BitStream outBuffer;
-					outBuffer.Write( MessageType::S2H_CLIENT_DATA_REQ );
+					outBuffer.Write( (unsigned char)MessageType::S2H_CLIENT_DATA_REQ );
 
-					count = dataList.size();
-					outBuffer.Write( count );
+					int dataCount = dataList.size();
+					outBuffer.Write( dataCount );
 		
-					for( int num = 0; num < count; num++ )
+					for( int num = 0; num < dataCount; num++ )
 					{
 						PacketData data = dataList[ num ];
 						outBuffer.Write( data );
 					}
 
 					// 호스트에게 패킷 보내기
-					count = _peerList.size();
-					for( int num = 0; num < count; num++ )
+					int peerCount = _peerList.size();
+					for( int num = 0; num < peerCount; num++ )
 					{
 						if( _peerList[ num ]._isHost )
 						{
