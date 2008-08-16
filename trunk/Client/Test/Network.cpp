@@ -19,10 +19,10 @@ void Network::Init()
 	SystemAddress clientID=UNASSIGNED_SYSTEM_ADDRESS;
 	char ip[30], serverPort[30], clientPort[30];
 
-	Network::GetInstance()._isHost = true;
+	Network::GetInstance()._isHost = false;
 	strcpy(clientPort, "200");
 
-	strcpy(ip, "211.189.19.160");
+	strcpy(ip, "192.168.0.3");
 	strcpy(serverPort, "10000");
 
 	_client->AllowConnectionResponseIPMigration(false);	
@@ -39,6 +39,8 @@ void Network::Init()
 
 void Network::Uninit()
 {
+	Sleep(300);
+
 	_client->Shutdown(300);
 	RakNetworkFactory::DestroyRakPeerInterface(_client);
 }
@@ -95,11 +97,11 @@ void Network::ProcPacket()
 			RakNet::BitStream stream;
 			if( Network::GetInstance()._isHost )
 			{
-				stream.Write( MessageType::C2S_CLIENT_REQ );
+				stream.Write( MessageType::H2S_HOST_REQ );
 			}
 			else
 			{
-				stream.Write( MessageType::H2S_HOST_REQ );
+				stream.Write( MessageType::C2S_CLIENT_REQ );
 			}
 
 			_client->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
