@@ -38,59 +38,19 @@ int CTestView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void CTestView::OnDraw(CDC* pDC)
 {
-	//Invalidate();
-
 	pDC->SetBkColor( COLORREF(0x00000000) );
 	pDC->SetDCPenColor( COLORREF(0x00ff0000) );
 	pDC->SetDCBrushColor( COLORREF(0x00ff0000) );
 
 	pDC->MoveTo(0,100);
 
-	if( Network::GetInstance()._isHost )
+	// 데이터 그리기
+	DataList & dataList = Network::GetInstance().GetDataList();
+
+	int count = dataList.size();
+	for( int num = 0; num < count; num++ )
 	{
-		// 호스트 이면 받은 데이터로 라인 그리기
-		DataList & dataList = Network::GetInstance().GetDataList();
-		
-		int count = dataList.size();
-		for( int num = 0; num < count; num++ )
-		{
-			PacketData data = dataList[ num ];
-			pDC->LineTo( data._x, data._y );
-		}
-	}
-	else
-	{
-		// 호스트가 아니면 라인 그려서 보내기
-		std::vector<PacketData> dataList;
-
-		for(int num=0; num<20; num++)
-		{
-			for(int cnt=0; cnt<10; cnt++)
-			{
-				int x = (num*20) + cnt;
-				int y = 50 + rand() % 10 * 10;
-				pDC->LineTo(x,y);
-
-				dataList.push_back( PacketData( x, y ) );
-			}		
-		}
-
-		RakNet::BitStream outBuffer;
-		outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
-
-		int count = dataList.size();
-		outBuffer.Write( count );
-
-		for( int num = 0; num < count; num++ )
-		{
-			PacketData data = dataList[ num ];
-			outBuffer.Write( data );
-		}
-
-		RakPeerInterface * client = Network::GetInstance().GetClient();
-		if( client )
-		{
-			client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
-		}
+		PacketData data = dataList[ num ];
+		pDC->LineTo( data._x, data._y );
 	}
 }

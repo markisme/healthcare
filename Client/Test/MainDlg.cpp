@@ -327,9 +327,40 @@ void MainDlg::OnLbnSelchangeUserList()
 
 void MainDlg::OnBnClickedButton1()
 {
-	char message[100];
-	strcpy(message,"aaa");
+	// 데이터 서버로 날리기
+	DataList dataList;
+
+	for(int num=0; num<20; num++)
+	{
+		for(int cnt=0; cnt<10; cnt++)
+		{
+			int x = (num*20) + cnt;
+			int y = 50 + rand() % 10 * 10;
+
+			dataList.push_back( PacketData( x, y ) );
+		}		
+	}
+
+	RakNet::BitStream outBuffer;
+	outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
+
+	int count = dataList.size();
+	outBuffer.Write( count );
+
+	for( int num = 0; num < count; num++ )
+	{
+		PacketData data = dataList[ num ];
+		outBuffer.Write( data );
+	}
 
 	RakPeerInterface * client = Network::GetInstance().GetClient();
-	client->Send(message, (int) strlen(message)+1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+	if( client )
+	{
+		client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+	}
+
+	DataList & list = Network::GetInstance().GetDataList();
+	list = dataList;
+
+	Invalidate();
 }
