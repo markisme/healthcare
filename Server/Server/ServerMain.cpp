@@ -120,7 +120,7 @@ int main(void)
 					PacketData data;				
 					inStream.Read( data );
 
-					printf("%d, %d\n", data._x, data._y );
+					//printf("%d, %d\n", data._x, data._y );
 
 					int count = _peerList.size();
 					for( int num = 0; num < count; num++ )

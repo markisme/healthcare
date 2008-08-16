@@ -49,7 +49,7 @@ void CTestView::OnDraw(CDC* pDC)
 	if( Network::GetInstance()._isHost )
 	{
 		// 호스트 이면 받은 데이터로 라인 그리기
-		DataList dataList = Network::GetInstance().GetDataList();
+		DataList & dataList = Network::GetInstance().GetDataList();
 		
 		int count = dataList.size();
 		for( int num = 0; num < count; num++ )
@@ -57,6 +57,8 @@ void CTestView::OnDraw(CDC* pDC)
 			PacketData data = dataList[ num ];
 			pDC->LineTo( data._x, data._y );
 		}
+
+		dataList.clear();
 	}
 	else
 	{
