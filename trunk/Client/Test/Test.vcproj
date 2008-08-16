@@ -219,6 +219,14 @@
 				Name="Dialog"
 				>
 				<File
+					RelativePath=".\LoginDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\LoginDlg.h"
+					>
+				</File>
+				<File
 					RelativePath=".\MainDlg.cpp"
 					>
 				</File>

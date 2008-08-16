@@ -57,8 +57,6 @@ void CTestView::OnDraw(CDC* pDC)
 			PacketData data = dataList[ num ];
 			pDC->LineTo( data._x, data._y );
 		}
-
-		dataList.clear();
 	}
 	else
 	{

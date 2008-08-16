@@ -6,6 +6,7 @@
 #include "MainFrm.h"
 #include "TestView.h"
 #include "Network.h"
+#include "LoginDlg.h"
 
 BEGIN_MESSAGE_MAP(CTestApp, CWinApp)
 END_MESSAGE_MAP()
@@ -19,6 +20,32 @@ CTestApp theApp;
 BOOL CTestApp::InitInstance()
 {
 	CWinApp::InitInstance();
+
+	bool isHost = false;
+	std::string id;
+	std::string pw;
+	int clientPort = 100;
+	std::string ip = "192.168.0.3";
+	int serverPort = 10000;
+
+	LoginDlg dlg;
+	if( dlg.DoModal() == IDOK )
+	{
+		id = dlg.GetID();
+		pw = dlg.GetPW();
+		clientPort = atoi( dlg.GetCPort().c_str() );
+		ip = dlg.GetIP();
+		serverPort = atoi( dlg.GetPort().c_str() );
+	}
+
+	// 호스트와 클라이언트 선정 (차후 서버로 기능 이전)
+	if( id == "naid" )
+	{
+		isHost = true;
+	}
+
+	// 네트워크 초기화
+	Network::GetInstance().Init( isHost, clientPort, ip, serverPort );
 	
 	// 주 MDI 프레임 창을 만듭니다.
 	CMainFrame* pMainFrame = new CMainFrame;
@@ -36,7 +63,17 @@ BOOL CTestApp::InitInstance()
 	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
-	Network::GetInstance().Init();
+	CRect mainRect;
+	pMainFrame->GetWindowRect( mainRect );
+
+	if( Network::GetInstance()._isHost )
+	{
+		pMainFrame->MoveWindow( mainRect.left, mainRect.top, 720, 410 );
+	}
+	else
+	{
+		pMainFrame->MoveWindow( mainRect.left, mainRect.top, 370, 410 );
+	}
 
 	return TRUE;
 }

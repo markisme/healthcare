@@ -18,8 +18,8 @@ MainDlg::~MainDlg()
 void MainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	ScrollDlg::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_USER_LIST, _userList);
 	DDX_Control(pDX, IDC_DATA_LIST, _dataList);
+	DDX_Control(pDX, IDC_USER_LIST, _userList);
 	DDX_Control(pDX, IDC_USERDATA_LIST, _userDataList);
 	DDX_Control(pDX, IDC_IMAGE, _image);
 
@@ -40,6 +40,19 @@ END_MESSAGE_MAP()
 BOOL MainDlg::OnInitDialog()
 {
 	ScrollDlg::OnInitDialog();
+
+	if( Network::GetInstance()._isHost )
+	{
+		_userList.ShowWindow( TRUE );
+		_userDataList.ShowWindow( TRUE );
+		_image.ShowWindow( TRUE );		
+	}
+	else
+	{
+		_userList.ShowWindow( FALSE );
+		_userDataList.ShowWindow( FALSE );
+		_image.ShowWindow( FALSE );
+	}
 
 	{
 		wchar_t name1[20] = L"±èÅÂÇö";
