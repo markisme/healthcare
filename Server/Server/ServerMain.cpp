@@ -86,7 +86,7 @@ int main(void)
 					printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
 
 					RakNet::BitStream stream;
-					stream.Write( MessageType::S2CH_SUCCESS_CONNECTED );
+					stream.Write( (unsigned char)MessageType::S2CH_SUCCESS_CONNECTED );
 					server->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 				}
 				break;

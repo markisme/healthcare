@@ -38,6 +38,9 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../LibStatic;../../Common"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="1"
 				DebugInformationFormat="4"
 			/>
 			<Tool
