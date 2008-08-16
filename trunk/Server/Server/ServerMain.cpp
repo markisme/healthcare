@@ -117,12 +117,40 @@ int main(void)
 
 			case C2S_CLIENT_DATA:
 				{
-					int count = _peerList.size();
+					// 패킷 읽기
+					std::vector<PacketData> dataList;
+
+					int count = 0;
+					inStream.Read( count );
+
+					for( int num = 0; num < count; num++ )
+					{
+						PacketData data;
+						inStream.Read( data );
+
+						dataList.push_back( data );
+					}
+
+					// 보낼 패킷 쓰기
+					RakNet::BitStream outBuffer;
+					outBuffer.Write( MessageType::S2H_CLIENT_DATA_REQ );
+
+					count = dataList.size();
+					outBuffer.Write( count );
+		
+					for( int num = 0; num < count; num++ )
+					{
+						PacketData data = dataList[ num ];
+						outBuffer.Write( data );
+					}
+
+					// 호스트에게 패킷 보내기
+					count = _peerList.size();
 					for( int num = 0; num < count; num++ )
 					{
 						if( _peerList[ num ]._isHost )
 						{
-							server->Send(&inStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, _peerList[ num ]._addr, false);
+							server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, _peerList[ num ]._addr, false);
 						}
 					}
 				}

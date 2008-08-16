@@ -106,7 +106,7 @@ void Network::ProcPacket()
 
 			_client->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 		}
-	case C2S_CLIENT_DATA:
+	case S2H_CLIENT_DATA_REQ:
 		{
 			_dataList.clear();
 
