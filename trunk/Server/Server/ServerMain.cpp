@@ -115,22 +115,21 @@ int main(void)
 				}
 				break;
 
-			default:
+			case C2S_CLIENT_DATA:
 				{
-					PacketData data;				
-					inStream.Read( data );
-
-					//printf("%d, %d\n", data._x, data._y );
-
 					int count = _peerList.size();
 					for( int num = 0; num < count; num++ )
 					{
 						if( _peerList[ num ]._isHost )
 						{
-							sprintf(message, "%s", p->data);
 							server->Send(&inStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, _peerList[ num ]._addr, false);
 						}
 					}
+				}
+				break;
+
+			default:
+				{
 				}
 				break;
 		}
