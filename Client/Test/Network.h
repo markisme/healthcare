@@ -19,7 +19,7 @@ public:
 	Network();
 	~Network();
 
-	void Init();
+	void Init( bool isHost, int clientPort, std::string ip, int serverPort );
 	void Uninit();
 	void ProcPacket();
 
