@@ -79,7 +79,7 @@ void CTestView::OnDraw(CDC* pDC)
 		}
 
 		RakNet::BitStream outBuffer;
-		outBuffer.Write( (unsigned char)13 );
+		outBuffer.Write( MessageType::C2S_CLIENT_DATA );
 
 		int count = dataList.size();
 		outBuffer.Write( count );

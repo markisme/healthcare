@@ -106,7 +106,7 @@ void Network::ProcPacket()
 
 			_client->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 		}
-	default:
+	case C2S_CLIENT_DATA:
 		{
 			_dataList.clear();
 
@@ -120,6 +120,11 @@ void Network::ProcPacket()
 
 				_dataList.push_back( data );
 			}
+		}
+		break;
+	default:
+		{
+			
 		}
 		break;
 	}
