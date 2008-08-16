@@ -74,15 +74,15 @@ void CTestView::OnDraw(CDC* pDC)
 				pDC->LineTo(x,y);
 
 				dataList.push_back( PacketData( x, y ) );
-				Sleep(10);
 			}		
 		}
 
 		RakNet::BitStream outBuffer;
-		outBuffer.Write( MessageType::C2S_CLIENT_DATA );
+		outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
 
 		int count = dataList.size();
 		outBuffer.Write( count );
+
 		for( int num = 0; num < count; num++ )
 		{
 			PacketData data = dataList[ num ];
