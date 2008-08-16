@@ -109,9 +109,17 @@ void Network::ProcPacket()
 	default:
 		{
 			_dataList.clear();
-			inStream.Read( _dataList );
 
-			//_dataList.push_back( data );
+			int count = 0;
+			inStream.Read( count );
+
+			for( int num = 0; num < count; num++ )
+			{
+				PacketData data;
+				inStream.Read( data );
+
+				_dataList.push_back( data );
+			}
 		}
 		break;
 	}

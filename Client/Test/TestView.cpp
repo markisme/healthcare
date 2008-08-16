@@ -80,7 +80,14 @@ void CTestView::OnDraw(CDC* pDC)
 
 		RakNet::BitStream outBuffer;
 		outBuffer.Write( (unsigned char)13 );
-		outBuffer.Write( dataList );
+
+		int count = dataList.size();
+		outBuffer.Write( count );
+		for( int num = 0; num < count; num++ )
+		{
+			PacketData data = dataList[ num ];
+			outBuffer.Write( data );
+		}
 
 		RakPeerInterface * client = Network::GetInstance().GetClient();
 		if( client )
