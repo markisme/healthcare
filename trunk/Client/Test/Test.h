@@ -23,6 +23,7 @@ public:
 
 private:
 	CMainFrame* _mainFrm;
+	HANDLE hComm;
 };
 
 extern CTestApp theApp;

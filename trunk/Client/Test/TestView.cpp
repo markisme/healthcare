@@ -42,8 +42,6 @@ void CTestView::OnDraw(CDC* pDC)
 	pDC->SetDCPenColor( COLORREF(0x00ff0000) );
 	pDC->SetDCBrushColor( COLORREF(0x00ff0000) );
 
-	pDC->MoveTo(0,100);
-
 	// 데이터 그리기
 	DataList & dataList = Network::GetInstance().GetDataList();
 
@@ -51,6 +49,14 @@ void CTestView::OnDraw(CDC* pDC)
 	for( int num = 0; num < count; num++ )
 	{
 		PacketData data = dataList[ num ];
-		pDC->LineTo( data._x, data._y );
+
+		if( num == 0 )
+		{
+			pDC->MoveTo( num, data._y );
+		}
+		else
+		{
+			pDC->LineTo( num, data._y );
+		}
 	}
 }
