@@ -34,6 +34,8 @@ public:
 	void Update( void );
 	void RefreshControls();
 
+	CTestView * GetView() { return m_wndView; }
+
 private:
 	CListBox _userList;
 	CListCtrl _dataList;

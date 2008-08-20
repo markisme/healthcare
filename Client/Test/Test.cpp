@@ -7,6 +7,7 @@
 #include "TestView.h"
 #include "Network.h"
 #include "LoginDlg.h"
+#include <windows.h>
 
 BEGIN_MESSAGE_MAP(CTestApp, CWinApp)
 END_MESSAGE_MAP()
@@ -75,12 +76,50 @@ BOOL CTestApp::InitInstance()
 		pMainFrame->MoveWindow( mainRect.left, mainRect.top, 370, 410 );
 	}
 
+	{
+		hComm = CreateFile(L"COM2", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+		if(hComm == INVALID_HANDLE_VALUE)
+			return -1;
+
+		//* 포트 설정 얻고 수정 하여 반영하기
+		DCB dcb;
+		
+		// 설정 얻기
+		if( !GetCommState(hComm, &dcb) )
+			return -1;
+		
+		// 설정 변경
+		dcb.BaudRate = CBR_9600;
+		dcb.fParity = FALSE;
+		dcb.fNull = FALSE;
+		dcb.ByteSize = 8;
+		dcb.Parity = NOPARITY;
+		dcb.StopBits = ONESTOPBIT;
+		
+		// 설정 반영
+		if( !SetCommState(hComm, &dcb) )
+			return -1;
+
+		//*   타임아웃 설정
+		COMMTIMEOUTS timeouts;
+		timeouts.ReadIntervalTimeout = 0;
+		timeouts.ReadTotalTimeoutMultiplier = 0;
+		timeouts.ReadTotalTimeoutConstant = 0;
+		timeouts.WriteTotalTimeoutMultiplier = 0;
+		timeouts.WriteTotalTimeoutConstant = 0;
+		if( !SetCommTimeouts(hComm, &timeouts) )
+			return -1;
+	}
+
 	return TRUE;
 }
 
 int CTestApp::ExitInstance()
 {
 	Network::GetInstance().Uninit();
+
+	//* 포트 닫기
+	CloseHandle(hComm);
 
 	delete m_pMainWnd;
 	m_pMainWnd = NULL;
@@ -91,5 +130,28 @@ int CTestApp::ExitInstance()
 BOOL CTestApp::OnIdle( LONG lCount )
 {
 	Network::GetInstance().ProcPacket();
+
+	//*  데이터 통신 (수신과 송신)
+	unsigned char buf[350];   // 통신에 사용될 버퍼
+	DWORD byteRead, byteWritten;
+	int retval;
+
+	DataList & dataList = Network::GetInstance().GetDataList();
+	dataList.clear();
+
+	// 데이터를 먼저 받아야 하는경우 수신부터 구현
+	retval = ReadFile(hComm, buf, 350, &byteRead, NULL);
+	if( retval )
+	{
+		for( int num = 0; num < 350; num++ )
+		{
+			unsigned char ch = buf[ num ];
+			int y = (int)ch;
+
+			dataList.push_back( PacketData(0,y) );
+		}
+	}
+
+	_mainFrm->GetMainDlg().GetView()->Refresh();
 	return TRUE;
 }
