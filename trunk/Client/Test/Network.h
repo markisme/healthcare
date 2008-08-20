@@ -22,6 +22,7 @@ public:
 	void Init( bool isHost, int clientPort, std::string ip, int serverPort );
 	void Uninit();
 	void ProcPacket();
+	void Send();
 
 	RakPeerInterface * GetClient() { return _client; }
 
