@@ -118,3 +118,24 @@ void Network::ProcPacket()
 
 	_client->DeallocatePacket(p);
 }
+
+void Network::Send()
+{
+	RakNet::BitStream outBuffer;
+	outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
+
+	int count = _dataList.size();
+	outBuffer.Write( count );
+
+	for( int num = 0; num < count; num++ )
+	{
+		PacketData data = _dataList[ num ];
+		outBuffer.Write( data );
+	}
+
+	RakPeerInterface * client = Network::GetInstance().GetClient();
+	if( client )
+	{
+		client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+	}
+}

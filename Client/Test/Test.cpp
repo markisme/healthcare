@@ -76,6 +76,7 @@ BOOL CTestApp::InitInstance()
 		pMainFrame->MoveWindow( mainRect.left, mainRect.top, 370, 410 );
 	}
 
+	if( isHost == false )
 	{
 		hComm = CreateFile(L"COM2", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 		if(hComm == INVALID_HANDLE_VALUE)
@@ -131,25 +132,30 @@ BOOL CTestApp::OnIdle( LONG lCount )
 {
 	Network::GetInstance().ProcPacket();
 
-	//*  데이터 통신 (수신과 송신)
-	unsigned char buf[350];   // 통신에 사용될 버퍼
-	DWORD byteRead, byteWritten;
-	int retval;
-
-	DataList & dataList = Network::GetInstance().GetDataList();
-	dataList.clear();
-
-	// 데이터를 먼저 받아야 하는경우 수신부터 구현
-	retval = ReadFile(hComm, buf, 350, &byteRead, NULL);
-	if( retval )
+	if( Network::GetInstance()._isHost == false )
 	{
-		for( int num = 0; num < 350; num++ )
-		{
-			unsigned char ch = buf[ num ];
-			int y = (int)ch;
+		//*  데이터 통신 (수신과 송신)
+		unsigned char buf[350];   // 통신에 사용될 버퍼
+		DWORD byteRead, byteWritten;
+		int retval;
 
-			dataList.push_back( PacketData(0,y) );
+		DataList & dataList = Network::GetInstance().GetDataList();
+		dataList.clear();
+
+		// 데이터를 먼저 받아야 하는경우 수신부터 구현
+		retval = ReadFile(hComm, buf, 350, &byteRead, NULL);
+		if( retval )
+		{
+			for( int num = 0; num < 350; num++ )
+			{
+				unsigned char ch = buf[ num ];
+				int y = (int)ch;
+
+				dataList.push_back( PacketData(0,y) );
+			}
 		}
+
+		Network::GetInstance().Send();
 	}
 
 	_mainFrm->GetMainDlg().GetView()->Refresh();
