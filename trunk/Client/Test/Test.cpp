@@ -135,23 +135,36 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	if( Network::GetInstance()._isHost == false )
 	{
 		//*  데이터 통신 (수신과 송신)
-		unsigned char buf[350];   // 통신에 사용될 버퍼
+		unsigned char buf[300];   // 통신에 사용될 버퍼
 		DWORD byteRead, byteWritten;
 		int retval;
 
 		DataList & dataList = Network::GetInstance().GetDataList();
-		dataList.clear();
+
+		int count = dataList.size();
+		if( count >= 350 )
+		{
+			DataList::iterator it = dataList.begin();
+			dataList.erase( it, it + 50 );
+		}
 
 		// 데이터를 먼저 받아야 하는경우 수신부터 구현
-		retval = ReadFile(hComm, buf, 350, &byteRead, NULL);
+		retval = ReadFile(hComm, buf, 300, &byteRead, NULL);
 		if( retval )
 		{
-			for( int num = 0; num < 350; num++ )
+			std::string str;
+			for( int num = 0; num < 300; num++ )
 			{
 				unsigned char ch = buf[ num ];
-				int y = (int)ch;
+				str += ch;
 
-				dataList.push_back( PacketData(0,y) );
+				if( ch == ' ' )
+				{
+					int y = atoi(str.c_str()) / 3;
+					dataList.push_back( PacketData(0,y) );
+
+					str.clear();
+				}
 			}
 		}
 
