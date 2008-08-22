@@ -34,7 +34,6 @@ BEGIN_MESSAGE_MAP(MainDlg, ScrollDlg)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
 	ON_LBN_SELCHANGE(IDC_USER_LIST, &MainDlg::OnLbnSelchangeUserList)
-	ON_BN_CLICKED(IDC_BUTTON1, &MainDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 BOOL MainDlg::OnInitDialog()
@@ -323,44 +322,4 @@ void MainDlg::OnLbnSelchangeUserList()
 		HBITMAP hBmp = (HBITMAP)LoadImage(NULL, pic, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		_image.SetBitmap( hBmp );
 	}
-}
-
-void MainDlg::OnBnClickedButton1()
-{
-	// 데이터 서버로 날리기
-	DataList dataList;
-
-	for(int num=0; num<20; num++)
-	{
-		for(int cnt=0; cnt<10; cnt++)
-		{
-			int x = (num*20) + cnt;
-			int y = 50 + rand() % 10 * 10;
-
-			dataList.push_back( PacketData( x, y ) );
-		}		
-	}
-
-	RakNet::BitStream outBuffer;
-	outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
-
-	int count = dataList.size();
-	outBuffer.Write( count );
-
-	for( int num = 0; num < count; num++ )
-	{
-		PacketData data = dataList[ num ];
-		outBuffer.Write( data );
-	}
-
-	RakPeerInterface * client = Network::GetInstance().GetClient();
-	if( client )
-	{
-		client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
-	}
-
-	DataList & list = Network::GetInstance().GetDataList();
-	list = dataList;
-
-	Invalidate();
 }
