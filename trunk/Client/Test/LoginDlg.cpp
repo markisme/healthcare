@@ -36,10 +36,10 @@ BOOL LoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	_editID.SetWindowTextW( L"naid" );
+	_editID.SetWindowTextW( L"host" );
 	_editPass.SetWindowTextW( L"1234" );
 	_editCPort.SetWindowTextW( L"100" );
-	_editIP.SetWindowTextW( L"192.168.0.3" );
+	_editIP.SetWindowTextW( L"211.189.19.160" );
 	_editPort.SetWindowTextW( L"10000" );
 
 	return TRUE;  // return TRUE unless you set the focus to a control

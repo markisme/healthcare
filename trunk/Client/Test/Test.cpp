@@ -26,7 +26,7 @@ BOOL CTestApp::InitInstance()
 	std::string id;
 	std::string pw;
 	int clientPort = 100;
-	std::string ip = "192.168.0.3";
+	std::string ip = "211.189.19.160";
 	int serverPort = 10000;
 
 	LoginDlg dlg;
@@ -40,7 +40,7 @@ BOOL CTestApp::InitInstance()
 	}
 
 	// 호스트와 클라이언트 선정 (차후 서버로 기능 이전)
-	if( id == "naid" )
+	if( id == "host" )
 	{
 		isHost = true;
 	}
