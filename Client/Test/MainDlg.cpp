@@ -34,7 +34,7 @@ BEGIN_MESSAGE_MAP(MainDlg, ScrollDlg)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
 	ON_LBN_SELCHANGE(IDC_USER_LIST, &MainDlg::OnLbnSelchangeUserList)
-END_MESSAGE_MAP()
+END_MESSAGE_MAP() 
 
 BOOL MainDlg::OnInitDialog()
 {
