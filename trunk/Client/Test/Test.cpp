@@ -66,15 +66,7 @@ BOOL CTestApp::InitInstance()
 
 	CRect mainRect;
 	pMainFrame->GetWindowRect( mainRect );
-
-	if( Network::GetInstance()._isHost )
-	{
-		pMainFrame->MoveWindow( mainRect.left, mainRect.top, 720, 410 );
-	}
-	else
-	{
-		pMainFrame->MoveWindow( mainRect.left, mainRect.top, 370, 410 );
-	}
+	pMainFrame->MoveWindow( mainRect.left, mainRect.top, 800, 600 );
 
 	if( isHost == false )
 	{
@@ -130,7 +122,10 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	Network::GetInstance().ProcPacket();
+	if( Network::GetInstance().ProcPacket() )
+	{
+		_mainFrm->GetMainDlg().RefreshControls();
+	}
 
 	if( Network::GetInstance()._isHost == false )
 	{

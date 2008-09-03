@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Network.h"
+#include "CommonType.h"
 
 Network Network::_instance;
 
@@ -42,7 +43,7 @@ void Network::Uninit()
 	RakNetworkFactory::DestroyRakPeerInterface(_client);
 }
 
-void Network::ProcPacket()
+bool Network::ProcPacket()
 {
 	Sleep(30);
 
@@ -50,7 +51,7 @@ void Network::ProcPacket()
 	p = _client->Receive();
 
 	if (p==0)
-		return;
+		return FALSE;
 
 	RakNet::BitStream inStream( p->data, p->length, false );
 
@@ -92,7 +93,40 @@ void Network::ProcPacket()
 			}
 
 			_client->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+
+			if( Network::GetInstance()._isHost )
+			{
+				RakNet::BitStream stream;
+				stream.Write( MessageType::H2S_GET_USERINFO_LIST );
+				_client->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+			}
+
+			return TRUE;
 		}
+		break;
+	case S2H_GET_USERINFO_LIST_RES:
+		{
+			int count = 0;
+			inStream.Read( count );
+
+			for( int num = 0; num < count; num++ )
+			{
+				UserInfo userInfo;
+				inStream.Read( userInfo._userNo );
+				inStream.Read( userInfo._userName );
+				inStream.Read( userInfo._age );
+				inStream.Read( userInfo._sex );
+				inStream.Read( userInfo._tall );
+				inStream.Read( userInfo._weight );
+				inStream.Read( userInfo._blood );
+				inStream.Read( userInfo._tel );
+				inStream.Read( userInfo._pic );
+				_userList.push_back( userInfo );
+			}
+
+			return TRUE;
+		}
+		break;
 	case S2H_CLIENT_DATA_REQ:
 		{
 			_dataList.clear();
@@ -107,6 +141,8 @@ void Network::ProcPacket()
 
 				_dataList.push_back( data );
 			}
+
+			return TRUE;
 		}
 		break;
 	default:
@@ -138,4 +174,20 @@ void Network::Send()
 	{
 		client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
+}
+
+int Network::GetIndexForUserNo( int userNo )
+{
+	int count = _userList.size();
+	for( int num = 0; num < count; num++ )
+	{
+		UserInfo & userInfo = _userList[ num ];
+		int curUserNo = atoi( userInfo._userNo.c_str() );
+		if( curUserNo == userNo )
+		{
+			return num;
+		}
+	}
+	
+	return -1;
 }

@@ -147,6 +147,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath=".\DBConnector.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\DBConnector.h"
+			>
+		</File>
+		<File
 			RelativePath=".\ServerMain.cpp"
 			>
 		</File>

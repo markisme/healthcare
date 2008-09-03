@@ -5,6 +5,7 @@
 #include "RakNetTypes.h"
 #include "BitStream.h"
 #include "RakSleep.h"
+#include "DBConnector.h"
 #include <assert.h>
 #include <cstdio>
 #include <cstring>
@@ -28,6 +29,9 @@ struct PeerType
 
 int main(void)
 {
+	// DB 초기화
+	DBConnector::GetInstance().Init();
+
 	RakPeerInterface *server=RakNetworkFactory::GetRakPeerInterface();
 	RakNetStatistics *rss;
 
@@ -116,6 +120,37 @@ int main(void)
 				}
 				break;
 
+			case H2S_GET_USERINFO_LIST:
+				{
+					// 보낼 패킷 쓰기
+					RakNet::BitStream outBuffer;
+					outBuffer.Write( (unsigned char)MessageType::S2H_GET_USERINFO_LIST_RES );
+
+					UserList userInfoList;
+					DBConnector::GetInstance().GetUserInfo( userInfoList );
+
+					int count = userInfoList.size();
+					outBuffer.Write( count );
+
+					for( int num = 0; num < count; num++ )
+					{
+						UserInfo & userInfo = userInfoList[ num ];
+						outBuffer.Write( userInfo._userNo );
+						outBuffer.Write( userInfo._userName );
+						outBuffer.Write( userInfo._age );
+						outBuffer.Write( userInfo._sex );
+						outBuffer.Write( userInfo._tall );
+						outBuffer.Write( userInfo._weight );
+						outBuffer.Write( userInfo._blood );
+						outBuffer.Write( userInfo._tel );
+						outBuffer.Write( userInfo._pic );
+					}
+
+					// 호스트에게 패킷 보내기
+					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+				}
+				break;
+
 			case C2S_CLIENT_DATA:
 				{
 					// 패킷 읽기
@@ -168,6 +203,8 @@ int main(void)
 
 	server->Shutdown(300);
 	RakNetworkFactory::DestroyRakPeerInterface(server);
+
+	DBConnector::GetInstance().Uninit();
 
 	return 0;
 }

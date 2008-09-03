@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ScrollDlg.h"
 #include "TestView.h"
 #include "Resource.h"
 #include <vector>
@@ -9,7 +8,7 @@
 
 class CMainFrame;
 
-class MainDlg : public ScrollDlg
+class MainDlg : public CDialog
 {
 	DECLARE_DYNAMIC(MainDlg)
 

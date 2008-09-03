@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 struct PacketData
 {
 	PacketData( int x = 0, int y = 0 ) : _x( x ), _y( y ) {};
@@ -7,5 +9,30 @@ struct PacketData
 
 	int _x;
 	int _y;
-	int _temp;
+	int _temp;	
 };
+
+typedef std::vector<PacketData> DataList;
+
+struct UserInfo
+{
+	std::string _userNo;
+	std::string _userName;
+	std::string _age;
+	std::string _sex;
+	std::string _tall;
+	std::string _weight;
+	std::string _blood;
+	std::string _tel;
+	std::string _pic;
+};
+
+typedef std::vector<UserInfo> UserList;
+
+struct UserData
+{
+	int _value;
+	float _temp;
+};
+
+typedef std::vector<UserData> UserDataList;
