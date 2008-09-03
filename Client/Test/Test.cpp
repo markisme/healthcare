@@ -167,9 +167,64 @@ BOOL CTestApp::OnIdle( LONG lCount )
 			}
 		}
 
-		Network::GetInstance().Send();
+		Network::GetInstance().ClientDataSend();
+
+		SendAddUserData( 80, 36.5 );
 	}
 
 	_mainFrm->GetMainDlg().GetView()->Refresh();
 	return TRUE;
+}
+
+void CTestApp::SendAddUserData( int value, float temp )
+{
+	CTime t = CTime::GetCurrentTime();
+
+	UserData userData; char buf[1024];
+	userData._year = itoa( t.GetYear(), buf, 10 );
+
+	if( t.GetMonth() < 10 )
+	{
+		userData._month = "0";
+		userData._month += itoa( t.GetMonth(), buf, 10 );
+	}
+	else
+	{
+		userData._month = itoa( t.GetMonth(), buf, 10 );
+	}
+
+	if( t.GetDay() < 10 )
+	{
+		userData._day = "0";
+		userData._day += itoa( t.GetDay(), buf, 10 );
+	}
+	else
+	{
+		userData._day = itoa( t.GetDay(), buf, 10 );
+	}
+
+	if( t.GetHour() < 10 )
+	{
+		userData._hour = "0";
+		userData._hour += itoa( t.GetHour(), buf, 10 );
+	}
+	else
+	{
+		userData._hour = itoa( t.GetHour(), buf, 10 );
+	}
+
+	if( t.GetMinute() < 10 )
+	{
+		userData._min = "0";
+		userData._min += itoa( t.GetMinute(), buf, 10 );
+	}
+	else
+	{
+		userData._min = itoa( t.GetMinute(), buf, 10 );
+	}
+
+	userData._value = itoa( value, buf, 10 );
+	userData._temp = gcvt( temp, 10, buf );
+
+	Network::GetInstance().ReqAddUserData( 1, userData );
 }

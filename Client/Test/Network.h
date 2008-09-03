@@ -20,7 +20,9 @@ public:
 	void Init( bool isHost, int clientPort, std::string ip, int serverPort );
 	void Uninit();
 	bool ProcPacket();
-	void Send();
+	void ClientDataSend();
+	void ReqGetUserData( int userNo );
+	void ReqAddUserData( int userNo, UserData & userData );
 
 	RakPeerInterface * GetClient() { return _client; }
 
@@ -28,6 +30,7 @@ public:
 
 	DataList & GetDataList() { return _dataList; }
 	UserList & GetUserInfoList() { return _userList; }
+	UserDataList & GetUserDataList() { return _userDataList; }
 	int GetIndexForUserNo( int userNo );
 
 	BOOL _isHost;
@@ -37,4 +40,5 @@ private:
 	RakPeerInterface * _client;
 	DataList _dataList;
 	UserList _userList;
+	UserDataList _userDataList;
 };

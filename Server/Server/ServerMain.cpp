@@ -151,6 +151,57 @@ int main(void)
 				}
 				break;
 
+			case CH2S_GET_USERDATA_LIST:
+				{
+					int userNo;
+					inStream.Read( userNo );
+
+					UserDataList userDataList;
+					DBConnector::GetInstance().GetUserData( userNo, userDataList );
+
+					// 보낼 패킷 쓰기
+					RakNet::BitStream outBuffer;
+					outBuffer.Write( (unsigned char)MessageType::S2CH_GET_USERDATA_LIST_RES );
+
+					int count = userDataList.size();
+					outBuffer.Write( count );
+
+					for( int num = 0; num < count; num++ )
+					{
+						UserData & userData = userDataList[ num ];
+						outBuffer.Write( userData._year );
+						outBuffer.Write( userData._month );
+						outBuffer.Write( userData._day );
+						outBuffer.Write( userData._hour );
+						outBuffer.Write( userData._min );
+						outBuffer.Write( userData._value );
+						outBuffer.Write( userData._temp );
+					}
+
+					// 호스트에게 패킷 보내기
+					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+				}
+				break;
+
+			case C2S_ADD_USERDATA:
+				{
+					int userNo = 0;
+					inStream.Read( userNo );
+
+					UserData userData;
+					inStream.Read( userData._year );
+					inStream.Read( userData._month );
+					inStream.Read( userData._day );
+					inStream.Read( userData._hour );
+					inStream.Read( userData._min );
+					inStream.Read( userData._value );
+					inStream.Read( userData._temp );
+					
+					//
+					DBConnector::GetInstance().AddUserData( userNo, userData );
+				}
+				break;
+
 			case C2S_CLIENT_DATA:
 				{
 					// 패킷 읽기

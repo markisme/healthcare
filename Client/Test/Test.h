@@ -22,6 +22,9 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
+	void SendAddUserData( int value, float temp );
+
+private:
 	CMainFrame* _mainFrm;
 	HANDLE hComm;
 };

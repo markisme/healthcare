@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(MainDlg, CDialog)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
 	ON_LBN_SELCHANGE(IDC_USER_LIST, &MainDlg::OnLbnSelchangeUserList)
+	ON_CBN_SELCHANGE(IDC_COMBO_HOUR, &MainDlg::OnCbnSelchangeComboHour)
 END_MESSAGE_MAP() 
 
 BOOL MainDlg::OnInitDialog()
@@ -97,46 +98,100 @@ BOOL MainDlg::OnInitDialog()
 		return -1;
 	}
 
+	//
 	{
-		for(int num = 2000; num < 2009; num++)
+		CTime t = CTime::GetCurrentTime();
+		int year = t.GetYear();
+		int month = t.GetMonth();
+		int day = t.GetDay();
+		int hour = t.GetHour();
+		int curSel = 0;
+
+		int index = 0;
+		for(int num = 2000; num < 2009; num++, index++)
 		{
 			CString itemText;
 			itemText.Format(L"%d 년", num);
 
 			_yearList.AddString( itemText );
-		}
-		_yearList.SetCurSel(8);
 
-		for(int num = 1; num < 13; num++)
+			if( num == year )
+			{
+				curSel = index;
+			}
+		}
+		_yearList.SetCurSel( curSel );
+
+		index = 0;
+		for(int num = 1; num < 13; num++, index++)
 		{
 			CString itemText;
-			itemText.Format(L"%d 월", num);
+			if( num < 10 )
+			{
+				itemText.Format(L"0%d 월", num);
+			}
+			else
+			{
+				itemText.Format(L"%d 월", num);
+			}
 
 			_monthList.AddString( itemText );
-		}
-		_monthList.SetCurSel(8);
 
-		for(int num = 1; num < 32; num++)
+			if( num == month )
+			{
+				curSel = index;
+			}
+		}
+		_monthList.SetCurSel(curSel);
+
+		index = 0;
+		for(int num = 1; num < 32; num++,index++)
 		{
 			CString itemText;
-			itemText.Format(L"%d 일", num);
+			if( num < 10 )
+			{
+				itemText.Format(L"0%d 일", num);
+			}
+			else
+			{
+				itemText.Format(L"%d 일", num);
+			}
 
 			_dayList.AddString( itemText );
-		}
-		_dayList.SetCurSel(7);
 
-		for(int num = 0; num < 24; num++)
+			if( num == day )
+			{
+				curSel = index;
+			}
+		}
+		_dayList.SetCurSel(curSel);
+
+		index = 0;
+		for(int num = 0; num < 24; num++,index++)
 		{
 			CString itemText;
-			itemText.Format(L"%d 시", num);
+			if( num < 10 )
+			{
+				itemText.Format(L"0%d 시", num);
+			}
+			else
+			{
+				itemText.Format(L"%d 시", num);
+			}
 
 			_hourList.AddString( itemText );
+
+			if( num == hour )
+			{
+				curSel = index;
+			}
 		}
-		_hourList.SetCurSel(21);
+		_hourList.SetCurSel(curSel);
 	}
 
 	_userList.SetCurSel( 0 );
 	OnLbnSelchangeUserList();
+	OnCbnSelchangeComboHour();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
@@ -165,6 +220,10 @@ void MainDlg::Update( void )
 
 void MainDlg::RefreshControls()
 {
+	// 유저 인포 데이터 갱신
+	int index = _userList.GetCurSel();
+	_userList.ResetContent();
+
 	UserList & userInfoList = Network::GetInstance().GetUserInfoList();
 	int count = userInfoList.size();
 	for( int num = 0; num < count; num++ )
@@ -174,6 +233,66 @@ void MainDlg::RefreshControls()
 		CString name(userInfo._userName.c_str());
 		_userList.AddString( (LPTSTR)(LPCTSTR)(name) );
 		_userList.SetItemData( num, atoi(userInfo._userNo.c_str()) );
+	}
+	_userList.SetCurSel( index );
+
+	// 유저 데이터 갱신
+	_dataList.DeleteAllItems();
+
+	UserDataList & userDataList = Network::GetInstance().GetUserDataList();
+	count = userDataList.size();
+
+	for(int num = 0; num<count; num++)
+	{
+		UserData & data = userDataList[ num ];
+
+		CString yearStr;
+		_yearList.GetLBText( _yearList.GetCurSel(), yearStr );
+
+		CString monthStr;
+		_monthList.GetLBText( _monthList.GetCurSel(), monthStr );
+
+		CString dayStr;
+		_dayList.GetLBText( _dayList.GetCurSel(), dayStr );
+
+		CString hourStr;
+		_hourList.GetLBText( _hourList.GetCurSel(), hourStr );
+
+		std::string curYear = data._year + " 년";
+		std::string curMonth = data._month + " 월";
+		std::string curDay = data._day + " 일";
+		std::string curHour = data._hour + " 시";
+
+		if( CString(curYear.c_str()) == yearStr &&
+			CString(curMonth.c_str()) == monthStr &&
+			CString(curDay.c_str()) == dayStr &&
+			CString(curHour.c_str()) == hourStr )
+		{
+			std::string addStr = data._hour + " 분";
+			CString itemText1( addStr.c_str() );
+			LV_ITEM lvItem;
+			lvItem.mask = LVIF_TEXT;
+			lvItem.iItem = 0;
+			lvItem.iSubItem = 0;
+			lvItem.pszText = (LPTSTR)(LPCTSTR)itemText1;
+			_dataList.InsertItem(&lvItem);
+
+			addStr = data._value + " 회";
+			CString itemText2( addStr.c_str() );
+			lvItem.mask = LVIF_TEXT;
+			lvItem.iItem = 0;
+			lvItem.iSubItem = 1;
+			lvItem.pszText = (LPTSTR)(LPCTSTR)itemText2;
+			_dataList.SetItem(&lvItem);
+
+			addStr = data._temp + " 도";
+			CString itemText3( addStr.c_str() );
+			lvItem.mask = LVIF_TEXT;
+			lvItem.iItem = 0;
+			lvItem.iSubItem = 2;
+			lvItem.pszText = (LPTSTR)(LPCTSTR)itemText3;
+			_dataList.SetItem(&lvItem);
+		}
 	}
 }
 
@@ -192,38 +311,6 @@ int MainDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void MainDlg::OnLbnSelchangeUserList()
 {
-	Invalidate();
-
-	_dataList.DeleteAllItems();
-
-	for(int num=1; num<61; num++)
-	{
-		CString itemText;
-		itemText.Format(L"%d 분", num);			
-
-		LV_ITEM lvItem;
-		lvItem.mask = LVIF_TEXT;
-		lvItem.iItem = 0;
-		lvItem.iSubItem = 0;
-		lvItem.pszText = (LPTSTR)(LPCTSTR)itemText;
-		_dataList.InsertItem(&lvItem);
-
-		itemText.Format(L"%d 회", 90 - rand()%10 );
-		lvItem.mask = LVIF_TEXT;
-		lvItem.iItem = 0;
-		lvItem.iSubItem = 1;
-		lvItem.pszText = (LPTSTR)(LPCTSTR)itemText;
-		_dataList.SetItem(&lvItem);
-
-		float th = 37.f - (float)(rand()%10)/10.f;
-		itemText.Format(L"%f 도", th );
-		lvItem.mask = LVIF_TEXT;
-		lvItem.iItem = 0;
-		lvItem.iSubItem = 2;
-		lvItem.pszText = (LPTSTR)(LPCTSTR)itemText;
-		_dataList.SetItem(&lvItem);
-	}
-
 	int curindex = _userList.GetCurSel();
 	if( curindex >= 0 )
 	{
@@ -326,5 +413,16 @@ void MainDlg::OnLbnSelchangeUserList()
 
 		HBITMAP hBmp = (HBITMAP)LoadImage(NULL, pic, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		_image.SetBitmap( hBmp );
+	}
+
+	OnCbnSelchangeComboHour();
+}
+void MainDlg::OnCbnSelchangeComboHour()
+{
+	int curindex = _userList.GetCurSel();
+	if( curindex >= 0 )
+	{
+		int userNo = (int)_userList.GetItemData( curindex );
+		Network::GetInstance().ReqGetUserData( userNo );
 	}
 }
