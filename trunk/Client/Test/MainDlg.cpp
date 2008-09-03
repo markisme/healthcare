@@ -413,9 +413,13 @@ void MainDlg::OnLbnSelchangeUserList()
 
 		HBITMAP hBmp = (HBITMAP)LoadImage(NULL, pic, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		_image.SetBitmap( hBmp );
-	}
 
-	OnCbnSelchangeComboHour();
+		//
+		m_wndView->SetUserNo( userNo );
+
+		//
+		OnCbnSelchangeComboHour();
+	}
 }
 void MainDlg::OnCbnSelchangeComboHour()
 {

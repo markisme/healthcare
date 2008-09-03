@@ -10,6 +10,9 @@
 #include <vector>
 #include "CommonType.h"
 #include "msgID.h"
+#include <map>
+
+typedef std::map<int,DataList> DataMap;
 
 class Network
 {
@@ -35,6 +38,7 @@ public:
 	static Network & GetInstance() { return _instance; }
 
 	DataList & GetDataList() { return _dataList; }
+	DataList & GetDataList( int userNo ) { return _dataMap[ userNo ]; }
 	UserList & GetUserInfoList() { return _userList; }
 	UserDataList & GetUserDataList() { return _userDataList; }
 	int GetIndexForUserNo( int userNo );
@@ -47,6 +51,7 @@ private:
 	static Network _instance;
 	RakPeerInterface * _client;
 	DataList _dataList;
+	DataMap _dataMap;
 	UserList _userList;
 	UserDataList _userDataList;
 };

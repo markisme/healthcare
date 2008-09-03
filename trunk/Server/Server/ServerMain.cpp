@@ -219,11 +219,13 @@ int main(void)
 			case C2S_CLIENT_DATA:
 				{
 					// 패킷 읽기
-					std::vector<PacketData> dataList;
+					int userNo = 0;
+					inStream.Read( userNo );
 
 					int count = 0;
 					inStream.Read( count );
 
+					std::vector<PacketData> dataList;
 					for( int num = 0; num < count; num++ )
 					{
 						PacketData data;
@@ -235,6 +237,7 @@ int main(void)
 					// 보낼 패킷 쓰기
 					RakNet::BitStream outBuffer;
 					outBuffer.Write( (unsigned char)MessageType::S2H_CLIENT_DATA_RES );
+					outBuffer.Write( userNo );
 
 					int dataCount = dataList.size();
 					outBuffer.Write( dataCount );

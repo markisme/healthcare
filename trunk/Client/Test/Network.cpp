@@ -134,19 +134,27 @@ bool Network::ProcPacket()
 		break;
 	case S2H_CLIENT_DATA_RES:
 		{
-			// 기존 데이터 초기화
-			_dataList.clear();
-
 			// 패킷 읽기
+			int userNo = 0;
+			inStream.Read( userNo );
+
 			int count = 0;
 			inStream.Read( count );
 
+			DataList dataList;
 			for( int num = 0; num < count; num++ )
 			{
 				PacketData data;
 				inStream.Read( data );
-				_dataList.push_back( data );
+				dataList.push_back( data );
 			}
+
+			// 기존 데이터 초기화
+			//DataList & buf = _dataMap[ userNo ];
+			//buf.clear();
+
+			// 데이터 갱신
+			_dataMap[ userNo ] = dataList;
 
 			// 데이터 갱신
 			return TRUE;
@@ -181,6 +189,7 @@ void Network::ReqClientDataSend()
 {
 	RakNet::BitStream outBuffer;
 	outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
+	outBuffer.Write( _myUserNo );
 
 	int count = _dataList.size();
 	outBuffer.Write( count );
