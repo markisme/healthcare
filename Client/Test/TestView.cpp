@@ -43,7 +43,7 @@ void CTestView::OnDraw(CDC* pDC)
 	pDC->SetDCBrushColor( COLORREF(0x00ff0000) );
 
 	// 데이터 그리기
-	DataList & dataList = Network::GetInstance().GetDataList();
+	DataList & dataList = Network::GetInstance().GetDataList( _curUserNo );
 
 	int count = dataList.size();
 	for( int num = 0; num < count; num++ )
