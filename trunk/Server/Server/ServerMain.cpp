@@ -110,6 +110,7 @@ int main(void)
 					// DB에서 데이터 확인
 					BOOL isAuth = DBConnector::GetInstance().ConfirmLogin( id, pass );
 					BOOL isHost = DBConnector::GetInstance().ConfirmHost( id );
+					int userNo = DBConnector::GetInstance().GetUserNo( id );
 
 					// Peer 설정
 					PeerType type;
@@ -122,6 +123,7 @@ int main(void)
 					outBuffer.Write( (unsigned char)MessageType::S2CH_LOGIN_RES );
 					outBuffer.Write( isAuth );
 					outBuffer.Write( isHost );
+					outBuffer.Write( userNo );
 
 					// 패킷 보내기
 					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
