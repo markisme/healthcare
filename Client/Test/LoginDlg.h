@@ -21,6 +21,8 @@ protected:
 
 public:
 	virtual BOOL OnInitDialog();
+	static UINT ThreadFunction(LPVOID pParam);
+	void ThreadDo();
 
 	std::string GetID() { USES_CONVERSION;return (LPCSTR)T2A(_id); }
 	std::string GetPW() { USES_CONVERSION;return (LPCSTR)T2A(_pass); }
@@ -44,4 +46,6 @@ private:
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);	
+public:
+	afx_msg void OnBnClickedOk();
 };

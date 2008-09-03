@@ -29,25 +29,18 @@ BOOL CTestApp::InitInstance()
 	std::string ip = "211.189.19.160";
 	int serverPort = 10000;
 
-	LoginDlg dlg;
-	if( dlg.DoModal() == IDOK )
-	{
-		id = dlg.GetID();
-		pw = dlg.GetPW();
-		clientPort = atoi( dlg.GetCPort().c_str() );
-		ip = dlg.GetIP();
-		serverPort = atoi( dlg.GetPort().c_str() );
-	}
-
-	// 호스트와 클라이언트 선정 (차후 서버로 기능 이전)
-	if( id == "host" )
-	{
-		isHost = true;
-	}
-
 	// 네트워크 초기화
-	Network::GetInstance().Init( isHost, clientPort, ip, serverPort );
-	
+	Network::GetInstance().Init( clientPort, ip, serverPort );
+
+	LoginDlg dlg;
+	dlg.DoModal();
+
+	// 호스트인 경우 유저 리스트 요청
+	if( Network::GetInstance()._isHost )
+	{
+		Network::GetInstance().ReqGetUserInfoSend();
+	}
+
 	// 주 MDI 프레임 창을 만듭니다.
 	CMainFrame* pMainFrame = new CMainFrame;
 	if (!pMainFrame || !pMainFrame->LoadFrame(IDR_MAINFRAME))
@@ -129,7 +122,7 @@ BOOL CTestApp::OnIdle( LONG lCount )
 
 	if( Network::GetInstance()._isHost == false )
 	{
-		//*  데이터 통신 (수신과 송신)
+		// 데이터 통신 (수신과 송신)
 		unsigned char buf[31];   // 통신에 사용될 버퍼
 		DWORD byteRead, byteWritten;
 		int retval;
@@ -142,8 +135,8 @@ BOOL CTestApp::OnIdle( LONG lCount )
 			DataList::iterator it = dataList.begin();
 			dataList.erase( it, it + 5 );
 		}
-//TM
-		// 데이터를 먼저 받아야 하는경우 수신부터 구현
+
+		// 데이터를 먼저 받아야 하는 경우 수신부터 구현
 		retval = ReadFile(hComm, buf, 30, &byteRead, NULL);
 		if( retval )
 		{
@@ -156,8 +149,6 @@ BOOL CTestApp::OnIdle( LONG lCount )
 				
 				if( ch == ' ' )
 				{
-					//int y = atoi(str.c_str())/5.f;
-					//int y = (1024-atoi(str.c_str()))/5.f;
 					int y = 195-(atoi(str.c_str())/1.f)+200;
 					if ( y > 180 ) y = Temp_y;
 					dataList.push_back( PacketData(0,y) );
@@ -167,8 +158,10 @@ BOOL CTestApp::OnIdle( LONG lCount )
 			}
 		}
 
-		Network::GetInstance().ClientDataSend();
+		// 데이터 전송
+		Network::GetInstance().ReqClientDataSend();
 
+		// 주기 데이터 전송(1분에 한번씩)
 		SendAddUserData( 80, 36.5 );
 	}
 
@@ -226,5 +219,5 @@ void CTestApp::SendAddUserData( int value, float temp )
 	userData._value = itoa( value, buf, 10 );
 	userData._temp = gcvt( temp, 10, buf );
 
-	Network::GetInstance().ReqAddUserData( 1, userData );
+	Network::GetInstance().ReqAddUserDataSend( 1, userData );
 }
