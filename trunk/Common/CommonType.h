@@ -31,8 +31,13 @@ typedef std::vector<UserInfo> UserList;
 
 struct UserData
 {
-	int _value;
-	float _temp;
+	std::string _year;
+	std::string _month;
+	std::string _day;
+	std::string _hour;
+	std::string _min;
+	std::string _value;
+	std::string _temp;
 };
 
 typedef std::vector<UserData> UserDataList;
