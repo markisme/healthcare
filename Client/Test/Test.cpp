@@ -161,8 +161,17 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		// 데이터 전송
 		Network::GetInstance().ReqClientDataSend();
 
-		// 주기 데이터 전송(1분에 한번씩)
-		SendAddUserData( 80, 36.5 );
+		// 1분에 한번 갱신
+		CTime t = CTime::GetCurrentTime();
+		int curMin = t.GetMinute();
+		if( _lastMin != curMin )
+		{
+			//
+			_lastMin = curMin;
+
+			// 주기 데이터 전송(1분에 한번씩)
+			SendAddUserData( 80, 36.5 );
+		}
 	}
 
 	_mainFrm->GetMainDlg().GetView()->Refresh();
@@ -219,5 +228,5 @@ void CTestApp::SendAddUserData( int value, float temp )
 	userData._value = itoa( value, buf, 10 );
 	userData._temp = gcvt( temp, 10, buf );
 
-	Network::GetInstance().ReqAddUserDataSend( 1, userData );
+	Network::GetInstance().ReqAddUserDataSend( userData );
 }

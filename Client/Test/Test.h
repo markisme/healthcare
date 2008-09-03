@@ -30,6 +30,7 @@ private:
 	HANDLE hComm;
 
 	BOOL _isStart;
+	int _lastMin;
 };
 
 extern CTestApp theApp;

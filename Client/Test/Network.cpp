@@ -68,9 +68,13 @@ bool Network::ProcPacket()
 			int isHost;
 			inStream.Read( isHost );
 
+			int userNo;
+			inStream.Read( userNo );
+			
 			// 데이터 저장
 			Network::GetInstance()._isSuccessAuth = isSuccessAuth;
 			Network::GetInstance()._isHost = isHost;
+			_myUserNo = userNo;
 		}
 		break;
 
@@ -219,11 +223,11 @@ void Network::ReqGetUserDataSend( int userNo )
 	}
 }
 
-void Network::ReqAddUserDataSend( int userNo, UserData & userData )
+void Network::ReqAddUserDataSend( UserData & userData )
 {
 	RakNet::BitStream outBuffer;
 	outBuffer.Write( (unsigned char)MessageType::C2S_ADD_USERDATA );
-	outBuffer.Write( userNo );
+	outBuffer.Write( _myUserNo );
 
 	outBuffer.Write( userData._year );
 	outBuffer.Write( userData._month );

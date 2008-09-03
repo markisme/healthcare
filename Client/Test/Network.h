@@ -28,7 +28,7 @@ public:
 	void ReqClientDataSend();
 	void ReqGetUserInfoSend();
 	void ReqGetUserDataSend( int userNo );
-	void ReqAddUserDataSend( int userNo, UserData & userData );
+	void ReqAddUserDataSend( UserData & userData );
 
 	RakPeerInterface * GetClient() { return _client; }
 
@@ -41,6 +41,7 @@ public:
 
 	BOOL _isSuccessAuth;
 	BOOL _isHost;
+	int _myUserNo;
 
 private:
 	static Network _instance;

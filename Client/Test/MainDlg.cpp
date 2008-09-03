@@ -268,7 +268,7 @@ void MainDlg::RefreshControls()
 			CString(curDay.c_str()) == dayStr &&
 			CString(curHour.c_str()) == hourStr )
 		{
-			std::string addStr = data._hour + " Ка";
+			std::string addStr = data._min + " Ка";
 			CString itemText1( addStr.c_str() );
 			LV_ITEM lvItem;
 			lvItem.mask = LVIF_TEXT;
