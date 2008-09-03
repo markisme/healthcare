@@ -11,8 +11,6 @@
 #include "CommonType.h"
 #include "msgID.h"
 
-typedef std::vector<PacketData> DataList;
-
 class Network
 {
 public:
@@ -21,7 +19,7 @@ public:
 
 	void Init( bool isHost, int clientPort, std::string ip, int serverPort );
 	void Uninit();
-	void ProcPacket();
+	bool ProcPacket();
 	void Send();
 
 	RakPeerInterface * GetClient() { return _client; }
@@ -29,6 +27,8 @@ public:
 	static Network & GetInstance() { return _instance; }
 
 	DataList & GetDataList() { return _dataList; }
+	UserList & GetUserInfoList() { return _userList; }
+	int GetIndexForUserNo( int userNo );
 
 	BOOL _isHost;
 
@@ -36,4 +36,5 @@ private:
 	static Network _instance;
 	RakPeerInterface * _client;
 	DataList _dataList;
+	UserList _userList;
 };
