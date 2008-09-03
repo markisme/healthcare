@@ -89,10 +89,6 @@ int main(void)
 			case ID_NEW_INCOMING_CONNECTION:
 				{
 					printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
-
-					RakNet::BitStream stream;
-					stream.Write( (unsigned char)MessageType::S2CH_SUCCESS_CONNECTED );
-					server->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 				}
 				break;
 
@@ -102,32 +98,45 @@ int main(void)
 				}
 				break;
 
-			case C2S_CLIENT_REQ:
+			case CH2S_LOGIN:
 				{
-					PeerType type;
-					type._addr = p->systemAddress;
-					type._isHost = false;
-					_peerList.push_back( type );
-				}
-				break;
+					// 패킷 읽기
+					std::string id;
+					inStream.Read( id );
 
-			case H2S_HOST_REQ:
-				{
+					std::string pass;
+					inStream.Read( pass );
+
+					// DB에서 데이터 확인
+					BOOL isAuth = DBConnector::GetInstance().ConfirmLogin( id, pass );
+					BOOL isHost = DBConnector::GetInstance().ConfirmHost( id );
+
+					// Peer 설정
 					PeerType type;
 					type._addr = p->systemAddress;
-					type._isHost = true;
+					type._isHost = isHost;
 					_peerList.push_back( type );
+
+					// 보낼 패킷 쓰기
+					RakNet::BitStream outBuffer;
+					outBuffer.Write( (unsigned char)MessageType::S2CH_LOGIN_RES );
+					outBuffer.Write( isAuth );
+					outBuffer.Write( isHost );
+
+					// 패킷 보내기
+					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 				}
 				break;
 
 			case H2S_GET_USERINFO_LIST:
 				{
+					// DB에서 데이터 가져오기
+					UserList userInfoList;
+					DBConnector::GetInstance().GetUserInfo( userInfoList );
+
 					// 보낼 패킷 쓰기
 					RakNet::BitStream outBuffer;
 					outBuffer.Write( (unsigned char)MessageType::S2H_GET_USERINFO_LIST_RES );
-
-					UserList userInfoList;
-					DBConnector::GetInstance().GetUserInfo( userInfoList );
 
 					int count = userInfoList.size();
 					outBuffer.Write( count );
@@ -146,16 +155,18 @@ int main(void)
 						outBuffer.Write( userInfo._pic );
 					}
 
-					// 호스트에게 패킷 보내기
+					// 패킷 보내기
 					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 				}
 				break;
 
 			case CH2S_GET_USERDATA_LIST:
 				{
+					// 패킷 읽기
 					int userNo;
 					inStream.Read( userNo );
 
+					// DB에서 데이터 가져오기
 					UserDataList userDataList;
 					DBConnector::GetInstance().GetUserData( userNo, userDataList );
 
@@ -178,13 +189,14 @@ int main(void)
 						outBuffer.Write( userData._temp );
 					}
 
-					// 호스트에게 패킷 보내기
+					//
 					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
 				}
 				break;
 
 			case C2S_ADD_USERDATA:
 				{
+					// 패킷 읽기
 					int userNo = 0;
 					inStream.Read( userNo );
 
@@ -197,7 +209,7 @@ int main(void)
 					inStream.Read( userData._value );
 					inStream.Read( userData._temp );
 					
-					//
+					// DB에 저장하기
 					DBConnector::GetInstance().AddUserData( userNo, userData );
 				}
 				break;
@@ -220,7 +232,7 @@ int main(void)
 
 					// 보낼 패킷 쓰기
 					RakNet::BitStream outBuffer;
-					outBuffer.Write( (unsigned char)MessageType::S2H_CLIENT_DATA_REQ );
+					outBuffer.Write( (unsigned char)MessageType::S2H_CLIENT_DATA_RES );
 
 					int dataCount = dataList.size();
 					outBuffer.Write( dataCount );

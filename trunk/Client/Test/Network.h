@@ -17,12 +17,18 @@ public:
 	Network();
 	~Network();
 
-	void Init( bool isHost, int clientPort, std::string ip, int serverPort );
+	void Init( int clientPort, std::string ip, int serverPort );
 	void Uninit();
+
+	//
 	bool ProcPacket();
-	void ClientDataSend();
-	void ReqGetUserData( int userNo );
-	void ReqAddUserData( int userNo, UserData & userData );
+
+	//
+	void ReqLoginSend( std::string id, std::string pass );
+	void ReqClientDataSend();
+	void ReqGetUserInfoSend();
+	void ReqGetUserDataSend( int userNo );
+	void ReqAddUserDataSend( int userNo, UserData & userData );
 
 	RakPeerInterface * GetClient() { return _client; }
 
@@ -33,6 +39,7 @@ public:
 	UserDataList & GetUserDataList() { return _userDataList; }
 	int GetIndexForUserNo( int userNo );
 
+	BOOL _isSuccessAuth;
 	BOOL _isHost;
 
 private:

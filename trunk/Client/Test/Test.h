@@ -16,6 +16,7 @@ public:
 	virtual BOOL OnIdle( LONG lCount );
 
 	void Init();
+	void Uninit();
 	void ProcPacket();
 
 	afx_msg void OnAppAbout();
@@ -27,6 +28,8 @@ private:
 private:
 	CMainFrame* _mainFrm;
 	HANDLE hComm;
+
+	BOOL _isStart;
 };
 
 extern CTestApp theApp;
