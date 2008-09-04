@@ -220,7 +220,7 @@ int main(void)
 					DBConnector::GetInstance().AddUserData( userNo, userData );
 
 					// 알람기능 가동
-					if( true ) // 조건식 기술 (Temp와 Value값이 얼마이면)
+					if( false ) // 조건식 기술 (Temp와 Value값이 얼마이면)
 					{
 						SendMail();
 					}

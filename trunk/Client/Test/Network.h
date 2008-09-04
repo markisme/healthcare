@@ -37,7 +37,6 @@ public:
 
 	static Network & GetInstance() { return _instance; }
 
-	DataList & GetDataList() { return _dataList; }
 	DataList & GetDataList( int userNo ) { return _dataMap[ userNo ]; }
 	UserList & GetUserInfoList() { return _userList; }
 	UserDataList & GetUserDataList() { return _userDataList; }
@@ -50,7 +49,6 @@ public:
 private:
 	static Network _instance;
 	RakPeerInterface * _client;
-	DataList _dataList;
 	DataMap _dataMap;
 	UserList _userList;
 	UserDataList _userDataList;

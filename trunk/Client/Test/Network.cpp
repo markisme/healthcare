@@ -44,6 +44,11 @@ void Network::Uninit()
 
 bool Network::ProcPacket()
 {
+	if( _client == NULL )
+	{
+		return FALSE;
+	}
+
 	Sleep(30);
 
 	Packet* p;
@@ -150,14 +155,11 @@ bool Network::ProcPacket()
 			}
 
 			// 기존 데이터 초기화
-			//DataList & buf = _dataMap[ userNo ];
-			//buf.clear();
+			DataList & buf = _dataMap[ userNo ];
+			buf.clear();
 
 			// 데이터 갱신
 			_dataMap[ userNo ] = dataList;
-
-			// 데이터 갱신
-			return TRUE;
 		}
 		break;
 	default:
@@ -191,12 +193,16 @@ void Network::ReqClientDataSend()
 	outBuffer.Write( (unsigned char)MessageType::C2S_CLIENT_DATA );
 	outBuffer.Write( _myUserNo );
 
-	int count = _dataList.size();
+	//
+	DataList & dataLIst = Network::GetInstance().GetDataList( _myUserNo );
+
+	//
+	int count = dataLIst.size();
 	outBuffer.Write( count );
 
 	for( int num = 0; num < count; num++ )
 	{
-		PacketData data = _dataList[ num ];
+		PacketData data = dataLIst[ num ];
 		outBuffer.Write( data );
 	}
 

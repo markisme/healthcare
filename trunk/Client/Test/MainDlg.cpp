@@ -423,10 +423,18 @@ void MainDlg::OnLbnSelchangeUserList()
 }
 void MainDlg::OnCbnSelchangeComboHour()
 {
-	int curindex = _userList.GetCurSel();
-	if( curindex >= 0 )
+	if( Network::GetInstance()._isHost )
 	{
-		int userNo = (int)_userList.GetItemData( curindex );
+		int curindex = _userList.GetCurSel();
+		if( curindex >= 0 )
+		{
+			int userNo = (int)_userList.GetItemData( curindex );
+			Network::GetInstance().ReqGetUserDataSend( userNo );
+		}
+	}
+	else
+	{
+		int userNo = Network::GetInstance()._myUserNo;
 		Network::GetInstance().ReqGetUserDataSend( userNo );
 	}
 }

@@ -38,12 +38,27 @@ int CTestView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void CTestView::OnDraw(CDC* pDC)
 {
+	pDC->SetDCPenColor( COLORREF(0x00ff9999) );
+	pDC->MoveTo( 0, 150 );
+	pDC->LineTo( 800, 150 );
+
 	pDC->SetBkColor( COLORREF(0x00000000) );
 	pDC->SetDCPenColor( COLORREF(0x00ff0000) );
 	pDC->SetDCBrushColor( COLORREF(0x00ff0000) );
 
+	// 보여줄 유저 선택
+	int userNo = 0;
+	if( Network::GetInstance()._isHost )
+	{
+		userNo = _curUserNo;
+	}
+	else
+	{
+		userNo = Network::GetInstance()._myUserNo;
+	}
+
 	// 데이터 그리기
-	DataList & dataList = Network::GetInstance().GetDataList( _curUserNo );
+	DataList & dataList = Network::GetInstance().GetDataList( userNo );
 
 	int count = dataList.size();
 	for( int num = 0; num < count; num++ )
