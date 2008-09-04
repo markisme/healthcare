@@ -38,7 +38,7 @@ BOOL LoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	_editID.SetWindowTextW( L"host_client" );
+	//_editID.SetWindowTextW( L"host_client" );
 	_editPass.SetWindowTextW( L"1234" );
 	_editCPort.SetWindowTextW( L"100" );
 	_editIP.SetWindowTextW( L"211.189.19.160" );

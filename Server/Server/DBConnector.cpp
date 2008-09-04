@@ -44,6 +44,11 @@ int DBConnector::GetUserNo( std::string id )
 		if( sql_result )
 		{
 			row=mysql_fetch_row(sql_result);
+			if( row == NULL )
+			{
+				return -1;
+			}
+
 			userNo = (char*)row[0];
 		}
 
@@ -70,6 +75,11 @@ bool DBConnector::ConfirmLogin( std::string id, std::string pass )
 		if( sql_result )
 		{
 			row=mysql_fetch_row(sql_result);
+			if( row == NULL )
+			{
+				return FALSE;
+			}
+
 			std::string passStr = (char*)row[2];
 
 			if( passStr == pass )
@@ -110,6 +120,11 @@ bool DBConnector::ConfirmHost( std::string id )
 		if( sql_result )
 		{
 			row=mysql_fetch_row(sql_result);
+			if( row == NULL )
+			{
+				return FALSE;
+			}
+
 			isHost = (char*)row[3];
 		}
 

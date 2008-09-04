@@ -25,7 +25,7 @@ BOOL CTestApp::InitInstance()
 	bool isHost = false;
 	std::string id;
 	std::string pw;
-	int clientPort = 100;
+	int clientPort = 200;
 	std::string ip = "211.189.19.160";
 	int serverPort = 10000;
 
@@ -61,7 +61,7 @@ BOOL CTestApp::InitInstance()
 	pMainFrame->GetWindowRect( mainRect );
 	pMainFrame->MoveWindow( mainRect.left, mainRect.top, 800, 600 );
 
-	if( isHost == false )
+	if( Network::GetInstance()._isHost == false )
 	{
 		hComm = CreateFile(L"COM2", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 		if(hComm == INVALID_HANDLE_VALUE)
@@ -127,10 +127,11 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		DWORD byteRead, byteWritten;
 		int retval;
 
-		DataList & dataList = Network::GetInstance().GetDataList();
+		int userNo = Network::GetInstance()._myUserNo;
+		DataList & dataList = Network::GetInstance().GetDataList( userNo );
 
 		int count = dataList.size();
-		if( count >= 350 )
+		if( count >= 800 )
 		{
 			DataList::iterator it = dataList.begin();
 			dataList.erase( it, it + 5 );
@@ -149,11 +150,13 @@ BOOL CTestApp::OnIdle( LONG lCount )
 				
 				if( ch == ' ' )
 				{
-					int y = 195-(atoi(str.c_str())/1.f)+200;
-					if ( y > 180 ) y = Temp_y;
-					dataList.push_back( PacketData(0,y) );
-					str.clear();
-					if( y < 180) Temp_y = y;
+					int value = atoi(str.c_str());
+					if( value > 0 )
+					{
+						int y = 300- value/3.4f - 50;
+						dataList.push_back( PacketData(0,y) );
+						str.clear();
+					}
 				}
 			}
 		}
@@ -161,9 +164,11 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		// 데이터 전송
 		Network::GetInstance().ReqClientDataSend();
 
-		// 1분에 한번 갱신
+		// 1분에 한번 체크
 		CTime t = CTime::GetCurrentTime();
 		int curMin = t.GetMinute();
+
+		// 갱신
 		if( _lastMin != curMin )
 		{
 			//
@@ -175,6 +180,7 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	}
 
 	_mainFrm->GetMainDlg().GetView()->Refresh();
+
 	return TRUE;
 }
 
