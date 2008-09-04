@@ -141,6 +141,26 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		retval = ReadFile(hComm, buf, 30, &byteRead, NULL);
 		if( retval )
 		{
+			// 1초에 한번 체크
+			CTime t = CTime::GetCurrentTime();
+			int curSec = t.GetSecond();
+
+			_dataCnt += 5;
+
+			if( _lastSec != curSec )
+			{
+				//
+				_lastSec = curSec;
+
+				//
+				CString buf;
+				buf.Format(L"DEBUG : %d \n", _dataCnt);
+				//OutputDebugString( (LPCWSTR)(buf) );
+
+				//
+				_dataCnt = 0;
+			}
+
 			std::string str;
 			int Temp_y=0;
 			for( int num = 0; num < 30; num++ )
@@ -156,6 +176,32 @@ BOOL CTestApp::OnIdle( LONG lCount )
 						int y = 300- value/3.4f - 50;
 						dataList.push_back( PacketData(0,y) );
 						str.clear();
+
+						//
+						int cnt = dataList.size();
+						if( cnt > 2 )
+						{
+							int curValue = dataList[ cnt - 1 ]._y;
+							int preValue = dataList[ cnt - 2 ]._y;
+
+							//
+							if( 130 <= preValue && 130 > curValue )
+							{
+								float hz = 1/(_overflowCnt / 110.f)*60;
+								if( hz < 150 )
+								{
+									_hzList.push_back( hz );
+									_overflowCnt = 0;
+
+									CString buf;
+									buf.Format(L"DEBUG : %f \n", hz);
+									OutputDebugString( (LPCWSTR)(buf) );
+								}
+							}
+
+							//
+							_overflowCnt++;
+						}
 					}
 				}
 			}
@@ -174,8 +220,32 @@ BOOL CTestApp::OnIdle( LONG lCount )
 			//
 			_lastMin = curMin;
 
+			//
+			float hz = 0.f;
+
+			//
+			int cnt = _hzList.size();
+			for( int num = 0; num < cnt; num++ )
+			{
+				hz += _hzList[ num ];
+			}
+
+			float avHz;
+			if( cnt > 0 )
+			{
+				avHz = hz / cnt;
+			}
+			else
+			{
+				avHz = 0;
+			}
+
+			_overflowCnt = 0;
+
+			_hzList.clear();
+
 			// 주기 데이터 전송(1분에 한번씩)
-			SendAddUserData( 80, 36.5 );
+			SendAddUserData( avHz, 36.5 );
 		}
 	}
 
