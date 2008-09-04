@@ -12,6 +12,8 @@ unsigned int Read_ADC(unsigned char ADC_input);
 void  Uart_U16Bit_PutNum(unsigned int NumData);
 void Timer_init(void);
 
+
+
 unsigned int cnt=0, temp=0;
 float Vout=0;
 unsigned int temp_1=0;
