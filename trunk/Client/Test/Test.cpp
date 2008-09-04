@@ -141,25 +141,25 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		retval = ReadFile(hComm, buf, 30, &byteRead, NULL);
 		if( retval )
 		{
-			// 1초에 한번 체크
-			CTime t = CTime::GetCurrentTime();
-			int curSec = t.GetSecond();
+			//// 1초에 한번 체크
+			//CTime t = CTime::GetCurrentTime();
+			//int curSec = t.GetSecond();
 
-			_dataCnt += 5;
+			//_dataCnt += 5;
 
-			if( _lastSec != curSec )
-			{
-				//
-				_lastSec = curSec;
+			//if( _lastSec != curSec )
+			//{
+			//	//
+			//	_lastSec = curSec;
 
-				//
-				CString buf;
-				buf.Format(L"DEBUG : %d \n", _dataCnt);
-				//OutputDebugString( (LPCWSTR)(buf) );
+			//	//
+			//	CString buf;
+			//	buf.Format(L"DEBUG : %d \n", _dataCnt);
+			//	OutputDebugString( (LPCWSTR)(buf) );
 
-				//
-				_dataCnt = 0;
-			}
+			//	//
+			//	_dataCnt = 0;
+			//}
 
 			std::string str;
 			int Temp_y=0;
@@ -193,9 +193,9 @@ BOOL CTestApp::OnIdle( LONG lCount )
 									_hzList.push_back( hz );
 									_overflowCnt = 0;
 
-									CString buf;
-									buf.Format(L"DEBUG : %f \n", hz);
-									OutputDebugString( (LPCWSTR)(buf) );
+									//CString buf;
+									//buf.Format(L"DEBUG : %f \n", hz);
+									//OutputDebugString( (LPCWSTR)(buf) );
 								}
 							}
 
@@ -241,7 +241,6 @@ BOOL CTestApp::OnIdle( LONG lCount )
 			}
 
 			_overflowCnt = 0;
-
 			_hzList.clear();
 
 			// 주기 데이터 전송(1분에 한번씩)
