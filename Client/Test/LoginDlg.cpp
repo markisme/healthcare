@@ -14,17 +14,8 @@ LoginDlg::~LoginDlg()
 void LoginDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT_ID, _id);
-	DDX_Text(pDX, IDC_EDIT_PW, _pass);
-	DDX_Text(pDX, IDC_EDIT_CPORT, _cPort);
-	DDX_Text(pDX, IDC_EDIT_IP, _ip);
-	DDX_Text(pDX, IDC_EDIT_PORT, _port);
-
 	DDX_Control(pDX, IDC_EDIT_ID, _editID);
 	DDX_Control(pDX, IDC_EDIT_PW, _editPass);
-	DDX_Control(pDX, IDC_EDIT_CPORT, _editCPort);
-	DDX_Control(pDX, IDC_EDIT_IP, _editIP);
-	DDX_Control(pDX, IDC_EDIT_PORT, _editPort);
 }
 
 BEGIN_MESSAGE_MAP(LoginDlg, CDialog)
@@ -38,11 +29,8 @@ BOOL LoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	//_editID.SetWindowTextW( L"host_client" );
+	_editID.SetWindowTextW( L"host" );
 	_editPass.SetWindowTextW( L"1234" );
-	_editCPort.SetWindowTextW( L"100" );
-	_editIP.SetWindowTextW( L"211.189.19.160" );
-	_editPort.SetWindowTextW( L"10000" );
 
 	CWinThread * pThread = AfxBeginThread(ThreadFunction, this);
 
@@ -71,11 +59,13 @@ void LoginDlg::OnBnClickedOk()
 	CString pass;
 	_editPass.GetWindowText( pass );
 
-	// 로긴
+	// 로긴 요청
 	Network::GetInstance().ReqLoginSend( (LPCSTR)T2A(id), (LPCSTR)T2A(pass) );
 
+	// 인증 받는 시간
 	Sleep(1000);
 
+	// 인증 완료 후 어플 스타트
 	if( Network::GetInstance()._isSuccessAuth )
 	{
 		OnOK();
@@ -85,7 +75,7 @@ void LoginDlg::OnBnClickedOk()
 UINT LoginDlg::ThreadFunction(LPVOID pParam)
 {
 	LoginDlg *pthis = (LoginDlg*)pParam;     
-	pthis->ThreadDo();               // Thread를 시작한다.
+	pthis->ThreadDo(); // 패킷을 받기 위한 Thread 시작
 
 	return 0;
 }
