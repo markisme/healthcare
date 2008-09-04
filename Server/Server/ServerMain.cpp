@@ -283,204 +283,111 @@ int main(void)
 	return 0;
 }
 
-// 잃어버렸던 소스를 찾아냄 --;
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
-//#include <getopt.h>
-//#include <sys/socket.h>
-//#include <netinet/in.h>
-//#include <netdb.h>
+#define WM_SOCKET   (WM_USER+1024)
+#define USER_MAX    20
+#define STR_IP      "127.0.0.1"
+#define I_PORT      4443
 
-static char *from_addr  = NULL;                /* 보내는 사람 주소        */
-static char *reply_addr = NULL;                /* 받는 사람 주소        */
-static char *mailhost   = NULL;                /* 메일서버 주소        */
-static int   mailport   = 25;                /* 메일서버 포트        */
-static char *subject    = 0;                /* 메일 제목                 */
-static FILE *sfp;
-static FILE *rfp;
+SOCKET      g_sockServer, g_sockClient[USER_MAX];
+SOCKADDR_IN   g_addrServer;
+WSADATA     g_wsaData;
 
-/*
-** 메일서버에서 응답받기
-*/
-void Get_Response(void)
+void init ()
 {
-	char buf[BUFSIZ];
+	WSAStartup (0x202, &g_wsaData);
 
-	while (fgets(buf, sizeof(buf), rfp)) {
-		buf[strlen(buf)-1] = 0;
-		/*
-		printf("%s --> %s\n", mailhost, buf);
-		*/
-		if (!isdigit(buf[0]) || buf[0] > '3') {
-			printf("unexpected reply: %s\n", buf);
-			exit(-1);
-		}
-		if (buf[4] != '-')
-			break;
-	}
-	return;
-}
-
-/*
-** 메일서버로 내용 전송하고 응답받기
-*/
-void Chat(char *fmt, ...)
-{
-	va_list ap;
-
-	va_start(ap, fmt);
-	vfprintf(sfp, fmt, ap);
-	va_end(ap);
-
-	/*
-	va_start(ap, fmt);
-	printf("%s <-- \n", mailhost);
-	vprintf(fmt, ap);
-	va_end(ap);
-	*/
-
-	fflush(sfp);
-	Get_Response();
-}
-
-/*
-**  main 함수
-*/
-
-void Usage(void)
-{
-	printf("\n");
-	printf("usage   : cymail [-S host] [-s subject] <-r reply-addr> FILE\n");
-	printf("options :\n");
-	/*
-	printf("  -S, --smtp-host=HOST        host where MTA can be contacted via SMTP\n")
-	*/
-	printf("          -S,       host where MTA can be contacted via SMTP\n");
-	printf("          -s,       subject line of message\n");
-	printf("          -r,       address of the sender for replies\n");
-	printf("\n");
-	exit(0);
-}
-
-int test()
-{
-	FILE *fpFile;
-	char buf[BUFSIZ];
-	char my_name[BUFSIZ];
-	struct sockaddr_in sin;
-	struct hostent *hp;
-	struct servent *sp;
-	int c;
-	int s;
-	int r;
-	char *cp;
-
-	if (mailhost == NULL)
+	for (int i=0; i < USER_MAX; i++)
 	{
-		if ((cp = getenv("SMTPSERVER")) != NULL)
-		{
-			mailhost = cp;
-		}
-		else
-		{
-			printf("SMTPSERVER is not setting\n");        
-			exit(-1);
-		}
+		g_sockClient[i] = INVALID_SOCKET;
 	}
 
-	/*
-	*  메일 서버에 연결
-	*/
+	g_sockServer = socket(AF_INET, SOCK_STREAM, 0);
 
-	if ((hp = gethostbyname(mailhost)) == NULL) {
-		printf("%s: unknown host\n", mailhost);
-		exit(-1);
-	}
-	if (hp->h_addrtype != AF_INET) {
-		printf("unknown address family: %d\n", hp->h_addrtype);
-		exit(-1);
-	}
+	ZeroMemory (&g_addrServer, sizeof(g_addrServer));
+	g_addrServer.sin_addr.s_addr = htonl(INADDR_ANY);
+	g_addrServer.sin_port = htons(I_PORT);
+	g_addrServer.sin_family = AF_INET;
 
-	memset((char *)&sin, 0, sizeof(sin));
-	memcpy((char *)&sin.sin_addr, hp->h_addr, hp->h_length);
+	bind(g_sockServer, (SOCKADDR *)&g_addrServer, sizeof(g_addrServer));
+	listen (g_sockServer, 5);
 
-	sin.sin_family = hp->h_addrtype;
-	sin.sin_port = htons(mailport);
+	WSAAsyncSelect(g_sockServer, NULL, WM_SOCKET, FD_ACCEPT | FD_CLOSE);
+}
 
-	if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		printf("socket: error\n");
-		exit(-1);
-	}
-	if (connect(s, (struct sockaddr *)&sin, sizeof(sin)) < 0) {
-		printf("connect: error\n");
-		exit(-1);
-	}
-	//if ((r = dup(s)) < 0) {
-	//	printf("dup: error\n");
-	//	exit(-1);
-	//}
-	if ((sfp = fdopen(s, "w")) == 0) {
-		printf("fdopen: error\n");
-		exit(-1);
-	}
-	if ((rfp = fdopen(r, "r")) == 0) {
-		printf("fdopen: error\n");
-		exit(-1);
-	}
+void SendData (SOCKET sockArg, const char * str, int size)
+{
+	int ret;
+	char * p = (char *) str;
 
-	/* 
-	*  SMTP 헤더보내기
-	*/
-	Get_Response(); /* 초기 메시지 받기 */
-	/*
-	Chat("HELO %s\r\n", my_name);
-	*/
-	Chat("MAIL FROM: <%s>\r\n", from_addr);
-	Chat("RCPT TO: <%s>\r\n", reply_addr);
-	Chat("DATA\r\n");
-
-	/* 
-	*  메일 제목
-	*/
-	if( subject != NULL)
+	while (size>0)
 	{
-		fprintf(sfp, "Subject: %s\r\n", subject);
-		fprintf(sfp, "\r\n");
+		ret = send(sockArg, p, size, 0);
+		p += ret;
+		size -= ret;
 	}
+}
 
-	///* 
-	//*  메일 내용 읽기
-	//*/
-	//if ((fpFile = fopen(argv[argc - 1], "r")) == NULL )
-	//{
-	//	printf("no message file \n");
-	//	exit(-1);
-	//}
-	//else
-	//{
-	//	while(fgets(buf, sizeof(buf), fpFile))
-	//	{
-	//		buf[strlen(buf)-1] = 0;
-	//		if (strcmp(buf, ".") == 0)
-	//		{
-	//			fprintf(sfp, ".\r\n");
-	//		}
-	//		else
-	//		{
-	//			fprintf(sfp, "%s\r\n", buf);
-	//		}
-	//	}
-	//	fclose(fpFile);
-	//}
 
-	/* 
-	*  내용 종료 및 통신 종료
-	*/
-	Chat(".\r\n");
-	Chat("QUIT\r\n");
+void SendData (int n, char * str)
+{
+	for (int i=0; i<USER_MAX; i++)
+	{
+		if (g_sockClient[i] != INVALID_SOCKET && i!=n)
 
-	printf("Your mail is sended successfully !!\n");
-	exit(0);
-} 
+			SendData (g_sockClient[i], str, strlen(str));
+	}
+}
+
+int test ()
+{
+	HANDLE hPort =  CreateFile(TEXT("\\\\.\\COM5"),   
+		GENERIC_WRITE | GENERIC_READ,     
+		FILE_SHARE_READ,    
+		NULL,   
+		CREATE_ALWAYS,   
+		FILE_ATTRIBUTE_NORMAL,   
+		NULL);   
+
+	// 휴대폰 USB 드라이버 설치 후 제어판에 보시면 해당 휴대폰의 포트가 나옵니다.
+	// 해당 포트를 파일 이름처럼 적으면 됨.  
+
+	if ( NULL == hPort )
+	{   
+		printf("%d", GetLastError());   
+	}   
+
+	/*  
+	각 이동통신사별 접속 스트링  
+	AT*SKT*MOREQ=0,%s,%s,4098,%s%c   
+	AT*LGT*MOREQ=0,%s,%s,4098,%s%c   
+	AT*KTF*MOREQ=0,%s,%s,4098,%s%c   
+	*/  
+
+	char szBuff[255]={0}, szBuff2[10]={0};   
+	//sprintf(szBuff, "AT*SKT*MOREQ=0,%s,%s,4098,%s%c", "01077513688","01196306210", "메세지 테스트", '\r');
+	sprintf(szBuff, "AT*ESMS=1");
+
+	// 보내는 사람과 받는 사람 이름 잘 적어서
+	// 문자열 만들어서 포트로 고고 고고 ~
+
+	BOOL bReturn = FALSE;   
+	DWORD dwWritten = 0, dwRead = 0;   
+	bReturn = WriteFile(hPort, szBuff, strlen(szBuff), &dwWritten, NULL);   
+	if ( FALSE == bReturn )   
+	{   
+		printf("%d", GetLastError());   
+	}   
+
+	// 포트에 문자열을 쏴주는 순간, 휴대폰은 문자발송 화면으로 바뀜니다.
+
+	bReturn = ReadFile(hPort, szBuff2, 10, &dwRead, NULL);   
+	if ( FALSE == bReturn )
+	{   
+		printf("%d", GetLastError());   
+	}   
+
+	// 제대로 발송 되었다면 OK 가 넘어오죠.
+
+	CloseHandle(hPort);   
+	return 0;   
+}
