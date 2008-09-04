@@ -1,4 +1,5 @@
 #include <iom128.h>
+#include <math.h>
 #define sbi(PORTX,BitX) PORTX |= (1 << BitX)
 #define cbi(PORTX,BitX) PORTX &= ~(1 << BitX)
 void Delay_us(unsigned int dly);
@@ -12,6 +13,11 @@ void  Uart_U16Bit_PutNum(unsigned int NumData);
 void Timer_init(void);
 
 unsigned int cnt=0, temp=0;
+float Vout=0;
+unsigned int temp_1=0;
+int Tk,Vo;
+char Tc;
+int Rt;
 
 #pragma vector=TIMER0_OVF_vect
 __interrupt void TIMER0_OVF_Interrupt(void)
@@ -20,6 +26,10 @@ __interrupt void TIMER0_OVF_Interrupt(void)
   if (cnt == 10) // 5ms
   {
     temp = Read_ADC(1);
+    temp_1 = Read_ADC(3);
+    //Tk = (float)3620/(float)(log((float)temp_1/1000)+12);
+    Tc = temp_1-325;
+    Uart_Putch(Tc);
     Uart_U16Bit_PutNum(temp);
     Uart_Putch(' ');
     cnt = 0;
@@ -28,13 +38,16 @@ __interrupt void TIMER0_OVF_Interrupt(void)
 }
 //TCNT0 = 131~255 นÝบน
 
-
 void main(void)
 {
   ADC_init();
   Uart_init();
   Timer_init();
   while(1){
+    //Uart_U16Bit_PutNum(Tc);
+    //Uart_Putch(' ');
+    //printf("Vout::%f, Vo::%f  Rt::%f,  Tk::%f, Tc::%f\n",Vout,Vo,Rt,Tk,Tc);
+		
     //temp = Read_ADC(Uart_Getch()-48);
     //temp = Read_ADC(1);
     //Uart_U16Bit_PutNum(temp);
@@ -104,8 +117,8 @@ void  Uart_U16Bit_PutNum(unsigned int NumData)
 {
   SREG &= ~(1<<7);
   unsigned int TempData;
-  TempData = NumData/10000;
-  Uart_Putch(TempData+48);
+  //TempData = NumData/10000;
+  //Uart_Putch(TempData+48);
   TempData = (NumData%10000)/1000;
   Uart_Putch(TempData+48);
   TempData = (NumData%1000)/100;
