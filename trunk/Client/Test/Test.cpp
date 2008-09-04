@@ -33,7 +33,10 @@ BOOL CTestApp::InitInstance()
 	Network::GetInstance().Init( clientPort, ip, serverPort );
 
 	LoginDlg dlg;
-	dlg.DoModal();
+	if( dlg.DoModal() != IDOK )
+	{
+		return -1;
+	}
 
 	// 호스트인 경우 유저 리스트 요청
 	if( Network::GetInstance()._isHost )

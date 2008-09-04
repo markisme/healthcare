@@ -24,24 +24,9 @@ public:
 	static UINT ThreadFunction(LPVOID pParam);
 	void ThreadDo();
 
-	std::string GetID() { USES_CONVERSION;return (LPCSTR)T2A(_id); }
-	std::string GetPW() { USES_CONVERSION;return (LPCSTR)T2A(_pass); }
-	std::string GetCPort() { USES_CONVERSION;return (LPCSTR)T2A(_cPort); }
-	std::string GetIP() { USES_CONVERSION;return (LPCSTR)T2A(_ip); }
-	std::string GetPort() { USES_CONVERSION;return (LPCSTR)T2A(_port); }
-
 private:
 	CEdit _editID;
 	CEdit _editPass;
-	CEdit _editCPort;
-	CEdit _editIP;
-	CEdit _editPort;
-
-	CString _id;
-	CString _pass;
-	CString _cPort;
-	CString _ip;
-	CString _port;
 
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
