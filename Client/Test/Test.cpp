@@ -22,6 +22,11 @@ BOOL CTestApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
+	// 클라이언트 시간 설정
+	CTime t = CTime::GetCurrentTime();
+	int curMin = t.GetMinute();
+	_lastMin = curMin;
+
 	bool isHost = false;
 	std::string id;
 	std::string pw;
@@ -248,6 +253,10 @@ BOOL CTestApp::OnIdle( LONG lCount )
 
 			// 주기 데이터 전송(1분에 한번씩)
 			SendAddUserData( avHz, 36.5 );
+
+			//
+			int userNo = Network::GetInstance()._myUserNo;
+			Network::GetInstance().ReqGetUserDataSend( userNo );
 		}
 	}
 
