@@ -1,0 +1,338 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\WinMgr.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\WinMgr.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 361, 199
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About WinMgr"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,21,20
+    LTEXT           "WinMgr Version 1.0",IDC_STATIC,34,7,119,8,SS_NOPREFIX
+    LTEXT           "© Copyright 1999  Marc E. Howe, All Rights Reserved.",
+                    IDC_STATIC,34,16,240,8
+    DEFPUSHBUTTON   "OK",IDOK,304,7,50,14,WS_GROUP
+    LTEXT           "By using this software, you (the user) agree to all of the terms in the above legal / warranty statements.\n\nFor questions, problems, concerns, etc. email Marc at: mehowe@yahoo.com",
+                    IDC_STATIC,7,120,347,27
+    LTEXT           "",IDC_PHYSICAL_MEM,61,169,230,8
+    LTEXT           "System Info:",IDC_STATIC,7,158,40,8
+    LTEXT           "Free Memory:",IDC_STATIC,14,169,44,8
+    LTEXT           "Free Hard Disk Space:",IDC_STATIC,14,181,73,8
+    LTEXT           "",IDC_DISK_SPACE,89,181,202,8
+    LTEXT           "Legal / Warranty Statement:",IDC_STATIC,7,33,344,10
+    LTEXT           "\tThis software may be redistributed only in the original, unmodified .zip file.  The user may modify this software by any means available. However, the user cannot redistribute any of the modified files without the written consent of the author.",
+                    IDC_STATIC,7,45,347,25
+    LTEXT           "\tThe author makes no warranties, either expressed or implied regarding the use of any of the software within the packaged .zip file.  This software does not even claim to have fitness for a particular purpose.",
+                    IDC_STATIC,7,72,347,18
+    LTEXT           "\tThe user is wholly responsible for any and all damages resulting from the use of this software.  The author is free from all liability regarding the use of this software by the consumer.",
+                    IDC_STATIC,7,92,347,17
+END
+
+IDD_WINMGR_DIALOG DIALOGEX 0, 0, 132, 146
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "WinMgr"
+MENU IDR_MENU1
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&Disable SS",IDC_BUTTONDISABLESS,13,17,50,14
+    PUSHBUTTON      "&Enable SS",IDC_BUTTONENABLESS,13,36,50,14
+    PUSHBUTTON      "&Activate SS",IDC_BUTTONACTIVATESS,70,17,50,14
+    PUSHBUTTON      "&Logoff",IDC_BUTTONLOGOFF,13,90,50,14
+    PUSHBUTTON      "&Reboot",IDC_BUTTONREBOOT,13,110,50,14
+    LTEXT           "SS Status:",IDC_STATICSSTEXT,17,57,34,8
+    EDITTEXT        IDC_EDITSSSTATUS,53,54,58,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "Screen Saver",IDC_STATICSSGRP,7,7,118,68
+    GROUPBOX        "Win Functions",IDC_STATIC,7,78,118,52
+END
+
+IDD_LAUNCHSS_DLG DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+END
+
+IDD_DIALOGCONFIG DIALOG DISCARDABLE  0, 0, 247, 138
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Configure WinMgr"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,190,7,50,14
+    GROUPBOX        "Activate Screen Saver Options",IDC_STATICACTSSGRP,7,7,
+                    111,40
+    CONTROL         "&Exit After Activate SS",IDC_RADIOEXITSS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,13,18,83,10
+    CONTROL         "&Minimize After Activate SS",IDC_RADIOMINSS,"Button",
+                    BS_AUTORADIOBUTTON,13,30,99,10
+    PUSHBUTTON      "Cancel",IDCANCEL,190,26,50,14
+END
+
+IDD_INFODLG DIALOG DISCARDABLE  0, 0, 412, 223
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "WinMgr Info"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,355,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,355,24,50,14
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,21,20
+    LTEXT           "For questions, problems, concerns, etc. email Marc at: mehowe@yahoo.com",
+                    IDC_STATIC,66,207,278,9
+    LTEXT           "Please see the Help...About box for legal information regarding the use of this software.",
+                    IDC_STATIC,33,13,273,8
+    LTEXT           "Notation Conventions: SS = Screen Saver; Win = Windows '9x;",
+                    IDC_STATIC,7,28,254,8
+    EDITTEXT        IDC_EDITINFO,7,39,398,161,ES_MULTILINE | ES_READONLY
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "WinMgr MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "WinMgr\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "WinMgr.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "WinMgr Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 354
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 192
+    END
+
+    IDD_WINMGR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 125
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_LAUNCHSS_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DIALOGCONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 240
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_INFODLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 405
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 216
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDD_FILE_EXIT
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Configure WinMgr",           ID_OPTIONS_CONFIG
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Info",                       ID_HELP_INFO
+        MENUITEM SEPARATOR
+        MENUITEM "&About",                      ID_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About WinMgr..."
+    CG_IDS_PHYSICAL_MEM     "%lu KB"
+    CG_IDS_DISK_SPACE       "%lu KB Free on %c:"
+    CG_IDS_DISK_SPACE_UNAVAIL "Unavailable"
+    IDS_ENABLESS            "Enable screen saving"
+    IDS_DISABLESS           "Disable screen saving"
+    IDS_ACTIVATESS          "Activate current screen saver"
+    IDS_SSSTATUS            "Current screen saving status"
+    IDS_WINLOGOFF           "Logoff the current user"
+    IDS_WINREBOOT           "Reboot the computer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CONFIGRADEXIT       "Exit WinMgr after activating screen saver"
+    IDS_CONFIGRADMIN        "Minimize WinMgr after activating screen saver"
+    IDS_CONFIGOKBUTTON      "Save options and exit"
+    IDS_CONFIGCANCELBUTTON  "Discard changes and exit"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\WinMgr.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
