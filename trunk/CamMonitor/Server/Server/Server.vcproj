@@ -37,7 +37,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../LibStatic;../../Common"
+				AdditionalIncludeDirectories="../../LibStatic;../../Common;./include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -54,7 +54,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../Lib/RakNetLibStatic.lib ws2_32.lib"
+				AdditionalDependencies="../../Lib/RakNetLibStatic.lib ws2_32.lib ./lib/libmysql.lib"
 				GenerateDebugInformation="true"
 			/>
 			<Tool
