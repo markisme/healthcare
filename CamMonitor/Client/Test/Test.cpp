@@ -31,7 +31,8 @@ BOOL CTestApp::InitInstance()
 	std::string id;
 	std::string pw;
 	int clientPort = 200;
-	std::string ip = "211.189.19.160";
+	//std::string ip = "211.189.19.160";
+	std::string ip = "127.0.0.1";
 	int serverPort = 10000;
 
 	// 네트워크 초기화
