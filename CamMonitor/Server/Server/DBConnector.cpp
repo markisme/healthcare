@@ -3,9 +3,9 @@
 #pragma comment(lib, "libmysql.lib")
 #pragma comment(lib, "ws2_32.lib")
 
-#define MYSQL_HOST  "localhost"
-#define MYSQL_USER  "root"
-#define MYSQL_PWD   "1234"
+#define MYSQL_HOST  "211.239.163.46"
+#define MYSQL_USER  "naid"
+#define MYSQL_PWD   "rbgur0834#!"
 #define MYSQL_DB "health"
 
 DBConnector DBConnector::_instance;
