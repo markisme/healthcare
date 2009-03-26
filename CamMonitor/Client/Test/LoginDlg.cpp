@@ -29,8 +29,8 @@ BOOL LoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	_editID.SetWindowTextW( L"host" );
-	_editPass.SetWindowTextW( L"1234" );
+	_editID.SetWindowText( "host" );
+	_editPass.SetWindowText( "1234" );
 
 	CWinThread * pThread = AfxBeginThread(ThreadFunction, this);
 
@@ -55,18 +55,21 @@ void LoginDlg::OnBnClickedOk()
 
 	CString id;
 	_editID.GetWindowText( id );
+	std::string idStr = id;
 
 	CString pass;
 	_editPass.GetWindowText( pass );
+	std::string passStr = pass;
 
 	// 로긴 요청
-	Network::GetInstance().ReqLoginSend( (LPCSTR)T2A(id), (LPCSTR)T2A(pass) );
+	Network::GetInstance().ReqLoginSend( idStr, passStr );
 
 	// 인증 완료 후 어플 스타트
 	while (1)
 	{
 		if( Network::GetInstance()._isSuccessAuth )
 		{
+			SendMessage(WM_SYSCOMMAND, SC_SCREENSAVE); //send SysCommand message calling SS
 			OnOK();
 			break;
 		}
