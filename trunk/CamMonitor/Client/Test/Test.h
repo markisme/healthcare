@@ -1,6 +1,7 @@
 #pragma once
 
 #include "resource.h"       // 주 기호입니다.
+#include "mmsystem.h"
 #include <vector>
 
 class CMainFrame;
@@ -24,27 +25,15 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	void SendAddUserData( int value, float temp );
+	BOOL InitMicControl();
+	BOOL SetMute(BOOL bMode);
+	BOOL SetVolumn(INT nValue);
 
 private:
-	CMainFrame* _mainFrm;
-	HANDLE hComm;
-
-	//
-	BOOL _isStart;
-	int _lastMin;
-
-	// 주기 검출 데이터
-	int _maxValue;
-	int _minValue;
-	int _tValue;
-	int _overflowCnt;
-	float _hz;
-	std::vector<float> _hzList;
-
-	// 테스트용
-	int _lastSec;
-	int _dataCnt;
+	HMIXER m_hMixer;
+	DWORD m_dwControlID;  
+	DWORD m_dwLineID;
+	DWORD m_dwChannels;
+	DWORD m_VolumneID; 
+	MMRESULT m_nStatus;
 };
-
-extern CTestApp theApp;

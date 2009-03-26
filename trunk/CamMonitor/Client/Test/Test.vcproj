@@ -21,7 +21,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
-			CharacterSet="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -68,7 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../Lib/RakNetLibStatic.lib ws2_32.lib"
+				AdditionalDependencies="../../Lib/RakNetLibStatic.lib ws2_32.lib  Winmm.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -207,14 +207,6 @@
 				RelativePath=".\Test.h"
 				>
 			</File>
-			<File
-				RelativePath=".\TestView.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TestView.h"
-				>
-			</File>
 			<Filter
 				Name="Dialog"
 				>
@@ -224,30 +216,6 @@
 				</File>
 				<File
 					RelativePath=".\LoginDlg.h"
-					>
-				</File>
-				<File
-					RelativePath=".\MainDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MainDlg.h"
-					>
-				</File>
-				<File
-					RelativePath=".\MainFrm.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MainFrm.h"
-					>
-				</File>
-				<File
-					RelativePath=".\ScrollDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\ScrollDlg.h"
 					>
 				</File>
 			</Filter>
