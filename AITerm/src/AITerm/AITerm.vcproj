@@ -176,11 +176,11 @@
 			>
 		</File>
 		<File
-			RelativePath=".\DicCreator.cpp"
+			RelativePath=".\DBDictionary.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\DicCreator.h"
+			RelativePath=".\DBDictionary.h"
 			>
 		</File>
 		<File
