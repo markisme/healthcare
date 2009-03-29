@@ -12,7 +12,11 @@
 #include <tchar.h>
 #include <memory.h>
 #include <string.h>
+#include <string>
+#include <vector>
 
+#include "TestCase.h"
+#include "DBConnector.h"
 
 #include "SimpleMinipar.h"
 #include "MiniparUsage.h"
