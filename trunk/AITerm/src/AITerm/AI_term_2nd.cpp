@@ -12,7 +12,7 @@
 
 #include "stdafx.h"
 #include <string>
-#include "DicCreator.h"
+#include "DBDictionary.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -42,8 +42,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//----------------------
 
 	// DB 사전 만들기
-	DicCreator dicCreator;
-	dicCreator.Init();
+	DBDictionary dbDic;
+	dbDic.Init();
 
 	//------------------------
 	// Parsing a sentence
