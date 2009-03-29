@@ -45,6 +45,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	DBDictionary dbDic;
 	dbDic.Init();
 
+	// 사전 테스트
+	std::string colName = dbDic.GetColName( "E7400" );
+	std::string tableName = dbDic.GetTableName( "E7400" );
+
 	//------------------------
 	// Parsing a sentence
 	//------------------------
