@@ -9,30 +9,34 @@ DicCreator::~DicCreator()
 {
 }
 
-void DicCreator::Init()
+void DicCreator::Init( bool createDic )
 {
 	// 사전 초기화
 	_dic.clear();
 
-	// 사전 로드
+	if( createDic == true )
 	{
+		// 사전 생성
+		CreateDBDic();
+	}
+	else
+	{
+		// 사전 로드
 		XmlDocument xmlDoc;
-		std::string path = "./resource/DBDicConfig.xml";
+		std::string path = "./resource/DBDic.xml";
 		xmlDoc.LoadFile( path.c_str() );
 
 		const XmlNode * resNode = xmlDoc.GetNode( "resource" );
 		LoadFromXML( resNode );
 	}
 
-	// 사전 세이브
-	{
-		XmlDocument xmlDoc;
-		XmlNode * resNode = xmlDoc.AddNode( "resource" );
-		SaveToXML( resNode );
+	// 사전 저장
+	XmlDocument xmlDoc;
+	XmlNode * resNode = xmlDoc.AddNode( "resource" );
+	SaveToXML( resNode );
 
-		std::string path = "./resource/DBDic.xml";
-		xmlDoc.SaveFile( path.c_str() );
-	}
+	std::string path = "./resource/DBDic.xml";
+	xmlDoc.SaveFile( path.c_str() );
 }
 
 void DicCreator::Uninit()
@@ -41,8 +45,15 @@ void DicCreator::Uninit()
 	_dic.clear();
 }
 
-bool DicCreator::LoadFromXML( const XmlNode * resNode )
+bool DicCreator::CreateDBDic()
 {
+	XmlDocument xmlDoc;
+	std::string path = "./resource/DBDicConfig.xml";
+	xmlDoc.LoadFile( path.c_str() );
+
+	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+	LoadFromXML( resNode );
+
 	int nodeCount = resNode->GetNodeCount( "table" );
 	for( int num = 0; num < nodeCount; num++ )
 	{
@@ -71,6 +82,44 @@ bool DicCreator::LoadFromXML( const XmlNode * resNode )
 
 			int colNum = GetColNum( colName, colList );
 			GetColData( colNum, dataList, colDataList._dataList );
+
+			tableDataList._dataList.push_back( colDataList );
+		}
+
+		_dic.push_back( tableDataList );
+	}
+
+	return true;
+}
+
+bool DicCreator::LoadFromXML( const XmlNode * resNode )
+{
+	int tableCount = resNode->GetNodeCount( "table" );
+	for( int num = 0; num < tableCount; num++ )
+	{
+		const XmlNode * tableNode = resNode->GetNode( "table", num );
+		std::string tableName = tableNode->GetAttribute( "name" );
+		
+		TableDataForDic tableDataList;
+		tableDataList._tableName = tableName;
+
+		int colCount = tableNode->GetNodeCount( "col" );
+		for( int cnt = 0; cnt < colCount; cnt++ )
+		{
+			const XmlNode * colNode = tableNode->GetNode( "col", cnt );
+			std::string colName = colNode->GetAttribute( "name" );
+
+			ColDataForDic colDataList;
+			colDataList._colName = colName;
+
+			int dataCount = colNode->GetNodeCount( "data" );
+			for( int k = 0; k < dataCount; k++ )
+			{
+				const XmlNode * dataNode = colNode->GetNode( "data", k );
+				std::string text = dataNode->GetAttribute( "text" );
+
+				colDataList._dataList.push_back( text );
+			}
 
 			tableDataList._dataList.push_back( colDataList );
 		}

@@ -20,9 +20,10 @@ public:
 	DicCreator();
 	~DicCreator();
 
-	void Init();
+	void Init( bool createDic = false );
 	void Uninit();
 
+	bool CreateDBDic();
 	bool LoadFromXML( const XmlNode * resNode );
 	bool SaveToXML( XmlNode * resNode );
 
