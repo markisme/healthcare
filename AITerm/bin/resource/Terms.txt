@@ -1,0 +1,26 @@
+PCI Express
+serial ATA
+AT Attachment
+ATX
+AM2
+AM2+
+AM3
+Conroe
+Conroe XE
+Conroe L
+Allendale
+Merom
+Merom XE
+Kentsfield
+Kentsfield XE
+Penryn
+Wolfdale
+Yorkfield
+Yorkfield XE
+Bloomfield
+Brisbane 
+Kuma
+Toliman
+Agena
+Heka
+Deneb
