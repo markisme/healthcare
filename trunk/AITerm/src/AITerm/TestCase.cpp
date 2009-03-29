@@ -21,6 +21,8 @@ void TestCase::Uninit()
 
 void TestCase::WordnetTest()
 {
+	Synset synset, *synsetPtr;
+
 	//--------------------------------------------------
 	// 문자열로 정리된(fomatted) 데이터를 넘겨 받을 때
 	//--------------------------------------------------
@@ -37,11 +39,11 @@ void TestCase::WordnetTest()
 	if( (synsetPtr= findtheinfo_ds( "edible", NOUN, HYPERPTR, ALLSENSES )) == NULL )
 	{
 		perror("serach failure\n");
-		return -1;
+		return;
 	}
 
 	// 검색어 차제의 의미 (NOUN으로써)
-	for( i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
+	for( int i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
 	{
 		printf("%s ", (*(synsetPtr->words)++)  );	// synset에 포함된 동의어들 출력
 	}
@@ -50,7 +52,7 @@ void TestCase::WordnetTest()
 	synsetPtr= synsetPtr->ptrlist;					// 검색된 상위 개념의 단어로 이동하여
 
 	printf("       => ");
-	for( i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
+	for( int i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
 	{
 		printf("%s ", (*(synsetPtr->words)++)  );	// synset에 포함된 동의어들 출력
 	}
@@ -83,7 +85,11 @@ void TestCase::XMLLoadSaveTest()
 		std::string type = resNode->GetAttribute( "type" );
 		std::string name = resNode->GetAttribute( "name" );
 
-		const XmlNode * testNode = resNode->GetNode( "testNode" );
-		std::string typeAtt = testNode->GetAttribute( "type" );
+		int nodeCount = resNode->GetNodeCount( "testNode" );
+		for( int num = 0; num < nodeCount; num++ )
+		{
+			const XmlNode * testNode = resNode->GetNode( "testNode", num );
+			std::string typeAtt = testNode->GetAttribute( "type" );
+		}
 	}
 }

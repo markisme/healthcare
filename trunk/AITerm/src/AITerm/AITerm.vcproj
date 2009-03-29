@@ -176,6 +176,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\DicCreator.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\DicCreator.h"
+			>
+		</File>
+		<File
 			RelativePath=".\stdafx.cpp"
 			>
 		</File>
