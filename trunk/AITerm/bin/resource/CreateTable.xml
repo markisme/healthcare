@@ -1,0 +1,25 @@
+<resource>
+    <table name="cpu">
+	<col name="product_name"/>
+	<col name="brand"/>
+    </table>
+    <table name="cpu_core">
+	<col name="code_name"/>
+	<col name="core"/>
+    </table>
+    <table name="mainboard">
+	<col name="product_name"/>
+	<col name="manufacturer"/>
+	<col name="seller"/>
+	<col name="board_type"/>
+	<col name="board_chipset"/>
+	<col name="graphic_interface"/>
+	<col name="hdd_interface_1"/>
+	<col name="hdd_interface_2"/>
+	<col name="graphic_card"/>
+	<col name="audio_card"/>
+    </table>
+    <table name="info">
+	<col name="info_keyword"/>
+    </table>
+</resource>
