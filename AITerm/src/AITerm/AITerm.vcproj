@@ -59,7 +59,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="wn.lib"
-				AdditionalLibraryDirectories="../../lib"
+				AdditionalLibraryDirectories="../../lib/wn;../../lib/mysql"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -168,11 +168,27 @@
 			>
 		</File>
 		<File
+			RelativePath=".\DBConnector.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\DBConnector.h"
+			>
+		</File>
+		<File
 			RelativePath=".\stdafx.cpp"
 			>
 		</File>
 		<File
 			RelativePath=".\stdafx.h"
+			>
+		</File>
+		<File
+			RelativePath=".\TestCase.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\TestCase.h"
 			>
 		</File>
 	</Files>

@@ -59,7 +59,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="wn.lib"
-				AdditionalLibraryDirectories="../../lib"
+				AdditionalLibraryDirectories="../../lib/wn"
 			/>
 			<Tool
 				Name="VCALinkTool"

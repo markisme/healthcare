@@ -71,80 +71,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	// 4. 저장해 놓은 데이터에서 부족한 부분은 사람이 보충한다.
 	// 5. 질문으로 들어온 명사들 중에 그런 것들이 있는지 알아본다.
 
-	//----------------------------
-	// 2. Wordnet Test
-	//----------------------------
-	wninit();													// wordnet을 초기화
+	// Wordnet 초기화
+	wninit();													
 	
-	synsetPtr=(Synset *)malloc(sizeof(Synset));					// 사용할 구조체 초기화
-	memset( synsetPtr, 0, sizeof(synsetPtr));
+	// Wordnet 테스트 // 사용시 테스트 코드 참조
+	TestCase::GetInstance().WordnetTest();
 
-	//--------------------------------------------------
-	// 2-1. 문자열로 정리된(fomatted) 데이터를 넘겨 받을 때
-	//--------------------------------------------------
-	char *wordnetData;
-	wordnetData= findtheinfo("edible", NOUN, HYPERPTR, ALLSENSES);
-	printf("%s\n", wordnetData);
-
-
-	//--------------------------------------------------
-	// 2-2. 각각의 정보에 따로따로 접근할 때
-	//--------------------------------------------------
-	// 구조체 초기화 (optional 하지만, 해주는게 깔끔할 듯)
-	synsetPtr=(Synset *)malloc(sizeof(Synset));
-	memset( synsetPtr, 0, sizeof(synsetPtr));
-
-	if( (synsetPtr= findtheinfo_ds( "edible", NOUN, HYPERPTR, ALLSENSES )) == NULL )
-	{
-		perror("serach failure\n");
-		return -1;
-	}
-
-	// 검색어 차제의 의미 (NOUN으로써)
-	for( i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
-	{
-		printf("%s ", (*(synsetPtr->words)++)  );	// synset에 포함된 동의어들 출력
-	}
-	printf("-- %s\n", synsetPtr->defn);				// 그 단어의 정의 출력
-
-	synsetPtr= synsetPtr->ptrlist;					// 검색된 상위 개념의 단어로 이동하여
-
-	printf("       => ");
-	for( i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
-	{
-		printf("%s ", (*(synsetPtr->words)++)  );	// synset에 포함된 동의어들 출력
-	}
-	printf("-- %s\n", synsetPtr->defn);				// 그 단어의 정의 출력
-
-
-	// XML 저장
-	{
-		XmlDocument xmlDoc;
-		XmlNode * resNode = xmlDoc.AddNode( "resource" );	
-		resNode->SetAttribute( "type", "type_test" );
-		resNode->SetAttribute( "name", "name_test" );
-
-		XmlNode * testNode = resNode->AddNode( "testNode" );
-		testNode->SetAttribute( "type", "type_attTest" );
-
-		std::string path = "test.xml";
-		xmlDoc.SaveFile( path.c_str() );
-	}
-
-	// XML 로드
-	{
-		XmlDocument xmlDoc;
-		std::string path = "test.xml";
-		xmlDoc.LoadFile( path.c_str() );
-
-		const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-		std::string type = resNode->GetAttribute( "type" );
-		std::string name = resNode->GetAttribute( "name" );
-
-		const XmlNode * testNode = resNode->GetNode( "testNode" );
-		std::string typeAtt = testNode->GetAttribute( "type" );
-	}
-
+	// XML 로드 세이브 테스트 // 사용시 테스트 코드 참조
+	TestCase::GetInstance().XMLLoadSaveTest();
 	
 	return 0;
 }
