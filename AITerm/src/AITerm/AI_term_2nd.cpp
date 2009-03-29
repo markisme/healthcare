@@ -12,7 +12,7 @@
 
 #include "stdafx.h"
 #include <string>
-
+#include "DicCreator.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -21,19 +21,29 @@ int _tmain(int argc, _TCHAR* argv[])
 	int miniparWordCount;
 	CSimpleMinipar Minipar;
 	char data[100]= "What is the cost of CPU-A?";				// Given Question
-	// wordnet
-	Synset synset, *synsetPtr;
-	int numOfWordInFile;
-
 	
 	//----------------------
 	// System Init start
 	//----------------------
-	
+
+	wninit();													// Wordnet 초기화
+
+	DBConnectInfo info;
+	info.ip = "211.239.163.46";
+	info.user = "naid";
+	info.pass = "rbgur0834#!";
+	info.port = 3306;
+	info.dbName = "AITerm";
+
+	DBConnector::GetInstance().Init( info );
+
 	//----------------------
 	// System Init end
 	//----------------------
 
+	// DB 사전 만들기
+	DicCreator dicCreator;
+	dicCreator.Init();
 
 	//------------------------
 	// Parsing a sentence
@@ -70,9 +80,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	// 4. 저장해 놓은 데이터에서 부족한 부분은 사람이 보충한다.
 	// 5. 질문으로 들어온 명사들 중에 그런 것들이 있는지 알아본다.
+												
 
-	// Wordnet 초기화
-	wninit();													
+	//------------------------
+	// Test Code
+	//------------------------
 	
 	// Wordnet 테스트 // 사용시 테스트 코드 참조
 	TestCase::GetInstance().WordnetTest();
