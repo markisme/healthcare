@@ -11,12 +11,38 @@ DicCreator::~DicCreator()
 
 void DicCreator::Init()
 {
-	XmlDocument xmlDoc;
-	std::string path = "./resource/CreateTable.xml";
-	xmlDoc.LoadFile( path.c_str() );
+	// 사전 초기화
+	_dic.clear();
 
-	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+	// 사전 로드
+	{
+		XmlDocument xmlDoc;
+		std::string path = "./resource/DBDicConfig.xml";
+		xmlDoc.LoadFile( path.c_str() );
 
+		const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+		LoadFromXML( resNode );
+	}
+
+	// 사전 세이브
+	{
+		XmlDocument xmlDoc;
+		XmlNode * resNode = xmlDoc.AddNode( "resource" );
+		SaveToXML( resNode );
+
+		std::string path = "./resource/DBDic.xml";
+		xmlDoc.SaveFile( path.c_str() );
+	}
+}
+
+void DicCreator::Uninit()
+{
+	// 사전 초기화
+	_dic.clear();
+}
+
+bool DicCreator::LoadFromXML( const XmlNode * resNode )
+{
 	int nodeCount = resNode->GetNodeCount( "table" );
 	for( int num = 0; num < nodeCount; num++ )
 	{
@@ -31,22 +57,61 @@ void DicCreator::Init()
 		DataList dataList;
 		DBConnector::GetInstance().GetDataList( tableName.c_str(), dataList );
 
+		TableDataForDic tableDataList;
+		tableDataList._tableName = tableName;
+
 		int nodeCount = tableNode->GetNodeCount( "col" );
 		for( int cnt = 0; cnt < nodeCount; cnt++ )
 		{
 			const XmlNode * colNode = tableNode->GetNode( "col", cnt );
 			std::string colName = colNode->GetAttribute( "name" );
 
-			int colNum = GetColNum( colName, colList );
+			ColDataForDic colDataList;
+			colDataList._colName = colName;
 
-			std::vector<std::string> dicList;
-			GetColData( colNum, dataList, dicList );
+			int colNum = GetColNum( colName, colList );
+			GetColData( colNum, dataList, colDataList._dataList );
+
+			tableDataList._dataList.push_back( colDataList );
 		}
+
+		_dic.push_back( tableDataList );
 	}
+
+	return true;
 }
 
-void DicCreator::Uninit()
+bool DicCreator::SaveToXML( XmlNode * resNode )
 {
+	int size = _dic.size();
+	for( int num = 0; num < size; num++ )
+	{
+		TableDataForDic tableDataList = _dic[num];
+		std::string tableName = tableDataList._tableName;
+
+		XmlNode * tableNode = resNode->AddNode( "table" );
+		tableNode->SetAttribute( "name", tableName.c_str() );
+
+		int colSize = tableDataList._dataList.size();
+		for( int cnt = 0; cnt < colSize; cnt++ )
+		{
+			const ColDataForDic & colDataList = tableDataList._dataList[ cnt ];
+			std::string colName = colDataList._colName;
+
+			XmlNode * colNode = tableNode->AddNode( "col" );
+			colNode->SetAttribute( "name", colName.c_str() );
+
+			int dataSize = colDataList._dataList.size();
+			for( int k = 0; k < dataSize; k++ )
+			{
+				const std::string & data = colDataList._dataList[ k ];
+
+				XmlNode * dataNode = colNode->AddNode( "data" );
+				dataNode->SetAttribute( "text", data.c_str() );
+			}
+		}
+	}
+	return true;
 }
 
 int DicCreator::GetColNum( std::string name, const ColList & colList )
@@ -75,7 +140,29 @@ void DicCreator::GetColData( int colNum, const DataList & dataList, std::vector<
 	for( int num = 0; num < size; num++ )
 	{
 		std::string data = dataList[num]._data[colNum];
-		outList.push_back( data );
-		printf( "%s \n", data.c_str() );
+		if( IsSameData( data, outList ) == false  )
+		{
+			printf( "%s \n", data.c_str() );
+			outList.push_back( data );
+		}
 	}
+}
+
+bool DicCreator::IsSameData( std::string data, const std::vector<std::string> & inList  )
+{
+	if( data.empty() )
+	{
+		return true;
+	}
+
+	int size = inList.size();
+	for( int num = 0; num < size; num++ )
+	{
+		if( data == inList[ num ] )
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
