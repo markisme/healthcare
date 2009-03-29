@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AITerm", "AITerm\AITerm.vcproj", "{DE752F1E-5293-435E-8FFA-E12FAE231DC8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA} = {85B65333-CD5F-4939-88AF-89A907F7BDFA}
+		{3A616853-533F-4152-9745-44BE82E9D9C9} = {3A616853-533F-4152-9745-44BE82E9D9C9}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Minipar", "Minipar\Minipar.vcproj", "{3A616853-533F-4152-9745-44BE82E9D9C9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlLib", "XMLLib\XmlLib.vcproj", "{85B65333-CD5F-4939-88AF-89A907F7BDFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Final|Win32 = Final|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE752F1E-5293-435E-8FFA-E12FAE231DC8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE752F1E-5293-435E-8FFA-E12FAE231DC8}.Debug|Win32.Build.0 = Debug|Win32
+		{DE752F1E-5293-435E-8FFA-E12FAE231DC8}.Final|Win32.ActiveCfg = Release|Win32
+		{DE752F1E-5293-435E-8FFA-E12FAE231DC8}.Final|Win32.Build.0 = Release|Win32
+		{DE752F1E-5293-435E-8FFA-E12FAE231DC8}.Release|Win32.ActiveCfg = Release|Win32
+		{DE752F1E-5293-435E-8FFA-E12FAE231DC8}.Release|Win32.Build.0 = Release|Win32
+		{3A616853-533F-4152-9745-44BE82E9D9C9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A616853-533F-4152-9745-44BE82E9D9C9}.Debug|Win32.Build.0 = Debug|Win32
+		{3A616853-533F-4152-9745-44BE82E9D9C9}.Final|Win32.ActiveCfg = Release|Win32
+		{3A616853-533F-4152-9745-44BE82E9D9C9}.Final|Win32.Build.0 = Release|Win32
+		{3A616853-533F-4152-9745-44BE82E9D9C9}.Release|Win32.ActiveCfg = Release|Win32
+		{3A616853-533F-4152-9745-44BE82E9D9C9}.Release|Win32.Build.0 = Release|Win32
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Debug|Win32.Build.0 = Debug|Win32
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Final|Win32.ActiveCfg = Final|Win32
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Final|Win32.Build.0 = Final|Win32
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Release|Win32.ActiveCfg = Release|Win32
+		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
