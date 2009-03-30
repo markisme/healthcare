@@ -52,7 +52,6 @@ bool DBDictionary::CreateDBDic()
 	xmlDoc.LoadFile( path.c_str() );
 
 	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-	LoadFromXML( resNode );
 
 	int nodeCount = resNode->GetNodeCount( "table" );
 	for( int num = 0; num < nodeCount; num++ )
