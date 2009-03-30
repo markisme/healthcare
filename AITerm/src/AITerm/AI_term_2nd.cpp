@@ -43,7 +43,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// DB 사전 만들기
 	DBDictionary dbDic;
-	dbDic.Init();
+	dbDic.Init( true );
 
 	// 사전 테스트
 	std::string colName = dbDic.GetColName( "E7400" );
@@ -94,7 +94,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	TestCase::GetInstance().WordnetTest();
 
 	// XML 로드 세이브 테스트 // 사용시 테스트 코드 참조
-	TestCase::GetInstance().XMLLoadSaveTest();
+	// TestCase::GetInstance().XMLLoadSaveTest();
 	
 	return 0;
 }
