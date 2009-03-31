@@ -15,6 +15,16 @@
 #include "DBDictionary.h"
 #include "WNDictionary.h"
 
+struct TagElement
+{
+	std::string tagName;
+	std::string word;
+};
+
+typedef std::vector<TagElement> TagList;
+
+void XMLSaveTest( TagList & tagList );
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int i, j;
@@ -48,6 +58,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	WNDictionary wnDic;
 	wnDic.Init( true );
 
+	
 	//------------------------
 	// Parsing a sentence
 	//------------------------
@@ -58,28 +69,68 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	miniparWordCount= Minipar.GetWordCount();
 
+	TagList tagList;
+
+	int count = Minipar.GetWordCount();
+	for( int num = 0; num < count; num++ )
+	{
+		std::string word = Minipar.GetAt( num )->szWord;
+
+		std::string colName = dbDic.GetColName( word );
+		if( colName.length() != 0 )
+		{
+			TagElement tag;
+			tag.tagName = colName;
+			tag.word = word;
+
+			tagList.push_back( tag );
+			continue;
+		}
+
+		std::string tagName = wnDic.GetTagName( word );
+		if( tagName.length() != 0 )
+		{
+			TagElement tag;
+			tag.tagName = tagName;
+			tag.word = word;
+
+			tagList.push_back( tag );
+			continue;
+		}
+	}
+
 	printf(">> %s\n", data);									// 주어진 문장 출력
 	outputParsingResult(Minipar);								// parsing 결과 출력
 	printf("\n");
-	//------------------------
-	// Parsing a sentence end
-	//------------------------
 
-	// std::string tagName = wnDic.GetTagName( "constitute" );
-	//if( tagName.length() != 0 )
-	//{
-	//}
-												
-	//------------------------
-	// Test Code
-	//------------------------
-	
-	// Wordnet 테스트 // 사용시 테스트 코드 참조
-	// TestCase::GetInstance().WordnetTest();
+	XMLSaveTest( tagList );
 
-	// XML 로드 세이브 테스트 // 사용시 테스트 코드 참조
-	// TestCase::GetInstance().XMLLoadSaveTest();
-	
+	//XmlDocument xmlDoc;
+	//XmlNode *XmlNode= TestCase::GetInstance().CreateXMLTag( xmlDoc, "Resource");
+
 	return 0;
+}
+
+void XMLSaveTest( TagList & tagList )
+{
+	// XML 저장
+	{
+		XmlDocument xmlDoc;
+		XmlNode *resNode = xmlDoc.AddNode( "resource" );
+
+		int size = tagList.size();
+		for( int num = 0; num < size; num++ )
+		{
+			TagElement tag = tagList[ num ];
+			std::string tagName = tag.tagName;
+			std::string word = tag.word;
+
+			XmlNode * tagNode = resNode->AddNode( tagName.c_str() );		// TAG명 		
+			tagNode->SetText( word.c_str(), XmlNode::NUMBER );			// 개체명 추가
+		}
+
+		std::string path = "test.xml";
+		xmlDoc.SaveFile( path.c_str() );
+	}
 }
 
