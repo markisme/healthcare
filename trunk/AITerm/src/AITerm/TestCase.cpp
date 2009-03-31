@@ -43,7 +43,7 @@ void TestCase::WordnetTest()
 	}
 
 	// 검색어 차제의 의미 (NOUN으로써)
-	for( int i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
+	for( int i=0; i<synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
 	{
 		printf("%s ", (*(synsetPtr->words)++)  );	// synset에 포함된 동의어들 출력
 	}
@@ -52,7 +52,7 @@ void TestCase::WordnetTest()
 	synsetPtr= synsetPtr->ptrlist;					// 검색된 상위 개념의 단어로 이동하여
 
 	printf("       => ");
-	for( int i=0; i<synsetPtr->wcount; i++)				// synset에 포함된 동의어 개수만큼
+	for( int i=0; i<synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
 	{
 		printf("%s ", (*(synsetPtr->words)++)  );	// synset에 포함된 동의어들 출력
 	}
