@@ -1,0 +1,51 @@
+<resource>
+    <tag name="comparison">
+    	<keyword name="compatible" sense="0"/>
+    </tag>
+    <tag name="difference">
+    	<keyword name="difference" sense="0"/>
+    </tag>
+    <tag name="support">
+    	<keyword name="supported" sense="1"/>
+    </tag>
+    <tag name="performance">
+    	<keyword name="performance" sense="2"/>
+    </tag>
+    <tag name="constitution">
+    	<keyword name="constitute" sense="3"/>
+	<keyword name="combination" sense="0"/>
+    </tag>
+    <tag name="exception">
+    	<keyword name="happens" sense="0"/>
+	<keyword name="occur" sense="0"/>
+    </tag>
+    <tag name="price">
+    	<keyword name="cost" sense="2"/>
+    	<keyword name="won" sense="1"/>
+    </tag>
+    <tag name="minimum">
+    	<keyword name="lowest" sense="0"/>
+    </tag>
+    <tag name="maximum">
+    	<keyword name="best" sense="0"/>
+    	<keyword name="strong" sense="6"/>
+    </tag>
+    <tag name="dealer">
+    	<keyword name="store" sense="1"/>
+    	<keyword name="selling" sense="1"/>
+    </tag>
+    <tag name="manufacture">
+    	<keyword name="manufacturer" sense="1"/>
+    	<keyword name="makes" sense="0"/>
+    </tag>
+    <tag name="kind">
+    	<keyword name="kinds" sense="1"/>
+    	<keyword name="type" sense="0"/>
+    </tag>
+    <tag name="date">
+    	<keyword name="latest" sense="0"/>
+    </tag>
+    <tag name="product">
+    	<keyword name="computer" sense="1"/>
+    </tag>
+</resource>

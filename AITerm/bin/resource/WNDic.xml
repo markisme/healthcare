@@ -1,0 +1,110 @@
+<resource>
+    <tag name="comparison">
+        <keyword name="compatible" />
+    </tag>
+    <tag name="difference">
+        <keyword name="difference" />
+        <keyword name="quality" />
+    </tag>
+    <tag name="support">
+        <keyword name="supported" />
+    </tag>
+    <tag name="performance">
+        <keyword name="performance" />
+        <keyword name="public_presentation" />
+        <keyword name="show" />
+    </tag>
+    <tag name="constitution">
+        <keyword name="constitute" />
+        <keyword name="represent" />
+        <keyword name="make_up" />
+        <keyword name="comprise" />
+        <keyword name="be" />
+        <keyword name="combination" />
+        <keyword name="collection" />
+        <keyword name="aggregation" />
+        <keyword name="accumulation" />
+        <keyword name="assemblage" />
+    </tag>
+    <tag name="exception">
+        <keyword name="happen" />
+        <keyword name="hap" />
+        <keyword name="go_on" />
+        <keyword name="pass_off" />
+        <keyword name="occur" />
+        <keyword name="pass" />
+        <keyword name="fall_out" />
+        <keyword name="come_about" />
+        <keyword name="take_place" />
+    </tag>
+    <tag name="price">
+        <keyword name="cost" />
+        <keyword name="outgo" />
+        <keyword name="expenditure" />
+        <keyword name="outlay" />
+        <keyword name="South_Korean_won" />
+        <keyword name="won" />
+        <keyword name="South_Korean_monetary_unit" />
+    </tag>
+    <tag name="minimum">
+        <keyword name="last" />
+        <keyword name="last-place" />
+        <keyword name="lowest" />
+    </tag>
+    <tag name="maximum">
+        <keyword name="best" />
+        <keyword name="attempt" />
+        <keyword name="effort" />
+        <keyword name="endeavor" />
+        <keyword name="endeavour" />
+        <keyword name="try" />
+        <keyword name="strong" />
+    </tag>
+    <tag name="dealer">
+        <keyword name="shop" />
+        <keyword name="store" />
+        <keyword name="mercantile_establishment" />
+        <keyword name="retail_store" />
+        <keyword name="sales_outlet" />
+        <keyword name="outlet" />
+        <keyword name="selling" />
+        <keyword name="merchandising" />
+        <keyword name="marketing" />
+        <keyword name="commerce" />
+        <keyword name="commercialism" />
+        <keyword name="mercantilism" />
+    </tag>
+    <tag name="manufacture">
+        <keyword name="manufacturer" />
+        <keyword name="maker" />
+        <keyword name="manufacturing_business" />
+        <keyword name="business" />
+        <keyword name="concern" />
+        <keyword name="business_concern" />
+        <keyword name="business_organization" />
+        <keyword name="business_organisation" />
+    </tag>
+    <tag name="kind">
+        <keyword name="type" />
+        <keyword name="kind" />
+        <keyword name="sort" />
+        <keyword name="form" />
+        <keyword name="variety" />
+    </tag>
+    <tag name="date">
+        <keyword name="latest" />
+        <keyword name="news" />
+        <keyword name="intelligence" />
+        <keyword name="tidings" />
+        <keyword name="word" />
+    </tag>
+    <tag name="product">
+        <keyword name="computer" />
+        <keyword name="computing_machine" />
+        <keyword name="computing_device" />
+        <keyword name="data_processor" />
+        <keyword name="electronic_computer" />
+        <keyword name="information_processing_system" />
+        <keyword name="machine" />
+    </tag>
+</resource>
