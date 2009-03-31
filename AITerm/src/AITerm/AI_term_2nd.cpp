@@ -31,7 +31,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	// minipar
 	int miniparWordCount;
 	CSimpleMinipar Minipar;
-	char data[100]= "What is the cost of CPU-A?";				// Given Question
+	char data[100]= "What is the cost of Q9550?";				// Given Question
 	
 	//----------------------
 	// System Init start
