@@ -199,6 +199,14 @@
 			RelativePath=".\TestCase.h"
 			>
 		</File>
+		<File
+			RelativePath=".\WNDictionary.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\WNDictionary.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
