@@ -1,16 +1,16 @@
 <resource>
     <table name="cpu">
-	<col name="product_name"/>
-	<col name="brand"/>
+	<col name="cpu_name"/>
+	<col name="cpu_maker"/>
     </table>
     <table name="cpu_core">
 	<col name="code_name"/>
 	<col name="core"/>
     </table>
     <table name="mainboard">
-	<col name="product_name"/>
-	<col name="manufacturer"/>
-	<col name="seller"/>
+	<col name="mb_name"/>
+	<col name="mb_maker"/>
+	<col name="mb_seller"/>
 	<col name="board_type"/>
 	<col name="board_chipset"/>
 	<col name="graphic_interface"/>

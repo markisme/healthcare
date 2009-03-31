@@ -1,6 +1,6 @@
 <resource>
     <table name="cpu">
-        <col name="product_name">
+        <col name="cpu_name">
             <data text="E5200" />
             <data text="E7400" />
             <data text="Q8200" />
@@ -47,7 +47,7 @@
             <data text="X4 9850" />
             <data text="X4 9950" />
         </col>
-        <col name="brand">
+        <col name="cpu_maker">
             <data text="INTEL" />
             <data text="AMD" />
         </col>
@@ -84,7 +84,7 @@
         </col>
     </table>
     <table name="mainboard">
-        <col name="product_name">
+        <col name="mb_name">
             <data text="P5KPL/1600" />
             <data text="G31MX-K" />
             <data text="P5LD2-C/IPAT" />
@@ -134,7 +134,7 @@
             <data text="A7GM-S" />
             <data text="A74MX-K" />
         </col>
-        <col name="manufacturer">
+        <col name="mb_maker">
             <data text="ASUS" />
             <data text="FOXCORN" />
             <data text="GIGABYTE" />
@@ -148,7 +148,7 @@
             <data text="MSI" />
             <data text="EMTECH" />
         </col>
-        <col name="seller">
+        <col name="mb_seller">
             <data text="IBORA" />
             <data text="PCDIRECT" />
             <data text="STCOM" />
