@@ -1,24 +1,24 @@
-compatible  			// comparison
-difference			// difference
-supported			// support
-performance 			// performance
-constitute / combination	// constitution
-happens				// exception(예외)
+compatible(0)  			// comparison
+difference(0)			// difference
+supported(1)			// support
+performance(2) 			// performance
+constitute(3) / combination(0)	// constitution
+happens(0) / occur(0) 		// exception(예외)
 
-cost / won			// price
-lowest  			// minimum
-best / strong 			// maximum
-store / selling 		// dealer
-manufacturer / makes 		// manufacture
-kinds / type 			// kind
-latest 				// date
-computer 			// thing
+cost(2) / won(1)		// price
+lowest(0) 			// minimum
+best(0) / strong(6) 		// maximum
+store(1) / selling(1) 		// dealer
+manufacturer(1) / makes(0) 	// manufacture
+kinds(1) / type(0) 		// kind
+latest(0) 			// date
+computer(1) 			// thing
 
 ------------
-socket 
-PCI-E
-motherboard 
-extension slots 
-internal audio chipset 
-internal network card 
-graphic interfaces 
+socket 				// cpu_socket
+motherboard 			// mainboard
+internal audio chipset 		// audio_card
+internal network card 		// lan_card
+graphic interfaces 		// graphic_interface
+
+------------ 사용자 정의사전
