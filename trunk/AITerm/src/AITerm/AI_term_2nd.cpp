@@ -43,7 +43,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// DB 사전 만들기
 	DBDictionary dbDic;
-	dbDic.Init( true );
+	dbDic.Init( false );
 
 	// 사전 테스트
 	std::string colName = dbDic.GetColName( "E7400" );
@@ -65,6 +65,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	//------------------------
 	// Parsing a sentence end
 	//------------------------
+
+	std::string tagName = dbDic.GetTagName( "abc" );
+	if( tagName.length() != 0 )
+	{
+	}
 
 	
 	// 개체명 인식 전략

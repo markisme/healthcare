@@ -36,7 +36,7 @@ void TestCase::WordnetTest()
 	synsetPtr=(Synset *)malloc(sizeof(Synset));
 	memset( synsetPtr, 0, sizeof(synsetPtr));
 
-	if( (synsetPtr= findtheinfo_ds( "edible", NOUN, HYPERPTR, ALLSENSES )) == NULL )
+	if( (synsetPtr= findtheinfo_ds( "man", NOUN, HYPERPTR, ALLSENSES )) == NULL )
 	{
 		perror("serach failure\n");
 		return;
