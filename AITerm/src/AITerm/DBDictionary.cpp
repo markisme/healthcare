@@ -162,6 +162,11 @@ bool DBDictionary::SaveToXML( XmlNode * resNode )
 	return true;
 }
 
+std::string DBDictionary::GetTagName( const std::string & inData )
+{
+	return "Tag";
+}
+
 std::string DBDictionary::GetColName( const std::string & inData )
 {
 	int size = _dic.size();

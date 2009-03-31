@@ -26,6 +26,8 @@ public:
 	bool LoadFromXML( const XmlNode * resNode );
 	bool SaveToXML( XmlNode * resNode );
 
+	std::string GetTagName( const std::string & inData );
+
 	std::string GetColName( const std::string & inData );
 	std::string GetTableName( const std::string & inData );
 
