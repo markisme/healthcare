@@ -1,0 +1,24 @@
+compatible  			// comparison
+difference			// difference
+supported			// support
+performance 			// performance
+constitute / combination	// constitution
+happens				// exception(¿¹¿Ü)
+
+cost / won			// price
+lowest  			// minimum
+best / strong 			// maximum
+store / selling 		// dealer
+manufacturer / makes 		// manufacture
+kinds / type 			// kind
+latest 				// date
+computer 			// thing
+
+------------
+socket 
+PCI-E
+motherboard 
+extension slots 
+internal audio chipset 
+internal network card 
+graphic interfaces 
