@@ -80,22 +80,24 @@ bool WNDictionary::CreateWNDic()
 				continue;
 			}
 
-			for( int i=0; i<_synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
+			// 동의어 추가
+			for( int i=0; i<_synsetPtr->wcount; i++)			
 			{
 				std::string word = (*(_synsetPtr->words)++);
 				tagDataList._dataList.push_back( word );
 			}
 
-			if( ( _synsetPtr= _synsetPtr->ptrlist ) == NULL ) 
+			// 상의어 추가
+			while( ( _synsetPtr= _synsetPtr->ptrlist ) != NULL )
 			{
-				continue;
+				for( int i=0; i<_synsetPtr->wcount; i++)
+				{
+					std::string word = (*(_synsetPtr->words)++);
+					tagDataList._dataList.push_back( word );
+				}
 			}
 
-			for( int i=0; i<_synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
-			{
-				std::string word = (*(_synsetPtr->words)++);
-				tagDataList._dataList.push_back( word );
-			}
+			
 		}
 
 		_dic.push_back( tagDataList );
