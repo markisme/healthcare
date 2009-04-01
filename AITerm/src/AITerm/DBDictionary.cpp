@@ -164,7 +164,7 @@ bool DBDictionary::SaveToXML( XmlNode * resNode )
 
 std::string DBDictionary::GetTagName( const std::string & inData )
 {
-	return "Tag";
+	return GetColName( inData );
 }
 
 std::string DBDictionary::GetColName( const std::string & inData )

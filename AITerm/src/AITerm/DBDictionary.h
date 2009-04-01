@@ -28,11 +28,12 @@ public:
 
 	std::string GetTagName( const std::string & inData );
 
+private:
+	bool CreateDBDic();
+
 	std::string GetColName( const std::string & inData );
 	std::string GetTableName( const std::string & inData );
 
-private:
-	bool CreateDBDic();
 	int GetColNum( std::string name, const ColList & colList );
 	void GetColData( int colNum, const DataList & dataList, std::vector<std::string> & outList );
 	bool IsSameData( std::string data, const std::vector<std::string> & inList  );

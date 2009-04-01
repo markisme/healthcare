@@ -184,6 +184,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\NamedEntity.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\NamedEntity.h"
+			>
+		</File>
+		<File
 			RelativePath=".\stdafx.cpp"
 			>
 		</File>

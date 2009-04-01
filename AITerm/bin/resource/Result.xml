@@ -1,0 +1,220 @@
+<resource>
+    <question no="0">
+        <tag type="N/A" curpos="1" deppos="2" part="U">Is</tag>
+        <tag type="cpu_name" curpos="2" deppos="*" part="N">E7400</tag>
+        <tag type="comparison" curpos="3" deppos="2" part="A">compatible</tag>
+        <tag type="N/A" curpos="4" deppos="3" part="Prep">with</tag>
+        <tag type="cpu_name" curpos="5" deppos="4" part="N">E5200</tag>
+    </question>
+    <question no="1">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="Det">the</tag>
+        <tag type="price" curpos="4" deppos="2" part="N">cost</tag>
+        <tag type="N/A" curpos="5" deppos="4" part="Prep">of</tag>
+        <tag type="cpu_name" curpos="6" deppos="5" part="N">E7400</tag>
+    </question>
+    <question no="2">
+        <tag type="N/A" curpos="1" deppos="E0" part="A">Where</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="be">is</tag>
+        <tag type="N/A" curpos="3" deppos="6" part="Det">the</tag>
+        <tag type="minimum" curpos="4" deppos="6" part="A">lowest</tag>
+        <tag type="price" curpos="5" deppos="6" part="N">cost</tag>
+        <tag type="dealer" curpos="6" deppos="7" part="N">store</tag>
+        <tag type="dealer" curpos="7" deppos="E0" part="V">selling</tag>
+        <tag type="cpu_name" curpos="8" deppos="7" part="N">E7400</tag>
+    </question>
+    <question no="3">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="Det">the</tag>
+        <tag type="N/A" curpos="4" deppos="2" part="N">socket</tag>
+        <tag type="N/A" curpos="5" deppos="4" part="Prep">of</tag>
+        <tag type="cpu_name" curpos="6" deppos="5" part="N">E7400</tag>
+    </question>
+    <question no="4">
+        <tag type="N/A" curpos="1" deppos="2" part="Det">What</tag>
+        <tag type="manufacture" curpos="2" deppos="E0" part="N">manufacturer</tag>
+        <tag type="manufacture" curpos="3" deppos="E0" part="V">makes</tag>
+        <tag type="cpu_name" curpos="4" deppos="3" part="N">E7400</tag>
+    </question>
+    <question no="5">
+        <tag type="N/A" curpos="1" deppos="2" part="Det">What</tag>
+        <tag type="manufacture" curpos="2" deppos="E0" part="N">manufacturer</tag>
+        <tag type="manufacture" curpos="3" deppos="E0" part="V">makes</tag>
+        <tag type="mb_name" curpos="4" deppos="3" part="N">P5KPL/1600</tag>
+    </question>
+    <question no="6">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="manufacture" curpos="2" deppos="5" part="N">kinds</tag>
+        <tag type="N/A" curpos="3" deppos="2" part="Prep">of</tag>
+        <tag type="N/A" curpos="4" deppos="3" part="N">motherboard</tag>
+        <tag type="manufacture" curpos="5" deppos="E0" part="V">made</tag>
+        <tag type="N/A" curpos="6" deppos="5" part="Prep">by</tag>
+        <tag type="mb_maker" curpos="7" deppos="6" part="N">ASUS</tag>
+    </question>
+    <question no="7">
+        <tag type="N/A" curpos="1" deppos="3" part="Det">What</tag>
+        <tag type="N/A" curpos="2" deppos="3" part="A">graphic</tag>
+        <tag type="N/A" curpos="3" deppos="E0" part="N">interfaces</tag>
+        <tag type="N/A" curpos="4" deppos="5" part="be">are</tag>
+        <tag type="support" curpos="5" deppos="E0" part="V">supported</tag>
+        <tag type="N/A" curpos="6" deppos="5" part="Prep">by</tag>
+        <tag type="mb_name" curpos="7" deppos="6" part="N">P5KPL/1600</tag>
+    </question>
+    <question no="8">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="Det">the</tag>
+        <tag type="kind" curpos="4" deppos="2" part="N">type</tag>
+        <tag type="N/A" curpos="5" deppos="4" part="Prep">of</tag>
+        <tag type="mb_name" curpos="6" deppos="5" part="N">P5KPL/1600</tag>
+    </question>
+    <question no="9">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="5" part="U">PCI</tag>
+        <tag type="N/A" curpos="4" deppos="5" part="U">-</tag>
+        <tag type="N/A" curpos="5" deppos="2" part="N">E</tag>
+    </question>
+    <question no="10">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="5" part="Det">the</tag>
+        <tag type="date" curpos="4" deppos="5" part="A">latest</tag>
+        <tag type="N/A" curpos="5" deppos="2" part="N">CPU</tag>
+    </question>
+    <question no="11">
+        <tag type="N/A" curpos="1" deppos="2" part="U">Does</tag>
+        <tag type="mb_name" curpos="2" deppos="3" part="N">P5KPL/1600</tag>
+        <tag type="N/A" curpos="3" deppos="E0" part="V">support</tag>
+        <tag type="hdd_interface_1" curpos="4" deppos="3" part="N">SATA2</tag>
+    </question>
+    <question no="12">
+        <tag type="N/A" curpos="1" deppos="2" part="U">How</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="N">many</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="N">extension</tag>
+        <tag type="N/A" curpos="4" deppos="E0" part="V">slots</tag>
+        <tag type="N/A" curpos="5" deppos="4" part="Prep">on</tag>
+        <tag type="N/A" curpos="6" deppos="5" part="N">motherboard</tag>
+    </question>
+    <question no="13">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="5" part="Det">the</tag>
+        <tag type="N/A" curpos="4" deppos="5" part="A">internal</tag>
+        <tag type="N/A" curpos="5" deppos="2" part="N">graphics</tag>
+        <tag type="N/A" curpos="6" deppos="5" part="Prep">on</tag>
+        <tag type="N/A" curpos="7" deppos="6" part="N">motherboard</tag>
+    </question>
+    <question no="14">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="6" part="Det">the</tag>
+        <tag type="N/A" curpos="4" deppos="6" part="A">internal</tag>
+        <tag type="N/A" curpos="5" deppos="6" part="N">audio</tag>
+        <tag type="N/A" curpos="6" deppos="2" part="N">chipset</tag>
+        <tag type="N/A" curpos="7" deppos="6" part="Prep">on</tag>
+        <tag type="N/A" curpos="8" deppos="7" part="N">motherboard</tag>
+    </question>
+    <question no="15">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="Det">the</tag>
+        <tag type="performance" curpos="4" deppos="2" part="N">performance</tag>
+        <tag type="N/A" curpos="5" deppos="4" part="Prep">of</tag>
+        <tag type="N/A" curpos="6" deppos="8" part="A">internal</tag>
+        <tag type="N/A" curpos="7" deppos="8" part="N">network</tag>
+        <tag type="N/A" curpos="8" deppos="5" part="N">card</tag>
+        <tag type="N/A" curpos="9" deppos="8" part="Prep">on</tag>
+        <tag type="N/A" curpos="10" deppos="9" part="N">motherboard</tag>
+    </question>
+    <question no="16">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="5" part="Det">the</tag>
+        <tag type="price" curpos="4" deppos="5" part="N">cost</tag>
+        <tag type="difference" curpos="5" deppos="2" part="N">difference</tag>
+        <tag type="N/A" curpos="6" deppos="5" part="Prep">between</tag>
+        <tag type="cpu_name" curpos="7" deppos="6" part="N">E7400</tag>
+        <tag type="cpu_name" curpos="9" deppos="7" part="N">E5200</tag>
+    </question>
+    <question no="17">
+        <tag type="N/A" curpos="1" deppos="2" part="Det">What</tag>
+        <tag type="kind" curpos="2" deppos="E0" part="N">types</tag>
+        <tag type="N/A" curpos="3" deppos="E0" part="VBE">are</tag>
+        <tag type="N/A" curpos="4" deppos="3" part="Prep">in</tag>
+        <tag type="cpu_maker" curpos="5" deppos="6" part="U">INTEL</tag>
+        <tag type="N/A" curpos="6" deppos="4" part="N">CPUs</tag>
+    </question>
+    <question no="18">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="difference" curpos="3" deppos="2" part="N">difference</tag>
+        <tag type="N/A" curpos="4" deppos="2" part="Prep">between</tag>
+        <tag type="info_keyword" curpos="5" deppos="4" part="N">AM2</tag>
+        <tag type="info_keyword" curpos="7" deppos="5" part="N">AM3</tag>
+        <tag type="N/A" curpos="8" deppos="7" part="Prep">in</tag>
+        <tag type="N/A" curpos="9" deppos="11" part="N">CPU</tag>
+        <tag type="N/A" curpos="10" deppos="11" part="N">socket</tag>
+        <tag type="kind" curpos="11" deppos="8" part="N">type</tag>
+    </question>
+    <question no="19">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="difference" curpos="3" deppos="2" part="N">difference</tag>
+        <tag type="N/A" curpos="4" deppos="2" part="Prep">between</tag>
+        <tag type="N/A" curpos="5" deppos="4" part="N">SATA</tag>
+        <tag type="N/A" curpos="7" deppos="5" part="N">ATA</tag>
+    </question>
+    <question no="20">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="difference" curpos="3" deppos="2" part="N">difference</tag>
+        <tag type="N/A" curpos="4" deppos="2" part="Prep">between</tag>
+        <tag type="cpu_name" curpos="5" deppos="4" part="N">E7400</tag>
+        <tag type="cpu_name" curpos="7" deppos="5" part="N">E5200</tag>
+    </question>
+    <question no="21">
+        <tag type="N/A" curpos="1" deppos="E0" part="A">How</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="Aux">can</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="N">we</tag>
+        <tag type="constitution" curpos="4" deppos="E0" part="V">constitute</tag>
+        <tag type="N/A" curpos="5" deppos="7" part="Det">the</tag>
+        <tag type="maximum" curpos="6" deppos="7" part="A">best</tag>
+        <tag type="product" curpos="7" deppos="4" part="N">computer</tag>
+        <tag type="N/A" curpos="8" deppos="7" part="Prep">with</tag>
+        <tag type="N/A" curpos="9" deppos="10" part="U">1000000</tag>
+        <tag type="price" curpos="10" deppos="8" part="N">won</tag>
+    </question>
+    <question no="22">
+        <tag type="N/A" curpos="1" deppos="E0" part="A">How</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="Aux">can</tag>
+        <tag type="N/A" curpos="3" deppos="4" part="N">we</tag>
+        <tag type="manufacture" curpos="4" deppos="E0" part="V">make</tag>
+        <tag type="N/A" curpos="5" deppos="7" part="Det">the</tag>
+        <tag type="maximum" curpos="6" deppos="7" part="A">strong</tag>
+        <tag type="constitution" curpos="7" deppos="4" part="N">combination</tag>
+    </question>
+    <question no="23">
+        <tag type="N/A" curpos="1" deppos="E0" part="N">What</tag>
+        <tag type="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag type="N/A" curpos="3" deppos="7" part="Det">the</tag>
+        <tag type="maximum" curpos="4" deppos="7" part="A">best</tag>
+        <tag type="price" curpos="5" deppos="7" part="N">cost</tag>
+        <tag type="performance" curpos="6" deppos="7" part="N">performance</tag>
+        <tag type="N/A" curpos="7" deppos="2" part="N">CPU</tag>
+    </question>
+    <question no="24">
+        <tag type="N/A" curpos="1" deppos="E1" part="COMP">If</tag>
+        <tag type="N/A" curpos="2" deppos="3" part="N">I</tag>
+        <tag type="N/A" curpos="3" deppos="E1" part="V">put</tag>
+        <tag type="N/A" curpos="4" deppos="5" part="U">Intel</tag>
+        <tag type="N/A" curpos="5" deppos="3" part="N">CPU</tag>
+        <tag type="N/A" curpos="6" deppos="3" part="Prep">onto</tag>
+        <tag type="cpu_maker" curpos="7" deppos="8" part="N">AMD</tag>
+        <tag type="N/A" curpos="8" deppos="6" part="N">motherboard</tag>
+        <tag type="N/A" curpos="10" deppos="E0" part="N">What</tag>
+        <tag type="exception" curpos="11" deppos="E0" part="V">happens</tag>
+    </question>
+</resource>

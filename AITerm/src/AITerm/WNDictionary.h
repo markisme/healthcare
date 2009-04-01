@@ -24,6 +24,7 @@ public:
 
 private:
 	bool CreateWNDic();
+	bool IsSameWord( std::string lWord, std::string rWord );
 	Synset * GetSynset( std::string keyword );
 
 private:
