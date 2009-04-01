@@ -9,15 +9,23 @@ DBDictionary::~DBDictionary()
 {
 }
 
-void DBDictionary::Init( bool createDic )
+void DBDictionary::Init()
 {
 	// 사전 초기화
 	_dic.clear();
 
-	if( createDic == true )
+	// 사전 생성 옵션 로드
+	XmlDocument xmlDoc;
+	std::string path = "./resource/DBDicConfig.xml";
+	xmlDoc.LoadFile( path.c_str() );
+
+	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+	std::string create = resNode->GetAttribute( "create" );
+
+	if( create == "true" )
 	{
 		// 사전 생성
-		CreateDBDic();
+		CreateDBDic( resNode );
 
 		// 사전 저장
 		XmlDocument xmlDoc;
@@ -45,14 +53,8 @@ void DBDictionary::Uninit()
 	_dic.clear();
 }
 
-bool DBDictionary::CreateDBDic()
+bool DBDictionary::CreateDBDic( const XmlNode * resNode )
 {
-	XmlDocument xmlDoc;
-	std::string path = "./resource/DBDicConfig.xml";
-	xmlDoc.LoadFile( path.c_str() );
-
-	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-
 	int nodeCount = resNode->GetNodeCount( "table" );
 	for( int num = 0; num < nodeCount; num++ )
 	{

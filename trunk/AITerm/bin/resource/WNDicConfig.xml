@@ -1,4 +1,4 @@
-<resource>
+<resource create="false">
     <!-- 질문에 필요한 카테고리 -->
     <tag name="comparison">
     	<keyword name="compatible" sense="0"/>

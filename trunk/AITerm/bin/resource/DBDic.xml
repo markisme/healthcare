@@ -235,9 +235,9 @@
     </table>
     <table name="info">
         <col name="info_keyword">
-            <data text="PCI Express" />
-            <data text="serial ATA" />
-            <data text="AT Attachment" />
+            <data text="PCI-E" />
+            <data text="SATA" />
+            <data text="ATA" />
             <data text="ATX" />
             <data text="AM2" />
             <data text="AM2+" />
