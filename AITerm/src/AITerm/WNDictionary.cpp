@@ -19,7 +19,7 @@ void WNDictionary::Init( bool createDic )
 	// 사전 초기화
 	_dic.clear();
 
-	//if( createDic == true )
+	if( createDic == true )
 	{
 		// 사전 생성
 		CreateWNDic();
@@ -32,16 +32,16 @@ void WNDictionary::Init( bool createDic )
 		std::string path = "./resource/WNDic.xml";
 		xmlDoc.SaveFile( path.c_str() );
 	}
-	//else
-	//{
-	//	// 사전 로드
-	//	XmlDocument xmlDoc;
-	//	std::string path = "./resource/WNDic.xml";
-	//	xmlDoc.LoadFile( path.c_str() );
+	else
+	{
+		// 사전 로드
+		XmlDocument xmlDoc;
+		std::string path = "./resource/WNDic.xml";
+		xmlDoc.LoadFile( path.c_str() );
 
-	//	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-	//	LoadFromXML( resNode );
-	//}
+		const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+		LoadFromXML( resNode );
+	}
 }
 
 void WNDictionary::Uninit()
@@ -80,20 +80,17 @@ bool WNDictionary::CreateWNDic()
 				continue;
 			}
 
-			// 검색어 차제의 의미 (NOUN으로써)
 			for( int i=0; i<_synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
 			{
 				std::string word = (*(_synsetPtr->words)++);
 				tagDataList._dataList.push_back( word );
 			}
-			// printf("-- %s\n", _synsetPtr->defn);				// 그 단어의 정의 출력
 
 			if( ( _synsetPtr= _synsetPtr->ptrlist ) == NULL ) 
 			{
 				continue;
 			}
 
-			// printf("       => ");
 			for( int i=0; i<_synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
 			{
 				std::string word = (*(_synsetPtr->words)++);
