@@ -36,6 +36,15 @@
         <keyword name="fall_out" />
         <keyword name="come_about" />
         <keyword name="take_place" />
+        <keyword name="happen" />
+        <keyword name="hap" />
+        <keyword name="go_on" />
+        <keyword name="pass_off" />
+        <keyword name="occur" />
+        <keyword name="pass" />
+        <keyword name="fall_out" />
+        <keyword name="come_about" />
+        <keyword name="take_place" />
     </tag>
     <tag name="price">
         <keyword name="cost" />
@@ -83,8 +92,20 @@
         <keyword name="business_concern" />
         <keyword name="business_organization" />
         <keyword name="business_organisation" />
+        <keyword name="brand" />
+        <keyword name="make" />
+        <keyword name="kind" />
+        <keyword name="sort" />
+        <keyword name="form" />
+        <keyword name="variety" />
+        <keyword name="made" />
     </tag>
     <tag name="kind">
+        <keyword name="kind" />
+        <keyword name="sort" />
+        <keyword name="form" />
+        <keyword name="variety" />
+        <keyword name="category" />
         <keyword name="type" />
         <keyword name="kind" />
         <keyword name="sort" />

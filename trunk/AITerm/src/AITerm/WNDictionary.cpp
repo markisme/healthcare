@@ -19,7 +19,7 @@ void WNDictionary::Init( bool createDic )
 	// 사전 초기화
 	_dic.clear();
 
-	if( createDic == true )
+	//if( createDic == true )
 	{
 		// 사전 생성
 		CreateWNDic();
@@ -32,16 +32,16 @@ void WNDictionary::Init( bool createDic )
 		std::string path = "./resource/WNDic.xml";
 		xmlDoc.SaveFile( path.c_str() );
 	}
-	else
-	{
-		// 사전 로드
-		XmlDocument xmlDoc;
-		std::string path = "./resource/WNDic.xml";
-		xmlDoc.LoadFile( path.c_str() );
+	//else
+	//{
+	//	// 사전 로드
+	//	XmlDocument xmlDoc;
+	//	std::string path = "./resource/WNDic.xml";
+	//	xmlDoc.LoadFile( path.c_str() );
 
-		const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-		LoadFromXML( resNode );
-	}
+	//	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+	//	LoadFromXML( resNode );
+	//}
 }
 
 void WNDictionary::Uninit()
@@ -85,17 +85,15 @@ bool WNDictionary::CreateWNDic()
 			{
 				std::string word = (*(_synsetPtr->words)++);
 				tagDataList._dataList.push_back( word );
-
-				//printf("%s ", (*(_synsetPtr->words)++)  );		// synset에 포함된 동의어들 출력
 			}
-			printf("-- %s\n", _synsetPtr->defn);				// 그 단어의 정의 출력
+			// printf("-- %s\n", _synsetPtr->defn);				// 그 단어의 정의 출력
 
 			if( ( _synsetPtr= _synsetPtr->ptrlist ) == NULL ) 
 			{
 				continue;
 			}
 
-			printf("       => ");
+			// printf("       => ");
 			for( int i=0; i<_synsetPtr->wcount; i++)			// synset에 포함된 동의어 개수만큼
 			{
 				std::string word = (*(_synsetPtr->words)++);
@@ -148,13 +146,54 @@ std::string WNDictionary::GetTagName( const std::string & inData )
 		for( int cnt = 0; cnt < dataSize; cnt++ )
 		{
 			std::string word = _dic[ num ]._dataList[ cnt ];
-			if( inData == word )
+			if( IsSameWord( inData , word ) )
 			{
 				return tag;
 			}
 		}
 	}
 	return "";
+}
+
+bool WNDictionary::IsSameWord( std::string lWord, std::string rWord )
+{
+	// 전체 비교
+	if( lWord == rWord )
+	{
+		return true;
+	}
+
+	//
+	int length = lWord.size();
+	if( length < 3 )
+	{
+		return false;
+	}
+
+	// 복수 비교 (s)
+	if( lWord[length-1] == 's' )
+	{
+		lWord.erase(length-1);
+		
+		if( lWord == rWord )
+		{
+			return true;
+		}
+	}
+
+	// 복수 비교 (es)
+	if( lWord[length-1] == 's' && lWord[length-2] == 'e' )
+	{
+		lWord.erase(length-1);
+		lWord.erase(length-2);
+		
+		if( lWord == rWord )
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 Synset * WNDictionary::GetSynset( std::string keyword )

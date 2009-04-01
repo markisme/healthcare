@@ -16,7 +16,7 @@
 	<keyword name="combination" sense="0"/>
     </tag>
     <tag name="exception">
-    	<keyword name="happens" sense="0"/>
+    	<keyword name="happen" sense="0"/>
 	<keyword name="occur" sense="0"/>
     </tag>
     <tag name="price">
@@ -36,10 +36,11 @@
     </tag>
     <tag name="manufacture">
     	<keyword name="manufacturer" sense="1"/>
-    	<keyword name="makes" sense="0"/>
+    	<keyword name="make" sense="0"/>
+    	<keyword name="made" sense="0"/>
     </tag>
     <tag name="kind">
-    	<keyword name="kinds" sense="1"/>
+    	<keyword name="kind" sense="1"/>
     	<keyword name="type" sense="0"/>
     </tag>
     <tag name="date">
