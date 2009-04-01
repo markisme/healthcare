@@ -1,4 +1,5 @@
 <resource>
+    <!-- 질문에 필요한 카테고리 -->
     <tag name="comparison">
     	<keyword name="compatible" sense="0"/>
     </tag>
@@ -6,6 +7,7 @@
     	<keyword name="difference" sense="0"/>
     </tag>
     <tag name="support">
+    	<keyword name="support" sense="1"/>
     	<keyword name="supported" sense="1"/>
     </tag>
     <tag name="performance">
@@ -48,5 +50,48 @@
     </tag>
     <tag name="product">
     	<keyword name="computer" sense="1"/>
+    </tag>
+   
+    <!-- 의문사 -->
+    <tag name="object">
+    	<keyword name="what" sense="0"/>
+    </tag>
+    <tag name="place">
+    	<keyword name="where" sense="0"/>
+    </tag>
+    <tag name="method">
+    	<keyword name="how" sense="0"/>
+    </tag>
+    <tag name="reason">
+    	<keyword name="why" sense="0"/>
+    </tag> 
+    <tag name="time">
+    	<keyword name="when" sense="0"/>
+    </tag> 
+    <tag name="person">
+    	<keyword name="who" sense="0"/>
+    </tag>
+
+    <!-- 고유 명사 -->
+    <tag name="cpu_socket">
+    	<keyword name="socket" sense="0"/>
+    </tag>
+    <tag name="mainboard">
+    	<keyword name="motherboard" sense="0"/>
+    </tag>
+    <tag name="cpu">
+    	<keyword name="cpu" sense="0"/>
+    </tag>
+    <tag name="graphic_interface">
+    	<keyword name="graphic interfaces" sense="0"/>
+    </tag>
+    <tag name="graphic_card">
+    	<keyword name="internal graphics" sense="0"/>
+    </tag>
+    <tag name="lan_card">
+    	<keyword name="internal network" sense="0"/>
+    </tag>
+    <tag name="audio_card">
+    	<keyword name="internal audio" sense="0"/>
     </tag>
 </resource>

@@ -74,6 +74,14 @@ bool WNDictionary::CreateWNDic()
 			std::string keyword = keywordNode->GetAttribute( "name" );
 			std::string sense = keywordNode->GetAttribute( "sense" );
 
+			// sense 0 인경우 워드넷 참조 안함
+			if( sense == "0" )
+			{
+				tagDataList._dataList.push_back( keyword );
+				continue;
+			}
+
+			// 0 이 아닌 경우엔 워드넷 참조
 			if( ( _synsetPtr = GetSynset( keyword ) ) == NULL )
 			{
 				perror("serach failure\n");
@@ -87,7 +95,7 @@ bool WNDictionary::CreateWNDic()
 				tagDataList._dataList.push_back( word );
 			}
 
-			// 상의어 추가
+			// 상위어 추가
 			while( ( _synsetPtr= _synsetPtr->ptrlist ) != NULL )
 			{
 				for( int i=0; i<_synsetPtr->wcount; i++)
@@ -144,7 +152,9 @@ std::string WNDictionary::GetTagName( const std::string & inData )
 		int dataSize = _dic[ num ]._dataList.size();
 		for( int cnt = 0; cnt < dataSize; cnt++ )
 		{
-			std::string word = _dic[ num ]._dataList[ cnt ];
+			std::string data = _dic[ num ]._dataList[ cnt ];
+			std::string word = ToLowerCase( (char*)data.c_str() );
+
 			if( IsSameWord( inData , word ) )
 			{
 				return tag;

@@ -4,9 +4,10 @@
     </tag>
     <tag name="difference">
         <keyword name="difference" />
-        <keyword name="quality" />
     </tag>
     <tag name="support">
+        <keyword name="support" />
+        <keyword name="activity" />
         <keyword name="supported" />
     </tag>
     <tag name="performance">
@@ -21,30 +22,10 @@
         <keyword name="comprise" />
         <keyword name="be" />
         <keyword name="combination" />
-        <keyword name="collection" />
-        <keyword name="aggregation" />
-        <keyword name="accumulation" />
-        <keyword name="assemblage" />
     </tag>
     <tag name="exception">
         <keyword name="happen" />
-        <keyword name="hap" />
-        <keyword name="go_on" />
-        <keyword name="pass_off" />
         <keyword name="occur" />
-        <keyword name="pass" />
-        <keyword name="fall_out" />
-        <keyword name="come_about" />
-        <keyword name="take_place" />
-        <keyword name="happen" />
-        <keyword name="hap" />
-        <keyword name="go_on" />
-        <keyword name="pass_off" />
-        <keyword name="occur" />
-        <keyword name="pass" />
-        <keyword name="fall_out" />
-        <keyword name="come_about" />
-        <keyword name="take_place" />
     </tag>
     <tag name="price">
         <keyword name="cost" />
@@ -56,17 +37,10 @@
         <keyword name="South_Korean_monetary_unit" />
     </tag>
     <tag name="minimum">
-        <keyword name="last" />
-        <keyword name="last-place" />
         <keyword name="lowest" />
     </tag>
     <tag name="maximum">
         <keyword name="best" />
-        <keyword name="attempt" />
-        <keyword name="effort" />
-        <keyword name="endeavor" />
-        <keyword name="endeavour" />
-        <keyword name="try" />
         <keyword name="strong" />
     </tag>
     <tag name="dealer">
@@ -92,12 +66,7 @@
         <keyword name="business_concern" />
         <keyword name="business_organization" />
         <keyword name="business_organisation" />
-        <keyword name="brand" />
         <keyword name="make" />
-        <keyword name="kind" />
-        <keyword name="sort" />
-        <keyword name="form" />
-        <keyword name="variety" />
         <keyword name="made" />
     </tag>
     <tag name="kind">
@@ -107,17 +76,9 @@
         <keyword name="variety" />
         <keyword name="category" />
         <keyword name="type" />
-        <keyword name="kind" />
-        <keyword name="sort" />
-        <keyword name="form" />
-        <keyword name="variety" />
     </tag>
     <tag name="date">
         <keyword name="latest" />
-        <keyword name="news" />
-        <keyword name="intelligence" />
-        <keyword name="tidings" />
-        <keyword name="word" />
     </tag>
     <tag name="product">
         <keyword name="computer" />
@@ -127,5 +88,44 @@
         <keyword name="electronic_computer" />
         <keyword name="information_processing_system" />
         <keyword name="machine" />
+    </tag>
+    <tag name="object">
+        <keyword name="what" />
+    </tag>
+    <tag name="place">
+        <keyword name="where" />
+    </tag>
+    <tag name="method">
+        <keyword name="how" />
+    </tag>
+    <tag name="reason">
+        <keyword name="why" />
+    </tag>
+    <tag name="time">
+        <keyword name="when" />
+    </tag>
+    <tag name="person">
+        <keyword name="who" />
+    </tag>
+    <tag name="cpu_socket">
+        <keyword name="socket" />
+    </tag>
+    <tag name="mainboard">
+        <keyword name="motherboard" />
+    </tag>
+    <tag name="cpu">
+        <keyword name="cpu" />
+    </tag>
+    <tag name="graphic_interface">
+        <keyword name="graphic interfaces" />
+    </tag>
+    <tag name="graphic_card">
+        <keyword name="internal graphics" />
+    </tag>
+    <tag name="lan_card">
+        <keyword name="internal network" />
+    </tag>
+    <tag name="audio_card">
+        <keyword name="internal audio" />
     </tag>
 </resource>

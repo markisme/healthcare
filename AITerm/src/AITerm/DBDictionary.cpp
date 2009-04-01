@@ -184,7 +184,9 @@ std::string DBDictionary::GetColName( const std::string & inData )
 			for( int k = 0; k < dataSize; k++ )
 			{
 				const std::string & data = colDataList._dataList[ k ];
-				if( inData == data ) 
+				std::string word = ToLowerCase( (char*)data.c_str() );
+
+				if( inData == word ) 
 				{
 					return colName;
 				}
@@ -213,7 +215,9 @@ std::string DBDictionary::GetTableName( const std::string & inData )
 			for( int k = 0; k < dataSize; k++ )
 			{
 				const std::string & data = colDataList._dataList[ k ];
-				if( inData == data ) 
+				std::string word = ToLowerCase( (char*)data.c_str() );
+
+				if( inData == word ) 
 				{
 					return tableName;
 				}
