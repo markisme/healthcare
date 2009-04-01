@@ -38,9 +38,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	//----------------------
 
 	DBConnectInfo info;
-	info.ip = "211.239.163.46";
-	info.user = "naid";
-	info.pass = "rbgur0834#!";
+	info.ip = "211.189.19.160";
+	info.user = "root";
+	info.pass = "1234";
 	info.port = 3306;
 	info.dbName = "AITerm";
 
