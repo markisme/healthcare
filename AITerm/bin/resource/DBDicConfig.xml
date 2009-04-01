@@ -1,4 +1,4 @@
-<resource>
+<resource create="false">
     <table name="cpu">
 	<col name="cpu_name"/>
 	<col name="cpu_maker"/>

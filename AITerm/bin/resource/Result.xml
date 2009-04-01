@@ -159,8 +159,8 @@
         <tag type="N/A" curpos="2" deppos="E0" part="VBE"> is</tag>
         <tag type="difference" curpos="3" deppos="2" part="N">difference</tag>
         <tag type="N/A" curpos="4" deppos="2" part="Prep"> between</tag>
-        <tag type="N/A" curpos="5" deppos="4" part="N"> sata</tag>
-        <tag type="N/A" curpos="7" deppos="5" part="N"> ata</tag>
+        <tag type="info_keyword" curpos="5" deppos="4" part="N">sata</tag>
+        <tag type="info_keyword" curpos="7" deppos="5" part="N">ata</tag>
     </question>
     <question no="20">
         <tag type="object" curpos="1" deppos="E0" part="N">what</tag>

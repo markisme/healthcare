@@ -9,8 +9,9 @@ WNDictionary::~WNDictionary()
 {
 }
 
-void WNDictionary::Init( bool createDic )
+void WNDictionary::Init()
 {
+	// 워드넷 초기화
 	wninit();
 
 	_synsetPtr=(Synset *)malloc(sizeof(Synset));
@@ -19,10 +20,18 @@ void WNDictionary::Init( bool createDic )
 	// 사전 초기화
 	_dic.clear();
 
-	if( createDic == true )
+	// 사전 생성 옵션 로드
+	XmlDocument xmlDoc;
+	std::string path = "./resource/WNDicConfig.xml";
+	xmlDoc.LoadFile( path.c_str() );
+
+	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
+	std::string create = resNode->GetAttribute( "create" );
+
+	if( create == "true" )
 	{
 		// 사전 생성
-		CreateWNDic();
+		CreateWNDic( resNode );
 
 		// 사전 저장
 		XmlDocument xmlDoc;
@@ -50,14 +59,8 @@ void WNDictionary::Uninit()
 	_dic.clear();
 }
 
-bool WNDictionary::CreateWNDic()
+bool WNDictionary::CreateWNDic( const XmlNode * resNode )
 {
-	XmlDocument xmlDoc;
-	std::string path = "./resource/WNDicConfig.xml";
-	xmlDoc.LoadFile( path.c_str() );
-
-	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-
 	int nodeCount = resNode->GetNodeCount( "tag" );
 	for( int num = 0; num < nodeCount; num++ )
 	{
@@ -116,6 +119,27 @@ bool WNDictionary::CreateWNDic()
 
 bool WNDictionary::LoadFromXML( const XmlNode * resNode )
 {
+	int nodeCount = resNode->GetNodeCount( "tag" );
+	for( int num = 0; num < nodeCount; num++ )
+	{
+		const XmlNode * tagNode = resNode->GetNode( "tag", num );
+		std::string tagName = tagNode->GetAttribute( "name" );
+
+		TagDataForDic tagDataList;
+		tagDataList._tagName = tagName;
+		
+		int keyCount = tagNode->GetNodeCount( "keyword" );
+		for( int cnt = 0; cnt < keyCount; cnt++ )
+		{
+			const XmlNode * keyNode = tagNode->GetNode( "keyword", cnt );
+			std::string keyword = keyNode->GetAttribute( "name" );
+
+			tagDataList._dataList.push_back( keyword );
+		}
+
+		_dic.push_back( tagDataList );
+	}
+
 	return true;
 }
 

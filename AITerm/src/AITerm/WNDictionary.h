@@ -14,7 +14,7 @@ public:
 	WNDictionary();
 	~WNDictionary();
 
-	void Init( bool createDic = false );
+	void Init();
 	void Uninit();
 
 	bool LoadFromXML( const XmlNode * resNode );
@@ -23,7 +23,7 @@ public:
 	std::string GetTagName( const std::string & inData );
 
 private:
-	bool CreateWNDic();
+	bool CreateWNDic( const XmlNode * resNode );
 	bool IsSameWord( std::string lWord, std::string rWord );
 	Synset * GetSynset( std::string keyword );
 

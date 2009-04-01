@@ -20,7 +20,7 @@ public:
 	DBDictionary();
 	~DBDictionary();
 
-	void Init( bool createDic = false );
+	void Init();
 	void Uninit();
 
 	bool LoadFromXML( const XmlNode * resNode );
@@ -29,7 +29,7 @@ public:
 	std::string GetTagName( const std::string & inData );
 
 private:
-	bool CreateDBDic();
+	bool CreateDBDic( const XmlNode * resNode );
 
 	std::string GetColName( const std::string & inData );
 	std::string GetTableName( const std::string & inData );
