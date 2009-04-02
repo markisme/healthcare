@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "T9-opencv", "T9-opencv.vcproj", "{04B603EC-E0EB-474A-96F5-C9966F4ADC4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04B603EC-E0EB-474A-96F5-C9966F4ADC4C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{04B603EC-E0EB-474A-96F5-C9966F4ADC4C}.Debug|Win32.Build.0 = Debug|Win32
+		{04B603EC-E0EB-474A-96F5-C9966F4ADC4C}.Release|Win32.ActiveCfg = Release|Win32
+		{04B603EC-E0EB-474A-96F5-C9966F4ADC4C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
