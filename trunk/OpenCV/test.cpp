@@ -12,8 +12,8 @@
 #include <cv.h>
 #include <highgui.h>
 
-#define Width 320
-#define Height 240
+#define Width 480
+#define Height 640
 
 struct stMap{
 
@@ -86,28 +86,6 @@ IplImage* contour(IplImage* img)
 			img->imageData[i*img->widthStep + j ] = (unsigned char)p;
 		}
 	}
-
-	/* for(int i=1; i<img->height-1; i++){
-	for(int j=1; j<img->width-1; j++){
-
-	p = (unsigned char)img->imageData[i*img->widthStep + j ];
-	p *= mask[1][1];
-	img->imageData[i*img->widthStep + j ] = (unsigned char)p;
-
-	for(int k=0; k<8; k++){
-	if(i+di[k] >= 0 && i+di[k] <= img->height &&
-	j+dj[k] >=0 && j+dj[k] <= img->width){
-
-	p = p + ((unsigned char)img->imageData[(i+di[k])*img->widthStep + (j+dj[k]) ] * mask[1+di[k]][1+dj[k]]);
-	}
-	}
-
-	if(p > 255)  p = 255;
-	else if(p < 0) p = 0;
-
-	img->imageData[i*img->widthStep + j ] = (unsigned char)p;
-	}
-	}*/
 
 	return img;
 
