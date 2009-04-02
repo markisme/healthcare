@@ -12,8 +12,8 @@
 #include <cv.h>
 #include <highgui.h>
 
-#define Width 480
-#define Height 640
+#define Width 640
+#define Height 480
 
 struct stMap{
 
