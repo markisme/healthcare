@@ -1,0 +1,40 @@
+#include <string>
+#include <vector>
+
+int main()
+{
+	std::string str1 = "test";
+	std::string str2 = "test";
+	
+	// 비교문에서 바로 비교 가능
+	if( str1 == str2 )
+	{
+		return true;
+	}
+
+	// 포인터 형으로 사용 가능
+	const char * temp = str1.c_str();
+
+	// 텍스트 길이 가져오기
+	int length = str1.length();
+
+	// 중간 텍스트 가져오기
+	std::string temp2 = str1[1];
+	char * temp3 = str[1];
+
+	// 리스트 정의 <> 내부에 리스트 자료형 넣기
+	// int, char*, class, struct등 모두가 될수 있음
+	std::vector<std::string> textList;
+	
+	// 리스트에 데이터 추가
+	textList.push_back(str);
+
+	// 리스트 사이즈 가져오기
+	int size = textList.size();
+
+	// 리스트 순회 하면서 데이터 가져오기
+	for( int num = 0; num < size; num++ )
+	{
+		std::stirng test = textList[ num ];
+	}
+}
