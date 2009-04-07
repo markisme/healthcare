@@ -4,7 +4,8 @@
 #include "mmsystem.h"
 #include <vector>
 
-class CMainFrame;
+class SoundMixer;
+class OpenCV;
 
 class CTestApp : public CWinApp
 {
@@ -20,6 +21,9 @@ public:
 	void Init();
 	void Uninit();
 	void ProcPacket();
+
+	static UINT ThreadFunction(LPVOID pParam);
+	void ThreadDo();
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()

@@ -49,6 +49,7 @@ int LoginDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	return 0;
 }
+
 void LoginDlg::OnBnClickedOk()
 {
 	USES_CONVERSION;
@@ -67,9 +68,13 @@ void LoginDlg::OnBnClickedOk()
 	// 인증 완료 후 어플 스타트
 	while (1)
 	{
+		//
+		Sleep( 10 );
+
+		//
 		if( Network::GetInstance()._isSuccessAuth )
 		{
-			SendMessage(WM_SYSCOMMAND, SC_SCREENSAVE); //send SysCommand message calling SS
+			// SendMessage(WM_SYSCOMMAND, SC_SCREENSAVE); //send SysCommand message calling SS
 			OnOK();
 			break;
 		}
@@ -88,8 +93,10 @@ void LoginDlg::ThreadDo()
 {
 	while (1)
 	{
+		//
 		Network::GetInstance().ProcPacket();
 
+		//
 		if( Network::GetInstance()._isSuccessAuth )
 		{
 			break;
