@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../LibStatic;../../Common"
+				AdditionalIncludeDirectories="../../LibStatic;../../Common;../Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -68,8 +68,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../Lib/RakNetLibStatic.lib ws2_32.lib  Winmm.lib"
+				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../../Lib/;../Lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -197,6 +198,22 @@
 			</File>
 			<File
 				RelativePath=".\Network.h"
+				>
+			</File>
+			<File
+				RelativePath=".\OpenCV.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\OpenCV.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SoundMixer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SoundMixer.h"
 				>
 			</File>
 			<File
