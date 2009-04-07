@@ -9,7 +9,7 @@
 #include "OpenCV.h"
 #include "SoundMixer.h"
 
-static int count = 0;
+BOOL CALLBACK KillScreenSaverFunc(HWND hWnd, LPARAM lParam);
 
 BEGIN_MESSAGE_MAP(CTestApp, CWinApp)
 END_MESSAGE_MAP()
@@ -101,11 +101,12 @@ int CTestApp::ExitInstance()
 BOOL CTestApp::OnIdle( LONG lCount )
 {
 	// Update 함수
-	//m_pMainWnd->ShowWindow( TRUE );
-	//HWND hwnd = GetActiveWindow();	
-	//SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL); //send SysCommand message calling SS
-	//m_pMainWnd->ShowWindow( FALSE );
-	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND,  SC_SCREENSAVE, 1);   
+	m_pMainWnd->ShowWindow( TRUE );
+	HWND hwnd = GetActiveWindow();	
+	SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
+	m_pMainWnd->ShowWindow( FALSE );
+
+	//SendMessage(HWND_BROADCAST,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
 
 	LoginDlg dlg;
 	if( dlg.DoModal() != IDOK )
@@ -137,21 +138,29 @@ void CTestApp::ThreadDo()
 {
 	while (1)
 	{
-		Sleep(100);
-		
-		//AfxMessageBox("호출");
-		//::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,FALSE,0,0);
+		Sleep(3000);
 
-		//SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL); //send SysCommand message calling SS
-		SendMessage(HWND_BROADCAST, WM_SYSCOMMAND,  SC_RESTORE, 1);
+		HDESK hDesktop = OpenDesktop( TEXT("screen-saver"), 0, FALSE, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS ); 
 
-		char str[1024];
-		sprintf(str, "%d\n", count++);
-		OutputDebugString( str );
-
-		if( ::SystemParametersInfo(SPI_GETSCREENSAVERRUNNING,TRUE,0,0) == TRUE )
+		if( hDesktop != 0 )
 		{
-			AfxMessageBox("호출");
+			EnumDesktopWindows( hDesktop, (WNDENUMPROC)KillScreenSaverFunc , 0 );
+			CloseDesktop( hDesktop );
+			OutputDebugString( "킬 스크린세이버\n" );
 		}
+		//else
+		//{
+		//	PostMessage( GetForegroundWindow(), WM_CLOSE, 0, 0 );
+		//}
 	}
+}
+
+BOOL CALLBACK KillScreenSaverFunc(HWND hWnd, LPARAM lParam)
+{
+	if( IsWindowVisible( hWnd ) )
+	{
+		::PostMessage( hWnd, WM_CLOSE, 0, 0 );
+		OutputDebugString( "킬 스크린세이버\n" );
+	}
+	return true;
 }
