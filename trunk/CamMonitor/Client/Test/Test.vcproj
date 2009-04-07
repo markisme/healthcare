@@ -235,6 +235,14 @@
 					RelativePath=".\LoginDlg.h"
 					>
 				</File>
+				<File
+					RelativePath=".\MainFrm.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MainFrm.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Common"

@@ -23,8 +23,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	//_mainDlg.Init( this );
-
 	return 0;
 }
 
