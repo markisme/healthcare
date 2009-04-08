@@ -6,6 +6,7 @@
 
 class SoundMixer;
 class OpenCV;
+class LoginDlg;
 
 class CTestApp : public CWinApp
 {
@@ -31,4 +32,6 @@ public:
 private:
 	SoundMixer * _soundMixer;
 	OpenCV * _openCV;
+	LoginDlg * _dlg;
+	int _rePassCount;
 };

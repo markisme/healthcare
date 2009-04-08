@@ -209,6 +209,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ScreenSaver.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ScreenSaver.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SoundMixer.cpp"
 				>
 			</File>

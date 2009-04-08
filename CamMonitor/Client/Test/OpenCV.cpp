@@ -15,17 +15,19 @@ OpenCV::~OpenCV()
 
 void OpenCV::Init()
 {
-
+	_alert = false;
 }
 
 void OpenCV::Uninit()
 {
-
+	_alert = false;
 }
 
 // 전체 화면 영역 변화 감지
-void OpenCV::ViewFromCamera()
+void OpenCV::StartMonitor()
 {
+	_startMonitor = true;
+
 	// 이전 프레임
 	IplImage *previous_image;
 
@@ -39,10 +41,7 @@ void OpenCV::ViewFromCamera()
 	// 0 번째 연결된 카메라로부터 연결 
 	CvCapture *capture = cvCaptureFromCAM(0);
 	
-	//
-	AfxMessageBox("프로그램을 시작합니다.");
-
-	while(1)
+	while(_startMonitor)
 	{
 		Sleep(100);
 		
@@ -120,22 +119,18 @@ void OpenCV::ViewFromCamera()
 				}
 			}
 
-			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
-			if( resion1 > 10 && resion2 > 10 && resion3 > 10 && resion4 > 10 )
-			{
-				printf("위험\n");
-			}
-
 			// 할당한 메모리 해제
 			cvReleaseImage( &gray );
 			cvReleaseImage( &oldgray );
-		}
-	}
 
-	// 할당한 메모리 해제
-	if( current_image != NULL ) 
-	{
-		cvReleaseImage( &current_image );
+			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
+			if( resion1 > 10 && resion2 > 10 && resion3 > 10 && resion4 > 10 )
+			{
+				OutputDebugString( "도난 경보\n" );
+				_alert = true;
+				break;
+			}
+		}
 	}
 
 	// 할당한 메모리 해제
@@ -146,4 +141,9 @@ void OpenCV::ViewFromCamera()
 
 	// 카메라 연결 종료
 	cvReleaseCapture( &capture );
+}
+
+void OpenCV::StopMonitor()
+{
+	_startMonitor = false;
 }
