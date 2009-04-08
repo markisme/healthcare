@@ -8,13 +8,13 @@
 #include "LoginDlg.h"
 #include "OpenCV.h"
 #include "SoundMixer.h"
-
-BOOL CALLBACK KillScreenSaverFunc(HWND hWnd, LPARAM lParam);
+#include "ScreenSaver.h"
 
 BEGIN_MESSAGE_MAP(CTestApp, CWinApp)
 END_MESSAGE_MAP()
 
-CTestApp::CTestApp()
+CTestApp::CTestApp() :
+_rePassCount( 0 )
 {
 }
 
@@ -24,6 +24,7 @@ BOOL CTestApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
+	// 서버 설정
 	bool isHost = false;
 	std::string id;
 	std::string pw;
@@ -35,24 +36,26 @@ BOOL CTestApp::InitInstance()
 	// 네트워크 초기화
 	Network::GetInstance().Init( clientPort, ip, serverPort );
 
+	// 스크린 세이버 설정 초기화
+	ScreenSaver::GetInstance().Init();
+
+	// 웹캠 관련
 	_openCV = new OpenCV;
 	_openCV->Init();
 
+	// 사운드 관련
 	_soundMixer = new SoundMixer;
 	_soundMixer->Init();
 
 	_soundMixer->SetMute( FALSE );
 	_soundMixer->SetVolumn( 65535 );
 
-	//
-	//std::string wav = "Test.wav";
-	//PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
-
-	//LoginDlg dlg;
-	//if( dlg.DoModal() != IDOK )
-	//{
-	//	return -1;
-	//}
+	// 프로그램 동작 로그인
+	_dlg = new LoginDlg;
+	if( _dlg->DoModal() != IDOK )
+	{
+		return -1;
+	}
 
 	// 주 MDI 프레임 창을 만듭니다.
 	m_pMainWnd = new CMainFrame;
@@ -71,9 +74,6 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->MoveWindow( 0, 0, 0, 0 );
 	m_pMainWnd->ShowWindow( FALSE );
 
-	// 스크린세이버 모드 실행
-	//::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,TRUE,0,0);
-
 	// 캠 제어 모듈 작동
 	CWinThread * pThread = AfxBeginThread(ThreadFunction, this);
 
@@ -89,7 +89,14 @@ int CTestApp::ExitInstance()
 	delete( _soundMixer );
 
 	//
+	ScreenSaver::GetInstance().Uninit();
+
+	//
 	Network::GetInstance().Uninit();
+
+	//
+	delete _dlg;
+	_dlg = NULL;
 
 	//
 	delete m_pMainWnd;
@@ -100,24 +107,40 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	// Update 함수
-	m_pMainWnd->ShowWindow( TRUE );
-	HWND hwnd = GetActiveWindow();	
-	SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
-	m_pMainWnd->ShowWindow( FALSE );
-
-	//SendMessage(HWND_BROADCAST,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
-
-	LoginDlg dlg;
-	if( dlg.DoModal() != IDOK )
+	if( _rePassCount == 0 )
 	{
-		// 다시 제어모드로
-		return FALSE;
+		// 스크린세이버 동작
+		m_pMainWnd->ShowWindow( TRUE );
+		HWND hwnd = GetActiveWindow();
+		ScreenSaver::GetInstance().StartScreenSaver( hwnd );
+		m_pMainWnd->ShowWindow( FALSE );
 	}
-	else
+
+	//
+	if( _dlg->DoModal() == IDOK )
 	{
-		// 프로그램 종료
-		PostQuitMessage(0);
+		if( Network::GetInstance()._isSuccessAuth == true )
+		{
+			// 프로그램 종료
+			AfxMessageBox("보안 모드 해제");
+			PostQuitMessage(0);
+		}
+		else
+		{
+			AfxMessageBox("비밀번호가 틀렸습니다.");
+			_rePassCount++;
+		}
+	}
+
+	//
+	if( _rePassCount >= 3 )
+	{
+		//
+		std::string wav = "Test.wav";
+		PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+
+		//
+		AfxMessageBox("비밀번호 3회 오류!\n보안 모드 작동!");
 	}
 
 	//
@@ -129,38 +152,20 @@ BOOL CTestApp::OnIdle( LONG lCount )
 UINT CTestApp::ThreadFunction(LPVOID pParam)
 {
 	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->ThreadDo(); // 패킷을 받기 위한 Thread 시작
-
+	pthis->ThreadDo(); // 감시를 위한 쓰레드 시작
 	return 0;
 }
 
 void CTestApp::ThreadDo()
 {
-	while (1)
-	{
-		Sleep(3000);
+	// 감시 모드 동작
+	_openCV->StartMonitor();
+	ScreenSaver::GetInstance().KillScreenSaver();
 
-		HDESK hDesktop = OpenDesktop( TEXT("screen-saver"), 0, FALSE, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS ); 
+	// 보안모드 작동
+	std::string wav = "Test.wav";
+	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 
-		if( hDesktop != 0 )
-		{
-			EnumDesktopWindows( hDesktop, (WNDENUMPROC)KillScreenSaverFunc , 0 );
-			CloseDesktop( hDesktop );
-			OutputDebugString( "킬 스크린세이버\n" );
-		}
-		//else
-		//{
-		//	PostMessage( GetForegroundWindow(), WM_CLOSE, 0, 0 );
-		//}
-	}
-}
-
-BOOL CALLBACK KillScreenSaverFunc(HWND hWnd, LPARAM lParam)
-{
-	if( IsWindowVisible( hWnd ) )
-	{
-		::PostMessage( hWnd, WM_CLOSE, 0, 0 );
-		OutputDebugString( "킬 스크린세이버\n" );
-	}
-	return true;
+	//
+	AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
 }

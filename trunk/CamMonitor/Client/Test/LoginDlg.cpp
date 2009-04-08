@@ -23,6 +23,7 @@ BEGIN_MESSAGE_MAP(LoginDlg, CDialog)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDOK, &LoginDlg::OnBnClickedOk)
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 BOOL LoginDlg::OnInitDialog()
@@ -69,17 +70,24 @@ void LoginDlg::OnBnClickedOk()
 	while (1)
 	{
 		//
-		Sleep( 10 );
+		Sleep( 30 );
 
 		//
-		if( Network::GetInstance()._isSuccessAuth )
+		if( Network::GetInstance()._isSuccessAuth != -1 )
 		{
-			// SendMessage(WM_SYSCOMMAND, SC_SCREENSAVE); //send SysCommand message calling SS
 			OnOK();
 			break;
 		}
 	}
 }
+
+void LoginDlg::OnClose()
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CDialog::OnClose();
+}
+
 
 UINT LoginDlg::ThreadFunction(LPVOID pParam)
 {
@@ -91,13 +99,17 @@ UINT LoginDlg::ThreadFunction(LPVOID pParam)
 
 void LoginDlg::ThreadDo()
 {
+	//
+	Network::GetInstance()._isSuccessAuth = -1;
+
+	//
 	while (1)
 	{
 		//
 		Network::GetInstance().ProcPacket();
 
 		//
-		if( Network::GetInstance()._isSuccessAuth )
+		if( Network::GetInstance()._isSuccessAuth != -1 )
 		{
 			break;
 		}

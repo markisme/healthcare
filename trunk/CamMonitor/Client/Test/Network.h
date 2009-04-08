@@ -42,7 +42,7 @@ public:
 	UserDataList & GetUserDataList() { return _userDataList; }
 	int GetIndexForUserNo( int userNo );
 
-	BOOL _isSuccessAuth;
+	int _isSuccessAuth;
 	BOOL _isHost;
 	int _myUserNo;
 

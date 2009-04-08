@@ -5,7 +5,7 @@
 Network Network::_instance;
 
 Network::Network() : 
-_isSuccessAuth( FALSE ),
+_isSuccessAuth( -1 ),
 _isHost( FALSE )
 {
 }
