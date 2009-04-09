@@ -29,7 +29,8 @@ BOOL CTestApp::InitInstance()
 	std::string id;
 	std::string pw;
 	int clientPort = 200;
-	std::string ip = "211.189.19.160";
+	std::string ip = "211.189.20.246";
+	//std::string ip = "211.189.19.160";
 	//std::string ip = "127.0.0.1";
 	int serverPort = 10000;
 
@@ -48,12 +49,14 @@ BOOL CTestApp::InitInstance()
 	_soundMixer->Init();
 
 	_soundMixer->SetMute( FALSE );
-	_soundMixer->SetVolumn( 65535 );
+	_soundMixer->SetVolumn( 1000 );
 
 	// 프로그램 동작 로그인
 	_dlg = new LoginDlg;
-	if( _dlg->DoModal() != IDOK )
+	_dlg->DoModal();
+	if(  Network::GetInstance()._isSuccessAuth == false )
 	{
+		AfxMessageBox("비밀번호가 틀렸습니다.");
 		return -1;
 	}
 
