@@ -25,13 +25,13 @@ void OpenCV::StartMonitor()
 	_startMonitor = true;
 
 	// 이전 프레임
-	IplImage *previous_image;
+	IplImage *previous_image = NULL;
 
 	// 현재 프레임
-	IplImage *current_image;
+	IplImage *current_image = NULL;
 
 	// 저장 프레임
-	IplImage *save_image;
+	IplImage *save_image = NULL;
 
 	// 프레임 카운트
 	int count = 0;
@@ -43,25 +43,6 @@ void OpenCV::StartMonitor()
 	while(_startMonitor)
 	{
 		Sleep(100);
-
-		if( _alert == true )
-		{
-			Sleep( 3000 );
-
-			CamState camState = CompareImage( current_image, previous_image );
-			
-			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
-			if( camState == CAM_MOVE )
-			{
-				OutputDebugString( "도난 경보\n" );
-				_alert = true;
-				break;
-			}
-			else
-			{
-				_alert = false;
-			}
-		}
 		
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
@@ -105,6 +86,32 @@ void OpenCV::StartMonitor()
 			{
 				OutputDebugString( "움직임확인\n" );
 				_alert = true;
+				continue;
+			}
+
+			if( _alert == true )
+			{
+				Sleep( 1000 );
+
+				if( save_image == NULL )
+				{
+					save_image = cvCreateImage( cvGetSize(previous_image), IPL_DEPTH_8U, previous_image->nChannels);
+					cvCopy( previous_image, save_image );
+				}
+
+				CamState camState = CompareImage( current_image, save_image );
+
+				// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
+				if( camState == CAM_MOVE )
+				{
+					OutputDebugString( "도난 경보\n" );
+					_alert = true;
+					break;
+				}
+				else
+				{
+					_alert = false;
+				}
 			}
 		}
 	}
