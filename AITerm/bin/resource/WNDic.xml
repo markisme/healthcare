@@ -89,22 +89,22 @@
         <keyword name="information_processing_system" />
         <keyword name="machine" />
     </tag>
-    <tag name="object">
+    <tag name="what">
         <keyword name="what" />
     </tag>
-    <tag name="place">
+    <tag name="where">
         <keyword name="where" />
     </tag>
-    <tag name="method">
+    <tag name="how">
         <keyword name="how" />
     </tag>
-    <tag name="reason">
+    <tag name="why">
         <keyword name="why" />
     </tag>
-    <tag name="time">
+    <tag name="when">
         <keyword name="when" />
     </tag>
-    <tag name="person">
+    <tag name="who">
         <keyword name="who" />
     </tag>
     <tag name="cpu_socket">
