@@ -1,0 +1,94 @@
+What is the cost of CPU-A?
+What is the socket of CPU-A?
+What is the type of motherboard-B?
+1.
+What is the internal graphics on motherboard?
+What is the internal audio chipset on motherboard?
+What manufacturer makes CPU-A?
+What manufacturer makes Motherboard-B?
+What is the latest CPU?
+What is PCI-E?
+What is the performance of internal network card on motherboard?
+What graphic interfaces are supported by motherboard-B?
+
+<question> What </question>
+<focus> cost, socket, performance, supported ... </focus>
+[<component> CPU-A, motherboard-A, graphic interfaces... </component>]
+[<component> CPU-A, motherboard-A, ... </component>]
+
+
+
+2.
+What is the cost difference between CPU-A and CPU-B?
+What is difference between AM2 and AM3 in CPU socket type?
+What is difference between SATA and ATA?
+What is difference between CPU-A and CPU-B?
+
+<question> What </question>
+[<focus> cost, socket, perfomance, ... </focus>]
+<differnece> difference </differnece>
+<component> CPU-A, motherboard-A, ... </component>
+<component> CPU-A, motherboard-A, ... </component>
+
+
+3. 
+What kinds of motherboard made by manufacturer-X?
+What types are in INTEL CPUs?
+
+<question> What </question>
+<focus> kinds, types, ... </focus>
+<manufacturer> manufacturer </manufacturer>
+<component> CPU-A, motherboard-A, ... </component>
+
+
+4.
+Is CPU-A compatible with CPU-B?
+Does motherboard-B support SATA2?
+
+<focus> compatible </focus>
+<component> CPU-A, motherboard-A, ... </component>
+<component> CPU-A, motherboard-A, ... </component>
+
+
+5.
+Where is the lowest cost store selling CPU-A?
+
+<question> Where </question>
+<focus> lowest cost </focus>
+<location> store, manufacturer </location>
+<component> CPU-A, motherboard-A, ... </component>
+
+
+6.
+How many extension slots on motherboard?
+
+<question> how many </question>
+<focus> extension slots </focus>
+<component> CPU-A, motherboard-A, ... </component>
+
+
+7. 
+How can we constitute the best computer with XX won?
+How can we make the strong combination?
+
+<question> how </question>
+<focus> constitute, make </focus>
+<target> strong, best ... </target>
+[<option> with XX won </option>]
+
+
+8.
+What is the best combination to perform high?
+What is the best cost performance CPU?
+
+<question> What </question>
+<focus> best </focus>
+<target> combination, cost ... </target>
+[<target> performance </target>]
+[<component> CPU-A, motherboard-A, ... </component>]
+
+9.
+If I put Intel CPU onto AMD motherboard, What happens?
+<¿¹¿Ü>
+
+
