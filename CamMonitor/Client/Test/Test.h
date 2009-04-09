@@ -1,5 +1,3 @@
-#pragma once
-
 #include "resource.h"       // 주 기호입니다.
 #include "mmsystem.h"
 #include <vector>

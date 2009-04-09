@@ -110,14 +110,14 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	if( _rePassCount == 0 )
-	{
-		// 스크린세이버 동작
-		m_pMainWnd->ShowWindow( TRUE );
-		HWND hwnd = GetActiveWindow();
-		ScreenSaver::GetInstance().StartScreenSaver( hwnd );
-		m_pMainWnd->ShowWindow( FALSE );
-	}
+	//if( _rePassCount == 0 )
+	//{
+	//	// 스크린세이버 동작
+	//	m_pMainWnd->ShowWindow( TRUE );
+	//	HWND hwnd = GetActiveWindow();
+	//	ScreenSaver::GetInstance().StartScreenSaver( hwnd );
+	//	m_pMainWnd->ShowWindow( FALSE );
+	//}
 
 	//
 	if( _dlg->DoModal() == IDOK )
