@@ -28,28 +28,17 @@ public:
 
 	//
 	void ReqLoginSend( std::string id, std::string pass );
-	void ReqClientDataSend();
-	void ReqGetUserInfoSend();
-	void ReqGetUserDataSend( int userNo );
-	void ReqAddUserDataSend( UserData & userData );
 
+	//
 	RakPeerInterface * GetClient() { return _client; }
 
+	//
 	static Network & GetInstance() { return _instance; }
 
-	DataList & GetDataList( int userNo ) { return _dataMap[ userNo ]; }
-	UserList & GetUserInfoList() { return _userList; }
-	UserDataList & GetUserDataList() { return _userDataList; }
-	int GetIndexForUserNo( int userNo );
-
+	//
 	int _isSuccessAuth;
-	BOOL _isHost;
-	int _myUserNo;
 
 private:
 	static Network _instance;
 	RakPeerInterface * _client;
-	DataMap _dataMap;
-	UserList _userList;
-	UserDataList _userDataList;
 };
