@@ -53,22 +53,22 @@
     </tag>
    
     <!-- ÀÇ¹®»ç -->
-    <tag name="object">
+    <tag name="what">
     	<keyword name="what" sense="0"/>
     </tag>
-    <tag name="place">
+    <tag name="where">
     	<keyword name="where" sense="0"/>
     </tag>
-    <tag name="method">
+    <tag name="how">
     	<keyword name="how" sense="0"/>
     </tag>
-    <tag name="reason">
+    <tag name="why">
     	<keyword name="why" sense="0"/>
     </tag> 
-    <tag name="time">
+    <tag name="when">
     	<keyword name="when" sense="0"/>
     </tag> 
-    <tag name="person">
+    <tag name="who">
     	<keyword name="who" sense="0"/>
     </tag>
 
