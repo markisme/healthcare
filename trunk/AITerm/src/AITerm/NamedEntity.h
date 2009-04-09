@@ -5,8 +5,8 @@
 
 struct TagElement
 {
-	std::string _tagName;
-	std::string _type;
+	std::string _name;
+	std::string _part;
 	std::string _currentPos;
 	std::string _dependencePos;
 	std::string _word;

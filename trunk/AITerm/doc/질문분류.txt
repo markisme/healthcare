@@ -1,7 +1,7 @@
+1.
 What is the cost of CPU-A?
 What is the socket of CPU-A?
 What is the type of motherboard-B?
-1.
 What is the internal graphics on motherboard?
 What is the internal audio chipset on motherboard?
 What manufacturer makes CPU-A?
@@ -11,10 +11,43 @@ What is PCI-E?
 What is the performance of internal network card on motherboard?
 What graphic interfaces are supported by motherboard-B?
 
-<question> What </question>
-<focus> cost, socket, performance, supported ... </focus>
-[<component> CPU-A, motherboard-A, graphic interfaces... </component>]
-[<component> CPU-A, motherboard-A, ... </component>]
+<template no="1">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "price"/>
+		<tag name = "cpu_socket"/>
+		<tag name = "performance"/>
+		<tag name = "supported"/>
+		<tag name = "date" />
+	</slot>
+	<slot type="component" need="false">
+		<tag name = "CPU-A"/>
+		<tag name = "motherboard-A"/>
+		<tag name = "graphic interfaces"/>
+	</slot>
+	<slot type="component" need="false">
+		<tag name = "CPU-A"/>
+		<tag name = "motherboard-A"/>
+		<tag name = "graphic interfaces"/>
+	</slot>
+</template>
+
+class Template
+{
+	int _tempNo;
+	std::vector<Slot> _slotList;
+}
+
+class Slot
+{
+	bool _need;
+	std::string _type;
+	std::vector<std::string> _tagList;
+}
+
+typedef std::vector<Template> TemplateList;
 
 
 
@@ -54,7 +87,8 @@ Does motherboard-B support SATA2?
 Where is the lowest cost store selling CPU-A?
 
 <question> Where </question>
-<focus> lowest cost </focus>
+<focus> lowest </focus>
+<target> price </target>
 <location> store, manufacturer </location>
 <component> CPU-A, motherboard-A, ... </component>
 

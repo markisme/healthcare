@@ -84,16 +84,16 @@ void NamedEntity::SaveResult( TagList & tagList )
 		{
 			TagElement tag = tags[ cnt ];
 			std::string currentPos = tag._currentPos;
-			std::string tagName = tag._tagName;
-			std::string type = tag._type;
+			std::string tagName = tag._name;
+			std::string part = tag._part;
 			std::string dependencePos = tag._dependencePos;
 			std::string word = tag._word;
 
 			XmlNode * tagNode = questionNode->AddNode( "tag" );
-			tagNode->SetAttribute( "type", tagName.c_str() );
+			tagNode->SetAttribute( "name", tagName.c_str() );
 			tagNode->SetAttribute( "curpos", currentPos.c_str() );
 			tagNode->SetAttribute( "deppos", dependencePos.c_str() );
-			tagNode->SetAttribute( "part", type.c_str() );
+			tagNode->SetAttribute( "part", part.c_str() );
 			tagNode->SetText( word.c_str(), XmlNode::NUMBER );
 		}
 	}	
@@ -120,19 +120,19 @@ void NamedEntity::GenerateTag( std::string question, Tags & tags )
 
 		TagElement tag;
 		tag._currentPos = no;
-		tag._type = _Minipar.GetAt( num )->szPOS;
+		tag._part = _Minipar.GetAt( num )->szPOS;
 		tag._dependencePos = _Minipar.GetAt( num )->szDependence;
 		tag._word = word;
 
-		tag._tagName = _dbDic.GetTagName( tag._word );
-		if( tag._tagName.length() != 0 )
+		tag._name = _dbDic.GetTagName( tag._word );
+		if( tag._name.length() != 0 )
 		{
 			tags.push_back( tag );
 			continue;
 		}
 
-		tag._tagName = _wnDic.GetTagName( tag._word );
-		if( tag._tagName.length() != 0 )
+		tag._name = _wnDic.GetTagName( tag._word );
+		if( tag._name.length() != 0 )
 		{
 			tags.push_back( tag );
 			continue;
@@ -142,17 +142,17 @@ void NamedEntity::GenerateTag( std::string question, Tags & tags )
 		std::string adjWord = GetAdjective( _Minipar.GetAt( num )->nLineNum );
 		tag._word = adjWord + " " + word;
 		
-		tag._tagName = _wnDic.GetTagName( tag._word  );
-		if( tag._tagName.length() != 0 )
+		tag._name = _wnDic.GetTagName( tag._word  );
+		if( tag._name.length() != 0 )
 		{
 			tags.push_back( tag );
 			continue;
 		}
 
 		// 형용사는 뜻이 없는 경우 명사에 붙임
-		if( tag._type != "A" )
+		if( tag._part != "A" )
 		{
-			tag._tagName = "N/A";
+			tag._name = "N/A";
 			tags.push_back( tag );
 		}
 	}
