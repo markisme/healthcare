@@ -157,20 +157,43 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	cvCvtColor(current_image, gray, CV_BGR2GRAY);
 	cvCvtColor(previous_image, oldgray, CV_BGR2GRAY);
 
-	int xpart = gray->width / 8;
-	int ypart = gray->height / 8;
+	int xpart = gray->width / 4;
+	int ypart = gray->height / 4;
 
-	struct Pos
-	{
-		int _x;
-		int _y;
-	};
-
-	std::vector<Pos> posList;
-	Pos pos;
-	pos._x = xpart * 1;
-	pos._y = xpart * 1;
-	posList.push_back( pos );
+	std::vector<ResionRect> resionList;
+	ResionRect resion01(xpart*0,ypart*0,xpart*1,ypart*1);
+	ResionRect resion02(xpart*1,ypart*0,xpart*2,ypart*1);
+	ResionRect resion03(xpart*2,ypart*0,xpart*3,ypart*1);
+	ResionRect resion04(xpart*3,ypart*0,xpart*4,ypart*1);
+	ResionRect resion05(xpart*0,ypart*1,xpart*1,ypart*2);
+	ResionRect resion06(xpart*1,ypart*1,xpart*2,ypart*2);
+	ResionRect resion07(xpart*2,ypart*1,xpart*3,ypart*2);
+	ResionRect resion08(xpart*3,ypart*1,xpart*4,ypart*2);
+	ResionRect resion09(xpart*0,ypart*2,xpart*1,ypart*3);
+	ResionRect resion10(xpart*1,ypart*2,xpart*2,ypart*3);
+	ResionRect resion11(xpart*2,ypart*2,xpart*3,ypart*3);
+	ResionRect resion12(xpart*3,ypart*2,xpart*4,ypart*3);
+	ResionRect resion13(xpart*0,ypart*3,xpart*1,ypart*4);
+	ResionRect resion14(xpart*1,ypart*3,xpart*2,ypart*4);
+	ResionRect resion15(xpart*2,ypart*3,xpart*3,ypart*4);
+	ResionRect resion16(xpart*3,ypart*3,xpart*4,ypart*4);
+	
+	resionList.push_back( resion01 );
+	resionList.push_back( resion02 );
+	resionList.push_back( resion03 );
+	resionList.push_back( resion04 );
+	resionList.push_back( resion05 );
+	resionList.push_back( resion06 );
+	resionList.push_back( resion07 );
+	resionList.push_back( resion08 );
+	resionList.push_back( resion09 );
+	resionList.push_back( resion10 );
+	resionList.push_back( resion11 );
+	resionList.push_back( resion12 );
+	resionList.push_back( resion13 );
+	resionList.push_back( resion14 );
+	resionList.push_back( resion15 );
+	resionList.push_back( resion16 );
 
 	float CriticalValue = 15.0f;
 	for(int x=0; x<gray->width; x+=6) {  
@@ -182,21 +205,12 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 
 			if(fabs(float((float)c1-(float)c2))>CriticalValue) 
 			{
-				if( 0 <= x && x <= xpart && 0 <= y && y <= ypart )
+
+				int size = resionList.size();
+				for( int num = 0; num < size; num++ )
 				{
-					_resionLeftTop++;
-				}
-				else if( 3 * xpart <= x && x <= 4 * xpart && 0 <= y && y <= ypart )
-				{
-					_resionRightTop++;
-				}
-				else if( 0 <= x && x <= xpart && 3 * ypart <= y && y <= 4 * ypart )
-				{
-					_resionLeftBottom++;
-				}
-				else if( 3 * xpart <= x && x <= 4 * xpart && 3 * ypart <= y && y <= 4 * ypart )
-				{
-					_resionRightBottom++;
+					ResionRect & rect = resionList[ num ];
+					rect.CheckResion( x, y );
 				}
 			}  
 		}
@@ -206,16 +220,36 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	cvReleaseImage( &gray );
 	cvReleaseImage( &oldgray );
 
-	//
-	if( _resionLeftTop == 0 || _resionRightTop == 0 || 
-		_resionLeftBottom == 0 || _resionRightBottom == 0 )
+	// ÆÇ´Ü
+	int totalCount = 0;
+	int size = resionList.size();
+	for( int num = 0; num < size; num++ )
 	{
-		return NONE_MOVE;
+		ResionRect & rect = resionList[ num ];
+		if( rect._checkCount > 10 )
+		{
+			totalCount++;
+		}
 	}
-	else if( _resionLeftTop > 10 && _resionRightTop > 10 && 
-			 _resionLeftBottom > 10 && _resionRightBottom > 10 )
+
+	if( totalCount == size )
 	{
 		return CAM_MOVE;
+	}
+
+	totalCount = 0;
+	for( int num = 0; num < size; num++ )
+	{
+		ResionRect & rect = resionList[ num ];
+		if( rect._checkCount < 10 )
+		{
+			totalCount++;
+		}
+	}
+
+	if( totalCount == size )
+	{
+		return NONE_MOVE;
 	}
 
 	return OBJECT_MOVE;

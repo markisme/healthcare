@@ -5,14 +5,26 @@
 #include "mmsystem.h"
 #include <vector>
 
-struct ResionCount
+struct ResionRect
 {
-	ResionCount() : _resionLeftTop(0), _resionRightTop(0), _resionLeftBottom(0), _resionRightBottom(0) {};
-	~ResionCount() {};
-	int _resionLeftTop;
-	int _resionRightTop;
-	int _resionLeftBottom;
-	int _resionRightBottom;
+	ResionRect( int lefttopX, int lefttopY, int rightbottomX, int rightbottomY ) : 
+		_lefttopX(lefttopX), _lefttopY(lefttopY), _rightbottomX(rightbottomX), _rightbottomY(rightbottomY) {};
+	~ResionRect() {};
+
+	void CheckResion( int x, int y)
+	{
+		if( _lefttopX <= x && x <= _rightbottomX && 
+			_lefttopY <= y && y <= _rightbottomY )
+		{
+			_checkCount++;
+		}
+	}
+	
+	int _checkCount;
+	int _lefttopX;
+	int _lefttopY;
+	int _rightbottomX;
+	int _rightbottomY;
 };
 
 enum CamState
