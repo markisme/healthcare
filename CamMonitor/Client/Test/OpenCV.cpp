@@ -47,7 +47,7 @@ void OpenCV::StartMonitor()
 
 	while(_startMonitor)
 	{
-		Sleep(100);
+		Sleep(10);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
@@ -117,7 +117,7 @@ void OpenCV::StartMonitor()
 			}
 
 			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
-			if( camState == CAM_MOVE )
+			if( camState == CAM_MOVE && _alert != true )
 			{
 				// 경고음
 				PlaySound("notify.wav",NULL,SND_APPLICATION | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
@@ -146,11 +146,6 @@ void OpenCV::StopMonitor()
 
 CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image )
 {
-	int _resionLeftTop = 0;
-	int _resionRightTop = 0;
-	int _resionLeftBottom = 0;
-	int _resionRightBottom = 0;
-
 	IplImage* gray=cvCreateImage(cvGetSize(current_image), IPL_DEPTH_8U,1);
 	IplImage* oldgray=cvCreateImage(cvGetSize(previous_image), IPL_DEPTH_8U, 1);
 
@@ -226,13 +221,14 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	for( int num = 0; num < size; num++ )
 	{
 		ResionRect & rect = resionList[ num ];
-		if( rect._checkCount > 10 )
+		int count = rect._checkCount;
+		if( rect._checkCount > 20 )
 		{
 			totalCount++;
 		}
 	}
 
-	if( totalCount == size )
+	if( totalCount >= size )
 	{
 		return CAM_MOVE;
 	}
@@ -247,7 +243,7 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 		}
 	}
 
-	if( totalCount == size )
+	if( totalCount >= 4 )
 	{
 		return NONE_MOVE;
 	}

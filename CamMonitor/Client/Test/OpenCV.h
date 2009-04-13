@@ -8,13 +8,13 @@
 struct ResionRect
 {
 	ResionRect( int lefttopX, int lefttopY, int rightbottomX, int rightbottomY ) : 
-		_lefttopX(lefttopX), _lefttopY(lefttopY), _rightbottomX(rightbottomX), _rightbottomY(rightbottomY) {};
+		_lefttopX(lefttopX), _lefttopY(lefttopY), _rightbottomX(rightbottomX), _rightbottomY(rightbottomY) { _checkCount = 0; };
 	~ResionRect() {};
 
 	void CheckResion( int x, int y)
 	{
-		if( _lefttopX <= x && x <= _rightbottomX && 
-			_lefttopY <= y && y <= _rightbottomY )
+		if( _lefttopX <= x && x < _rightbottomX && 
+			_lefttopY <= y && y < _rightbottomY )
 		{
 			_checkCount++;
 		}
