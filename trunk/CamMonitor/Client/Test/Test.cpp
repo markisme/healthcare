@@ -49,7 +49,7 @@ BOOL CTestApp::InitInstance()
 	_soundMixer->Init();
 
 	_soundMixer->SetMute( FALSE );
-	_soundMixer->SetVolumn( 1000 );
+	_soundMixer->SetVolumn( 6000 );
 
 	// 프로그램 동작 로그인
 	_dlg = new LoginDlg;

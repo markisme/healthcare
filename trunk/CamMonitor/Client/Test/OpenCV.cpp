@@ -47,7 +47,7 @@ void OpenCV::StartMonitor()
 
 	while(_startMonitor)
 	{
-		Sleep(10);
+		//Sleep(1);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
@@ -75,7 +75,7 @@ void OpenCV::StartMonitor()
 			time_t diffTime = curTime - alertTime;
 
 			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
-			if( camState == CAM_MOVE && diffTime >= 3.f )
+			if( camState == CAM_MOVE && diffTime >= 2.f )
 			{
 				OutputDebugString( "도난 경보\n" );
 				_alert = true;
@@ -279,7 +279,7 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	{
 		ResionRect & rect = resionList[ num ];
 		int count = rect._checkCount;
-		if( rect._checkCount > 10 )
+		if( rect._checkCount > 20 )
 		{
 			totalCount++;
 		}
@@ -294,13 +294,13 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	for( int num = 0; num < size; num++ )
 	{
 		ResionRect & rect = resionList[ num ];
-		if( rect._checkCount < 10 )
+		if( rect._checkCount < 5 )
 		{
 			totalCount++;
 		}
 	}
 
-	if( totalCount >= 16 )
+	if( totalCount >= 32 )
 	{
 		return NONE_MOVE;
 	}
