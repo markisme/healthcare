@@ -75,7 +75,7 @@ void OpenCV::StartMonitor()
 			time_t diffTime = curTime - alertTime;
 
 			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
-			if( camState == CAM_MOVE && diffTime >= 2.f )
+			if( camState == CAM_MOVE && diffTime >= 3.f )
 			{
 				OutputDebugString( "도난 경보\n" );
 				_alert = true;
@@ -294,13 +294,13 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	for( int num = 0; num < size; num++ )
 	{
 		ResionRect & rect = resionList[ num ];
-		if( rect._checkCount < 5 )
+		if( rect._checkCount < 2 )
 		{
 			totalCount++;
 		}
 	}
 
-	if( totalCount >= 32 )
+	if( totalCount >= 60 )
 	{
 		return NONE_MOVE;
 	}
