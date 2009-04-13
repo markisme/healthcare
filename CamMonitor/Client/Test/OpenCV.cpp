@@ -152,8 +152,8 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	cvCvtColor(current_image, gray, CV_BGR2GRAY);
 	cvCvtColor(previous_image, oldgray, CV_BGR2GRAY);
 
-	int xpart = gray->width / 4;
-	int ypart = gray->height / 4;
+	int xpart = gray->width / 8;
+	int ypart = gray->height / 8;
 
 	std::vector<ResionRect> resionList;
 	ResionRect resion01(xpart*0,ypart*0,xpart*1,ypart*1);
