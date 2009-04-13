@@ -2,6 +2,8 @@
 #include <highgui.h>
 #include <cvcam.h>
 #include <stdio.h>
+#include "mmsystem.h"
+#include <vector>
 
 struct ResionCount
 {
