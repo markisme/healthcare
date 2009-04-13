@@ -30,7 +30,7 @@ BOOL LoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	_editID.SetWindowText( "host" );
+	_editID.SetWindowText( "asd" );
 	_editPass.SetWindowText( "1234" );
 
 	CWinThread * pThread = AfxBeginThread(ThreadFunction, this);
