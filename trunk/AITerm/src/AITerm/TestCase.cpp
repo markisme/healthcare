@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TestCase.h"
+#include "NamedEntity.h"
 
 TestCase TestCase::_instance;
 
@@ -90,6 +91,7 @@ void TestCase::XMLLoadSaveTest()
 		{
 			const XmlNode * testNode = resNode->GetNode( "testNode", num );
 			std::string typeAtt = testNode->GetAttribute( "type" );
+			printf("%d= %s\n", num, typeAtt.c_str());
 		}
 	}
 }
@@ -118,23 +120,7 @@ void TestCase::XMLSaveTest()
 
 void TestCase::XMLLoadTest()
 {
-	// XML ·Îµå
-	{
-		XmlDocument xmlDoc;
-		std::string path = "test.xml";
-		xmlDoc.LoadFile( path.c_str() );
-
-		const XmlNode * resNode = xmlDoc.GetNode( "resource" );
-		std::string type = resNode->GetAttribute( "type" );
-		std::string name = resNode->GetAttribute( "name" );
-
-		int nodeCount = resNode->GetNodeCount( "testNode" );
-		for( int num = 0; num < nodeCount; num++ )
-		{
-			const XmlNode * testNode = resNode->GetNode( "testNode", num );
-			std::string typeAtt = testNode->GetAttribute( "type" );
-		}
-	}
+	
 }
 
 //XmlNode* CreateXMLTag( XmlDocument &xmlDoc, const char *representativeName)

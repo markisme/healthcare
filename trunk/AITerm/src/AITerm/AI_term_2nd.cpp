@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "NamedEntity.h"
+#include "QuestionTemplate.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -19,8 +20,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	NamedEntity namedEntity;
 	namedEntity.Init();
 
+	// 템플릿 로드
+
 	// 질문들 처리
-	namedEntity.ProcessQuestion();
+	TagList tagList;
+	namedEntity.ProcessQuestion( tagList );
+
+	// 템플릿 처리
+	QuestionTemplate questionTemplate;
+	questionTemplate.Init( &tagList );
+
+	// Just XML test
+	//TestCase testCase;
+	//namedEntity를 변수로 값으로 넘겨서 처리
+	//testCase.XMLLoadTest( &tagList );
+	
 
 	return 0;
 }

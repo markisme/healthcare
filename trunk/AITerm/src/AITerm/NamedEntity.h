@@ -26,7 +26,8 @@ public:
 	void Init();
 	void Uninit();
 
-	void ProcessQuestion();
+	//void ProcessQuestion();
+	void ProcessQuestion( TagList & tagList );
 
 private:
 	void LoadQuestions( QuestionList & qsList );

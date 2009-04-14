@@ -22,15 +22,37 @@ void NamedEntity::Uninit()
 	_wnDic.Uninit();
 }
 
-void NamedEntity::ProcessQuestion()
+//void NamedEntity::ProcessQuestion()
+//{
+//	// 질문 로드
+//	QuestionList qsList;
+//	LoadQuestions( qsList );
+//
+//	// 질문 분석
+//	TagList tagList;
+//
+//	int size = qsList.size();
+//	for( int num = 0; num < size; num++ )
+//	{
+//		std::string question = qsList[ num ];
+//		printf( "Process Question %d: %s\n", num, question.c_str() );
+//
+//		Tags tags;
+//		GenerateTag( question, tags );
+//		tagList.push_back( tags );
+//	}
+//
+//	// 결과 저장
+//	SaveResult( tagList );
+//}
+
+void NamedEntity::ProcessQuestion( TagList & tagList )
 {
 	// 질문 로드
 	QuestionList qsList;
 	LoadQuestions( qsList );
 
 	// 질문 분석
-	TagList tagList;
-
 	int size = qsList.size();
 	for( int num = 0; num < size; num++ )
 	{

@@ -192,6 +192,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\QuestionTemplate.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\QuestionTemplate.h"
+			>
+		</File>
+		<File
 			RelativePath=".\stdafx.cpp"
 			>
 		</File>
