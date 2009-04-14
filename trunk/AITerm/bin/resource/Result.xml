@@ -4,8 +4,7 @@
         <tag name="cpu_name" curpos="2" deppos="*" part="N">e7400</tag>
         <tag name="comparison" curpos="3" deppos="2" part="A">compatible</tag>
         <tag name="N/A" curpos="4" deppos="3" part="Prep">with</tag>
-        <tag name="cpu_name" curpos="5" deppos="6" part="U">e5200</tag>
-        <tag name="number" curpos="6" deppos="4" part="N">0</tag>
+        <tag name="cpu_name" curpos="5" deppos="4" part="N">e5200</tag>
     </question>
     <question no="1">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
