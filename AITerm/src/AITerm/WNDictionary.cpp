@@ -106,9 +106,7 @@ bool WNDictionary::CreateWNDic( const XmlNode * resNode )
 					std::string word = (*(_synsetPtr->words)++);
 					tagDataList._dataList.push_back( word );
 				}
-			}
-
-			
+			}			
 		}
 
 		_dic.push_back( tagDataList );
@@ -166,8 +164,19 @@ bool WNDictionary::SaveToXML( XmlNode * resNode )
 	return true;
 }
 
-std::string WNDictionary::GetTagName( const std::string & inData )
+int WNDictionary::GetTagName( const std::vector<std::string> & inDataList, std::string & outTagName, std::string & outWords )
 {
+	// 날짜 / 시간
+
+	// 숫자
+	if( IsNumber( (std::string)inDataList[0] ) == true )
+	{
+		outTagName = "number";
+		outWords = inDataList[0];
+		return 0;
+	}
+
+	// 단어인 경우
 	int size = _dic.size();
 	for( int num = 0; num < size; num++ )
 	{
@@ -179,28 +188,50 @@ std::string WNDictionary::GetTagName( const std::string & inData )
 			std::string data = _dic[ num ]._dataList[ cnt ];
 			std::string word = ToLowerCase( (char*)data.c_str() );
 
-			if( IsSameWord( inData , word ) )
+			int count = IsSameWords( inDataList, word, outWords );
+			if( count >= 0 )
 			{
-				return tag;
+				outTagName = tag;
+				return count;
 			}
 		}
 	}
-	return "";
+	return 0;
 }
 
-bool WNDictionary::IsSameWord( std::string lWord, std::string rWord )
+int WNDictionary::IsSameWords( const std::vector<std::string> & lWordList, std::string rWord, std::string & outWords )
 {
-	// 전체 비교
-	if( lWord == rWord )
+	// 연속된 단어 비교
+	std::string words;
+
+	int count = lWordList.size();
+	for( int num = 0; num < count; num++ )
 	{
-		return true;
+		std::string word = lWordList[ num ];
+		if( words.length() > 0 )
+		{
+			words += " ";
+			words += word;
+		}
+		else
+		{
+			words = word;
+		}
+		
+		if( words == rWord )
+		{
+			outWords = words;
+			return num;
+		}
 	}
+
+	std::string lWord = lWordList[ 0 ];
 
 	//
 	int length = lWord.size();
 	if( length < 3 )
 	{
-		return false;
+		return -1;
 	}
 
 	// 복수 비교 (s)
@@ -210,7 +241,8 @@ bool WNDictionary::IsSameWord( std::string lWord, std::string rWord )
 		
 		if( lWord == rWord )
 		{
-			return true;
+			outWords = lWord;
+			return 0;
 		}
 	}
 
@@ -222,8 +254,20 @@ bool WNDictionary::IsSameWord( std::string lWord, std::string rWord )
 		
 		if( lWord == rWord )
 		{
-			return true;
+			outWords = lWord;
+			return 0;
 		}
+	}
+
+	return -1;
+}
+
+bool WNDictionary::IsNumber( const std::string & inData )
+{
+	int num = atoi( inData.c_str() );
+	if( num > 0 || inData == "0" )
+	{
+		return true;
 	}
 
 	return false;

@@ -1,4 +1,4 @@
-<resource create="false">
+<resource create="true">
     <!-- 질문에 필요한 카테고리 -->
     <tag name="comparison">
     	<keyword name="compatible" sense="0"/>
@@ -89,9 +89,12 @@
     	<keyword name="internal graphics" sense="0"/>
     </tag>
     <tag name="lan_card">
-    	<keyword name="internal network" sense="0"/>
+	<keyword name="internal network card" sense="0"/>
     </tag>
     <tag name="audio_card">
     	<keyword name="internal audio" sense="0"/>
+    </tag>
+    <tag name="pci-e">
+    	<keyword name="pci - e" sense="0"/>
     </tag>
 </resource>

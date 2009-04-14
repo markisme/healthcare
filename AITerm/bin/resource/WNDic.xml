@@ -123,9 +123,12 @@
         <keyword name="internal graphics" />
     </tag>
     <tag name="lan_card">
-        <keyword name="internal network" />
+        <keyword name="internal network card" />
     </tag>
     <tag name="audio_card">
         <keyword name="internal audio" />
+    </tag>
+    <tag name="pci-e">
+        <keyword name="pci - e" />
     </tag>
 </resource>
