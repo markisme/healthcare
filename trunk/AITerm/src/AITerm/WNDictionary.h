@@ -20,11 +20,12 @@ public:
 	bool LoadFromXML( const XmlNode * resNode );
 	bool SaveToXML( XmlNode * resNode );
 
-	std::string GetTagName( const std::string & inData );
+	int GetTagName( const std::vector<std::string> & inDataList, std::string & outTagName, std::string & outWords );
 
 private:
 	bool CreateWNDic( const XmlNode * resNode );
-	bool IsSameWord( std::string lWord, std::string rWord );
+	int IsSameWords( const std::vector<std::string> & lWordList, std::string rWord, std::string & outWords );
+	bool IsNumber( const std::string & inData );
 	Synset * GetSynset( std::string keyword );
 
 private:

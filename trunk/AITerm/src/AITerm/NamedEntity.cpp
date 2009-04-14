@@ -131,30 +131,42 @@ void NamedEntity::GenerateTag( std::string question, Tags & tags )
 			continue;
 		}
 
-		tag._name = _wnDic.GetTagName( tag._word );
+		// 자신의 뒤 단어들을 리스트로 조합
+		std::vector<std::string> words;
+		for( int cnt = num; cnt < count; cnt++)
+		{
+			std::string word = ToLowerCase( _Minipar.GetAt( cnt )->szWord );
+			words.push_back( word );
+		}
+
+		int count = _wnDic.GetTagName( words, tag._name, tag._word );
 		if( tag._name.length() != 0 )
 		{
 			tags.push_back( tag );
+			num += count;
 			continue;
 		}
 
-		// 명사에 뜻이 없으면 형용사 찾아서 붙여 봄
-		std::string adjWord = GetAdjective( _Minipar.GetAt( num )->nLineNum );
-		tag._word = adjWord + " " + word;
-		
-		tag._name = _wnDic.GetTagName( tag._word  );
-		if( tag._name.length() != 0 )
-		{
-			tags.push_back( tag );
-			continue;
-		}
+		tag._name = "N/A";
+		tags.push_back( tag );
 
-		// 형용사는 뜻이 없는 경우 명사에 붙임
-		if( tag._part != "A" )
-		{
-			tag._name = "N/A";
-			tags.push_back( tag );
-		}
+		//// 명사에 뜻이 없으면 형용사 찾아서 붙여 봄
+		//std::string adjWord = GetAdjective( _Minipar.GetAt( num )->nLineNum );
+		//tag._word = adjWord + " " + word;
+		//
+		//tag._name = _wnDic.GetTagName( tag._word  );
+		//if( tag._name.length() != 0 )
+		//{
+		//	tags.push_back( tag );
+		//	continue;
+		//}
+
+		//// 형용사는 뜻이 없는 경우 명사에 붙임
+		//if( tag._part != "A" )
+		//{
+		//	tag._name = "N/A";
+		//	tags.push_back( tag );
+		//}
 	}
 }
 
