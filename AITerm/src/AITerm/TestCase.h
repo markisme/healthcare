@@ -1,6 +1,6 @@
 #pragma once
-
 class XmlDocument;
+class NamedEntity;
 class XmlNode;
 
 class TestCase
