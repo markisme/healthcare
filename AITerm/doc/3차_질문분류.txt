@@ -1,25 +1,25 @@
-1.
-What is the cost of CPU-A?
-What is the socket of CPU-A?
-What is the type of motherboard-B?
-What is the internal graphics on motherboard?
-What is the internal audio chipset on motherboard?
-What manufacturer makes CPU-A?
-What manufacturer makes Motherboard-B?
-What is the latest CPU?
-What is PCI-E?
-What is the performance of internal network card on motherboard?
-What graphic interfaces are supported by motherboard-B?
+// 2009.04.15.수
+// Template을 매칭하는 순서는 복잡한 것을 우선으로 매칭시킴.
+// 왜냐하면 복잡한 것과 매칭되지 않은 것은 간단한 것과 매칭될 가능성이 있지만,
+// 간단한 것과 매칭되지 않는 것은 복잡한 것과 매칭될 가능성이 없기 때문
+// (여기서 말하는 복잡한 것은, 같은 유형에 몇개의 slot이 더 추가된 것을 말함)
 
-<template no="1">
+
+0.
+What is the performance of internal network card on motherboard?
+
+<template no="0">
 	<slot type="question" need="true"> 
 		<tag name = "What"/>
 	</slot>
-	<slot type="focus" need="true"> 
-		<tag name = "price"/>
-		<tag name = "cpu_socket"/>
-		<tag name = "performance"/>
-		<tag name = "support"/>
+	<slot type="be" need="true">
+		<tag name = "is"/>
+	</slot>
+	<slot type="focus1" need="true"> 
+		<tag name = "cpu_name" />
+		<tag name = "cpu_socket" />
+		<tag name = "performance" />
+		<tag name = "support" />
 		<tag name = "date" />
 		<tag name = "cpu_maker" />
 		<tag name = "cpu_core" />
@@ -32,33 +32,138 @@ What graphic interfaces are supported by motherboard-B?
 		<tag name = "hdd_interface" />
 		<tag name = "graphic_card" />
 		<tag name = "audio_card info" />
+		<tag name = "kind" />
 	</slot>
-	<slot type="component" need="false">
+	<slot type="focus2" need="true"> 
+		<tag name = "cpu_name" />
+		<tag name = "cpu_socket" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+	</slot>
+	<slot type="component" need="true"> 
 		<tag name = "cpu"/>
+		<tag name = "cpu_name"/>
 		<tag name = "mainboard"/>
 		<tag name = "graphic_interface"/>
 	</slot>
-	<slot type="component" need="false">
+</template>
+
+
+
+1.
+What is the cost of CPU-A?
+What is the socket of CPU-A?
+What is the type of motherboard-B?
+What is the internal graphics on motherboard?
+What is the internal audio chipset on motherboard?
+
+<template no="1">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="be" need="true">
+		<tag name = "is"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "price" />
+		<tag name = "cpu_socket" />
+		<tag name = "performance" />
+		<tag name = "support" />
+		<tag name = "date" />
+		<tag name = "cpu_maker" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "mb_maker" />
+		<tag name = "mb_seller" />
+		<tag name = "board_type" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_interface" />
+		<tag name = "hdd_interface" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+		<tag name = "kind" />
+	</slot>
+	<slot type="component" need="true">
 		<tag name = "cpu"/>
 		<tag name = "mainboard"/>
 		<tag name = "graphic_interface"/>
 	</slot>
 </template>
 
-class Template
-{
-	int _tempNo;
-	std::vector<Slot> _slotList;
-}
 
-class Slot
-{
-	bool _need;
-	std::string _type;
-	std::vector<std::string> _tagList;
-}
 
-typedef std::vector<Template> TemplateList;
+
+2.
+What is the latest CPU?
+What is PCI-E?
+
+<template no="2">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="be" need="true">
+		<tag name = "is"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "price" />
+		<tag name = "cpu_socket" />
+		<tag name = "performance" />
+		<tag name = "support" />
+		<tag name = "date" />
+		<tag name = "cpu_maker" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "mb_maker" />
+		<tag name = "mb_seller" />
+		<tag name = "board_type" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_interface" />
+		<tag name = "hdd_interface" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+		<tag name = "kind" />
+	</slot>
+</template>
+
+
+
+
+3. 
+// 이 질문은 be동사로서 앞에서 구분되므로 순서에서 매칭 순서에서 자유로울 수 있음.
+What manufacturer makes CPU-A?
+What manufacturer makes Motherboard-B?
+
+
+<template no="3">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="manufacturer" need="true">
+		<tag name = "manufacture"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "make" />
+	</slot>
+	<slot type="component" need="true"> 
+		<tag name = "cpu"/>
+		<tag name = "cpu_name"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+
+4.
+What graphic interfaces are supported by motherboard-B?
+
+
+
+
 
 
 
@@ -297,3 +402,21 @@ If I put Intel CPU onto AMD motherboard, What happens?
 <예외>
 
 
+
+
+
+
+class Template
+{
+	int _tempNo;
+	std::vector<Slot> _slotList;
+}
+
+class Slot
+{
+	bool _need;
+	std::string _type;
+	std::vector<std::string> _tagList;
+}
+
+typedef std::vector<Template> TemplateList;
