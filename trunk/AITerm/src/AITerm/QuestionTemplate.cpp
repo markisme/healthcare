@@ -11,6 +11,32 @@ QuestionTemplate::~QuestionTemplate()
 
 void QuestionTemplate::Init( TagList * tagList )
 {
+	// 템플릿 로드
+	TemplateList tempList;
+	LoadTemplateList( tempList );
+
+	// 매칭되는 템플릿 찾기
+	QuestionResultList questionResultList;
+
+	int count = tagList->size();
+	for( int num = 0; num < count; num++ )
+	{
+		Tags & tags = (*tagList)[ num ];
+		QuestionResult questionResult;
+		CompareTagname( tempList, tags, questionResult );
+		questionResultList.push_back( questionResult );
+	}
+
+	// 저장
+	SaveResultSemanticTemplate( questionResultList );
+}
+
+void QuestionTemplate::Uninit()
+{
+}
+
+void QuestionTemplate::LoadTemplateList( TemplateList & tempList )
+{
 	// 질문 템플릿 xml 로드
 	XmlDocument xmlDoc;
 	std::string path = "./resource/QuestionTemplate.xml";
@@ -24,9 +50,6 @@ void QuestionTemplate::Init( TagList * tagList )
 	const XmlNode *resNode			= xmlDoc.GetNode( "resource");
 	const XmlNode *resNodeOfResult	= xmlDoc2.GetNode( "resource");
 
-	//
-	TemplateList tempList;
-
 	// QuestionTemplate xml파일의 
 	int nodeCount = resNode->GetNodeCount( "template" );
 	for( int num = 0; num < nodeCount; num++ )
@@ -34,7 +57,6 @@ void QuestionTemplate::Init( TagList * tagList )
 		// Question template node들을 돌며,
 		const XmlNode * templateNode = resNode->GetNode( "template", num );
 		std::string templateNum = templateNode->GetAttribute( "no" );
-		//printf("no[%d] = %s\n", num, templateNum.c_str() );
 
 		//
 		Template temp;
@@ -78,28 +100,9 @@ void QuestionTemplate::Init( TagList * tagList )
 
 		tempList.push_back( temp );
 	}
-
-	QuestionResultList questionResultList;
-
-	// 매칭되는 템플릿 찾기
-	int count = tagList->size();
-	for( int num = 0; num < count; num++ )
-	{
-		Tags & tags = (*tagList)[ num ];
-		QuestionResult questionResult;
-		CompareTagname( tempList, tags, questionResult );
-		questionResultList.push_back( questionResult );
-	}
-
-	// 저장
-	SaveToXML( questionResultList );
 }
 
-void QuestionTemplate::Uninit()
-{
-}
-
-void QuestionTemplate::SaveToXML( QuestionResultList & inQuestionResultList )
+void QuestionTemplate::SaveResultSemanticTemplate( QuestionResultList & inQuestionResultList )
 {
 	XmlDocument xmlDoc;
 	XmlNode * resNode = xmlDoc.AddNode( "resource" );
@@ -165,25 +168,10 @@ void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags, Que
 			for( int k = 0; k < slotSize; k++ )
 			{
 				std::string tagName = ToLowerCase( (char*)slot._tagNameList[ k ].c_str() );
-
-				int tagsSize = tags.size();
-				for( int n = 0; n < tagsSize; n++ )
+				matchSlot = IsMatchWord( tags, tagName, questionResult, resultSlot );
+				if( matchSlot == true )
 				{
-					if( IsWordInSlot( questionResult, n ) == true )
-					{
-						continue;
-					}
-					
-					TagElement & tag = tags[ n ];
-					std::string name = tag._name;
-					if( name == tagName )
-					{
-						matchSlot = true;
-						resultSlot._word = tag._word;
-						resultSlot._tagName = tag._name;
-						resultSlot._wordPos = n;
-						break;
-					}
+					break;
 				}
 			}
 
@@ -211,6 +199,30 @@ void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags, Que
 	}
 
 	SelectTemplate( questionResultList, outQuestionResult );
+}
+
+bool QuestionTemplate::IsMatchWord( Tags & tags, std::string & tagName, QuestionResult & questionResult, ResultSlot & outResultSlot )
+{
+	int tagsSize = tags.size();
+	for( int n = 0; n < tagsSize; n++ )
+	{
+		if( IsWordInSlot( questionResult, n ) == true )
+		{
+			continue;
+		}
+
+		TagElement & tag = tags[ n ];
+		std::string name = tag._name;
+		if( name == tagName )
+		{
+			outResultSlot._word = tag._word;
+			outResultSlot._tagName = tag._name;
+			outResultSlot._wordPos = n;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool QuestionTemplate::IsWordInSlot( QuestionResult & questionResult, int n )
