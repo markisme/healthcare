@@ -9,26 +9,26 @@ SemanticTemplateProcessor::~SemanticTemplateProcessor()
 {
 }
 
-void SemanticTemplateProcessor::Init( TagList * tagList )
+void SemanticTemplateProcessor::Init( ResultNamedEntityRecognition * resultNamedEntityRecognition )
 {
 	// 템플릿 로드
 	TemplateList tempList;
 	LoadTemplateList( tempList );
 
 	// 매칭되는 템플릿 찾기
-	QuestionResultList questionResultList;
+	ResultMatchedTemplate resultMatchedTemplate;
 
-	int count = tagList->size();
+	int count = resultNamedEntityRecognition->size();
 	for( int num = 0; num < count; num++ )
 	{
-		Tags & tags = (*tagList)[ num ];
-		QuestionResult questionResult;
-		CompareTagname( tempList, tags, questionResult );
-		questionResultList.push_back( questionResult );
+		NamedEntityList & namedEntityList = (*resultNamedEntityRecognition)[ num ];
+		MatchedTemplate matchedTemplate;
+		CompareTagname( tempList, namedEntityList, matchedTemplate );
+		resultMatchedTemplate.push_back( matchedTemplate );
 	}
 
 	// 저장
-	SaveResultSemanticTemplate( questionResultList );
+	SaveResultSemanticTemplateProcess( resultMatchedTemplate );
 }
 
 void SemanticTemplateProcessor::Uninit()
@@ -39,12 +39,12 @@ void SemanticTemplateProcessor::LoadTemplateList( TemplateList & tempList )
 {
 	// 질문 템플릿 xml 로드
 	XmlDocument xmlDoc;
-	std::string path = "./resource/QuestionTemplate.xml";
+	std::string path = "./resource/SemanticTemplate.xml";
 	xmlDoc.LoadFile( path.c_str() );
 
 	// 결과 xml 파일 로드
 	XmlDocument xmlDoc2;
-	std::string path2 = "./resource/Result.xml";
+	std::string path2 = "./resource/ResultNamedEntityRecognition.xml";
 	xmlDoc2.LoadFile( path2.c_str() );
 
 	const XmlNode *resNode			= xmlDoc.GetNode( "resource");
@@ -101,55 +101,55 @@ void SemanticTemplateProcessor::LoadTemplateList( TemplateList & tempList )
 	}
 }
 
-void SemanticTemplateProcessor::SaveResultSemanticTemplate( QuestionResultList & inQuestionResultList )
+void SemanticTemplateProcessor::SaveResultSemanticTemplateProcess( ResultMatchedTemplate & inResultMatchedTemplate )
 {
 	XmlDocument xmlDoc;
 	XmlNode * resNode = xmlDoc.AddNode( "resource" );
 
-	int count = inQuestionResultList.size();
+	int count = inResultMatchedTemplate.size();
 	for( int num = 0; num < count; num++ )
 	{
-		QuestionResult & questionResult = inQuestionResultList[ num ];
-		;
+		MatchedTemplate & matchedTemplate = inResultMatchedTemplate[ num ];
+
 		char buf[8];
 		
 		itoa( num, buf, 10 );
 		std::string questionNo = buf;
 
-		itoa( questionResult._tempNo, buf, 10 );
+		itoa( matchedTemplate._tempNo, buf, 10 );
 		std::string templateNo = buf;
 
 		XmlNode * questionNode = resNode->AddNode( "question" );
 		questionNode->SetAttribute( "questionno", questionNo.c_str() );
 		questionNode->SetAttribute( "templateno", templateNo.c_str() );
 
-		int size = questionResult._slotList.size();
+		int size = matchedTemplate._slotList.size();
 		for( int cnt = 0; cnt < size; cnt++)
 		{
-			ResultSlot resultSlot = questionResult._slotList[ cnt ];
+			MatchedSlot matchedSlot = matchedTemplate._slotList[ cnt ];
 
 			XmlNode * slotNode = questionNode->AddNode( "slot" );
-			slotNode->SetAttribute( "type", resultSlot._slotType.c_str() );
-			slotNode->SetAttribute( "tagname", resultSlot._tagName.c_str() );
-			slotNode->SetText( resultSlot._word.c_str(), XmlNode::NUMBER );
+			slotNode->SetAttribute( "type", matchedSlot._slotType.c_str() );
+			slotNode->SetAttribute( "tagname", matchedSlot._tagName.c_str() );
+			slotNode->SetText( matchedSlot._word.c_str(), XmlNode::NUMBER );
 		}
 	}
 
-	std::string path = "./resource/ResultSemanticTemplate.xml";
+	std::string path = "./resource/ResultSemanticTemplateProcess.xml";
 	xmlDoc.SaveFile( path.c_str() );
 }
 
-void SemanticTemplateProcessor::CompareTagname( TemplateList & tempList, Tags & tags, QuestionResult & outQuestionResult )
+void SemanticTemplateProcessor::CompareTagname( TemplateList & tempList, NamedEntityList & namedEntityList, MatchedTemplate & outMatchedTemplate )
 {
-	QuestionResultList questionResultList;
+	ResultMatchedTemplate resultMatchedTemplate;
 
 	int count = tempList.size();
 	for( int num = 0; num < count; num++ )
 	{
 		Template & temp = tempList[ num ];
 		bool matchTemplate = false;
-		QuestionResult questionResult;
-		questionResult._tempNo = num;
+		MatchedTemplate matchedTemplate;
+		matchedTemplate._tempNo = num;
 
 		int size = temp.size();
 		for( int cnt = 0; cnt < size; cnt++ )
@@ -159,15 +159,15 @@ void SemanticTemplateProcessor::CompareTagname( TemplateList & tempList, Tags & 
 			std::string type = slot._type;
 
 			bool matchSlot = false;
-			ResultSlot resultSlot;
-			resultSlot._need = slot._need;
-			resultSlot._slotType = type;
+			MatchedSlot matchedSlot;
+			matchedSlot._need = slot._need;
+			matchedSlot._slotType = type;
 
 			int slotSize = slot._tagNameList.size();
 			for( int k = 0; k < slotSize; k++ )
 			{
 				std::string tagName = ToLowerCase( (char*)slot._tagNameList[ k ].c_str() );
-				matchSlot = IsMatchWord( tags, tagName, questionResult, resultSlot );
+				matchSlot = IsMatchWord( namedEntityList, tagName, matchedTemplate, matchedSlot );
 				if( matchSlot == true )
 				{
 					break;
@@ -176,7 +176,7 @@ void SemanticTemplateProcessor::CompareTagname( TemplateList & tempList, Tags & 
 
 			if( matchSlot == true )
 			{
-				questionResult._slotList.push_back( resultSlot );
+				matchedTemplate._slotList.push_back( matchedSlot );
 			}
 
 			if( matchSlot == false && slot._need == true )
@@ -193,30 +193,30 @@ void SemanticTemplateProcessor::CompareTagname( TemplateList & tempList, Tags & 
 
 		if( matchTemplate == true )
 		{
-			questionResultList.push_back( questionResult );
+			resultMatchedTemplate.push_back( matchedTemplate );
 		}
 	}
 
-	SelectTemplate( questionResultList, outQuestionResult );
+	SelectTemplate( resultMatchedTemplate, outMatchedTemplate );
 }
 
-bool SemanticTemplateProcessor::IsMatchWord( Tags & tags, std::string & tagName, QuestionResult & questionResult, ResultSlot & outResultSlot )
+bool SemanticTemplateProcessor::IsMatchWord( NamedEntityList & namedEntityList, std::string & tagName, MatchedTemplate & matchedTemplate, MatchedSlot & outMatchedSlot )
 {
-	int tagsSize = tags.size();
+	int tagsSize = namedEntityList.size();
 	for( int n = 0; n < tagsSize; n++ )
 	{
-		if( IsWordInSlot( questionResult, n ) == true )
+		if( IsWordInSlot( matchedTemplate, n ) == true )
 		{
 			continue;
 		}
 
-		TagElement & tag = tags[ n ];
-		std::string name = tag._name;
+		NamedEntityElement & namedEntityElement = namedEntityList[ n ];
+		std::string name = namedEntityElement._name;
 		if( name == tagName )
 		{
-			outResultSlot._word = tag._word;
-			outResultSlot._tagName = tag._name;
-			outResultSlot._wordPos = n;
+			outMatchedSlot._word = namedEntityElement._word;
+			outMatchedSlot._tagName = namedEntityElement._name;
+			outMatchedSlot._wordPos = n;
 			return true;
 		}
 	}
@@ -224,12 +224,12 @@ bool SemanticTemplateProcessor::IsMatchWord( Tags & tags, std::string & tagName,
 	return false;
 }
 
-bool SemanticTemplateProcessor::IsWordInSlot( QuestionResult & questionResult, int n )
+bool SemanticTemplateProcessor::IsWordInSlot( MatchedTemplate & matchedTemplate, int n )
 {
-	int matchSlotCount = questionResult._slotList.size();
+	int matchSlotCount = matchedTemplate._slotList.size();
 	for( int m = 0; m < matchSlotCount; m++ )
 	{
-		if( n == questionResult._slotList[m]._wordPos )
+		if( n == matchedTemplate._slotList[m]._wordPos )
 		{
 			return true;
 		}
@@ -238,25 +238,25 @@ bool SemanticTemplateProcessor::IsWordInSlot( QuestionResult & questionResult, i
 	return false;
 }
 
-void SemanticTemplateProcessor::SelectTemplate( QuestionResultList & questionResultList, QuestionResult & outQuestionResult )
+void SemanticTemplateProcessor::SelectTemplate( ResultMatchedTemplate & resultMatchedTemplate, MatchedTemplate & outMatchedTemplate )
 {
 	int matchTemplate = -1;
 	int maxMatchSlot = 0;
 
-	int count = questionResultList.size();
+	int count = resultMatchedTemplate.size();
 	for( int num = 0; num < count; num++ )
 	{
-		QuestionResult questionResult = questionResultList[ num ];
-		int tempNo = questionResult._tempNo;
+		MatchedTemplate matchedTemplate = resultMatchedTemplate[ num ];
+		int tempNo = matchedTemplate._tempNo;
 
 		int matchPoint = 0;
 
-		int size = questionResult._slotList.size();
+		int size = matchedTemplate._slotList.size();
 		for( int cnt = 0; cnt < size; cnt++ )
 		{
-			ResultSlot resultSlot = questionResult._slotList[cnt];
+			MatchedSlot matchedSlot = matchedTemplate._slotList[cnt];
 
-			bool need = resultSlot._need;
+			bool need = matchedSlot._need;
 			if( need )
 			{
 				matchPoint += 10;
@@ -276,11 +276,11 @@ void SemanticTemplateProcessor::SelectTemplate( QuestionResultList & questionRes
 
 	for( int num = 0; num < count; num++ )
 	{
-		QuestionResult & questionResult = questionResultList[ num ];
-		int tempNo = questionResult._tempNo;
+		MatchedTemplate & matchedTemplate = resultMatchedTemplate[ num ];
+		int tempNo = matchedTemplate._tempNo;
 		if( matchTemplate == tempNo )
 		{
-			outQuestionResult = questionResult;
+			outMatchedTemplate = matchedTemplate;
 		}
 	}
 }
