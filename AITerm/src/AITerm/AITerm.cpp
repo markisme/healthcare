@@ -21,12 +21,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	namedEntityRecognition.Init();
 
 	// 개체명 인식 처리
-	TagList tagList;
-	namedEntityRecognition.ProcessQuestion( tagList );
+	ResultNamedEntityRecognition resultNamedEntityRecognition;
+	namedEntityRecognition.ProcessQuestion( resultNamedEntityRecognition );
 
 	// 템플릿 매칭 처리
 	SemanticTemplateProcessor semanticTemplateProcessor;
-	semanticTemplateProcessor.Init( &tagList );
+	semanticTemplateProcessor.Init( &resultNamedEntityRecognition );
 
 	// Just XML test
 	//TestCase testCase;

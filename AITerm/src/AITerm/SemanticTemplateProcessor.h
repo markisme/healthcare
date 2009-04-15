@@ -10,7 +10,8 @@ struct TemplateSlot
 typedef std::vector<TemplateSlot> Template;
 typedef std::vector<Template> TemplateList;
 
-struct ResultSlot
+// 매칭 결과 컨테이너
+struct MatchedSlot
 {
 	std::string _slotType;
 	std::string _word;
@@ -19,15 +20,13 @@ struct ResultSlot
 	int _wordPos;
 };
 
-typedef std::vector<ResultSlot> SlotList;
-
-struct QuestionResult
+struct MatchedTemplate
 {
-	SlotList _slotList;
+	std::vector<MatchedSlot> _slotList;
 	int _tempNo;
 };
 
-typedef std::vector<QuestionResult> QuestionResultList;
+typedef std::vector<MatchedTemplate> ResultMatchedTemplate;
 
 class SemanticTemplateProcessor
 {
@@ -35,17 +34,17 @@ public:
 	SemanticTemplateProcessor();
 	~SemanticTemplateProcessor();
 
-	void Init( TagList * tagList );
+	void Init( ResultNamedEntityRecognition * resultNamedEntityRecognition );
 	void Uninit();
 
 	void LoadTemplateList( TemplateList & tempList );
-	void SaveResultSemanticTemplate( QuestionResultList & inQuestionResultList );
+	void SaveResultSemanticTemplateProcess( ResultMatchedTemplate & inResultMatchedTemplate );
 
 private:
-	bool IsMatchWord( Tags & tags, std::string & tagName, QuestionResult & questionResult, ResultSlot & outResultSlot );
-	bool IsWordInSlot( QuestionResult & questionResult, int n );
-	void CompareTagname( TemplateList & tempList, Tags & tags, QuestionResult & outQuestionResult );
-	void SelectTemplate( QuestionResultList & questionResultList, QuestionResult & outQuestionResult );
+	bool IsMatchWord( NamedEntityList & namedEntityList, std::string & tagName, MatchedTemplate & matchedTemplate, MatchedSlot & outMatchedSlot );
+	bool IsWordInSlot( MatchedTemplate & matchedTemplate, int n );
+	void CompareTagname( TemplateList & tempList, NamedEntityList & namedEntityList, MatchedTemplate & outMatchedTemplate );
+	void SelectTemplate( ResultMatchedTemplate & resultMatchedTemplate, MatchedTemplate & outMatchedTemplate );
 
 private:
 };
