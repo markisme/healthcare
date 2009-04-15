@@ -164,7 +164,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\AI_term_2nd.cpp"
+			RelativePath=".\AITerm.cpp"
 			>
 		</File>
 		<File
@@ -184,19 +184,19 @@
 			>
 		</File>
 		<File
-			RelativePath=".\NamedEntity.cpp"
+			RelativePath=".\NamedEntityRecognition.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\NamedEntity.h"
+			RelativePath=".\NamedEntityRecognition.h"
 			>
 		</File>
 		<File
-			RelativePath=".\QuestionTemplate.cpp"
+			RelativePath=".\SemanticTemplateProcessor.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\QuestionTemplate.h"
+			RelativePath=".\SemanticTemplateProcessor.h"
 			>
 		</File>
 		<File

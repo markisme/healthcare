@@ -1,4 +1,4 @@
-#include "NamedEntity.h"
+#include "NamedEntityRecognition.h"
 
 struct TemplateSlot
 {
@@ -29,11 +29,11 @@ struct QuestionResult
 
 typedef std::vector<QuestionResult> QuestionResultList;
 
-class QuestionTemplate
+class SemanticTemplateProcessor
 {
 public:
-	QuestionTemplate();
-	~QuestionTemplate();
+	SemanticTemplateProcessor();
+	~SemanticTemplateProcessor();
 
 	void Init( TagList * tagList );
 	void Uninit();

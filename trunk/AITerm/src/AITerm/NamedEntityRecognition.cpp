@@ -1,52 +1,28 @@
 #include "stdafx.h"
-#include "NamedEntity.h"
+#include "NamedEntityRecognition.h"
 
-NamedEntity::NamedEntity()
+NamedEntityRecognition::NamedEntityRecognition()
 {
 }
 
-NamedEntity::~NamedEntity()
+NamedEntityRecognition::~NamedEntityRecognition()
 {
 }
 
-void NamedEntity::Init()
+void NamedEntityRecognition::Init()
 {
 	// 사전 초기화
 	_dbDic.Init();
 	_wnDic.Init();
 }
 
-void NamedEntity::Uninit()
+void NamedEntityRecognition::Uninit()
 {
 	_dbDic.Uninit();
 	_wnDic.Uninit();
 }
 
-//void NamedEntity::ProcessQuestion()
-//{
-//	// 질문 로드
-//	QuestionList qsList;
-//	LoadQuestions( qsList );
-//
-//	// 질문 분석
-//	TagList tagList;
-//
-//	int size = qsList.size();
-//	for( int num = 0; num < size; num++ )
-//	{
-//		std::string question = qsList[ num ];
-//		printf( "Process Question %d: %s\n", num, question.c_str() );
-//
-//		Tags tags;
-//		GenerateTag( question, tags );
-//		tagList.push_back( tags );
-//	}
-//
-//	// 결과 저장
-//	SaveResult( tagList );
-//}
-
-void NamedEntity::ProcessQuestion( TagList & tagList )
+void NamedEntityRecognition::ProcessQuestion( TagList & tagList )
 {
 	// 질문 로드
 	QuestionList qsList;
@@ -68,7 +44,7 @@ void NamedEntity::ProcessQuestion( TagList & tagList )
 	SaveResult( tagList );
 }
 
-void NamedEntity::LoadQuestions( QuestionList & qsList )
+void NamedEntityRecognition::LoadQuestions( QuestionList & qsList )
 {
 	XmlDocument xmlDoc;
 	std::string path = "./resource/Questions.xml";
@@ -85,7 +61,7 @@ void NamedEntity::LoadQuestions( QuestionList & qsList )
 	}
 }
 
-void NamedEntity::SaveResult( TagList & tagList )
+void NamedEntityRecognition::SaveResult( TagList & tagList )
 {
 	XmlDocument xmlDoc;
 	XmlNode * resNode = xmlDoc.AddNode( "resource" );
@@ -124,7 +100,7 @@ void NamedEntity::SaveResult( TagList & tagList )
 	xmlDoc.SaveFile( path.c_str() );
 }
 
-void NamedEntity::GenerateTag( std::string question, Tags & tags )
+void NamedEntityRecognition::GenerateTag( std::string question, Tags & tags )
 {
 	if( !_Minipar.Parse((char*)question.c_str()))
 	{
@@ -192,7 +168,7 @@ void NamedEntity::GenerateTag( std::string question, Tags & tags )
 	}
 }
 
-std::string NamedEntity::GetAdjective( int curPos )
+std::string NamedEntityRecognition::GetAdjective( int curPos )
 {
 	char pos[8];
 	itoa( curPos, pos, 10 );

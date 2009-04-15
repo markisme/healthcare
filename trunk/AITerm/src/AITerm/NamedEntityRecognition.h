@@ -17,16 +17,15 @@ typedef std::vector<Tags> TagList;
 
 typedef std::vector<std::string> QuestionList;
 
-class NamedEntity
+class NamedEntityRecognition
 {
 public:
-	NamedEntity();
-	~NamedEntity();
+	NamedEntityRecognition();
+	~NamedEntityRecognition();
 
 	void Init();
 	void Uninit();
 
-	//void ProcessQuestion();
 	void ProcessQuestion( TagList & tagList );
 
 private:

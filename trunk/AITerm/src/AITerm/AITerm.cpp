@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
-#include "NamedEntity.h"
-#include "QuestionTemplate.h"
+#include "NamedEntityRecognition.h"
+#include "SemanticTemplateProcessor.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -17,18 +17,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	DBConnector::GetInstance().Init( info );
 
 	// 개체명 인식기 초기화
-	NamedEntity namedEntity;
-	namedEntity.Init();
+	NamedEntityRecognition namedEntityRecognition;
+	namedEntityRecognition.Init();
 
-	// 템플릿 로드
-
-	// 질문들 처리
+	// 개체명 인식 처리
 	TagList tagList;
-	namedEntity.ProcessQuestion( tagList );
+	namedEntityRecognition.ProcessQuestion( tagList );
 
-	// 템플릿 처리
-	QuestionTemplate questionTemplate;
-	questionTemplate.Init( &tagList );
+	// 템플릿 매칭 처리
+	SemanticTemplateProcessor semanticTemplateProcessor;
+	semanticTemplateProcessor.Init( &tagList );
 
 	// Just XML test
 	//TestCase testCase;
