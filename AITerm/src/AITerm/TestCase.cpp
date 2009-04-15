@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TestCase.h"
-#include "NamedEntity.h"
+#include "NamedEntityRecognition.h"
 
 TestCase TestCase::_instance;
 
@@ -95,43 +95,3 @@ void TestCase::XMLLoadSaveTest()
 		}
 	}
 }
-
-
-void TestCase::XMLSaveTest()
-{
-	// XML 저장
-	{
-		XmlDocument xmlDoc;
-
-		XmlNode *resNode = xmlDoc.AddNode( "TestNode" );		// TAG명 
-		
-		resNode->SetText( "test", XmlNode::NUMBER );			// 개체명 추가
-
-		//resNode->SetAttribute( "attr", "No" );
-		//resNode->SetAttribute( "Name", "No_name" );
-		//XmlNode *testNode = resNode->AddNode( "testNode" );
-		//testNode->SetAttribute( "type", "type_attTest" );
-		//XmlNode *testNode2 = testNode->AddNode( "testNode2");
-
-		std::string path = "test.xml";
-		xmlDoc.SaveFile( path.c_str() );
-	}
-}
-
-void TestCase::XMLLoadTest()
-{
-	
-}
-
-//XmlNode* CreateXMLTag( XmlDocument &xmlDoc, const char *representativeName)
-//{
-//	XmlNode *resNode = xmlDoc.AddNode( representativeName);		// TAG명 
-//	return resNode;
-//}
-//
-//void AddTag(XmlNode &XmlNode, const char *tagName, const char *tag)
-//{
-//	
-//	XmlNode *tagNode = resNode->AddNode( tagName);
-//	tagNode->SetText( tag, XmlNode::NUMBER);
-//}

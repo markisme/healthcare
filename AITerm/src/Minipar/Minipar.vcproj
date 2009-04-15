@@ -153,30 +153,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\FileProcess.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\FileProcess.h"
-			>
-		</File>
-		<File
-			RelativePath=".\MiniparUsage.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\MiniparUsage.h"
-			>
-		</File>
-		<File
-			RelativePath=".\NamedEntityRecognition.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\NamedEntityRecognition.h"
-			>
-		</File>
-		<File
 			RelativePath=".\SimpleMinipar.cpp"
 			>
 		</File>

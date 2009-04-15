@@ -19,9 +19,6 @@
 #include "DBConnector.h"
 
 #include "SimpleMinipar.h"
-#include "MiniparUsage.h"
-#include "NamedEntityRecognition.h"
-#include "FileProcess.h"
 #include "wn.h"
 #include "XMLLib.h"
 
