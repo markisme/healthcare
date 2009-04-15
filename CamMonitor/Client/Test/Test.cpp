@@ -112,11 +112,13 @@ BOOL CTestApp::OnIdle( LONG lCount )
 {
 	if( _rePassCount == 0 )
 	{
+#ifndef TEST
 		// 스크린세이버 동작
 		m_pMainWnd->ShowWindow( TRUE );
 		HWND hwnd = GetActiveWindow();
 		ScreenSaver::GetInstance().StartScreenSaver( hwnd );
 		m_pMainWnd->ShowWindow( FALSE );
+#endif
 	}
 
 	//
@@ -166,9 +168,10 @@ void CTestApp::ThreadDo()
 	ScreenSaver::GetInstance().KillScreenSaver();
 
 	// 보안모드 작동
+#ifndef TEST
 	std::string wav = "Test.wav";
 	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
-
+#endif
 	//
 	AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
 }
