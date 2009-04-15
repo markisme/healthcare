@@ -138,7 +138,7 @@
 	
 	<template no="5">
 		<slot type="question" need="true"> 
-			<tag name = "how many"/>
+			<tag name = "how"/>
 		</slot>
 		<slot type="focus" need="true"> 
 			<tag name = "extension_slot"/>

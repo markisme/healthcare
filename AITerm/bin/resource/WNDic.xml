@@ -97,6 +97,7 @@
     </tag>
     <tag name="how">
         <keyword name="how" />
+        <keyword name="how many" />
     </tag>
     <tag name="why">
         <keyword name="why" />
@@ -130,5 +131,8 @@
     </tag>
     <tag name="pci-e">
         <keyword name="pci - e" />
+    </tag>
+    <tag name="extension_slot">
+        <keyword name="extension slots" />
     </tag>
 </resource>

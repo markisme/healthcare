@@ -90,8 +90,7 @@
     <question no="12">
         <tag name="how" curpos="1" deppos="2" part="U">how</tag>
         <tag name="N/A" curpos="2" deppos="E0" part="N">many</tag>
-        <tag name="N/A" curpos="3" deppos="4" part="N">extension</tag>
-        <tag name="N/A" curpos="4" deppos="E0" part="V">slots</tag>
+        <tag name="extension_slot" curpos="3" deppos="4" part="N">extension slots</tag>
         <tag name="N/A" curpos="5" deppos="4" part="Prep">on</tag>
         <tag name="mainboard" curpos="6" deppos="5" part="N">motherboard</tag>
     </question>
