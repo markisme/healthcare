@@ -34,11 +34,12 @@
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="kind">kind</slot>
         <slot type="manufacturer" tagname="manufacture">made</slot>
-        <slot type="component" tagname="mb_maker">asus</slot>
+        <slot type="component" tagname="mainboard">motherboard</slot>
     </question>
     <question questionno="7" templateno="0">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="graphic_interface">graphic interfaces</slot>
+        <slot type="focus" tagname="support">supported</slot>
+        <slot type="component" tagname="graphic_interface">graphic interfaces</slot>
     </question>
     <question questionno="8" templateno="0" />
     <question questionno="9" templateno="0">
@@ -99,7 +100,7 @@
     </question>
     <question questionno="22" templateno="6">
         <slot type="question" tagname="how">how</slot>
-        <slot type="focus" tagname="manufacture">make</slot>
+        <slot type="focus" tagname="constitution">combination</slot>
         <slot type="target" tagname="maximum">strong</slot>
     </question>
     <question questionno="23" templateno="7">
@@ -112,7 +113,7 @@
     <question questionno="24" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="cpu_maker">intel</slot>
-        <slot type="component" tagname="mainboard">motherboard</slot>
         <slot type="component" tagname="cpu">cpu</slot>
+        <slot type="component" tagname="mainboard">motherboard</slot>
     </question>
 </resource>

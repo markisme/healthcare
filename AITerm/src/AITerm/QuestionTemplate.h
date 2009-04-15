@@ -38,9 +38,11 @@ public:
 	void Init( TagList * tagList );
 	void Uninit();
 
-	void SaveToXML( QuestionResultList & inQuestionResultList );
+	void LoadTemplateList( TemplateList & tempList );
+	void SaveResultSemanticTemplate( QuestionResultList & inQuestionResultList );
 
 private:
+	bool IsMatchWord( Tags & tags, std::string & tagName, QuestionResult & questionResult, ResultSlot & outResultSlot );
 	bool IsWordInSlot( QuestionResult & questionResult, int n );
 	void CompareTagname( TemplateList & tempList, Tags & tags, QuestionResult & outQuestionResult );
 	void SelectTemplate( QuestionResultList & questionResultList, QuestionResult & outQuestionResult );
