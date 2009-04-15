@@ -154,16 +154,20 @@ void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags )
 		if( matchTemplate == true )
 		{
 			questionResultList.push_back( questionResult );
-			break;
 		}
 	}
 
 	{
+		int matchTemplate = -1;
+		int maxMatchSlot = 0;
+
 		int count = questionResultList.size();
 		for( int num = 0; num < count; num++ )
 		{
 			QuestionResult questionResult = questionResultList[ num ];
 			int tempNo = questionResult._tempNo;
+
+			int matchPoint = 0;
 
 			int size = questionResult._slotList.size();
 			for( int cnt = 0; cnt < size; cnt++ )
@@ -173,6 +177,21 @@ void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags )
 				bool need = resultSlot._need;
 				std::string slotType = resultSlot._slotType;
 				std::string tagName = resultSlot._tagName;
+
+				if( need )
+				{
+					matchPoint += 10;
+				}
+				else
+				{
+					matchPoint += 3;
+				}
+			}
+
+			if( maxMatchSlot < matchPoint )
+			{
+				maxMatchSlot = matchPoint;
+				matchTemplate = tempNo;
 			}
 		}
 	}
