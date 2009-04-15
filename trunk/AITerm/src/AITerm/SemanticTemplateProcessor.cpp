@@ -42,13 +42,7 @@ void SemanticTemplateProcessor::LoadTemplateList( TemplateList & tempList )
 	std::string path = "./resource/SemanticTemplate.xml";
 	xmlDoc.LoadFile( path.c_str() );
 
-	// 결과 xml 파일 로드
-	XmlDocument xmlDoc2;
-	std::string path2 = "./resource/ResultNamedEntityRecognition.xml";
-	xmlDoc2.LoadFile( path2.c_str() );
-
 	const XmlNode *resNode			= xmlDoc.GetNode( "resource");
-	const XmlNode *resNodeOfResult	= xmlDoc2.GetNode( "resource");
 
 	// QuestionTemplate xml파일의 
 	int nodeCount = resNode->GetNodeCount( "template" );
@@ -90,7 +84,6 @@ void SemanticTemplateProcessor::LoadTemplateList( TemplateList & tempList )
 			{
 				const XmlNode *tagNode_Question= slotNode->GetNode( "tag", tagNum);
 				std::string tagEntityOfQuestion = tagNode_Question->GetAttribute( "name" );
-				printf("%d = %s\n", tagNum, tagEntityOfQuestion.c_str() );
 				slot._tagNameList.push_back( tagEntityOfQuestion );
 			}
 
