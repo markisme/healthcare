@@ -19,6 +19,15 @@ struct ResionRect
 			_checkCount++;
 		}
 	}
+
+	void DrawResion( HDC hdc )
+	{
+		HBRUSH MyBrush=CreateHatchBrush(HS_DIAGCROSS,RGB(255,255,255));
+		HBRUSH OldBrush=(HBRUSH)SelectObject(hdc,MyBrush);
+
+		SetBkMode(hdc,TRANSPARENT);
+		Rectangle(hdc,_lefttopX, _lefttopY,_rightbottomX,_rightbottomY);
+	}
 	
 	int _checkCount;
 	int _lefttopX;

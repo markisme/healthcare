@@ -45,9 +45,14 @@ void OpenCV::StartMonitor()
 	// 0 번째 연결된 카메라로부터 연결 
 	CvCapture *capture = cvCaptureFromCAM(0);
 
+#ifdef TEST
+	char *diff_captureWidow = "diff_camera";
+	cvNamedWindow( diff_captureWidow, CV_WINDOW_AUTOSIZE );
+#endif
+
 	while(_startMonitor)
 	{
-		//Sleep(1);
+		Sleep(10);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
@@ -92,7 +97,7 @@ void OpenCV::StartMonitor()
 		}
 
 		// 초당 30프레임 기준의 현재 프레임을 이전의 프레임에 복사한다.
-		if( count == 1 && save_image == NULL )
+		if( count == 1 )
 		{
 			// 이전의 프레임으로 복사한다.
 			previous_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U,	current_image->nChannels);
@@ -104,6 +109,10 @@ void OpenCV::StartMonitor()
 		{
 			// 캠 스테이트를 가져옴
 			CamState camState = CompareImage( current_image, previous_image );	
+
+#ifdef TEST
+			cvShowImage( diff_captureWidow, current_image );
+#endif
 
 			// 지역 4개가 움직이지 않았다면 화면 저장
 			if( camState == NONE_MOVE && save_image == NULL )
@@ -126,6 +135,8 @@ void OpenCV::StartMonitor()
 				time( &alertTime );
 				_alert = true;
 			}
+
+			cvWaitKey(10);
 		}
 	}
 
@@ -146,6 +157,9 @@ void OpenCV::StopMonitor()
 
 CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image )
 {
+	HWND hWnd = (HWND)cvGetWindowHandle( "diff_camera" );
+	HDC hDC = GetDC(hWnd);
+
 	IplImage* gray=cvCreateImage(cvGetSize(current_image), IPL_DEPTH_8U,1);
 	IplImage* oldgray=cvCreateImage(cvGetSize(previous_image), IPL_DEPTH_8U, 1);
 
@@ -263,7 +277,15 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 				{
 					ResionRect & rect = resionList[ num ];
 					rect.CheckResion( x, y );
+#ifdef TEST
+					//rect.DrawResion( hDC );
+#endif
 				}
+#ifdef TEST
+				int X = x;    
+				int Y = previous_image->height-1-y;    
+				Rectangle(hDC, X-3, Y-3, X+3, Y+3);
+#endif
 			}  
 		}
 	}
@@ -279,7 +301,7 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	{
 		ResionRect & rect = resionList[ num ];
 		int count = rect._checkCount;
-		if( rect._checkCount > 20 )
+		if( rect._checkCount > 5 )
 		{
 			totalCount++;
 		}
