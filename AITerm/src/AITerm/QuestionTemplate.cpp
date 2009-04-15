@@ -79,19 +79,65 @@ void QuestionTemplate::Init( TagList * tagList )
 		tempList.push_back( temp );
 	}
 
+	QuestionResultList questionResultList;
+
+	// 매칭되는 템플릿 찾기
 	int count = tagList->size();
 	for( int num = 0; num < count; num++ )
 	{
 		Tags & tags = (*tagList)[ num ];
-		CompareTagname( tempList, tags );
+		QuestionResult questionResult;
+		CompareTagname( tempList, tags, questionResult );
+		questionResultList.push_back( questionResult );
 	}
+
+	// 저장
+	SaveToXML( questionResultList );
 }
 
 void QuestionTemplate::Uninit()
 {
 }
 
-void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags )
+void QuestionTemplate::SaveToXML( QuestionResultList & inQuestionResultList )
+{
+	XmlDocument xmlDoc;
+	XmlNode * resNode = xmlDoc.AddNode( "resource" );
+
+	int count = inQuestionResultList.size();
+	for( int num = 0; num < count; num++ )
+	{
+		QuestionResult & questionResult = inQuestionResultList[ num ];
+		;
+		char buf[8];
+		
+		itoa( num, buf, 10 );
+		std::string questionNo = buf;
+
+		itoa( questionResult._tempNo, buf, 10 );
+		std::string templateNo = buf;
+
+		XmlNode * questionNode = resNode->AddNode( "question" );
+		questionNode->SetAttribute( "questionno", questionNo.c_str() );
+		questionNode->SetAttribute( "templateno", templateNo.c_str() );
+
+		int size = questionResult._slotList.size();
+		for( int cnt = 0; cnt < size; cnt++)
+		{
+			ResultSlot resultSlot = questionResult._slotList[ cnt ];
+
+			XmlNode * slotNode = questionNode->AddNode( "slot" );
+			slotNode->SetAttribute( "type", resultSlot._slotType.c_str() );
+			slotNode->SetAttribute( "tagname", resultSlot._tagName.c_str() );
+			slotNode->SetText( resultSlot._word.c_str(), XmlNode::NUMBER );
+		}
+	}
+
+	std::string path = "./resource/ResultSemanticTemplate.xml";
+	xmlDoc.SaveFile( path.c_str() );
+}
+
+void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags, QuestionResult & outQuestionResult )
 {
 	QuestionResultList questionResultList;
 
@@ -123,12 +169,19 @@ void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags )
 				int tagsSize = tags.size();
 				for( int n = 0; n < tagsSize; n++ )
 				{
+					if( IsWordInSlot( questionResult, n ) == true )
+					{
+						continue;
+					}
+					
 					TagElement & tag = tags[ n ];
 					std::string name = tag._name;
 					if( name == tagName )
 					{
 						matchSlot = true;
-						resultSlot._tagName = tagName;
+						resultSlot._word = tag._word;
+						resultSlot._tagName = tag._name;
+						resultSlot._wordPos = n;
 						break;
 					}
 				}
@@ -157,42 +210,66 @@ void QuestionTemplate::CompareTagname( TemplateList & tempList, Tags & tags )
 		}
 	}
 
+	SelectTemplate( questionResultList, outQuestionResult );
+}
+
+bool QuestionTemplate::IsWordInSlot( QuestionResult & questionResult, int n )
+{
+	int matchSlotCount = questionResult._slotList.size();
+	for( int m = 0; m < matchSlotCount; m++ )
 	{
-		int matchTemplate = -1;
-		int maxMatchSlot = 0;
-
-		int count = questionResultList.size();
-		for( int num = 0; num < count; num++ )
+		if( n == questionResult._slotList[m]._wordPos )
 		{
-			QuestionResult questionResult = questionResultList[ num ];
-			int tempNo = questionResult._tempNo;
+			return true;
+		}
+	}
 
-			int matchPoint = 0;
+	return false;
+}
 
-			int size = questionResult._slotList.size();
-			for( int cnt = 0; cnt < size; cnt++ )
+void QuestionTemplate::SelectTemplate( QuestionResultList & questionResultList, QuestionResult & outQuestionResult )
+{
+	int matchTemplate = -1;
+	int maxMatchSlot = 0;
+
+	int count = questionResultList.size();
+	for( int num = 0; num < count; num++ )
+	{
+		QuestionResult questionResult = questionResultList[ num ];
+		int tempNo = questionResult._tempNo;
+
+		int matchPoint = 0;
+
+		int size = questionResult._slotList.size();
+		for( int cnt = 0; cnt < size; cnt++ )
+		{
+			ResultSlot resultSlot = questionResult._slotList[cnt];
+
+			bool need = resultSlot._need;
+			if( need )
 			{
-				ResultSlot resultSlot = questionResult._slotList[cnt];
-
-				bool need = resultSlot._need;
-				std::string slotType = resultSlot._slotType;
-				std::string tagName = resultSlot._tagName;
-
-				if( need )
-				{
-					matchPoint += 10;
-				}
-				else
-				{
-					matchPoint += 3;
-				}
+				matchPoint += 10;
 			}
-
-			if( maxMatchSlot < matchPoint )
+			else
 			{
-				maxMatchSlot = matchPoint;
-				matchTemplate = tempNo;
+				matchPoint += 3;
 			}
+		}
+
+		if( maxMatchSlot < matchPoint )
+		{
+			maxMatchSlot = matchPoint;
+			matchTemplate = tempNo;
+		}
+	}
+
+	for( int num = 0; num < count; num++ )
+	{
+		QuestionResult & questionResult = questionResultList[ num ];
+		int tempNo = questionResult._tempNo;
+		if( matchTemplate == tempNo )
+		{
+			outQuestionResult = questionResult;
 		}
 	}
 }

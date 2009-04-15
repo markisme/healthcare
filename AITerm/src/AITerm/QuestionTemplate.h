@@ -13,8 +13,10 @@ typedef std::vector<Template> TemplateList;
 struct ResultSlot
 {
 	std::string _slotType;
+	std::string _word;
 	std::string _tagName;
 	bool _need;
+	int _wordPos;
 };
 
 typedef std::vector<ResultSlot> SlotList;
@@ -36,8 +38,12 @@ public:
 	void Init( TagList * tagList );
 	void Uninit();
 
+	void SaveToXML( QuestionResultList & inQuestionResultList );
+
 private:
-	void CompareTagname( TemplateList & tempList, Tags & tags );
+	bool IsWordInSlot( QuestionResult & questionResult, int n );
+	void CompareTagname( TemplateList & tempList, Tags & tags, QuestionResult & outQuestionResult );
+	void SelectTemplate( QuestionResultList & questionResultList, QuestionResult & outQuestionResult );
 
 private:
 };
