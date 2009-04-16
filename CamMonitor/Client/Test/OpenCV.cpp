@@ -52,7 +52,8 @@ void OpenCV::StartMonitor()
 
 	while(_startMonitor)
 	{
-		Sleep(10);
+		Sleep(50);
+		cvWaitKey(10);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
@@ -135,8 +136,6 @@ void OpenCV::StartMonitor()
 				time( &alertTime );
 				_alert = true;
 			}
-
-			cvWaitKey(10);
 		}
 	}
 
