@@ -1,4 +1,4 @@
-<resource create="false">
+<resource create="true">
     <!-- 질문에 필요한 카테고리 -->
     <tag name="comparison">
     	<keyword name="compatible" sense="0"/>
@@ -36,7 +36,7 @@
     	<keyword name="store" sense="1"/>
     	<keyword name="selling" sense="1"/>
     </tag>
-    <tag name="manufacture">
+    <tag name="maker">
     	<keyword name="manufacturer" sense="1"/>
     	<keyword name="make" sense="0"/>
     	<keyword name="made" sense="0"/>

@@ -34,14 +34,14 @@
     </question>
     <question no="4">
         <tag name="what" curpos="1" deppos="2" part="Det">what</tag>
-        <tag name="manufacture" curpos="2" deppos="E0" part="N">manufacturer</tag>
-        <tag name="manufacture" curpos="3" deppos="E0" part="V">make</tag>
+        <tag name="maker" curpos="2" deppos="E0" part="N">manufacturer</tag>
+        <tag name="maker" curpos="3" deppos="E0" part="V">make</tag>
         <tag name="cpu_name" curpos="4" deppos="3" part="N">e7400</tag>
     </question>
     <question no="5">
         <tag name="what" curpos="1" deppos="2" part="Det">what</tag>
-        <tag name="manufacture" curpos="2" deppos="E0" part="N">manufacturer</tag>
-        <tag name="manufacture" curpos="3" deppos="E0" part="V">make</tag>
+        <tag name="maker" curpos="2" deppos="E0" part="N">manufacturer</tag>
+        <tag name="maker" curpos="3" deppos="E0" part="V">make</tag>
         <tag name="mb_name" curpos="4" deppos="3" part="N">p5kpl/1600</tag>
     </question>
     <question no="6">
@@ -49,7 +49,7 @@
         <tag name="kind" curpos="2" deppos="5" part="N">kind</tag>
         <tag name="N/A" curpos="3" deppos="2" part="Prep">of</tag>
         <tag name="mainboard" curpos="4" deppos="3" part="N">motherboard</tag>
-        <tag name="manufacture" curpos="5" deppos="E0" part="V">made</tag>
+        <tag name="maker" curpos="5" deppos="E0" part="V">made</tag>
         <tag name="N/A" curpos="6" deppos="5" part="Prep">by</tag>
         <tag name="mb_maker" curpos="7" deppos="6" part="N">asus</tag>
     </question>
@@ -92,7 +92,7 @@
         <tag name="N/A" curpos="2" deppos="E0" part="N">many</tag>
         <tag name="extension_slot" curpos="3" deppos="4" part="N">extension slots</tag>
         <tag name="N/A" curpos="5" deppos="4" part="Prep">on</tag>
-        <tag name="mainboard" curpos="6" deppos="5" part="N">motherboard</tag>
+        <tag name="mb_name" curpos="6" deppos="5" part="N">p5kpl/1600</tag>
     </question>
     <question no="13">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
@@ -100,7 +100,7 @@
         <tag name="N/A" curpos="3" deppos="5" part="Det">the</tag>
         <tag name="graphic_card" curpos="4" deppos="5" part="A">internal graphics</tag>
         <tag name="N/A" curpos="6" deppos="5" part="Prep">on</tag>
-        <tag name="mainboard" curpos="7" deppos="6" part="N">motherboard</tag>
+        <tag name="mb_name" curpos="7" deppos="6" part="N">p5kpl/1600</tag>
     </question>
     <question no="14">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
@@ -182,7 +182,7 @@
         <tag name="how" curpos="1" deppos="E0" part="A">how</tag>
         <tag name="N/A" curpos="2" deppos="E0" part="Aux">can</tag>
         <tag name="N/A" curpos="3" deppos="4" part="N">we</tag>
-        <tag name="manufacture" curpos="4" deppos="E0" part="V">make</tag>
+        <tag name="maker" curpos="4" deppos="E0" part="V">make</tag>
         <tag name="N/A" curpos="5" deppos="7" part="Det">the</tag>
         <tag name="maximum" curpos="6" deppos="7" part="A">strong</tag>
         <tag name="constitution" curpos="7" deppos="4" part="N">combination</tag>
