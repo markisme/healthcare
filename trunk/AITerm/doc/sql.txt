@@ -1,0 +1,52 @@
+템플릿0_호환0
+SELECT price FROM cpu WHERE cpu_name='E7400'
+SELECT shop_url FROM cpu WHERE cpu_name='E7400'
+SELECT cpu_socket FROM cpu WHERE cpu_name='E7400'
+SELECT cpu_maker FROM cpu WHERE cpu_name='E7400'
+SELECT mb_maker FROM mainboard WHERE mb_name='P5KPL/1600'
+SELECT graphic_interface FROM mainboard WHERE mb_name='P5KPL/1600'
+SELECT info_text FROM info WHERE info_keyword='PCI-E'
+SELECT graphic_card FROM mainboard WHERE mb_name='P5KPL/1600'
+SELECT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
+
+템플릿0_호환1
+SELECT date_released FROM cpu_core WHERE core_id=
+(SELECT core_id FROM cpu WHERE cpu_name="E5200")
+
+템플릿0_호환2
+SELECT DISTINCT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
+
+템플릿1_호환0
+SELECT ABS(
+(SELECT price FROM cpu WHERE cpu_name='E7400') - 
+(SELECT price FROM cpu WHERE cpu_name='E5200') )
+
+템플릿1_호환1
+SELECT info_text FROM info WHERE info_keyword='AM2' OR info_keyword='AM3'
+SELECT info_text FROM info WHERE info_keyword='SATA' OR info_keyword='ATA'
+
+템플릿1_호환2
+SELECT * FROM cpu WHERE cpu_name='E5200' OR cpu_name='E7400'
+
+템플릿2_호환0
+SELECT mb_name FROM mainboard WHERE mb_maker='ASUS'
+
+템플릿3_호환0
+SELECT IF(
+(SELECT cpu_socket FROM cpu WHERE cpu_name='E7400') = (SELECT cpu_socket FROM cpu WHERE cpu_name='I70 965'), 
+'TRUE', 
+'FALSE' 
+);
+
+템플릿5_호환0
+SELECT extension_slot_cnt FROM mainboard WHERE mb_name='P5KPL/1600'
+
+
+하다 만것
+SELECT * FROM(
+(SELECT cpu.price FROM cpu,mainboard WHERE cpu.price < 100000 and mainboard.price < 100000) +
+(SELECT mainboard.price FROM cpu,mainboard WHERE cpu.price < 100000 and mainboard.price < 100000)
+)
+
+
+
