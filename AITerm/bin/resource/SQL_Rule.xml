@@ -1,0 +1,32 @@
+<SQL tempNo="3"> // 질문0, 
+	<focus_list>
+		<focus type="comparison">
+	</focus_list>
+	<expression>
+		<exp type="SELECT IF">
+		<exp type="SELECT" lvalue="cpu_socket" rvalue="FALSE"> 	// fix value
+		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component tablename
+		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component tagname,text
+		<exp type="=">
+		<exp type="SELECT" lvalue="cpu_socket" rvalue="FALSE">	// fix value
+		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component tablename
+		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component tagname,text
+		<exp type="," value="" rvalue="FALSE">
+		<exp type="TRUE" value="" rvalue="FALSE">
+		<exp type="," value="" rvalue="FALSE">
+		<exp type="FALSE" value="" rvalue="FALSE">
+	</expression>
+</SQL>
+
+<SQL tempNo="0"> // 질문1, 질문3, 질문4, 질문5, 질문7, 질문13, 질문15
+	<focus_list>
+		<focus type="price">
+		<focus type="cpu_socket">
+		<focus type="maker">
+	</focus_list>
+	<expression>
+		<exp type="SELECT" lvalue="focus#v" rvalue="FALSE"> 	// focus#tagname
+		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component#tablename
+		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component#tagname,component#text
+	</expression>
+</SQL>
