@@ -29,6 +29,7 @@
     <question questionno="5" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="maker">manufacturer</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
     <question questionno="6" templateno="2">
         <slot type="question" tagname="what">what</slot>
@@ -38,8 +39,8 @@
     </question>
     <question questionno="7" templateno="0">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="support">supported</slot>
-        <slot type="component" tagname="graphic_interface">graphic interfaces</slot>
+        <slot type="focus" tagname="graphic_interface">graphic interfaces</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
     <question questionno="8" templateno="0" />
     <question questionno="9" templateno="0">
@@ -52,16 +53,21 @@
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
     <question questionno="11" templateno="0" />
-    <question questionno="12" templateno="0" />
+    <question questionno="12" templateno="5">
+        <slot type="question" tagname="how">how</slot>
+        <slot type="focus" tagname="extension_slot">extension slots</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
+    </question>
     <question questionno="13" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="graphic_card">internal graphics</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
     <question questionno="14" templateno="0" />
     <question questionno="15" templateno="0">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="performance">performance</slot>
-        <slot type="component" tagname="mainboard">motherboard</slot>
+        <slot type="focus" tagname="lan_card">internal network card</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
     <question questionno="16" templateno="1">
         <slot type="question" tagname="what">what</slot>
@@ -70,11 +76,7 @@
         <slot type="component" tagname="cpu_name">e7400</slot>
         <slot type="component" tagname="cpu_name">e5200</slot>
     </question>
-    <question questionno="17" templateno="0">
-        <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="cpu_maker">intel</slot>
-        <slot type="component" tagname="cpu">cpu</slot>
-    </question>
+    <question questionno="17" templateno="1" />
     <question questionno="18" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="cpu_socket">socket</slot>
@@ -105,10 +107,5 @@
         <slot type="target" tagname="performance">performance</slot>
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
-    <question questionno="24" templateno="0">
-        <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="cpu_maker">intel</slot>
-        <slot type="component" tagname="cpu">cpu</slot>
-        <slot type="component" tagname="mainboard">motherboard</slot>
-    </question>
+    <question questionno="24" templateno="7" />
 </resource>
