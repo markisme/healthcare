@@ -1,17 +1,20 @@
 ≈€«√∏¥0_»£»Ø0
 SELECT price FROM cpu WHERE cpu_name='E7400'
-SELECT shop_url FROM cpu WHERE cpu_name='E7400'
 SELECT cpu_socket FROM cpu WHERE cpu_name='E7400'
 SELECT cpu_maker FROM cpu WHERE cpu_name='E7400'
 SELECT mb_maker FROM mainboard WHERE mb_name='P5KPL/1600'
 SELECT graphic_interface FROM mainboard WHERE mb_name='P5KPL/1600'
-SELECT info_text FROM info WHERE info_keyword='PCI-E'
 SELECT graphic_card FROM mainboard WHERE mb_name='P5KPL/1600'
-SELECT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
 
 ≈€«√∏¥0_»£»Ø1
+SELECT info_text FROM info WHERE info_keyword='PCI-E'
+
+≈€«√∏¥0_»£»Ø2
 SELECT date_released FROM cpu_core WHERE core_id=
 (SELECT core_id FROM cpu WHERE cpu_name="E5200")
+
+SELECT shop_url FROM cpu WHERE cpu_name='E7400'
+SELECT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
 
 ≈€«√∏¥0_»£»Ø2
 SELECT DISTINCT cpu_socket FROM cpu WHERE cpu_maker='INTEL'

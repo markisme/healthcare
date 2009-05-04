@@ -118,7 +118,7 @@
         <tag name="N/A" curpos="5" deppos="4" part="Prep">of</tag>
         <tag name="lan_card" curpos="6" deppos="8" part="A">internal network card</tag>
         <tag name="N/A" curpos="9" deppos="8" part="Prep">on</tag>
-        <tag name="mainboard" curpos="10" deppos="9" part="N">motherboard</tag>
+        <tag name="mb_name" curpos="10" deppos="9" part="N">p5kpl/1600</tag>
     </question>
     <question no="16">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>

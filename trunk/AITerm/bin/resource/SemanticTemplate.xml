@@ -6,13 +6,9 @@
 		<slot type="focus" need="true"> 
 			<tag name = "price"/>
 			<tag name = "cpu_socket"/>
-			<tag name = "performance"/>
-			<tag name = "support"/>
 			<tag name = "date" />
-			<tag name = "cpu_maker" />
 			<tag name = "cpu_core" />
 			<tag name = "core" />
-			<tag name = "mb_maker" />
 			<tag name = "mb_seller" />
 			<tag name = "board_type" />
 			<tag name = "board_chipset" />
@@ -20,22 +16,22 @@
 			<tag name = "hdd_interface" />
 			<tag name = "graphic_card" />
 			<tag name = "audio_card info" />
-			<tag name = "maker"/>
 			<tag name = "pci-e"/>
+			<tag name = "maker"/>
+			<tag name = "graphic_interface"/>
+			<tag name = "lan_card"/>
 		</slot>
 		<slot type="component" need="false">
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>
 			<tag name = "mb_name"/>
-			<tag name = "graphic_interface"/>
 		</slot>
 		<slot type="component" need="false">
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>
 			<tag name = "mb_name"/>
-			<tag name = "graphic_interface"/>
 		</slot>
 	</template>
 	
@@ -146,9 +142,7 @@
 			<tag name = "extension_slot"/>
 		</slot>
 		<slot type="component" need="true">
-			<tag name = "cpu"/>
-			<tag name = "mainboard"/>
-			<tag name = "graphic_interface"/>
+			<tag name = "mb_name"/>
 		</slot>
 	</template>
 	
