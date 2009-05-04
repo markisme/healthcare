@@ -20,19 +20,21 @@
 			<tag name = "hdd_interface" />
 			<tag name = "graphic_card" />
 			<tag name = "audio_card info" />
-			<tag name = "manufacture"/>
+			<tag name = "maker"/>
 			<tag name = "pci-e"/>
 		</slot>
 		<slot type="component" need="false">
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>
+			<tag name = "mb_name"/>
 			<tag name = "graphic_interface"/>
 		</slot>
 		<slot type="component" need="false">
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>
+			<tag name = "mb_name"/>
 			<tag name = "graphic_interface"/>
 		</slot>
 	</template>
@@ -82,8 +84,8 @@
 		<slot type="focus" need="true"> 
 			<tag name = "kind"/>
 		</slot>
-		<slot type="manufacturer" need="true">
-			<tag name = "manufacture"/>
+		<slot type="maker" need="true">
+			<tag name = "maker"/>
 		</slot>
 		<slot type="component" need="true">
 			<tag name = "cpu"/>
@@ -156,7 +158,7 @@
 		</slot>
 		<slot type="focus" need="true"> 
 			<tag name = "constitution"/>
-			<tag name = "manufacture"/>
+			<tag name = "maker"/>
 		</slot>
 		<slot type="target" need="true"> 
 			<tag name = "maximum"/>

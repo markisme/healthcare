@@ -23,17 +23,17 @@
     </question>
     <question questionno="4" templateno="0">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="manufacture">manufacturer</slot>
+        <slot type="focus" tagname="maker">manufacturer</slot>
         <slot type="component" tagname="cpu_name">e7400</slot>
     </question>
     <question questionno="5" templateno="0">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="manufacture">manufacturer</slot>
+        <slot type="focus" tagname="maker">manufacturer</slot>
     </question>
     <question questionno="6" templateno="2">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="kind">kind</slot>
-        <slot type="manufacturer" tagname="manufacture">made</slot>
+        <slot type="maker" tagname="maker">made</slot>
         <slot type="component" tagname="mainboard">motherboard</slot>
     </question>
     <question questionno="7" templateno="0">
@@ -52,15 +52,10 @@
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
     <question questionno="11" templateno="0" />
-    <question questionno="12" templateno="5">
-        <slot type="question" tagname="how">how</slot>
-        <slot type="focus" tagname="extension_slot">extension slots</slot>
-        <slot type="component" tagname="mainboard">motherboard</slot>
-    </question>
+    <question questionno="12" templateno="0" />
     <question questionno="13" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="graphic_card">internal graphics</slot>
-        <slot type="component" tagname="mainboard">motherboard</slot>
     </question>
     <question questionno="14" templateno="0" />
     <question questionno="15" templateno="0">
