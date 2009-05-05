@@ -90,7 +90,7 @@
         <slot type="component" tagname="cpu_name">e7400</slot>
         <slot type="component" tagname="cpu_name">e5200</slot>
     </question>
-    <question questionno="17" templateno="0">
+    <question questionno="17" templateno="2">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="cpu_socket">type</slot>
         <slot type="target" tagname="maker">intel</slot>

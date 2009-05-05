@@ -60,12 +60,14 @@
 		</slot>
 		<slot type="focus" need="true"> 
 			<tag name = "kind"/>
+			<tag name = "cpu_socket"/>
 		</slot>
 		<slot type="target" need="true">
 			<tag name = "maker"/>
 		</slot>
 		<slot type="component" need="true">
 			<tag name = "maker"/>
+			<tag name = "cpu"/>
 		</slot>
 	</template>
 	
