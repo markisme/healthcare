@@ -52,10 +52,28 @@ component#na
 	</expression>
 </SQL>
 <SQL tempNo="0" no="3"> // 질문17,
-SELECT DISTINCT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
+	<focus_list>
+		<focus type="cpu_socket">
+	</focus_list>
+	<expression>
+		<exp type="SELECT DISTINCT" lvalue="cpu_socket" rvalue="FALSE">		// fix value
+		<exp type="FROM" value="target#tb" rvalue="FALSE">			// fix value
+		<exp type="ORDER BY" value="target#v DESC" rvalue="TRUE">		// fix value
+	</expression>
+	<ex ex="SELECT DISTINCT cpu_socket FROM cpu WHERE cpu_maker='INTEL'">
 </SQL>
 
 <SQL tempNo="1" no="0"> // 질문16,
+	<focus_list>
+		<focus type="difference">
+	</focus_list>
+	<expression>
+		<exp type="SELECT ABS" lvalue="" rvalue="FALSE">
+		<exp type="(" lvalue="" rvalue="">
+		<exp type="FROM" value="target#tb" rvalue="FALSE">			// fix value
+		<exp type="ORDER BY" value="target#v DESC" rvalue="TRUE">		// fix value
+		<exp type=")" lvalue="" rvalue="">
+	</expression>
 SELECT ABS(
 (SELECT price FROM cpu WHERE cpu_name='E7400') - 
 (SELECT price FROM cpu WHERE cpu_name='E5200') )
@@ -66,7 +84,7 @@ SELECT info_text FROM info WHERE info_keyword='AM2' OR info_keyword='AM3'
 SELECT info_text FROM info WHERE info_keyword='SATA' OR info_keyword='ATA'
 </SQL>
 
-<SQL tempNo="1" no="1"> // 질문20,
+<SQL tempNo="1" no="2"> // 질문20,
 SELECT * FROM cpu WHERE cpu_name='E5200' OR cpu_name='E7400'
 </SQL>
 
@@ -139,8 +157,29 @@ SELECT * FROM cpu WHERE cpu_name='E5200' OR cpu_name='E7400'
 	</expression>
 </SQL>
 
-<SQL tempNo="6" no="0">
+<SQL tempNo="6" no="0"> // 질문21,
+
+SELECT cpu_name, mb_name, cpu.price, mainboard.price FROM cpu, mainboard WHERE 
+cpu.price + mainboard.price < 100000
+ORDER BY cpu.clock_frequency DESC LIMIT 1
+
 </SQL>
 
-<SQL tempNo="7" no="0">
+<SQL tempNo="6" no="1"> // 질문22,
+
+SELECT cpu_name, mb_name
+FROM cpu, mainboard
+WHERE cpu.cpu_socket = mainboard.cpu_socket AND
+      clock_frequency+l2_cache = (SELECT MAX(clock_frequency+l2_cache) FROM cpu )
+ORDER BY mainboard.price DESC LIMIT 1
+
+</SQL>
+
+<SQL tempNo="7" no="0"> // 질문 23,
+
+SELECT cpu_name
+FROM cpu
+WHERE cpu.clock_frequency / cpu.price > 0
+ORDER BY cpu.clock_frequency / cpu.price DESC LIMIT 1
+
 </SQL>
