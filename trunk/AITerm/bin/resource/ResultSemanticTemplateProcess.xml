@@ -34,15 +34,19 @@
     <question questionno="6" templateno="2">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="kind">kind</slot>
-        <slot type="maker" tagname="maker">made</slot>
-        <slot type="component" tagname="mainboard">motherboard</slot>
+        <slot type="target" tagname="maker">made</slot>
+        <slot type="component" tagname="maker">asus</slot>
     </question>
     <question questionno="7" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="graphic_interface">graphic interfaces</slot>
         <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
-    <question questionno="8" templateno="0" />
+    <question questionno="8" templateno="0">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="cpu_socket">type</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
+    </question>
     <question questionno="9" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="pci-e">pci - e</slot>
@@ -52,7 +56,11 @@
         <slot type="focus" tagname="date">latest</slot>
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
-    <question questionno="11" templateno="0" />
+    <question questionno="11" templateno="8">
+        <slot type="focus" tagname="support">support</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
+        <slot type="component" tagname="hdd_interface_1">sata2</slot>
+    </question>
     <question questionno="12" templateno="5">
         <slot type="question" tagname="how">how</slot>
         <slot type="focus" tagname="extension_slot">extension slots</slot>
@@ -76,7 +84,11 @@
         <slot type="component" tagname="cpu_name">e7400</slot>
         <slot type="component" tagname="cpu_name">e5200</slot>
     </question>
-    <question questionno="17" templateno="1" />
+    <question questionno="17" templateno="0">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="cpu_socket">type</slot>
+        <slot type="component" tagname="cpu">cpu</slot>
+    </question>
     <question questionno="18" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="cpu_socket">socket</slot>
@@ -107,5 +119,9 @@
         <slot type="target" tagname="performance">performance</slot>
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
-    <question questionno="24" templateno="7" />
+    <question questionno="24" templateno="0">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="maker">intel</slot>
+        <slot type="component" tagname="cpu">cpu</slot>
+    </question>
 </resource>
