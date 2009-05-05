@@ -44,6 +44,24 @@ SELECT shop_url FROM cpu WHERE cpu_name='E7400'
 템플릿5_호환0
 SELECT extension_slot_cnt FROM mainboard WHERE mb_name='P5KPL/1600'
 
+템플릿6_호환0
+(질문22. strong combonation?)
+1. 가장 성능좋은 cpu
+SELECT cpu_name
+FROM cpu 
+WHERE clock_frequency=(SELECT MAX(clock_frequency) FROM cpu WHERE clock_frequency)
+      AND
+      l2_cache=(SELECT MAX(l2_cache) FROM cpu WHERE l2_cache);
+2. 가장 성능좋은 cpu와 호환되는 가장 좋은 mainboard
+SELECT mb_name, MAX(price)
+FROM mainboard 
+WHERE	cpu_socket=(SELECT cpu_socket 
+		FROM cpu 
+		WHERE clock_frequency=(SELECT MAX(clock_frequency) FROM cpu WHERE clock_frequency)
+			AND
+			l2_cache=(SELECT MAX(l2_cache) FROM cpu WHERE l2_cache)
+		);
+
 템플릿8_호환0
 SELECT IF( (SELECT COUNT( hdd_interface_1 ) FROM mainboard WHERE mb_name="P5KPL/1600") >= 1 , 'TRUE', 'FALSE' )
 
@@ -53,6 +71,13 @@ SELECT * FROM(
 (SELECT cpu.price FROM cpu,mainboard WHERE cpu.price < 100000 and mainboard.price < 100000) +
 (SELECT mainboard.price FROM cpu,mainboard WHERE cpu.price < 100000 and mainboard.price < 100000)
 )
+
+SELECT *
+FROM cpu
+WHERE (MAX((SELECT clock_frequency FROM cpu WHERE clock_frequency>0)
+	DIV
+      (SELECT price FROM cpu WHERE price))
+      );
 
 
 
