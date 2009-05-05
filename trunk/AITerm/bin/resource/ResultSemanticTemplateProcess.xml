@@ -24,11 +24,13 @@
     <question questionno="4" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="maker">manufacturer</slot>
+        <slot type="target" tagname="maker">make</slot>
         <slot type="component" tagname="cpu_name">e7400</slot>
     </question>
     <question questionno="5" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="maker">manufacturer</slot>
+        <slot type="target" tagname="maker">make</slot>
         <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
     <question questionno="6" templateno="2">
@@ -56,12 +58,12 @@
         <slot type="focus" tagname="date">latest</slot>
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
-    <question questionno="11" templateno="8">
+    <question questionno="11" templateno="5">
         <slot type="focus" tagname="support">support</slot>
-        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
+        <slot type="target" tagname="mb_name">p5kpl/1600</slot>
         <slot type="component" tagname="hdd_interface_1">sata2</slot>
     </question>
-    <question questionno="12" templateno="5">
+    <question questionno="12" templateno="0">
         <slot type="question" tagname="how">how</slot>
         <slot type="focus" tagname="extension_slot">extension slots</slot>
         <slot type="component" tagname="mb_name">p5kpl/1600</slot>
@@ -71,7 +73,11 @@
         <slot type="focus" tagname="graphic_card">internal graphics</slot>
         <slot type="component" tagname="mb_name">p5kpl/1600</slot>
     </question>
-    <question questionno="14" templateno="0" />
+    <question questionno="14" templateno="0">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="audio_card">internal audio</slot>
+        <slot type="component" tagname="mb_name">p5kpl/1600</slot>
+    </question>
     <question questionno="15" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="lan_card">internal network card</slot>
@@ -79,25 +85,32 @@
     </question>
     <question questionno="16" templateno="1">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="price">cost</slot>
-        <slot type="difference" tagname="difference">difference</slot>
+        <slot type="focus" tagname="difference">difference</slot>
+        <slot type="target" tagname="price">cost</slot>
         <slot type="component" tagname="cpu_name">e7400</slot>
         <slot type="component" tagname="cpu_name">e5200</slot>
     </question>
     <question questionno="17" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="cpu_socket">type</slot>
+        <slot type="target" tagname="maker">intel</slot>
         <slot type="component" tagname="cpu">cpu</slot>
     </question>
-    <question questionno="18" templateno="0">
+    <question questionno="18" templateno="1">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="cpu_socket">socket</slot>
-        <slot type="component" tagname="cpu">cpu</slot>
+        <slot type="focus" tagname="difference">difference</slot>
+        <slot type="component" tagname="info_keyword">am2</slot>
+        <slot type="component" tagname="info_keyword">am3</slot>
     </question>
-    <question questionno="19" templateno="0" />
+    <question questionno="19" templateno="1">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="difference">difference</slot>
+        <slot type="component" tagname="info_keyword">sata</slot>
+        <slot type="component" tagname="info_keyword">ata</slot>
+    </question>
     <question questionno="20" templateno="1">
         <slot type="question" tagname="what">what</slot>
-        <slot type="difference" tagname="difference">difference</slot>
+        <slot type="focus" tagname="difference">difference</slot>
         <slot type="component" tagname="cpu_name">e7400</slot>
         <slot type="component" tagname="cpu_name">e5200</slot>
     </question>

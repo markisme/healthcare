@@ -12,12 +12,16 @@ component#na
 }
 -->
 
-<SQL tempNo="0" no="0"> // 질문1, 질문3, 질문4, 질문5, 질문7, 질문8, 질문13, 질문15
+<SQL tempNo="0" no="0"> // 질문1, 질문3, 질문4, 질문5, 질문7, 질문8, 질문12, 질문13, 질문14, 질문15
 	<focus_list>
 		<focus type="price">
 		<focus type="cpu_socket">
 		<focus type="maker">
 		<focus type="graphic_interface">
+		<focus type="graphic_card">
+		<focus type="extension_slot">
+		<focus type="audio_card">
+		<focus type="lan_card">
 	</focus_list>
 	<expression>
 		<exp type="SELECT" lvalue="focus#v" rvalue="FALSE"> 	// focus#tagname
@@ -47,8 +51,23 @@ component#na
 		<exp type="ORDER BY" value="date_released DESC" rvalue="FALSE">			// fix value
 	</expression>
 </SQL>
+<SQL tempNo="0" no="3"> // 질문17,
+SELECT DISTINCT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
+</SQL>
 
-<SQL tempNo="1" no="0">
+<SQL tempNo="1" no="0"> // 질문16,
+SELECT ABS(
+(SELECT price FROM cpu WHERE cpu_name='E7400') - 
+(SELECT price FROM cpu WHERE cpu_name='E5200') )
+</SQL>
+
+<SQL tempNo="1" no="1"> // 질문18, 질문19
+SELECT info_text FROM info WHERE info_keyword='AM2' OR info_keyword='AM3'
+SELECT info_text FROM info WHERE info_keyword='SATA' OR info_keyword='ATA'
+</SQL>
+
+<SQL tempNo="1" no="1"> // 질문20,
+SELECT * FROM cpu WHERE cpu_name='E5200' OR cpu_name='E7400'
 </SQL>
 
 <SQL tempNo="2" no="0"> // 질문6,
@@ -98,16 +117,7 @@ component#na
 	</expression>
 </SQL>
 
-<SQL tempNo="5" no="0">
-</SQL>
-
-<SQL tempNo="6" no="0">
-</SQL>
-
-<SQL tempNo="7" no="0">
-</SQL>
-
-<SQL tempNo="8" no="0"> // 질문11,
+<SQL tempNo="5" no="0"> // 질문11,
 	<focus_list>
 		<focus type="support">
 		<target type = "mb_name"/>
@@ -127,4 +137,10 @@ component#na
 		<exp type="FALSE" value="" rvalue="FALSE">
 		<exp type=")" lvalue="" rvalue="">
 	</expression>
+</SQL>
+
+<SQL tempNo="6" no="0">
+</SQL>
+
+<SQL tempNo="7" no="0">
 </SQL>
