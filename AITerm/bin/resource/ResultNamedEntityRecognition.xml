@@ -108,7 +108,7 @@
         <tag name="N/A" curpos="3" deppos="5" part="Det">the</tag>
         <tag name="audio_card" curpos="4" deppos="5" part="A">internal audio</tag>
         <tag name="N/A" curpos="6" deppos="5" part="Prep">on</tag>
-        <tag name="mainboard" curpos="7" deppos="6" part="N">motherboard</tag>
+        <tag name="mb_name" curpos="7" deppos="6" part="N">p5kpl/1600</tag>
     </question>
     <question no="15">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>

@@ -2,6 +2,7 @@
 	<template no="0">
 		<slot type="question" need="true"> 
 			<tag name = "what"/>
+			<tag name = "how"/>
 		</slot>
 		<slot type="focus" need="true"> 
 			<tag name = "price"/>
@@ -12,6 +13,11 @@
 			<tag name = "maker"/>
 			<tag name = "lan_card"/>
 			<tag name = "date"/>
+			<tag name = "extension_slot"/>
+			<tag name = "audio_card" />
+		</slot>
+		<slot type="target" need="false">
+			<tag name = "maker"/>
 		</slot>
 		<slot type="component" need="false">
 			<tag name = "cpu"/>
@@ -28,32 +34,23 @@
 		<slot type="question" need="true"> 
 			<tag name = "what"/>
 		</slot>
-		<slot type="focus" need="false"> 
-			<tag name = "price"/>
-			<tag name = "cpu_socket"/>
-			<tag name = "performance"/>
-			<tag name = "cpu_maker" />
-			<tag name = "cpu_core" />
-			<tag name = "core" />
-			<tag name = "mb_maker" />
-			<tag name = "mb_seller" />
-			<tag name = "board_type" />
-			<tag name = "board_chipset" />
-			<tag name = "graphic_interface" />
-			<tag name = "hdd_interface" />
-			<tag name = "graphic_card" />
-			<tag name = "audio_card info" />
-		</slot>
-		<slot type="difference" need="true">
+		<slot type="focus" need="true">
 			<tag name = "difference"/>
 		</slot>
-		<slot type="component" need="true">
-			<tag name = "cpu_name"/>
-			<tag name = "mb_name"/>
+		<slot type="target" need="false"> 
+			<tag name = "price"/>
+			<tag name = "performance"/>
+
 		</slot>
 		<slot type="component" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
+			<tag name = "info_keyword"/>
+		</slot>
+		<slot type="component" need="true">
+			<tag name = "cpu_name"/>
+			<tag name = "mb_name"/>
+			<tag name = "info_keyword"/>
 		</slot>
 	</template>
 	
@@ -108,14 +105,15 @@
 	</template>
 	
 	<template no="5">
-		<slot type="question" need="true"> 
-			<tag name = "how"/>
-		</slot>
 		<slot type="focus" need="true"> 
-			<tag name = "extension_slot"/>
+			<tag name = "support"/>
+		</slot>
+		<slot type="target" need="true">
+			<tag name = "mb_name"/>
 		</slot>
 		<slot type="component" need="true">
-			<tag name = "mb_name"/>
+			<tag name = "hdd_interface_1"/>
+			<tag name = "hdd_interface_2"/>
 		</slot>
 	</template>
 	
@@ -153,18 +151,6 @@
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>
-		</slot>
-	</template>
-	<template no="8">
-		<slot type="focus" need="true"> 
-			<tag name = "support"/>
-		</slot>
-		<slot type="target" need="true">
-			<tag name = "mb_name"/>
-		</slot>
-		<slot type="component" need="true">
-			<tag name = "hdd_interface_1"/>
-			<tag name = "hdd_interface_2"/>
 		</slot>
 	</template>
 </resource>
