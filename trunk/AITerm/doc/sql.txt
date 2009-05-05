@@ -72,6 +72,10 @@ SELECT * FROM(
 (SELECT mainboard.price FROM cpu,mainboard WHERE cpu.price < 100000 and mainboard.price < 100000)
 )
 
+24. What is the best cost performance CPU?
+가격은 저렴하면서 성능은 높은것
+클럭은 높으면서 가격은 저렴한것
+클럭/(나누기)가격이 가장 높은 것 -> 나누기가 안됨
 SELECT *
 FROM cpu
 WHERE (MAX((SELECT clock_frequency FROM cpu WHERE clock_frequency>0)
