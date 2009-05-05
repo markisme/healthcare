@@ -51,7 +51,7 @@
         <tag name="mainboard" curpos="4" deppos="3" part="N">motherboard</tag>
         <tag name="maker" curpos="5" deppos="E0" part="V">made</tag>
         <tag name="N/A" curpos="6" deppos="5" part="Prep">by</tag>
-        <tag name="mb_maker" curpos="7" deppos="6" part="N">asus</tag>
+        <tag name="maker" curpos="7" deppos="6" part="N">asus</tag>
     </question>
     <question no="7">
         <tag name="what" curpos="1" deppos="3" part="Det">what</tag>
@@ -65,7 +65,7 @@
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
         <tag name="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
         <tag name="N/A" curpos="3" deppos="4" part="Det">the</tag>
-        <tag name="kind" curpos="4" deppos="2" part="N">type</tag>
+        <tag name="cpu_socket" curpos="4" deppos="2" part="N">type</tag>
         <tag name="N/A" curpos="5" deppos="4" part="Prep">of</tag>
         <tag name="mb_name" curpos="6" deppos="5" part="N">p5kpl/1600</tag>
     </question>
@@ -132,10 +132,10 @@
     </question>
     <question no="17">
         <tag name="what" curpos="1" deppos="2" part="Det">what</tag>
-        <tag name="kind" curpos="2" deppos="E0" part="N">type</tag>
+        <tag name="cpu_socket" curpos="2" deppos="E0" part="N">type</tag>
         <tag name="N/A" curpos="3" deppos="E0" part="VBE">are</tag>
         <tag name="N/A" curpos="4" deppos="3" part="Prep">in</tag>
-        <tag name="cpu_maker" curpos="5" deppos="6" part="U">intel</tag>
+        <tag name="maker" curpos="5" deppos="6" part="U">intel</tag>
         <tag name="cpu" curpos="6" deppos="4" part="N">cpu</tag>
     </question>
     <question no="18">
@@ -148,7 +148,7 @@
         <tag name="N/A" curpos="8" deppos="7" part="Prep">in</tag>
         <tag name="cpu" curpos="9" deppos="11" part="N">cpu</tag>
         <tag name="cpu_socket" curpos="10" deppos="11" part="N">socket</tag>
-        <tag name="kind" curpos="11" deppos="8" part="N">type</tag>
+        <tag name="cpu_socket" curpos="11" deppos="8" part="N">type</tag>
     </question>
     <question no="19">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
@@ -200,10 +200,10 @@
         <tag name="N/A" curpos="1" deppos="E1" part="COMP">if</tag>
         <tag name="N/A" curpos="2" deppos="3" part="N">i</tag>
         <tag name="N/A" curpos="3" deppos="E1" part="V">put</tag>
-        <tag name="cpu_maker" curpos="4" deppos="5" part="U">intel</tag>
+        <tag name="maker" curpos="4" deppos="5" part="U">intel</tag>
         <tag name="cpu" curpos="5" deppos="3" part="N">cpu</tag>
         <tag name="N/A" curpos="6" deppos="3" part="Prep">onto</tag>
-        <tag name="cpu_maker" curpos="7" deppos="8" part="N">amd</tag>
+        <tag name="N/A" curpos="7" deppos="8" part="N">amd</tag>
         <tag name="mainboard" curpos="8" deppos="6" part="N">motherboard</tag>
         <tag name="what" curpos="10" deppos="E0" part="N">what</tag>
         <tag name="exception" curpos="11" deppos="E0" part="V">happen</tag>

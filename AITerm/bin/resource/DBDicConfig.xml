@@ -9,8 +9,8 @@
     </table>
     <table name="mainboard">
 	<col name="mb_name"/>
-	<col name="mb_maker"/>
-	<col name="mb_seller"/>
+	<col name="maker"/>
+	<col name="seller"/>
 	<col name="board_type"/>
 	<col name="board_chipset"/>
 	<col name="graphic_interface"/>

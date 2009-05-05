@@ -43,7 +43,6 @@
     </tag>
     <tag name="kind">
     	<keyword name="kind" sense="1"/>
-    	<keyword name="type" sense="0"/>
     </tag>
     <tag name="date">
     	<keyword name="latest" sense="0"/>
@@ -76,6 +75,7 @@
     <!-- 고유 명사 -->
     <tag name="cpu_socket">
     	<keyword name="socket" sense="0"/>
+    	<keyword name="type" sense="0"/>
     </tag>
     <tag name="mainboard">
     	<keyword name="motherboard" sense="0"/>

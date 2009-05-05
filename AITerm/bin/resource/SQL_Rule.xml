@@ -1,13 +1,79 @@
-<SQL tempNo="3"> // 질문0, 
+<!--
+component#tb
+{
+	cpu
+	mainboard
+}
+
+component#na
+{
+	cpu_name
+	mb_name
+}
+-->
+
+<SQL tempNo="0" no="0"> // 질문1, 질문3, 질문4, 질문5, 질문7, 질문8, 질문13, 질문15
+	<focus_list>
+		<focus type="price">
+		<focus type="cpu_socket">
+		<focus type="maker">
+		<focus type="graphic_interface">
+	</focus_list>
+	<expression>
+		<exp type="SELECT" lvalue="focus#v" rvalue="FALSE"> 	// focus#tagname
+		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component#tablename
+		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component#tagname,component#text
+	</expression>
+</SQL>
+
+<SQL tempNo="0" no="1"> // 질문9,
+	<focus_list>
+		<focus type="pci-e">
+	</focus_list>
+	<expression>
+		<exp type="SELECT" lvalue="info_text" rvalue="FALSE"> 	// fix value
+		<exp type="FROM" value="info" rvalue="FALSE">		// fix value
+		<exp type="WHERE" value="focus#v" rvalue="TRUE">	// focus#tagname
+	</expression>
+</SQL>
+
+<SQL tempNo="0" no="2"> // 질문10,
+	<focus_list>
+		<focus type="date">
+	</focus_list>
+	<expression>
+		<exp type="SELECT" lvalue="MAX(date_released), code_name" rvalue="FALSE"> 	// fix value
+		<exp type="FROM" value="cpu_core" rvalue="FALSE">				// fix value
+		<exp type="ORDER BY" value="date_released DESC" rvalue="FALSE">			// fix value
+	</expression>
+</SQL>
+
+<SQL tempNo="1" no="0">
+</SQL>
+
+<SQL tempNo="2" no="0"> // 질문6,
+	<focus_list>
+		<focus type="kind">
+		<target type="maker">
+	</focus_list>
+	<expression>
+		<exp type="SELECT" lvalue="component#na" rvalue="FALSE">// component#name
+		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component#tablename
+		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component#tagname,component#text
+	</expression>
+</SQL>
+
+<SQL tempNo="3" no="0"> // 질문0, 
 	<focus_list>
 		<focus type="comparison">
 	</focus_list>
 	<expression>
 		<exp type="SELECT IF">
+		<exp type="(" lvalue="" rvalue="">
 		<exp type="SELECT" lvalue="cpu_socket" rvalue="FALSE"> 	// fix value
 		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component tablename
 		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component tagname,text
-		<exp type="=">
+		<exp type="=" value="" rvalue="FALSE">
 		<exp type="SELECT" lvalue="cpu_socket" rvalue="FALSE">	// fix value
 		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component tablename
 		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component tagname,text
@@ -15,18 +81,50 @@
 		<exp type="TRUE" value="" rvalue="FALSE">
 		<exp type="," value="" rvalue="FALSE">
 		<exp type="FALSE" value="" rvalue="FALSE">
+		<exp type=")" lvalue="" rvalue="">
 	</expression>
 </SQL>
 
-<SQL tempNo="0"> // 질문1, 질문3, 질문4, 질문5, 질문7, 질문13, 질문15
+<SQL tempNo="4" no="0"> // 질문2, 
 	<focus_list>
-		<focus type="price">
-		<focus type="cpu_socket">
-		<focus type="maker">
+		<focus type="minimum">
+		<target type="price">
+		<location type="dealer">
 	</focus_list>
 	<expression>
-		<exp type="SELECT" lvalue="focus#v" rvalue="FALSE"> 	// focus#tagname
+		<exp type="SELECT" lvalue="shop_url" rvalue="FALSE"> 	// fix value
 		<exp type="FROM" value="component#tb" rvalue="FALSE">	// component#tablename
 		<exp type="WHERE" value="component#v" rvalue="TRUE">	// component#tagname,component#text
+	</expression>
+</SQL>
+
+<SQL tempNo="5" no="0">
+</SQL>
+
+<SQL tempNo="6" no="0">
+</SQL>
+
+<SQL tempNo="7" no="0">
+</SQL>
+
+<SQL tempNo="8" no="0"> // 질문11,
+	<focus_list>
+		<focus type="support">
+		<target type = "mb_name"/>
+	</focus_list>
+	<expression>
+		<exp type="SELECT IF" lvalue="" rvalue="">
+		<exp type="(" lvalue="" rvalue="">
+		<exp type="SELECT" lvalue="" rvalue="">
+		<exp type="COUNT(" lvalue="component#v" rvalue="">	// component#tagname
+		<exp type=")" lvalue="" rvalue="">
+		<exp type="FROM" value="target#tb" rvalue="FALSE">	// target#tablename
+		<exp type="WHERE" value="target#v" rvalue="TRUE">	// target#tagname,target#text
+		<exp type=">= 1" value="" rvalue="FALSE">
+		<exp type="," value="" rvalue="FALSE">
+		<exp type="TRUE" value="" rvalue="FALSE">
+		<exp type="," value="" rvalue="FALSE">
+		<exp type="FALSE" value="" rvalue="FALSE">
+		<exp type=")" lvalue="" rvalue="">
 	</expression>
 </SQL>

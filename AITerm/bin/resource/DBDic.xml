@@ -47,10 +47,7 @@
             <data text="X4 9850" />
             <data text="X4 9950" />
         </col>
-        <col name="cpu_maker">
-            <data text="INTEL" />
-            <data text="AMD" />
-        </col>
+        <col name="cpu_maker" />
     </table>
     <table name="cpu_core">
         <col name="code_name">
@@ -134,7 +131,7 @@
             <data text="A7GM-S" />
             <data text="A74MX-K" />
         </col>
-        <col name="mb_maker">
+        <col name="maker">
             <data text="ASUS" />
             <data text="FOXCORN" />
             <data text="GIGABYTE" />
@@ -148,7 +145,7 @@
             <data text="MSI" />
             <data text="EMTECH" />
         </col>
-        <col name="mb_seller">
+        <col name="seller">
             <data text="IBORA" />
             <data text="PCDIRECT" />
             <data text="STCOM" />

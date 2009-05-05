@@ -75,7 +75,6 @@
         <keyword name="form" />
         <keyword name="variety" />
         <keyword name="category" />
-        <keyword name="type" />
     </tag>
     <tag name="date">
         <keyword name="latest" />
@@ -110,6 +109,7 @@
     </tag>
     <tag name="cpu_socket">
         <keyword name="socket" />
+        <keyword name="type" />
     </tag>
     <tag name="mainboard">
         <keyword name="motherboard" />
