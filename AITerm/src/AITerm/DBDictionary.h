@@ -27,12 +27,12 @@ public:
 	bool SaveToXML( XmlNode * resNode );
 
 	std::string GetTagName( const std::string & inData );
+	std::string GetTableName( const std::string & inData );
 
 private:
 	bool CreateDBDic( const XmlNode * resNode );
 
 	std::string GetColName( const std::string & inData );
-	std::string GetTableName( const std::string & inData );
 
 	int GetColNum( std::string name, const ColList & colList );
 	void GetColData( int colNum, const DataList & dataList, std::vector<std::string> & outList );
