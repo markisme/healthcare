@@ -31,6 +31,9 @@ public:
 
 	void ProcessQuestion( ResultNamedEntityRecognition & resultNamedEntityRecognition );
 
+	DBDictionary * GetDBDic() { return &_dbDic;}
+	WNDictionary * GetWNDic() { return &_wnDic;}
+
 private:
 	void LoadQuestions( QuestionList & qsList );
 	void SaveResultNamedEntityRecognition( ResultNamedEntityRecognition & resultNamedEntityRecognition );

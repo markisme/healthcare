@@ -2,6 +2,8 @@
 
 #include "SemanticTemplateProcessor.h"
 
+class DBDictionary;
+
 // 매칭 결과 컨테이너
 struct NeedSlot
 {
@@ -47,13 +49,19 @@ public:
 	QuaryGenerator();
 	~QuaryGenerator();
 
-	void Init( ResultMatchedTemplate & resultMatchedTemplate );
+	void Init( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic );
 	void Uninit();
 
 private:
 	void LoadQuaryRule( QuaryRuleList & quaryRuleList );
-	void GeneratorQuary( MatchedTemplate & matchedTemplate, QuaryRuleList & quaryRuleList );
-	void SetExpression( std::string expression, std::vector<std::string> valueList );
+	void SaveResultQuary( QuaryList & quaryList );
+	std::string GeneratorQuary( MatchedTemplate & matchedTemplate, QuaryRuleList & quaryRuleList );
+	std::string GetExpression( std::string expression, std::vector<std::string> valueList );
+	std::string GetElement( DataElement element, MatchedTemplate & matchedTemplate );
+	std::string GetTableName( std::string slotType, MatchedTemplate & matchedTemplate );
+	std::string GetTagName( std::string slotType, MatchedTemplate & matchedTemplate );
+	std::string GetWord( std::string slotType, MatchedTemplate & matchedTemplate );
 
 private:
+	DBDictionary * _dbDic;
 };

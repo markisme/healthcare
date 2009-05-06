@@ -20,6 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	// 개체명 인식기 초기화
 	NamedEntityRecognition namedEntityRecognition;
 	namedEntityRecognition.Init();
+	DBDictionary * dbDic = namedEntityRecognition.GetDBDic();
 
 	// 개체명 인식 처리
 	ResultNamedEntityRecognition resultNamedEntityRecognition;
@@ -32,7 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// 쿼리 생성기
 	QuaryGenerator quaryGenerator;
-	quaryGenerator.Init( resultMatchedTemplate );
+	quaryGenerator.Init( resultMatchedTemplate, dbDic );
 
 	// Just XML test
 	//TestCase testCase;

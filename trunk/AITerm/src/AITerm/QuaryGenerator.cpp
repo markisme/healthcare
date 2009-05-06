@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "QuaryGenerator.h"
+#include "DBDictionary.h"
 
 QuaryGenerator::QuaryGenerator()
 {
@@ -9,17 +10,24 @@ QuaryGenerator::~QuaryGenerator()
 {
 }
 
-void QuaryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate )
+void QuaryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic )
 {
+	_dbDic = dbDic;
+
 	QuaryRuleList quaryRuleList;
 	LoadQuaryRule( quaryRuleList );
+
+	QuaryList quaryList;
 
 	int count = resultMatchedTemplate.size();
 	for( int num = 0; num < count; num++ )
 	{
 		MatchedTemplate & matchedTemplate = resultMatchedTemplate[ num ];
-		GeneratorQuary( matchedTemplate, quaryRuleList );
+		std::string result = GeneratorQuary( matchedTemplate, quaryRuleList );
+		quaryList.push_back( result );
 	}
+
+	SaveResultQuary( quaryList );
 }
 
 void QuaryGenerator::Uninit()
@@ -146,7 +154,25 @@ void QuaryGenerator::LoadQuaryRule( QuaryRuleList & quaryRuleList )
 	}
 }
 
-void QuaryGenerator::GeneratorQuary( MatchedTemplate & matchedTemplate, QuaryRuleList & quaryRuleList )
+void QuaryGenerator::SaveResultQuary( QuaryList & quaryList )
+{
+	XmlDocument xmlDoc;
+	XmlNode * resNode = xmlDoc.AddNode( "resource" );
+
+	int count = quaryList.size();
+	for( int num = 0; num < count; num++ )
+	{
+		std::string sql = quaryList[ num ];
+
+		XmlNode * questionNode = resNode->AddNode( "question" );
+		questionNode->SetText( sql.c_str(), XmlNode::NUMBER );
+	}
+
+	std::string path = "./resource/ResultSQL.xml";
+	xmlDoc.SaveFile( path.c_str() );
+}
+
+std::string QuaryGenerator::GeneratorQuary( MatchedTemplate & matchedTemplate, QuaryRuleList & quaryRuleList )
 {
 	int count = quaryRuleList.size();
 	for( int num = 0; num < count; num++)
@@ -194,64 +220,111 @@ void QuaryGenerator::GeneratorQuary( MatchedTemplate & matchedTemplate, QuaryRul
 		for( int cnt = 0; cnt < elementCount; cnt++)
 		{
 			DataElement element = quaryRule._elementList[ cnt ];
-			// 앨레멘트 빼서 리스트 채우기
-			switch( element )
-			{
-			case FOCUS_TABLE:
-				break;
-			case FOCUS_TAG:
-				break;
-			case FOCUS_TEXT:
-				break;
-			case TARGET_TABLE:
-				break;
-			case TARGET_TAG:
-				break;
-			case TARGET_TEXT:
-				break;
-			case OPTION_TABLE:
-				break;
-			case OPTION_TAG:
-				break;
-			case OPTION_TEXT:
-				break;
-			case COMPONENT1_TABLE:
-				break;
-			case COMPONENT1_TAG:
-				break;
-			case COMPONENT1_TEXT:
-				break;
-			case COMPONENT2_TABLE:
-				break;
-			case COMPONENT2_TAG:
-				break;
-			case COMPONENT2_TEXT:
-				break;
-			}
+			std::string value = GetElement( element, matchedTemplate );
+			valueList.push_back( value );
 		}
-		
-		valueList.push_back("test2");
-		valueList.push_back("test3");
-		valueList.push_back("test4");
 
 		// 채운 리스트를 식에 대입
-		SetExpression( quaryRule._expression, valueList );
-
-		if( matched == true )
-		{
-			break;
-		}
+		return GetExpression( quaryRule._expression, valueList );
 	}
+
+	return "";
 }
 
-void QuaryGenerator::SetExpression( std::string expression, std::vector<std::string> valueList )
+std::string QuaryGenerator::GetExpression( std::string expression, std::vector<std::string> valueList )
 {
+	//
+	std::string exp = expression;
+
+	//
 	int count = valueList.size();
 	for( int num = 0; num < count; num++)
 	{
 		std::string str = valueList[ num ];
-		int index = expression.find("%s");
-		expression.erase(index,2);
-		expression.insert(index,str);
-	}	
+		int index = exp.find("%s");
+		if( index < 0 )
+		{
+			break;
+		}
+		exp.erase(index,2);
+		exp.insert(index,str);
+	}
+
+	return exp;
+}
+
+std::string QuaryGenerator::GetElement( DataElement element, MatchedTemplate & matchedTemplate )
+{
+	//return "test";
+	switch( element )
+	{
+	case FOCUS_TABLE:
+		return GetTableName( "focus", matchedTemplate );
+	case FOCUS_TAG:
+		return GetTagName( "focus", matchedTemplate );
+	case FOCUS_TEXT:
+		return GetWord( "focus", matchedTemplate );
+	case TARGET_TABLE:
+		return GetTableName( "target", matchedTemplate );
+	case TARGET_TAG:
+		return GetTagName( "target", matchedTemplate );
+	case TARGET_TEXT:
+		return GetWord( "target", matchedTemplate );
+	case OPTION_TABLE:
+		return GetTableName( "option", matchedTemplate );
+	case OPTION_TAG:
+		return GetTagName( "option", matchedTemplate );
+	case OPTION_TEXT:
+		return GetWord( "option", matchedTemplate );
+	case COMPONENT1_TABLE:
+		return GetTableName( "component1", matchedTemplate );
+	case COMPONENT1_TAG:
+		return GetTagName( "component1", matchedTemplate );
+	case COMPONENT1_TEXT:
+		return GetWord( "component1", matchedTemplate );
+	case COMPONENT2_TABLE:
+		return GetTableName( "component2", matchedTemplate );
+	case COMPONENT2_TAG:
+		return GetTagName( "component2", matchedTemplate );
+	case COMPONENT2_TEXT:
+		return GetWord( "component2", matchedTemplate );
+	}
+	return "test";
+}
+
+std::string QuaryGenerator::GetTableName( std::string slotType, MatchedTemplate & matchedTemplate )
+{
+	std::string word = GetWord( slotType, matchedTemplate );
+	std::string tableName = _dbDic->GetTableName( word );
+	return tableName;
+}
+
+std::string QuaryGenerator::GetTagName( std::string slotType, MatchedTemplate & matchedTemplate )
+{
+	int count = matchedTemplate._slotList.size();
+	for( int num = 0; num < count; num++)
+	{
+		MatchedSlot & slot = matchedTemplate._slotList[ num ];
+		if( slot._slotType == slotType )
+		{
+			return slot._tagName;
+		}
+	}
+
+	return "";
+}
+
+std::string QuaryGenerator::GetWord( std::string slotType, MatchedTemplate & matchedTemplate )
+{
+	int count = matchedTemplate._slotList.size();
+	for( int num = 0; num < count; num++)
+	{
+		MatchedSlot & slot = matchedTemplate._slotList[ num ];
+		if( slot._slotType == slotType )
+		{
+			return slot._word;
+		}
+	}
+
+	return "";
 }
