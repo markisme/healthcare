@@ -192,11 +192,11 @@
 			>
 		</File>
 		<File
-			RelativePath=".\QuaryGenerator.cpp"
+			RelativePath=".\QueryGenerator.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\QuaryGenerator.h"
+			RelativePath=".\QueryGenerator.h"
 			>
 		</File>
 		<File
