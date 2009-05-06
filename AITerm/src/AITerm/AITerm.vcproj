@@ -192,6 +192,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\QuaryGenerator.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\QuaryGenerator.h"
+			>
+		</File>
+		<File
 			RelativePath=".\SemanticTemplateProcessor.cpp"
 			>
 		</File>

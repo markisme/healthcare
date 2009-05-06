@@ -2,6 +2,7 @@
 
 #include "NamedEntityRecognition.h"
 #include "SemanticTemplateProcessor.h"
+#include "QuaryGenerator.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -27,12 +28,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	// 템플릿 매칭 처리
 	SemanticTemplateProcessor semanticTemplateProcessor;
 	semanticTemplateProcessor.Init( &resultNamedEntityRecognition );
+	ResultMatchedTemplate & resultMatchedTemplate = semanticTemplateProcessor.GetResultMatchedTemplate();
+
+	// 쿼리 생성기
+	//QuaryGenerator quaryGenerator;
+	//quaryGenerator.Init( resultMatchedTemplate );
 
 	// Just XML test
 	//TestCase testCase;
 	//namedEntity를 변수로 값으로 넘겨서 처리
 	//testCase.XMLLoadTest( &tagList );
 	
-
 	return 0;
 }
