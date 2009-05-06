@@ -19,12 +19,8 @@
 		<slot type="target" need="false">
 			<tag name = "maker"/>
 		</slot>
-		<slot type="component" need="false">
+		<slot type="component1" need="false">
 			<tag name = "cpu"/>
-			<tag name = "cpu_name"/>
-			<tag name = "mb_name"/>
-		</slot>
-		<slot type="component" need="false">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
 		</slot>
@@ -42,12 +38,12 @@
 			<tag name = "performance"/>
 
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component1" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
 			<tag name = "info_keyword"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component2" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
 			<tag name = "info_keyword"/>
@@ -65,7 +61,7 @@
 		<slot type="target" need="true">
 			<tag name = "maker"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component1" need="true">
 			<tag name = "maker"/>
 			<tag name = "cpu"/>
 		</slot>
@@ -76,11 +72,11 @@
 			<tag name = "comparison"/>
 			<tag name = "support"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component1" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component2" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
 		</slot>
@@ -100,7 +96,7 @@
 		<slot type="location" need="true">
 			<tag name = "dealer"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component1" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
 		</slot>
@@ -113,7 +109,7 @@
 		<slot type="target" need="true">
 			<tag name = "mb_name"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component1" need="true">
 			<tag name = "hdd_interface_1"/>
 			<tag name = "hdd_interface_2"/>
 		</slot>
@@ -149,7 +145,7 @@
 		<slot type="target" need="false"> 
 			<tag name = "performance"/>
 		</slot>
-		<slot type="component" need="true">
+		<slot type="component1" need="true">
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>

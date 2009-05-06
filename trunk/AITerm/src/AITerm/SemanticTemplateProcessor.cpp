@@ -16,19 +16,17 @@ void SemanticTemplateProcessor::Init( ResultNamedEntityRecognition * resultNamed
 	LoadTemplateList( tempList );
 
 	// 매칭되는 템플릿 찾기
-	ResultMatchedTemplate resultMatchedTemplate;
-
 	int count = resultNamedEntityRecognition->size();
 	for( int num = 0; num < count; num++ )
 	{
 		NamedEntityList & namedEntityList = (*resultNamedEntityRecognition)[ num ];
 		MatchedTemplate matchedTemplate;
 		CompareTagname( tempList, namedEntityList, matchedTemplate );
-		resultMatchedTemplate.push_back( matchedTemplate );
+		_resultMatchedTemplate.push_back( matchedTemplate );
 	}
 
 	// 저장
-	SaveResultSemanticTemplateProcess( resultMatchedTemplate );
+	SaveResultSemanticTemplateProcess( _resultMatchedTemplate );
 }
 
 void SemanticTemplateProcessor::Uninit()

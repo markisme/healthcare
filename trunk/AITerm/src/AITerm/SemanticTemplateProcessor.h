@@ -1,3 +1,4 @@
+#pragma once
 #include "NamedEntityRecognition.h"
 
 struct TemplateSlot
@@ -39,6 +40,7 @@ public:
 
 	void LoadTemplateList( TemplateList & tempList );
 	void SaveResultSemanticTemplateProcess( ResultMatchedTemplate & inResultMatchedTemplate );
+	ResultMatchedTemplate & GetResultMatchedTemplate() { return _resultMatchedTemplate; }
 
 private:
 	bool IsMatchWord( NamedEntityList & namedEntityList, std::string & tagName, MatchedTemplate & matchedTemplate, MatchedSlot & outMatchedSlot );
@@ -47,4 +49,5 @@ private:
 	void SelectTemplate( ResultMatchedTemplate & resultMatchedTemplate, MatchedTemplate & outMatchedTemplate );
 
 private:
+	ResultMatchedTemplate _resultMatchedTemplate;
 };
