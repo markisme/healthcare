@@ -41,6 +41,7 @@ public:
 	bool GetColumnsList( std::string tableName, ColList & colList );
 	bool GetDataList( std::string tableName, DataList & dataList );
 	bool MysqlQuery( std::string query );
+	bool MysqlQuery( std::string query, DataList & dataList );
 
 	static DBConnector & GetInstance() { return _instance; }
 
