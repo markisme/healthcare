@@ -175,7 +175,7 @@
         <tag name="maximum" curpos="6" deppos="7" part="A">best</tag>
         <tag name="product" curpos="7" deppos="4" part="N">computer</tag>
         <tag name="N/A" curpos="8" deppos="7" part="Prep">with</tag>
-        <tag name="number" curpos="9" deppos="10" part="U">1000000</tag>
+        <tag name="number" curpos="9" deppos="10" part="U">100000</tag>
         <tag name="price" curpos="10" deppos="8" part="N">won</tag>
     </question>
     <question no="22">

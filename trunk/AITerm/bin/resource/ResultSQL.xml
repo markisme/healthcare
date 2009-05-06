@@ -1,27 +1,27 @@
 <resource>
-    <question>SELECT IF((SELECT cpu_socket FROM cpu WHERE cpu_name='e7400') = (SELECT cpu_socket FROM cpu WHERE cpu_name='e5200'), 'TRUE', 'FALSE' )</question>
-    <question>SELECT price FROM  cpu WHERE cpu_name='e7400'</question>
-    <question>SELECT shop_url FROM cpu WHERE cpu_name='e7400'</question>
-    <question>SELECT cpu_socket FROM  cpu WHERE cpu_name='e7400'</question>
-    <question>SELECT maker FROM  cpu WHERE cpu_name='e7400'</question>
-    <question>SELECT maker FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT DISTINCT mb_name FROM mainboard WHERE maker='asus'</question>
-    <question>SELECT graphic_interface FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT cpu_socket FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT info_text FROM info WHERE info_keyword='pci-e'</question>
-    <question>SELECT MAX(date_released) FROM cpu_core ORDER BY date_released DESC</question>
-    <question>SELECT IF( SELECT COUNT(mainboard) FROM mainboard WHERE hdd_interface_1='sata2', 'TRUE', 'FALSE' )</question>
-    <question>SELECT extension_slot FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT graphic_card FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT audio_card FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT lan_card FROM  mainboard WHERE mb_name='p5kpl/1600'</question>
-    <question>SELECT ABS((SELECT price FROM cpu WHERE cpu_name='e7400') - (SELECT price FROM cpu WHERE cpu_name='e5200') )</question>
-    <question>SELECT DISTINCT cpu_socket FROM  WHERE cpu='cpu'</question>
-    <question>SELECT * FROM info WHERE info_keyword='am2' OR info_keyword='am3'</question>
-    <question>SELECT * FROM info WHERE info_keyword='sata' OR info_keyword='ata'</question>
-    <question>SELECT * FROM cpu WHERE cpu_name='e7400' OR cpu_name='e5200'</question>
-    <question>SELECT cpu_name, mb_name, cpu.price, mainboard.price FROM cpu, mainboard WHERE cpu.price + mainboard.price < number ORDER BY cpu.clock_frequency DESC LIMIT 1</question>
-    <question>SELECT cpu_name, mb_name FROM cpu, mainboard WHERE cpu.cpu_socket = mainboard.cpu_socket AND clock_frequency+l2_cache = (SELECT MAX(clock_frequency+l2_cache) FROM cpu ) ORDER BY mainboard.price DESC LIMIT 1</question>
-    <question></question>
-    <question>SELECT maker FROM   WHERE cpu='cpu'</question>
+    <question no="0">SELECT IF((SELECT cpu_socket FROM cpu WHERE cpu_name='e7400') = (SELECT cpu_socket FROM cpu WHERE cpu_name='e5200'), 'TRUE', 'FALSE' )</question>
+    <question no="1">SELECT price FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="2">SELECT shop_url FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="3">SELECT cpu_socket FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="4">SELECT maker FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="5">SELECT maker FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="6">SELECT DISTINCT mb_name FROM mainboard WHERE maker='asus'</question>
+    <question no="7">SELECT graphic_interface FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="8">SELECT cpu_socket FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="9">SELECT info_text FROM info WHERE info_keyword='pci-e'</question>
+    <question no="10">SELECT MAX(date_released) FROM cpu_core ORDER BY date_released DESC</question>
+    <question no="11">SELECT IF( (SELECT COUNT(hdd_interface_1) FROM mainboard WHERE mb_name='p5kpl/1600')>0, 'TRUE', 'FALSE' )</question>
+    <question no="12">SELECT extension_slot FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="13">SELECT graphic_card FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="14">SELECT audio_card FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="15">SELECT lan_card FROM mainboard WHERE mb_name='p5kpl/1600'</question>
+    <question no="16">SELECT ABS((SELECT price FROM cpu WHERE cpu_name='e7400') - (SELECT price FROM cpu WHERE cpu_name='e5200') )</question>
+    <question no="17">SELECT DISTINCT cpu_socket FROM mainboard WHERE maker='intel'</question>
+    <question no="18">SELECT * FROM info WHERE info_keyword='am2' OR info_keyword='am3'</question>
+    <question no="19">SELECT * FROM info WHERE info_keyword='sata' OR info_keyword='ata'</question>
+    <question no="20">SELECT * FROM cpu WHERE cpu_name='e7400' OR cpu_name='e5200'</question>
+    <question no="21">SELECT cpu_name, mb_name, cpu.price, mainboard.price FROM cpu, mainboard WHERE cpu.price + mainboard.price < 100000 ORDER BY cpu.clock_frequency+cpu.l2_cache DESC LIMIT 1</question>
+    <question no="22">SELECT cpu_name, mb_name FROM cpu, mainboard WHERE cpu.cpu_socket = mainboard.cpu_socket AND clock_frequency+l2_cache = (SELECT MAX(clock_frequency+l2_cache) FROM cpu ) ORDER BY mainboard.price DESC LIMIT 1</question>
+    <question no="23">SELECT cpu_name FROM cpu WHERE cpu.clock_frequency / cpu.price > 0 ORDER BY cpu.clock_frequency / cpu.price DESC LIMIT 1</question>
+    <question no="24">SELECT maker FROM  WHERE cpu='cpu'</question>
 </resource>

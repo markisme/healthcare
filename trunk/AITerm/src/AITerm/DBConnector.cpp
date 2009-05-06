@@ -218,3 +218,59 @@ bool DBConnector::MysqlQuery( std::string query )
 
 	return TRUE;
 }
+
+bool DBConnector::MysqlQuery( std::string query, DataList & dataList )
+{
+	MYSQL_ROW row;
+	MYSQL_RES *sql_result;
+
+	int rowCount = 0;
+
+	mysql_init(&_mysql);
+	if (mysql_real_connect(&_mysql, _info.ip.c_str(),_info.user.c_str(),_info.pass.c_str(),_info.dbName.c_str(),_info.port,0,0))
+	{
+		mysql_query(&_mysql, query.c_str());
+
+		sql_result=mysql_store_result(&_mysql);
+		if( sql_result )
+		{
+			row=mysql_fetch_row(sql_result);
+			while( row != NULL )
+			{
+				// row 구조체 만들기
+				RowData rowdata;
+				rowdata._rowNum = rowCount;
+
+				// row에 데이터 채우기
+				int count = mysql_num_fields(sql_result); // row 크기
+				for( int num = 0; num < count; num++ )
+				{
+					char * str = (char*)row[num];
+					if( str != NULL )
+					{
+						rowdata._data.push_back(str);
+					}
+					else
+					{
+						rowdata._data.push_back("");
+					}
+				}
+
+				// 리스트에 row 데이터 추가
+				dataList.push_back(rowdata);
+				rowCount++;
+
+				// 다음 row 패치
+				row=mysql_fetch_row(sql_result);
+			}
+		}
+		else
+		{
+			return FALSE;
+		}
+
+		mysql_close(&_mysql);
+	}
+
+	return TRUE;
+}

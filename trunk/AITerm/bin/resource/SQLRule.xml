@@ -17,7 +17,6 @@
 			<exp type="$c1.tx"/>
 		</expression>
 	</sql>
-
 	<sql tempNo="0" no="1"> // 질문9,
 		<need_slot_list>
 			<slot type="focus" value="pci-e"/>
@@ -26,7 +25,6 @@
 			<exp type="$f.va"/>
 		</expression>
 	</sql>
-
 	<sql tempNo="0" no="2"> // 질문10,
 		<need_slot_list>
 			<slot type="focus" value="date"/>
@@ -48,7 +46,6 @@
 			<exp type="$c2.tx"/>
 		</expression>
 	</sql>
-
 	<sql tempNo="1" no="1"> // 질문18, 질문19
 		<need_slot_list>
 			<slot type="component" value="info_keyword"/>
@@ -58,7 +55,6 @@
 			<exp type="$c2.va"/>
 		</expression>
 	</sql>
-
 	<sql tempNo="1" no="2"> // 질문20,
 		<need_slot_list>
 			<slot type="focus" value="difference"/>
@@ -83,16 +79,15 @@
 			<exp type="$c1.tx"/>
 		</expression>
 	</sql>
-
 	<sql tempNo="2" no="1"> // 질문17
 		<need_slot_list>
 			<slot type="focus" value="cpu_socket"/>
 		</need_slot_list>
 		<expression type="SELECT DISTINCT %s FROM %s WHERE %s='%s'">
 			<exp type="$f.va"/>
-			<exp type="$c1.tb"/>
-			<exp type="$c1.va"/>
-			<exp type="$c1.tx"/>
+			<exp type="$t.tb"/>
+			<exp type="$t.va"/>
+			<exp type="$t.tx"/>
 		</expression>
 	</sql>
 
@@ -125,11 +120,11 @@
 		<need_slot_list>
 			<slot type="focus" value="support"/>
 		</need_slot_list>
-		<expression type="SELECT IF( SELECT COUNT(%s) FROM %s WHERE %s='%s', 'TRUE', 'FALSE' )">
-			<exp type="$t.tb"/>
-			<exp type="$c1.tb"/>
+		<expression type="SELECT IF( (SELECT COUNT(%s) FROM %s WHERE %s='%s')>0, 'TRUE', 'FALSE' )">
 			<exp type="$c1.va"/>
-			<exp type="$c1.tx"/>
+			<exp type="$t.tb"/>
+			<exp type="$t.va"/>
+			<exp type="$t.tx"/>
 		</expression>
 	</sql>
 
@@ -137,8 +132,8 @@
 		<need_slot_list>
 			<slot type="option" value="number"/>
 		</need_slot_list>
-		<expression type="SELECT cpu_name, mb_name, cpu.price, mainboard.price FROM cpu, mainboard WHERE cpu.price + mainboard.price < %s ORDER BY cpu.clock_frequency DESC LIMIT 1">
-			<exp type="$o.va"/>
+		<expression type="SELECT cpu_name, mb_name, cpu.price, mainboard.price FROM cpu, mainboard WHERE cpu.price + mainboard.price < %s ORDER BY cpu.clock_frequency+cpu.l2_cache DESC LIMIT 1">
+			<exp type="$o.tx"/>
 		</expression>
 
 	</sql>
@@ -153,7 +148,7 @@
 
 	<sql tempNo="7" no="0"> // 질문 23,
 		<need_slot_list>
-			<slot type="option" value="maximum"/>
+			<slot type="question" value="what"/>
 		</need_slot_list>
 		<expression type="SELECT cpu_name FROM cpu WHERE cpu.clock_frequency / cpu.price > 0 ORDER BY cpu.clock_frequency / cpu.price DESC LIMIT 1">
 		</expression>

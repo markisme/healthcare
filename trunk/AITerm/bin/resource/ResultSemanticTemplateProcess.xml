@@ -118,7 +118,7 @@
         <slot type="question" tagname="how">how</slot>
         <slot type="focus" tagname="constitution">constitute</slot>
         <slot type="target" tagname="maximum">best</slot>
-        <slot type="option" tagname="number">1000000</slot>
+        <slot type="option" tagname="number">100000</slot>
     </question>
     <question questionno="22" templateno="6">
         <slot type="question" tagname="how">how</slot>
