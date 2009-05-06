@@ -12,11 +12,14 @@ QueryGenerator::~QueryGenerator()
 
 void QueryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic )
 {
+	// 디비 사전 셋
 	_dbDic = dbDic;
 
+	// 쿼리룰 로드
 	QueryRuleList queryRuleList;
 	LoadQueryRule( queryRuleList );
 
+	// 쿼리 리스트 만들기
 	QueryList queryList;
 
 	int count = resultMatchedTemplate.size();
@@ -27,8 +30,10 @@ void QueryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate, DBDict
 		queryList.push_back( result );
 	}
 
+	// 쿼리 저장
 	SaveQuery( queryList );
 
+	// 디비에 접속해서 쿼리 결과 얻어 오기
 	SaveResultQuery( queryList );	
 }
 
@@ -181,6 +186,7 @@ void QueryGenerator::SaveResultQuery( QueryList & queryList )
 {
 	std::vector<DataList> dbResultList;
 
+	// 디비에 쿼리 날려서 결과 얻어 오기
 	int queryCount = queryList.size();
 	for( int num = 0; num < queryCount; num++)
 	{
@@ -192,6 +198,7 @@ void QueryGenerator::SaveResultQuery( QueryList & queryList )
 		dbResultList.push_back( dataList );
 	}
 
+	// 결과 저장 하기
 	XmlDocument xmlDoc;
 	XmlNode * resNode = xmlDoc.AddNode( "resource" );
 
