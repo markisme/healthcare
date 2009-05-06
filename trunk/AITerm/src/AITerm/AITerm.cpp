@@ -2,7 +2,7 @@
 
 #include "NamedEntityRecognition.h"
 #include "SemanticTemplateProcessor.h"
-#include "QuaryGenerator.h"
+#include "QueryGenerator.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -32,8 +32,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	ResultMatchedTemplate & resultMatchedTemplate = semanticTemplateProcessor.GetResultMatchedTemplate();
 
 	// Äõ¸® »ý¼º±â
-	QuaryGenerator quaryGenerator;
-	quaryGenerator.Init( resultMatchedTemplate, dbDic );
+	QueryGenerator queryGenerator;
+	queryGenerator.Init( resultMatchedTemplate, dbDic );
 
 	// Just XML test
 	//TestCase testCase;
