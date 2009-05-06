@@ -27,54 +27,9 @@ void QuaryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate, DBDict
 		quaryList.push_back( result );
 	}
 
-	SaveResultQuary( quaryList );
+	SaveQuary( quaryList );
 
-	std::vector<DataList> dbResultList;
-
-	int quaryCount = quaryList.size();
-	for( int num = 0; num < quaryCount; num++)
-	{
-		std::string sql = quaryList[ num ];
-		
-		DataList dataList;
-		DBConnector::GetInstance().MysqlQuery( sql.c_str(), dataList );
-
-		dbResultList.push_back( dataList );
-	}
-
-	XmlDocument xmlDoc;
-	XmlNode * resNode = xmlDoc.AddNode( "resource" );
-
-	count = dbResultList.size();
-	for( int num = 0; num < count; num++ )
-	{
-		XmlNode * questionNode = resNode->AddNode( "question" );
-
-		char buf[8]; itoa(num, buf, 10);
-		questionNode->SetAttribute( "no", buf );
-
-		DataList & dataList = dbResultList[ num ];
-		
-		int dataCount = dataList.size();
-		for( int cnt = 0; cnt < dataCount; cnt++ )
-		{
-			XmlNode * rowNode = questionNode->AddNode( "row" );
-
-			RowData row = dataList[ cnt ];
-
-			int rowCount = row._data.size();
-			for( int k = 0; k < rowCount; k++ )
-			{
-				XmlNode * dataNode = rowNode->AddNode( "data" );
-
-				std::string data = row._data[ k ];
-				dataNode->SetText( data.c_str(), XmlNode::NUMBER );
-			}
-		}
-	}
-
-	std::string path = "./resource/ResultDB.xml";
-	xmlDoc.SaveFile( path.c_str() );
+	SaveResultQuary( quaryList );	
 }
 
 void QuaryGenerator::Uninit()
@@ -201,7 +156,7 @@ void QuaryGenerator::LoadQuaryRule( QuaryRuleList & quaryRuleList )
 	}
 }
 
-void QuaryGenerator::SaveResultQuary( QuaryList & quaryList )
+void QuaryGenerator::SaveQuary( QuaryList & quaryList )
 {
 	XmlDocument xmlDoc;
 	XmlNode * resNode = xmlDoc.AddNode( "resource" );
@@ -219,6 +174,56 @@ void QuaryGenerator::SaveResultQuary( QuaryList & quaryList )
 	}
 
 	std::string path = "./resource/ResultSQL.xml";
+	xmlDoc.SaveFile( path.c_str() );
+}
+
+void QuaryGenerator::SaveResultQuary( QuaryList & quaryList )
+{
+	std::vector<DataList> dbResultList;
+
+	int quaryCount = quaryList.size();
+	for( int num = 0; num < quaryCount; num++)
+	{
+		std::string sql = quaryList[ num ];
+		
+		DataList dataList;
+		DBConnector::GetInstance().MysqlQuery( sql.c_str(), dataList );
+
+		dbResultList.push_back( dataList );
+	}
+
+	XmlDocument xmlDoc;
+	XmlNode * resNode = xmlDoc.AddNode( "resource" );
+
+	int count = dbResultList.size();
+	for( int num = 0; num < count; num++ )
+	{
+		XmlNode * questionNode = resNode->AddNode( "question" );
+
+		char buf[8]; itoa(num, buf, 10);
+		questionNode->SetAttribute( "no", buf );
+
+		DataList & dataList = dbResultList[ num ];
+		
+		int dataCount = dataList.size();
+		for( int cnt = 0; cnt < dataCount; cnt++ )
+		{
+			XmlNode * rowNode = questionNode->AddNode( "row" );
+
+			RowData row = dataList[ cnt ];
+
+			int rowCount = row._data.size();
+			for( int k = 0; k < rowCount; k++ )
+			{
+				XmlNode * dataNode = rowNode->AddNode( "data" );
+
+				std::string data = row._data[ k ];
+				dataNode->SetText( data.c_str(), XmlNode::NUMBER );
+			}
+		}
+	}
+
+	std::string path = "./resource/ResultDB.xml";
 	xmlDoc.SaveFile( path.c_str() );
 }
 

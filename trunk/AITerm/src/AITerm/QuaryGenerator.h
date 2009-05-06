@@ -54,6 +54,7 @@ public:
 
 private:
 	void LoadQuaryRule( QuaryRuleList & quaryRuleList );
+	void SaveQuary( QuaryList & quaryList );
 	void SaveResultQuary( QuaryList & quaryList );
 	std::string GeneratorQuary( MatchedTemplate & matchedTemplate, QuaryRuleList & quaryRuleList );
 	std::string GetExpression( std::string expression, std::vector<std::string> valueList );
