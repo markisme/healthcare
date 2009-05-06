@@ -31,8 +31,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	ResultMatchedTemplate & resultMatchedTemplate = semanticTemplateProcessor.GetResultMatchedTemplate();
 
 	// Äõ¸® »ý¼º±â
-	//QuaryGenerator quaryGenerator;
-	//quaryGenerator.Init( resultMatchedTemplate );
+	QuaryGenerator quaryGenerator;
+	quaryGenerator.Init( resultMatchedTemplate );
 
 	// Just XML test
 	//TestCase testCase;
