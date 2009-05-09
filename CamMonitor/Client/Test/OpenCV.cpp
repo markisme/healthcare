@@ -18,6 +18,8 @@ void OpenCV::Init()
 void OpenCV::Uninit()
 {
 	_alert = false;
+
+	_regionList.clear();
 }
 
 // 전체 화면 영역 변화 감지
@@ -71,6 +73,9 @@ void OpenCV::StartMonitor()
 
 		// 가져온 프레임으로부터 영상 데이터를 얻는다.
 		current_image = cvRetrieveFrame( capture );
+
+		// 수정해야함.. 맨 처음으로
+		InitPart( current_image );
 
 		if( _alert == true && save_image != NULL )
 		{
@@ -165,102 +170,7 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	cvCvtColor(current_image, gray, CV_BGR2GRAY);
 	cvCvtColor(previous_image, oldgray, CV_BGR2GRAY);
 
-	int xpart = gray->width / 8;
-	int ypart = gray->height / 8;
-
-	std::vector<ResionRect> resionList;
-	ResionRect resion01(xpart*0,ypart*0,xpart*1,ypart*1);
-	ResionRect resion02(xpart*1,ypart*0,xpart*2,ypart*1);
-	ResionRect resion03(xpart*2,ypart*0,xpart*3,ypart*1);
-	ResionRect resion04(xpart*3,ypart*0,xpart*4,ypart*1);
-	ResionRect resion05(xpart*4,ypart*0,xpart*5,ypart*1);
-	ResionRect resion06(xpart*5,ypart*0,xpart*6,ypart*1);
-	ResionRect resion07(xpart*6,ypart*0,xpart*7,ypart*1);
-	ResionRect resion08(xpart*7,ypart*0,xpart*8,ypart*1);
-
-	ResionRect resion09(xpart*0,ypart*1,xpart*1,ypart*2);
-	ResionRect resion10(xpart*1,ypart*1,xpart*2,ypart*2);
-	ResionRect resion11(xpart*2,ypart*1,xpart*3,ypart*2);
-	ResionRect resion12(xpart*3,ypart*1,xpart*4,ypart*2);
-	ResionRect resion13(xpart*4,ypart*1,xpart*5,ypart*2);
-	ResionRect resion14(xpart*5,ypart*1,xpart*6,ypart*2);
-	ResionRect resion15(xpart*6,ypart*1,xpart*7,ypart*2);
-	ResionRect resion16(xpart*7,ypart*1,xpart*8,ypart*2);
-
-	ResionRect resion17(xpart*0,ypart*2,xpart*1,ypart*3);
-	ResionRect resion18(xpart*1,ypart*2,xpart*2,ypart*3);
-	ResionRect resion19(xpart*2,ypart*2,xpart*3,ypart*3);
-	ResionRect resion20(xpart*3,ypart*2,xpart*4,ypart*3);
-	ResionRect resion21(xpart*4,ypart*2,xpart*5,ypart*3);
-	ResionRect resion22(xpart*5,ypart*2,xpart*6,ypart*3);
-	ResionRect resion23(xpart*6,ypart*2,xpart*7,ypart*3);
-	ResionRect resion24(xpart*7,ypart*2,xpart*8,ypart*3);
-
-	ResionRect resion25(xpart*0,ypart*3,xpart*1,ypart*4);
-	ResionRect resion26(xpart*1,ypart*3,xpart*2,ypart*4);
-	ResionRect resion27(xpart*2,ypart*3,xpart*3,ypart*4);
-	ResionRect resion28(xpart*3,ypart*3,xpart*4,ypart*4);
-	ResionRect resion29(xpart*4,ypart*3,xpart*5,ypart*4);
-	ResionRect resion30(xpart*5,ypart*3,xpart*6,ypart*4);
-	ResionRect resion31(xpart*6,ypart*3,xpart*7,ypart*4);
-	ResionRect resion32(xpart*7,ypart*3,xpart*8,ypart*4);
-
-	ResionRect resion33(xpart*0,ypart*4,xpart*1,ypart*5);
-	ResionRect resion34(xpart*1,ypart*4,xpart*2,ypart*5);
-	ResionRect resion35(xpart*2,ypart*4,xpart*3,ypart*5);
-	ResionRect resion36(xpart*3,ypart*4,xpart*4,ypart*5);
-	ResionRect resion37(xpart*4,ypart*4,xpart*5,ypart*5);
-	ResionRect resion38(xpart*5,ypart*4,xpart*6,ypart*5);
-	ResionRect resion39(xpart*6,ypart*4,xpart*7,ypart*5);
-	ResionRect resion40(xpart*7,ypart*4,xpart*8,ypart*5);
-
-	ResionRect resion41(xpart*0,ypart*5,xpart*1,ypart*6);
-	ResionRect resion42(xpart*1,ypart*5,xpart*2,ypart*6);
-	ResionRect resion43(xpart*2,ypart*5,xpart*3,ypart*6);
-	ResionRect resion44(xpart*3,ypart*5,xpart*4,ypart*6);
-	ResionRect resion45(xpart*4,ypart*5,xpart*5,ypart*6);
-	ResionRect resion46(xpart*5,ypart*5,xpart*6,ypart*6);
-	ResionRect resion47(xpart*6,ypart*5,xpart*7,ypart*6);
-	ResionRect resion48(xpart*7,ypart*5,xpart*8,ypart*6);
-
-	ResionRect resion49(xpart*0,ypart*6,xpart*1,ypart*7);
-	ResionRect resion50(xpart*1,ypart*6,xpart*2,ypart*7);
-	ResionRect resion51(xpart*2,ypart*6,xpart*3,ypart*7);
-	ResionRect resion52(xpart*3,ypart*6,xpart*4,ypart*7);
-	ResionRect resion53(xpart*4,ypart*6,xpart*5,ypart*7);
-	ResionRect resion54(xpart*5,ypart*6,xpart*6,ypart*7);
-	ResionRect resion55(xpart*6,ypart*6,xpart*7,ypart*7);
-	ResionRect resion56(xpart*7,ypart*6,xpart*8,ypart*7);
-
-	ResionRect resion57(xpart*0,ypart*7,xpart*1,ypart*8);
-	ResionRect resion58(xpart*1,ypart*7,xpart*2,ypart*8);
-	ResionRect resion59(xpart*2,ypart*7,xpart*3,ypart*8);
-	ResionRect resion60(xpart*3,ypart*7,xpart*4,ypart*8);
-	ResionRect resion61(xpart*4,ypart*7,xpart*5,ypart*8);
-	ResionRect resion62(xpart*5,ypart*7,xpart*6,ypart*8);
-	ResionRect resion63(xpart*6,ypart*7,xpart*7,ypart*8);
-	ResionRect resion64(xpart*7,ypart*7,xpart*8,ypart*8);
-	
-	resionList.push_back( resion01 ); resionList.push_back( resion02 ); resionList.push_back( resion03 ); resionList.push_back( resion04 );
-	resionList.push_back( resion05 ); resionList.push_back( resion06 );	resionList.push_back( resion07 ); resionList.push_back( resion08 );
-	resionList.push_back( resion09 ); resionList.push_back( resion10 );	resionList.push_back( resion11 ); resionList.push_back( resion12 );
-	resionList.push_back( resion13 ); resionList.push_back( resion14 );	resionList.push_back( resion15 ); resionList.push_back( resion16 );
-
-	resionList.push_back( resion17 ); resionList.push_back( resion18 ); resionList.push_back( resion19 ); resionList.push_back( resion20 );
-	resionList.push_back( resion21 ); resionList.push_back( resion22 );	resionList.push_back( resion23 ); resionList.push_back( resion24 );
-	resionList.push_back( resion25 ); resionList.push_back( resion26 );	resionList.push_back( resion27 ); resionList.push_back( resion28 );
-	resionList.push_back( resion29 ); resionList.push_back( resion30 );	resionList.push_back( resion31 ); resionList.push_back( resion32 );
-
-	resionList.push_back( resion33 ); resionList.push_back( resion34 ); resionList.push_back( resion35 ); resionList.push_back( resion36 );
-	resionList.push_back( resion37 ); resionList.push_back( resion38 );	resionList.push_back( resion39 ); resionList.push_back( resion40 );
-	resionList.push_back( resion41 ); resionList.push_back( resion42 );	resionList.push_back( resion43 ); resionList.push_back( resion44 );
-	resionList.push_back( resion45 ); resionList.push_back( resion46 );	resionList.push_back( resion47 ); resionList.push_back( resion48 );
-
-	resionList.push_back( resion49 ); resionList.push_back( resion50 ); resionList.push_back( resion51 ); resionList.push_back( resion52 );
-	resionList.push_back( resion53 ); resionList.push_back( resion54 );	resionList.push_back( resion55 ); resionList.push_back( resion56 );
-	resionList.push_back( resion57 ); resionList.push_back( resion58 );	resionList.push_back( resion59 ); resionList.push_back( resion60 );
-	resionList.push_back( resion61 ); resionList.push_back( resion62 );	resionList.push_back( resion63 ); resionList.push_back( resion64 );
-
+	// 변한 영역 체크
 	float CriticalValue = 15.0f;
 	for(int x=0; x<gray->width; x+=6) {  
 		for(int y=0; y<gray->height; y+=6) {   
@@ -271,11 +181,11 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 
 			if(fabs(float((float)c1-(float)c2))>CriticalValue) 
 			{
-				int size = resionList.size();
+				int size = _regionList.size();
 				for( int num = 0; num < size; num++ )
 				{
-					ResionRect & rect = resionList[ num ];
-					rect.CheckResion( x, y );
+					RegionRect & rect = _regionList[ num ];
+					rect.CheckRegion( x, y );
 #ifdef TEST
 					//rect.DrawResion( hDC );
 #endif
@@ -295,10 +205,10 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 
 	// 판단
 	int totalCount = 0;
-	int size = resionList.size();
+	int size = _regionList.size();
 	for( int num = 0; num < size; num++ )
 	{
-		ResionRect & rect = resionList[ num ];
+		RegionRect & rect = _regionList[ num ];
 		int count = rect._checkCount;
 		if( rect._checkCount > 5 )
 		{
@@ -314,7 +224,7 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	totalCount = 0;
 	for( int num = 0; num < size; num++ )
 	{
-		ResionRect & rect = resionList[ num ];
+		RegionRect & rect = _regionList[ num ];
 		if( rect._checkCount < 2 )
 		{
 			totalCount++;
@@ -327,4 +237,111 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	}
 
 	return OBJECT_MOVE;
+}
+
+void OpenCV::InitPart( IplImage* current_image )
+{
+	// 나중에 지우자 이부분
+	_regionList.clear();
+
+	// 설정
+	int count = 8;
+	int xpart = current_image->width / count;
+	int ypart = current_image->height / count;
+
+	// 박스 나누기
+	for( int num = 0; num < count; num++ )
+	{
+		for( int cnt = 0; cnt < count; cnt++ )
+		{
+			RegionRect region((num*10)+cnt,xpart*cnt,ypart*num,xpart*(cnt+1),ypart*(num+1));
+			_regionList.push_back( region );
+		}
+	}
+
+	// 파트 비교후 삭제
+	ComparePart( current_image );
+}
+
+void OpenCV::ComparePart( IplImage* current_image )
+{
+	IplImage* gray=cvCreateImage(cvGetSize(current_image), IPL_DEPTH_8U,1);
+	cvCvtColor(current_image, gray, CV_BGR2GRAY);
+
+	// 설정
+	int count = 8;
+	int xpart = gray->width / count;
+	int ypart = gray->height / count;
+	float CriticalValue = 15.0f;
+
+	// 각 영역별로 포문 돌기
+	RegionList::iterator it = _regionList.begin();
+	for( ; it != _regionList.end(); it++ )
+	{
+		//
+		RegionRect & rect = *it;
+
+		//
+		int rectCnt = rect._rightbottomX * rect._rightbottomY;
+		int left = rectCnt;
+		int right = rectCnt;
+		int top = rectCnt;
+		int bottom = rectCnt;
+
+		for(int x=rect._lefttopX; x<rect._rightbottomX; x+=6) 
+		{  
+			for(int y=rect._lefttopY; y<rect._rightbottomY; y+=6) 
+			{
+				//
+				uchar c0 = ((uchar*)(gray->imageData + gray->widthStep*y))[x];
+
+				// 좌측 파트 비교
+				if( x - xpart >= 0 )
+				{
+					uchar c1 = ((uchar*)(gray->imageData + gray->widthStep*y))[x-xpart];
+					if(fabs(float((float)c0-(float)c1))>CriticalValue)
+					{
+						left--;
+					}
+				}
+
+				// 우측 파트 비교
+				if( x + xpart <= gray->width )
+				{
+					uchar c2 = ((uchar*)(gray->imageData + gray->widthStep*y))[x+xpart];
+					if(fabs(float((float)c0-(float)c2))>CriticalValue)
+					{
+						right--;
+					}
+				}
+
+				// 상위 파트 비교
+				if( y - ypart >= 0 )
+				{
+					uchar c3 = ((uchar*)(gray->imageData + gray->widthStep*(y-ypart)))[x];
+					if(fabs(float((float)c0-(float)c3))>CriticalValue)
+					{
+						top--;
+					}
+				}
+
+				// 하위 파트 비교
+				if( y + ypart <= gray->height )
+				{
+					uchar c4 = ((uchar*)(gray->imageData + gray->widthStep*(y+ypart)))[x];
+					if(fabs(float((float)c0-(float)c4))>CriticalValue)
+					{
+						bottom--;
+					}
+				}
+			}
+		}
+
+		// 주변에 비슷한 영역이 있는지 판단
+		if( left < 10 || right < 10 || top < 10 || bottom < 10 )
+		{
+			// 현재 파트 삭제
+			_regionList.erase( it );
+		}
+	}
 }

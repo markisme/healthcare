@@ -29,8 +29,8 @@ BOOL CTestApp::InitInstance()
 	std::string id;
 	std::string pw;
 	int clientPort = 200;
-	std::string ip = "211.189.20.246";
-	//std::string ip = "211.189.19.160";
+	//std::string ip = "211.189.20.246";
+	std::string ip = "211.189.19.160";
 	//std::string ip = "127.0.0.1";
 	int serverPort = 10000;
 
