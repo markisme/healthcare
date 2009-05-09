@@ -276,17 +276,18 @@ void OpenCV::ComparePart( IplImage* current_image )
 
 	// 각 영역별로 포문 돌기
 	RegionList::iterator it = _regionList.begin();
-	for( ; it != _regionList.end(); it++ )
+	for( ; it != _regionList.end(); )
 	{
 		//
 		RegionRect & rect = *it;
 
 		//
-		int rectCnt = rect._rightbottomX * rect._rightbottomY;
-		int left = rectCnt;
-		int right = rectCnt;
-		int top = rectCnt;
-		int bottom = rectCnt;
+		int rectCnt = ( rect._rightbottomX - rect._lefttopX ) * 
+					  ( rect._rightbottomY - rect._lefttopY ) / 36;
+		int left = 140;
+		int right = 140;
+		int top = 140;
+		int bottom = 140;
 
 		for(int x=rect._lefttopX; x<rect._rightbottomX; x+=6) 
 		{  
@@ -299,7 +300,7 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( x - xpart >= 0 )
 				{
 					uchar c1 = ((uchar*)(gray->imageData + gray->widthStep*y))[x-xpart];
-					if(fabs(float((float)c0-(float)c1))>CriticalValue)
+					if(fabs(float((float)c0-(float)c1))<CriticalValue)
 					{
 						left--;
 					}
@@ -309,7 +310,7 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( x + xpart <= gray->width )
 				{
 					uchar c2 = ((uchar*)(gray->imageData + gray->widthStep*y))[x+xpart];
-					if(fabs(float((float)c0-(float)c2))>CriticalValue)
+					if(fabs(float((float)c0-(float)c2))<CriticalValue)
 					{
 						right--;
 					}
@@ -319,7 +320,7 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( y - ypart >= 0 )
 				{
 					uchar c3 = ((uchar*)(gray->imageData + gray->widthStep*(y-ypart)))[x];
-					if(fabs(float((float)c0-(float)c3))>CriticalValue)
+					if(fabs(float((float)c0-(float)c3))<CriticalValue)
 					{
 						top--;
 					}
@@ -329,7 +330,7 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( y + ypart <= gray->height )
 				{
 					uchar c4 = ((uchar*)(gray->imageData + gray->widthStep*(y+ypart)))[x];
-					if(fabs(float((float)c0-(float)c4))>CriticalValue)
+					if(fabs(float((float)c0-(float)c4))<CriticalValue)
 					{
 						bottom--;
 					}
@@ -341,7 +342,18 @@ void OpenCV::ComparePart( IplImage* current_image )
 		if( left < 10 || right < 10 || top < 10 || bottom < 10 )
 		{
 			// 현재 파트 삭제
-			_regionList.erase( it );
+			if( it != _regionList.begin() )
+			{
+				_regionList.erase( it-- );
+			}
+		}
+		else
+		{
+			it++;
 		}
 	}
+
+	char buf[1024];
+	sprintf( buf, "%d \n", _regionList.size() );
+	OutputDebugString( buf );
 }
