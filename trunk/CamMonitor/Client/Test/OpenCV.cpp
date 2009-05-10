@@ -49,7 +49,7 @@ void OpenCV::StartMonitor()
 
 	// 초기화 설정
 	{
-		cvWaitKey(10);
+		//cvWaitKey(10);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
@@ -189,7 +189,7 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	}
 
 	// 변한 영역 체크
-	float CriticalValue = 15.0f;
+	float CriticalValue = 20.0f;
 	for(int x=0; x<gray->width; x+=6) {  
 		for(int y=0; y<gray->height; y+=6) {   
 			uchar c1 = ((uchar*)(gray->imageData + 
@@ -286,7 +286,7 @@ void OpenCV::ComparePart( IplImage* current_image )
 	int count = 8;
 	int xpart = gray->width / count;
 	int ypart = gray->height / count;
-	float CriticalValue = 15.0f;
+	float CriticalValue = 20.0f;
 
 	// 각 영역별로 포문 돌기
 	RegionList::iterator it = _regionList.begin();
