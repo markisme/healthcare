@@ -73,8 +73,6 @@ private:
 	void ComparePart( IplImage* gray );
 
 private:
-	bool _startMonitor;
 	bool _alert;
-	bool _init;
 	RegionList _regionList;
 };

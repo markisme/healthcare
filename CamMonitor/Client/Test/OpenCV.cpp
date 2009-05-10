@@ -13,25 +13,18 @@ OpenCV::~OpenCV()
 void OpenCV::Init()
 {
 	_alert = false;
-	_init = false;
 	_regionList.clear();
 }
 
 void OpenCV::Uninit()
 {
 	_alert = false;
-	_init = false;
 	_regionList.clear();
 }
 
 // 전체 화면 영역 변화 감지
 void OpenCV::StartMonitor()
 {
-	_startMonitor = true;
-
-	// 이전 프레임
-	IplImage *previous_image = NULL;
-
 	// 현재 프레임
 	IplImage *current_image = NULL;
 
@@ -41,9 +34,6 @@ void OpenCV::StartMonitor()
 	// 현재 시간
 	time_t curTime;
 	time_t alertTime;
-
-	// 프레임 카운트
-	int count = 0;
 
 	// 카메라 캡쳐 초기화
 	// 0 번째 연결된 카메라로부터 연결 
@@ -57,7 +47,38 @@ void OpenCV::StartMonitor()
 	cvNamedWindow( save_captureWidow, CV_WINDOW_AUTOSIZE );
 #endif
 
-	while(_startMonitor)
+	// 초기화 설정
+	{
+		cvWaitKey(10);
+
+		// 카메라로부터 입력된 프레임을 잡는다.
+		// 만약에 실패할시 에러 메시지를 보여준다.
+		if( !cvGrabFrame( capture ) ) 
+		{
+			AfxMessageBox("카메라가 연결되어 있지 않습니다.");
+			return;
+		}
+
+		// 가져온 프레임으로부터 영상 데이터를 얻는다.
+		current_image = cvRetrieveFrame( capture );
+
+		// 파트 설정
+		InitPart( current_image );
+
+		// 성공음
+		MessageBeep(MB_ICONASTERISK);
+
+		// 이미지 저장
+		save_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
+		cvCopy( current_image, save_image );
+		save_image->origin = current_image->origin;
+
+#ifdef TEST
+		cvShowImage( save_captureWidow, save_image );
+#endif
+	}
+
+	while( true )
 	{
 		Sleep(100);
 		cvWaitKey(10);
@@ -70,21 +91,33 @@ void OpenCV::StartMonitor()
 			break;
 		}
 
-		// 프레임 회수를 초기화 한다.
-		if( count % 2 == 0 ) count = 0;
-
-		// 프레임 회수를 증가한다.
-		count++;
-
 		// 가져온 프레임으로부터 영상 데이터를 얻는다.
 		current_image = cvRetrieveFrame( capture );
 
-		// 경보 설정
-		if( _alert == true && save_image != NULL )
-		{
 #ifdef TEST
-			cvShowImage( diff_captureWidow, current_image );
+		cvShowImage( diff_captureWidow, current_image );
 #endif
+
+		// 경보 설정
+		if( _alert == false && save_image != NULL )
+		{
+			// 캠 스테이트를 가져옴
+			CamState camState = CompareImage( current_image, save_image );	
+
+			// 캠이 움직이면 경보 설정
+			if( camState == CAM_MOVE )
+			{
+				// 경고음
+				PlaySound("notify.wav",NULL,SND_APPLICATION | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+
+				// 시간 기록
+				time( &alertTime );
+				_alert = true;
+			}
+		}
+		else if( _alert == true && save_image != NULL )
+		{
+			// 캠 스테이트를 가져옴
 			CamState camState = CompareImage( current_image, save_image );
 
 			//
@@ -102,78 +135,24 @@ void OpenCV::StartMonitor()
 			{
 				PlaySound(NULL, NULL, SND_PURGE);
 				_alert = false;
-				count = 0;
-			}
-
-			continue;
-		}
-
-		//// 초당 30프레임 기준의 현재 프레임을 이전의 프레임에 복사한다.
-		//if( count == 1 )
-		//{
-		//	// 이전의 프레임으로 복사한다.
-		//	previous_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U,	current_image->nChannels);
-
-		//	cvCopy( current_image, previous_image );
-		//}
-		//// 이전 프레임과 현재 프레임을 비교한다. 
-		//else
-		{
-			// 초기화 설정
-			if( !_init )
-			{
-				// 파트 설정
-				InitPart( current_image );
-
-				// 성공음
-				MessageBeep(MB_ICONASTERISK);
-
-				// 이미지 저장
-				save_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
-				cvCopy( current_image, save_image );
-				save_image->origin = current_image->origin;
-
-#ifdef TEST
-				cvShowImage( save_captureWidow, save_image );
-#endif
-
-				// 초기화 완료
-				_init = true;
-			}
-
-			// 캠 스테이트를 가져옴
-			CamState camState = CompareImage( current_image, save_image );	
-
-#ifdef TEST
-			cvShowImage( diff_captureWidow, current_image );
-#endif
-
-			// 캠이 움직이면 경보 설정
-			if( camState == CAM_MOVE && _alert != true )
-			{
-				// 경고음
-				PlaySound("notify.wav",NULL,SND_APPLICATION | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
-				
-				// 시간 기록
-				time( &alertTime );
-				_alert = true;
 			}
 		}
 	}
 
 	// 할당한 메모리 해제
-	if( previous_image != NULL ) 
+	if( save_image != NULL ) 
 	{
-		cvReleaseImage( &previous_image );
+		cvReleaseImage( &save_image );
 	}
 
 	// 카메라 연결 종료
 	cvReleaseCapture( &capture );
-}
 
-void OpenCV::StopMonitor()
-{
-	_startMonitor = false;
+#ifdef TEST
+	// 윈도우 해제
+	cvDestroyWindow( diff_captureWidow );
+	cvDestroyWindow( save_captureWidow );
+#endif
 }
 
 CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image )
