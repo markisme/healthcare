@@ -41,6 +41,7 @@
 
 #include <afxdisp.h>        // MFC 자동화 클래스입니다.
 
+#include <windows.h>
 #include <string>
 #include <vector>
 #include <algorithm>
