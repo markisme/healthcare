@@ -49,8 +49,6 @@ void OpenCV::StartMonitor()
 
 	// 초기화 설정
 	{
-		//cvWaitKey(10);
-
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
 		if( !cvGrabFrame( capture ) ) 
@@ -98,14 +96,14 @@ void OpenCV::StartMonitor()
 		cvShowImage( diff_captureWidow, current_image );
 #endif
 
-		// 경보 설정
-		if( _alert == false && save_image != NULL )
-		{
-			// 캠 스테이트를 가져옴
-			CamState camState = CompareImage( current_image, save_image );	
+		// 캠 스테이트를 가져옴
+		bool isMoveCam = IsMoveCam( current_image, save_image );
 
+		// 경보 설정
+		if( !_alert )
+		{
 			// 캠이 움직이면 경보 설정
-			if( camState == CAM_MOVE )
+			if( isMoveCam )
 			{
 				// 경고음
 				PlaySound("notify.wav",NULL,SND_APPLICATION | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
@@ -115,23 +113,20 @@ void OpenCV::StartMonitor()
 				_alert = true;
 			}
 		}
-		else if( _alert == true && save_image != NULL )
+		else
 		{
-			// 캠 스테이트를 가져옴
-			CamState camState = CompareImage( current_image, save_image );
-
 			//
 			time( &curTime );
 			time_t diffTime = curTime - alertTime;
 
 			// 3초간 캠 움직임 판단
-			if( camState == CAM_MOVE && diffTime >= 60.f )
+			if( isMoveCam && diffTime >= 3.f )
 			{
 				OutputDebugString( "도난 경보\n" );
 				_alert = true;
 				break;
 			}
-			else if( camState != CAM_MOVE )
+			else if( !isMoveCam )
 			{
 				PlaySound(NULL, NULL, SND_PURGE);
 				_alert = false;
@@ -155,7 +150,7 @@ void OpenCV::StartMonitor()
 #endif
 }
 
-CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image )
+bool OpenCV::IsMoveCam( IplImage* current_image, IplImage* previous_image )
 {
 	HWND hWnd = (HWND)cvGetWindowHandle( "diff_camera" );
 	HDC hDC = GetDC(hWnd);
@@ -232,25 +227,10 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 
 	if( totalCount >= size )
 	{
-		return CAM_MOVE;
+		return true;
 	}
 
-	totalCount = 0;
-	for( int num = 0; num < size; num++ )
-	{
-		RegionRect & rect = _regionList[ num ];
-		if( rect._checkCount < 2 )
-		{
-			totalCount++;
-		}
-	}
-
-	if( totalCount >= 60 )
-	{
-		return NONE_MOVE;
-	}
-
-	return OBJECT_MOVE;
+	return false;
 }
 
 void OpenCV::InitPart( IplImage* current_image )
@@ -296,27 +276,27 @@ void OpenCV::ComparePart( IplImage* current_image )
 		RegionRect & rect = *it;
 
 		//
-		int rectCnt = ( rect._rightbottomX - rect._lefttopX ) * 
-					  ( rect._rightbottomY - rect._lefttopY ) / 36;
-		int left = 140;
-		int right = 140;
-		int top = 140;
-		int bottom = 140;
+		int totalCnt = 0;
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
 
 		for(int x=rect._lefttopX; x<rect._rightbottomX; x+=6) 
 		{  
 			for(int y=rect._lefttopY; y<rect._rightbottomY; y+=6) 
 			{
-				//
+				// 4방의 파트 비교 다른 픽셀이 있을시 카운트 증가
 				uchar c0 = ((uchar*)(gray->imageData + gray->widthStep*y))[x];
+				totalCnt++;
 
 				// 좌측 파트 비교
 				if( x - xpart >= 0 )
 				{
 					uchar c1 = ((uchar*)(gray->imageData + gray->widthStep*y))[x-xpart];
-					if(fabs(float((float)c0-(float)c1))<CriticalValue)
+					if(fabs(float((float)c0-(float)c1))>CriticalValue) // 다르면 카운트
 					{
-						left--;
+						left++;
 					}
 				}
 
@@ -324,9 +304,9 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( x + xpart <= gray->width )
 				{
 					uchar c2 = ((uchar*)(gray->imageData + gray->widthStep*y))[x+xpart];
-					if(fabs(float((float)c0-(float)c2))<CriticalValue)
+					if(fabs(float((float)c0-(float)c2))>CriticalValue) // 다르면 카운트
 					{
-						right--;
+						right++;
 					}
 				}
 
@@ -334,9 +314,9 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( y - ypart >= 0 )
 				{
 					uchar c3 = ((uchar*)(gray->imageData + gray->widthStep*(y-ypart)))[x];
-					if(fabs(float((float)c0-(float)c3))<CriticalValue)
+					if(fabs(float((float)c0-(float)c3))>CriticalValue) // 다르면 카운트
 					{
-						top--;
+						top++;
 					}
 				}
 
@@ -344,16 +324,16 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( y + ypart <= gray->height )
 				{
 					uchar c4 = ((uchar*)(gray->imageData + gray->widthStep*(y+ypart)))[x];
-					if(fabs(float((float)c0-(float)c4))<CriticalValue)
+					if(fabs(float((float)c0-(float)c4))>CriticalValue) // 다르면 카운트
 					{
-						bottom--;
+						bottom++;
 					}
 				}
 			}
 		}
 
-		// 주변에 비슷한 영역이 있는지 판단
-		if( left < 10 || right < 10 || top < 10 || bottom < 10 )
+		// 주변에 비슷한 영역이 있는지 판단 (다른 카운트가 총 카운드의 1/3 이하면 비슷한 영역으로 판단
+		if( left > totalCnt / 3 || right < totalCnt / 3 || top < totalCnt / 3 || bottom < totalCnt / 3 )
 		{
 			// 현재 파트 삭제
 			if( it != _regionList.begin() )
