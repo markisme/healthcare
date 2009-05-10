@@ -52,11 +52,14 @@ void OpenCV::StartMonitor()
 #ifdef TEST
 	char *diff_captureWidow = "diff_camera";
 	cvNamedWindow( diff_captureWidow, CV_WINDOW_AUTOSIZE );
+
+	char *save_captureWidow = "save_camera";
+	cvNamedWindow( save_captureWidow, CV_WINDOW_AUTOSIZE );
 #endif
 
 	while(_startMonitor)
 	{
-		Sleep(50);
+		Sleep(100);
 		cvWaitKey(10);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
@@ -76,26 +79,12 @@ void OpenCV::StartMonitor()
 		// 가져온 프레임으로부터 영상 데이터를 얻는다.
 		current_image = cvRetrieveFrame( capture );
 
-		// 초기화 설정
-		if( _init )
-		{
-			// 파트 설정
-			InitPart( current_image );
-
-			// 성공음
-			MessageBeep(MB_ICONASTERISK);
-
-			// 이미지 저장
-			save_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
-			cvCopy( current_image, save_image );
-
-			// 초기화 완료
-			_init = false;
-		}
-
 		// 경보 설정
 		if( _alert == true && save_image != NULL )
 		{
+#ifdef TEST
+			cvShowImage( diff_captureWidow, current_image );
+#endif
 			CamState camState = CompareImage( current_image, save_image );
 
 			//
@@ -103,7 +92,7 @@ void OpenCV::StartMonitor()
 			time_t diffTime = curTime - alertTime;
 
 			// 3초간 캠 움직임 판단
-			if( camState == CAM_MOVE && diffTime >= 3.f )
+			if( camState == CAM_MOVE && diffTime >= 60.f )
 			{
 				OutputDebugString( "도난 경보\n" );
 				_alert = true;
@@ -119,19 +108,41 @@ void OpenCV::StartMonitor()
 			continue;
 		}
 
-		// 초당 30프레임 기준의 현재 프레임을 이전의 프레임에 복사한다.
-		if( count == 1 )
-		{
-			// 이전의 프레임으로 복사한다.
-			previous_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U,	current_image->nChannels);
+		//// 초당 30프레임 기준의 현재 프레임을 이전의 프레임에 복사한다.
+		//if( count == 1 )
+		//{
+		//	// 이전의 프레임으로 복사한다.
+		//	previous_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U,	current_image->nChannels);
 
-			cvCopy( current_image, previous_image );
-		}
-		// 이전 프레임과 현재 프레임을 비교한다. 
-		else
+		//	cvCopy( current_image, previous_image );
+		//}
+		//// 이전 프레임과 현재 프레임을 비교한다. 
+		//else
 		{
+			// 초기화 설정
+			if( !_init )
+			{
+				// 파트 설정
+				InitPart( current_image );
+
+				// 성공음
+				MessageBeep(MB_ICONASTERISK);
+
+				// 이미지 저장
+				save_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
+				cvCopy( current_image, save_image );
+				save_image->origin = current_image->origin;
+
+#ifdef TEST
+				cvShowImage( save_captureWidow, save_image );
+#endif
+
+				// 초기화 완료
+				_init = true;
+			}
+
 			// 캠 스테이트를 가져옴
-			CamState camState = CompareImage( current_image, previous_image );	
+			CamState camState = CompareImage( current_image, save_image );	
 
 #ifdef TEST
 			cvShowImage( diff_captureWidow, current_image );
@@ -176,6 +187,28 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 	cvCvtColor(current_image, gray, CV_BGR2GRAY);
 	cvCvtColor(previous_image, oldgray, CV_BGR2GRAY);
 
+	// 영역 그리기
+#ifdef TEST
+	int regionCnt = _regionList.size();
+	for( int num = 0; num < regionCnt; num++ )
+	{
+		RegionRect & rect = _regionList[ num ];
+		rect.DrawRegion( hDC );
+	}
+
+	char buf[1024];
+	sprintf( buf, "%d \n", _regionList.size() );
+	OutputDebugString( buf );
+#endif
+
+	// 체크 클리어
+	int size = _regionList.size();
+	for( int num = 0; num < size; num++ )
+	{
+		RegionRect & rect = _regionList[ num ];
+		rect.ClearCheck();
+	}
+
 	// 변한 영역 체크
 	float CriticalValue = 15.0f;
 	for(int x=0; x<gray->width; x+=6) {  
@@ -192,9 +225,6 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 				{
 					RegionRect & rect = _regionList[ num ];
 					rect.CheckRegion( x, y );
-#ifdef TEST
-					//rect.DrawResion( hDC );
-#endif
 				}
 #ifdef TEST
 				int X = x;    
@@ -211,7 +241,6 @@ CamState OpenCV::CompareImage( IplImage* current_image, IplImage* previous_image
 
 	// 판단
 	int totalCount = 0;
-	int size = _regionList.size();
 	for( int num = 0; num < size; num++ )
 	{
 		RegionRect & rect = _regionList[ num ];
@@ -358,8 +387,4 @@ void OpenCV::ComparePart( IplImage* current_image )
 			it++;
 		}
 	}
-
-	char buf[1024];
-	sprintf( buf, "%d \n", _regionList.size() );
-	OutputDebugString( buf );
 }
