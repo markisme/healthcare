@@ -13,12 +13,14 @@ OpenCV::~OpenCV()
 void OpenCV::Init()
 {
 	_alert = false;
+	_init = false;
+	_regionList.clear();
 }
 
 void OpenCV::Uninit()
 {
 	_alert = false;
-
+	_init = false;
 	_regionList.clear();
 }
 
@@ -74,9 +76,24 @@ void OpenCV::StartMonitor()
 		// 가져온 프레임으로부터 영상 데이터를 얻는다.
 		current_image = cvRetrieveFrame( capture );
 
-		// 수정해야함.. 맨 처음으로
-		InitPart( current_image );
+		// 초기화 설정
+		if( _init )
+		{
+			// 파트 설정
+			InitPart( current_image );
 
+			// 성공음
+			MessageBeep(MB_ICONASTERISK);
+
+			// 이미지 저장
+			save_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
+			cvCopy( current_image, save_image );
+
+			// 초기화 완료
+			_init = false;
+		}
+
+		// 경보 설정
 		if( _alert == true && save_image != NULL )
 		{
 			CamState camState = CompareImage( current_image, save_image );
@@ -85,7 +102,7 @@ void OpenCV::StartMonitor()
 			time( &curTime );
 			time_t diffTime = curTime - alertTime;
 
-			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
+			// 3초간 캠 움직임 판단
 			if( camState == CAM_MOVE && diffTime >= 3.f )
 			{
 				OutputDebugString( "도난 경보\n" );
@@ -120,18 +137,7 @@ void OpenCV::StartMonitor()
 			cvShowImage( diff_captureWidow, current_image );
 #endif
 
-			// 지역 4개가 움직이지 않았다면 화면 저장
-			if( camState == NONE_MOVE && save_image == NULL )
-			{
-				// 성공음
-				MessageBeep(MB_ICONASTERISK);
-
-				// 이미지 저장
-				save_image = cvCreateImage( cvGetSize(previous_image), IPL_DEPTH_8U, previous_image->nChannels);
-				cvCopy( previous_image, save_image );
-			}
-
-			// 지역 4개가 모두 움직였으면 카메라 움직임으로 판단
+			// 캠이 움직이면 경보 설정
 			if( camState == CAM_MOVE && _alert != true )
 			{
 				// 경고음

@@ -85,5 +85,6 @@ private:
 private:
 	bool _startMonitor;
 	bool _alert;
+	bool _init;
 	RegionList _regionList;
 };
