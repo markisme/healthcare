@@ -22,6 +22,7 @@ struct RegionRect
 		}
 	}
 
+	// 자신의 영역 체크 지우기
 	void ClearCheck() { _checkCount = 0; };
 
 	// 자신의 영역 그리기
@@ -47,13 +48,6 @@ struct RegionRect
 
 typedef std::vector<RegionRect> RegionList;
 
-enum CamState
-{
-	NONE_MOVE,
-	OBJECT_MOVE,
-	CAM_MOVE
-};
-
 class OpenCV
 {
 public:
@@ -68,7 +62,7 @@ public:
 	bool GetAlert() { return _alert; }
 
 private:
-	CamState CompareImage( IplImage* current_image, IplImage* previous_image );
+	bool IsMoveCam( IplImage* current_image, IplImage* previous_image );
 	void InitPart( IplImage* current_image );
 	void ComparePart( IplImage* gray );
 
