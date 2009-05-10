@@ -78,7 +78,11 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->ShowWindow( FALSE );
 
 	// 캠 제어 모듈 작동
-	CWinThread * pThread = AfxBeginThread(ThreadFunction, this);
+	CWinThread * pThread1 = AfxBeginThread(WebCamThreadFunction, this);
+
+	// 파워 제어 모듈 작동
+
+	CWinThread * pThread2 = AfxBeginThread(WebCamThreadFunction, this);
 
 	return TRUE;
 }
@@ -154,14 +158,14 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	return TRUE;
 }
 
-UINT CTestApp::ThreadFunction(LPVOID pParam)
+UINT CTestApp::WebCamThreadFunction(LPVOID pParam)
 {
 	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->ThreadDo(); // 감시를 위한 쓰레드 시작
+	pthis->WebCamThreadDo(); // 감시를 위한 쓰레드 시작
 	return 0;
 }
 
-void CTestApp::ThreadDo()
+void CTestApp::WebCamThreadDo()
 {
 	// 감시 모드 동작
 	_openCV->StartMonitor();
@@ -174,4 +178,39 @@ void CTestApp::ThreadDo()
 #endif
 	//
 	AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+}
+
+UINT CTestApp::PowerEventThreadFunction(LPVOID pParam)
+{
+	CTestApp *pthis = (CTestApp*)pParam;     
+	pthis->PowerEventThreadDo(); // 감시를 위한 쓰레드 시작
+	return 0;
+}
+
+void CTestApp::PowerEventThreadDo()
+{
+	// 감시 모드 동작
+	while( true )
+	{
+		//
+		Sleep(1000);
+		
+		//
+		SYSTEM_BATTERY_STATE sys_bat_state;
+		CallNtPowerInformation(SystemBatteryState, NULL, 0,	&sys_bat_state, sizeof(sys_bat_state));
+
+		//
+		if( sys_bat_state.BatteryPresent )
+		{
+			break;
+		}
+	}
+
+	// 보안모드 작동
+#ifndef TEST
+	std::string wav = "Test.wav";
+	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+#endif
+	//
+	AfxMessageBox("베터리 모드 동작!\n보안 모드 작동!");
 }

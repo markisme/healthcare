@@ -68,7 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib"
+				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib powrprof.lib "
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Lib/;../Lib"
 				GenerateDebugInformation="true"
@@ -155,7 +155,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib"
+				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib powrprof.lib "
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Lib/;../Lib"
 				GenerateDebugInformation="true"
@@ -212,6 +212,14 @@
 			</File>
 			<File
 				RelativePath=".\OpenCV.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PowerEvent.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PowerEvent.h"
 				>
 			</File>
 			<File
