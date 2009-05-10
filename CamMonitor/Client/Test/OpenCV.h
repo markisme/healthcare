@@ -8,8 +8,8 @@
 struct RegionRect
 {
 	RegionRect( int partNo, int lefttopX, int lefttopY, int rightbottomX, int rightbottomY ) : _partNo( partNo ),
-		_lefttopX(lefttopX), _lefttopY(lefttopY), _rightbottomX(rightbottomX), _rightbottomY(rightbottomY),
-		_left(false), _right(false), _top(false), _bottom(false) { _checkCount = 0; };
+		_lefttopX(lefttopX), _lefttopY(lefttopY), _rightbottomX(rightbottomX), _rightbottomY(rightbottomY)
+		{ _checkCount = 0; };
 	~RegionRect() {};
 
 	// 자신의 영역인지 체크
@@ -22,11 +22,7 @@ struct RegionRect
 		}
 	}
 
-	// 주변 파트 정보 표시
-	void SetLeft( bool b ) { _left = b; }
-	void SetRight( bool b ) { _right = b; }
-	void SetTop( bool b ) { _top = b; }
-	void SetBottom( bool b ) { _bottom = b; }
+	void ClearCheck() { _checkCount = 0; };
 
 	// 자신의 영역 그리기
 	void DrawRegion( HDC hdc )
@@ -47,12 +43,6 @@ struct RegionRect
 	int _lefttopY;
 	int _rightbottomX;
 	int _rightbottomY;
-
-	// 주변 파트 정보
-	int _left;
-	int _right;
-	int _top;
-	int _bottom;
 };
 
 typedef std::vector<RegionRect> RegionList;
