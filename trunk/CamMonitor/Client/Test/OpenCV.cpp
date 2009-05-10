@@ -49,6 +49,8 @@ void OpenCV::StartMonitor()
 
 	// 초기화 설정
 	{
+		cvWaitKey(10);
+
 		// 카메라로부터 입력된 프레임을 잡는다.
 		// 만약에 실패할시 에러 메시지를 보여준다.
 		if( !cvGrabFrame( capture ) ) 
@@ -270,17 +272,16 @@ void OpenCV::ComparePart( IplImage* current_image )
 
 	// 각 영역별로 포문 돌기
 	RegionList::iterator it = _regionList.begin();
-	for( ; it != _regionList.end(); )
+	for( ; it != _regionList.end(); it++ )
 	{
 		//
 		RegionRect & rect = *it;
 
 		//
-		int totalCnt = 0;
-		int left = 0;
-		int right = 0;
-		int top = 0;
-		int bottom = 0;
+		int left = 140;
+		int right = 140;
+		int top = 140;
+		int bottom = 140;
 
 		for(int x=rect._lefttopX; x<rect._rightbottomX; x+=6) 
 		{  
@@ -288,15 +289,14 @@ void OpenCV::ComparePart( IplImage* current_image )
 			{
 				// 4방의 파트 비교 다른 픽셀이 있을시 카운트 증가
 				uchar c0 = ((uchar*)(gray->imageData + gray->widthStep*y))[x];
-				totalCnt++;
 
 				// 좌측 파트 비교
 				if( x - xpart >= 0 )
 				{
 					uchar c1 = ((uchar*)(gray->imageData + gray->widthStep*y))[x-xpart];
-					if(fabs(float((float)c0-(float)c1))>CriticalValue) // 다르면 카운트
+					if(fabs(float((float)c0-(float)c1))<CriticalValue) // 같으면 카운트 빼기
 					{
-						left++;
+						left--;
 					}
 				}
 
@@ -304,9 +304,9 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( x + xpart <= gray->width )
 				{
 					uchar c2 = ((uchar*)(gray->imageData + gray->widthStep*y))[x+xpart];
-					if(fabs(float((float)c0-(float)c2))>CriticalValue) // 다르면 카운트
+					if(fabs(float((float)c0-(float)c2))<CriticalValue) // 같으면 카운트 빼기
 					{
-						right++;
+						right--;
 					}
 				}
 
@@ -314,9 +314,9 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( y - ypart >= 0 )
 				{
 					uchar c3 = ((uchar*)(gray->imageData + gray->widthStep*(y-ypart)))[x];
-					if(fabs(float((float)c0-(float)c3))>CriticalValue) // 다르면 카운트
+					if(fabs(float((float)c0-(float)c3))<CriticalValue) // 같으면 카운트 빼기
 					{
-						top++;
+						top--;
 					}
 				}
 
@@ -324,26 +324,28 @@ void OpenCV::ComparePart( IplImage* current_image )
 				if( y + ypart <= gray->height )
 				{
 					uchar c4 = ((uchar*)(gray->imageData + gray->widthStep*(y+ypart)))[x];
-					if(fabs(float((float)c0-(float)c4))>CriticalValue) // 다르면 카운트
+					if(fabs(float((float)c0-(float)c4))<CriticalValue) // 같으면 카운트 빼기
 					{
-						bottom++;
+						bottom--;
 					}
 				}
 			}
 		}
 
-		// 주변에 비슷한 영역이 있는지 판단 (다른 카운트가 총 카운드의 1/3 이하면 비슷한 영역으로 판단
-		if( left > totalCnt / 3 || right < totalCnt / 3 || top < totalCnt / 3 || bottom < totalCnt / 3 )
+		// 주변에 비슷한 영역이 있는지 판단
+		int diff = 20; // 같은 픽셀 140-diff / 다른 픽셀 diff
+		if( left < diff || right < diff || top < diff || bottom < diff )
 		{
 			// 현재 파트 삭제
 			if( it != _regionList.begin() )
 			{
 				_regionList.erase( it-- );
 			}
-		}
-		else
-		{
-			it++;
+			else
+			{
+				_regionList.erase( it );
+				it = _regionList.begin();
+			}
 		}
 	}
 }
