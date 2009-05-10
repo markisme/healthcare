@@ -215,14 +215,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\PowerEvent.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PowerEvent.h"
-				>
-			</File>
-			<File
 				RelativePath=".\ScreenSaver.cpp"
 				>
 			</File>
