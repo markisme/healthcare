@@ -65,7 +65,7 @@ private:
 	bool IsMoveCam( IplImage* current_image, IplImage* previous_image );
 	void InitPart( IplImage* current_image );
 	void ComparePart( IplImage* gray );
-	void CurrentFrame(IplImage* frame);
+	bool IsMarker(IplImage* frame);
 
 private:
 	bool _alert;

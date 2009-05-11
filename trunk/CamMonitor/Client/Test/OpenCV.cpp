@@ -94,9 +94,12 @@ void OpenCV::StartMonitor()
 		// 가져온 프레임으로부터 영상 데이터를 얻는다.
 		current_image = cvRetrieveFrame( capture );
 
-		CurrentFrame( current_image );
-		cvShowImage( diff_captureWidow, current_image );
-		continue;
+		// 마커 매칭 테스트
+		{
+			IsMarker( current_image );
+			cvShowImage( diff_captureWidow, current_image );
+			continue;
+		}
 
 #ifdef TEST
 		cvShowImage( diff_captureWidow, current_image );
@@ -354,20 +357,33 @@ void OpenCV::ComparePart( IplImage* current_image )
 	}
 }
 
-void OpenCV::CurrentFrame( IplImage* current_image )
+bool OpenCV::IsMarker( IplImage* current_image )
 {
 	double min, max;
 	CvPoint left_top;
 
 	//
-	IplImage * marker = cvLoadImage("marker.jpg", -1);	// 스테이플러(B)를 읽는다.
+	IplImage * marker = cvLoadImage("marker.jpg", -1);	// 마커를 읽는다.
 	IplImage* coeff = cvCreateImage( cvSize( current_image->width - marker->width+1, 
 		current_image->height - marker->height+1 ), IPL_DEPTH_32F, 1 );	// 상관계수를 구할 이미지(C)
+	coeff->origin = current_image->origin;
 
 	//
-	cvMatchTemplate(current_image, mar7ker, coeff, CV_TM_CCOEFF_NORMED);	// 상관계수를 구하여 C 에 그린다.
+	cvMatchTemplate(current_image, marker, coeff, CV_TM_CCOEFF_NORMED);	// 상관계수를 구하여 C 에 그린다.
 	cvMinMaxLoc(coeff, &min, &max, NULL, &left_top);	// 상관계수가 최대값을 값는 위치 찾기 
+
+#ifdef TEST
+	cvShowImage( "save_camera", coeff );
+
+	char buf[1024];
+	sprintf( buf, "min : %f, max : %f \n", min, max );
+	OutputDebugString( buf );
+#endif
+
+	cvRectangle(current_image, left_top, cvPoint(left_top.x + 50, left_top.y + 50), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
 	
-	//
-	cvRectangle(current_image, left_top, cvPoint(left_top.x + marker->width, left_top.y + marker->height), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
+	if( max > 0.7f )
+		return true;
+
+	return false;
 }
