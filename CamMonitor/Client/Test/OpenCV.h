@@ -9,6 +9,7 @@
 //#include <AR/video.h>
 //#include <AR/param.h>
 #include "AR/ar.h"
+#include "AR/video.h"
 
 struct RegionRect
 {
