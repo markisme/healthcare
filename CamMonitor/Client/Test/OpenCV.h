@@ -5,6 +5,11 @@
 #include "mmsystem.h"
 #include <vector>
 
+//#include <AR/gsub.h>
+//#include <AR/video.h>
+//#include <AR/param.h>
+#include "AR/ar.h"
+
 struct RegionRect
 {
 	RegionRect( int partNo, int lefttopX, int lefttopY, int rightbottomX, int rightbottomY ) : _partNo( partNo ),
@@ -66,6 +71,10 @@ private:
 	void InitPart( IplImage* current_image );
 	void ComparePart( IplImage* gray );
 	bool IsMarker(IplImage* frame);
+
+	//
+	void OpenCV::ARTInit();
+	bool IsMarker2( IplImage* current_image );
 
 private:
 	bool _alert;

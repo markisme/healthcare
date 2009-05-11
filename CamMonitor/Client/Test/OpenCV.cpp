@@ -387,3 +387,30 @@ bool OpenCV::IsMarker( IplImage* current_image )
 
 	return false;
 }
+
+void OpenCV::ARTInit()
+{
+	char * patt_name      = "patt.hiro";
+    if( (arLoadPatt(patt_name)) < 0 ) {
+        printf("pattern load error !!\n");
+        exit(0);
+    }
+}
+
+bool OpenCV::IsMarker2( IplImage* current_image )
+{
+    ARMarkerInfo    *marker_info;
+    int             marker_num;
+	int             thresh = 100;
+
+	ARUint8 *dataPtr = (unsigned char*)current_image->imageData;
+
+	/* detect the markers in the video frame */
+    if( arDetectMarker(dataPtr, thresh, &marker_info, &marker_num) < 0 ) {
+        exit(0);
+    }
+
+	char buf[1024];
+	sprintf( buf, "markernum : %d \n", marker_num );
+	OutputDebugString( buf );
+}
