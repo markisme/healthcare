@@ -14,7 +14,8 @@ BEGIN_MESSAGE_MAP(CTestApp, CWinApp)
 END_MESSAGE_MAP()
 
 CTestApp::CTestApp() :
-_rePassCount( 0 )
+_rePassCount( 0 ),
+_isMonitorMode( false )
 {
 }
 
@@ -25,13 +26,9 @@ BOOL CTestApp::InitInstance()
 	CWinApp::InitInstance();
 
 	// 서버 설정
-	bool isHost = false;
-	std::string id;
-	std::string pw;
 	int clientPort = 200;
 	//std::string ip = "211.189.20.246";
 	std::string ip = "211.189.19.160";
-	//std::string ip = "127.0.0.1";
 	int serverPort = 10000;
 
 	// 네트워크 초기화
@@ -53,7 +50,12 @@ BOOL CTestApp::InitInstance()
 
 	// 프로그램 동작 로그인
 	_dlg = new LoginDlg;
-	_dlg->DoModal();
+	if( _dlg->DoModal() != IDOK )
+	{
+		AfxMessageBox("프로그램을 종료 합니다.");
+		return -1;
+	}
+
 	if(  Network::GetInstance()._isSuccessAuth == false )
 	{
 		AfxMessageBox("비밀번호가 틀렸습니다.");
@@ -78,17 +80,35 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->ShowWindow( FALSE );
 
 	// 캠 제어 모듈 작동
-	CWinThread * pThread1 = AfxBeginThread(WebCamThreadFunction, this);
+	CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
 
 	// 파워 제어 모듈 작동
+	//CWinThread * pThread2 = AfxBeginThread(MonitorPowerThreadFunction, this);
 
-	CWinThread * pThread2 = AfxBeginThread(PowerEventThreadFunction, this);
+	// 네트워크 제어 모듈 작동
+	//CWinThread * pThread3 = AfxBeginThread(MonitorNetworkThreadFunction, this);
+
+	// 모니터 모드 시작
+	_isMonitorMode = true;
 
 	return TRUE;
 }
 
 int CTestApp::ExitInstance()
 {
+	// 모니터 모드 중 프로그램 종료
+	if( _isMonitorMode )
+	{
+		// 보안모드 작동
+		PlayAlertSound();
+
+		//
+		AfxMessageBox("강제 프로그램 종료!\n보안 모드 작동!");
+
+		//
+		Sleep(9999999);
+	}
+
 	_openCV->Uninit();
 	delete( _openCV );
 
@@ -132,6 +152,7 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		{
 			// 프로그램 종료
 			AfxMessageBox("보안 모드 해제");
+			_isMonitorMode = false;
 			PostQuitMessage(0);
 		}
 		else
@@ -144,9 +165,8 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	//
 	if( _rePassCount >= 3 )
 	{
-		//
-		std::string wav = "Test.wav";
-		PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+		// 보안모드 작동
+		PlayAlertSound();
 
 		//
 		AfxMessageBox("비밀번호 3회 오류!\n보안 모드 작동!");
@@ -158,14 +178,14 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	return TRUE;
 }
 
-UINT CTestApp::WebCamThreadFunction(LPVOID pParam)
+UINT CTestApp::MonitorWebCamThreadFunction(LPVOID pParam)
 {
 	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->WebCamThreadDo(); // 감시를 위한 쓰레드 시작
+	pthis->MonitorWebCamThreadDo(); // 감시를 위한 쓰레드 시작
 	return 0;
 }
 
-void CTestApp::WebCamThreadDo()
+void CTestApp::MonitorWebCamThreadDo()
 {
 	// 감시 모드 동작
 	_openCV->StartMonitor();
@@ -176,23 +196,20 @@ void CTestApp::WebCamThreadDo()
 #endif
 
 	// 보안모드 작동
-#ifndef TEST
-	std::string wav = "Test.wav";
-	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
-#endif
+	PlayAlertSound();
 	
 	//
 	AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
 }
 
-UINT CTestApp::PowerEventThreadFunction(LPVOID pParam)
+UINT CTestApp::MonitorPowerThreadFunction(LPVOID pParam)
 {
 	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->PowerEventThreadDo(); // 감시를 위한 쓰레드 시작
+	pthis->MonitorPowerThreadDo(); // 감시를 위한 쓰레드 시작
 	return 0;
 }
 
-void CTestApp::PowerEventThreadDo()
+void CTestApp::MonitorPowerThreadDo()
 {
 	// 감시 모드 동작
 	while( true )
@@ -212,11 +229,46 @@ void CTestApp::PowerEventThreadDo()
 	}
 
 	// 보안모드 작동
+	PlayAlertSound();
+
+	//
+	AfxMessageBox("베터리 모드 동작!\n보안 모드 작동!");
+}
+
+UINT CTestApp::MonitorNetworkThreadFunction(LPVOID pParam)
+{
+	CTestApp *pthis = (CTestApp*)pParam;     
+	pthis->MonitorNetworkThreadDo(); // 감시를 위한 쓰레드 시작
+	return 0;
+}
+
+void CTestApp::MonitorNetworkThreadDo()
+{
+	// 감시 모드 동작
+	while( true )
+	{
+		//
+		Sleep(1000);
+		
+		//
+		if( Network::GetInstance()._isConnecting == 0 )
+		{
+			break;
+		}
+	}
+
+	// 보안모드 작동
+	PlayAlertSound();
+
+	//
+	AfxMessageBox("네트워크 연결 끊김!\n보안 모드 작동!");
+}
+
+
+void CTestApp::PlayAlertSound()
+{
 #ifndef TEST
 	std::string wav = "Test.wav";
 	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
-
-	//
-	AfxMessageBox("베터리 모드 동작!\n보안 모드 작동!");
 }

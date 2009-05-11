@@ -38,6 +38,9 @@ public:
 	//
 	int _isSuccessAuth;
 
+	//
+	int _isConnecting;
+
 private:
 	static Network _instance;
 	RakPeerInterface * _client;
