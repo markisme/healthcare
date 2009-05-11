@@ -392,11 +392,36 @@ bool OpenCV::IsMarker( IplImage* current_image )
 
 void OpenCV::ARTInit()
 {
-	char * patt_name      = "patt.hiro";
+	ARParam  wparam;
+	char * vconf = "WDM_camera_flipV.xml";
+	char * patt_name = "patt.hiro";
+	int xsize, ysize;
+	char * cparam_name    = "camera_para.dat";
+	ARParam cparam;
+
+	/* open the video path */
+	if( arVideoOpen( vconf ) < 0 ) exit(0);
+	/* find the size of the window */
+	if( arVideoInqSize(&xsize, &ysize) < 0 ) exit(0);
+	printf("Image size (x,y) = (%d,%d)\n", xsize, ysize);
+
+	/* set the initial camera parameters */
+	if( arParamLoad(cparam_name, 1, &wparam) < 0 ) {
+		printf("Camera parameter load error !!\n");
+		exit(0);
+	}
+	arParamChangeSize( &wparam, xsize, ysize, &cparam );
+	arInitCparam( &cparam );
+	printf("*** Camera Parameter ***\n");
+	arParamDisp( &cparam );
+
     if( (arLoadPatt(patt_name)) < 0 ) {
         printf("pattern load error !!\n");
         exit(0);
     }
+
+	/* open the graphics window */
+	//argInit( &cparam, 1.0, 0, 0, 0, 0 );
 }
 
 bool OpenCV::IsMarker2( IplImage* current_image )
@@ -434,7 +459,6 @@ bool OpenCV::IsMarker2( IplImage* current_image )
 		modifiedStorage[i+2] = current_image->imageData[j+1];
 		modifiedStorage[i+3] = current_image->imageData[j];
 	}
-
 
 	/* detect the markers in the video frame */
     if( arDetectMarker(modifiedStorage, thresh, &marker_info, &marker_num) < 0 ) {

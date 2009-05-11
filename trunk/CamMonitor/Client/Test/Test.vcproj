@@ -68,7 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib powrprof.lib  libARd.lib"
+				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib powrprof.lib  libARd.lib libARvideod.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Lib/;../Lib"
 				GenerateDebugInformation="true"
