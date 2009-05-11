@@ -98,7 +98,7 @@ void OpenCV::StartMonitor()
 
 		// 마커 매칭 테스트
 		{
-			IsMarker2( current_image );
+			IsMarker( current_image );
 			cvShowImage( diff_captureWidow, current_image );
 			continue;
 		}
@@ -359,65 +359,26 @@ void OpenCV::ComparePart( IplImage* current_image )
 	}
 }
 
-bool OpenCV::IsMarker( IplImage* current_image )
-{
-	double min, max;
-	CvPoint left_top;
-
-	//
-	IplImage * marker = cvLoadImage("marker.jpg", 1);	// 마커를 읽는다.
-	IplImage* coeff = cvCreateImage( cvSize( current_image->width - marker->width+1, 
-		current_image->height - marker->height+1 ), IPL_DEPTH_32F, 1 );	// 상관계수를 구할 이미지(C)
-	coeff->origin = current_image->origin;
-
-	//
-	cvMatchTemplate(current_image, marker, coeff, CV_TM_CCOEFF_NORMED);	// 상관계수를 구하여 C 에 그린다.
-	cvMinMaxLoc(coeff, &min, &max, NULL, &left_top);	// 상관계수가 최대값을 값는 위치 찾기 
-
-#ifdef TEST
-	cvShowImage( "save_camera", coeff );
-
-	char buf[1024];
-	sprintf( buf, "min : %f, max : %f \n", min, max );
-	OutputDebugString( buf );
-#endif
-
-	cvRectangle(current_image, left_top, cvPoint(left_top.x + marker->width, left_top.y + marker->height), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
-	
-	if( max > 0.7f )
-		return true;
-
-	return false;
-}
-
 void OpenCV::ARTInit()
 {
-	ARParam  wparam;
-	char * vconf = "WDM_camera_flipV.xml";
-	char * patt_name = "patt.hiro";
+	char * vconf = "Data\\WDM_camera_flipV.xml";
+	char * cparam_name = "Data\\camera_para.dat";
+	char * patt_name = "Data\\patt.hiro";
 	int xsize, ysize;
-	char * cparam_name = "camera_para.dat";
+	ARParam  wparam;
 	ARParam cparam;
 
 	/* open the video path */
 	if( arVideoOpen( vconf ) < 0 ) exit(0);
 	/* find the size of the window */
 	if( arVideoInqSize(&xsize, &ysize) < 0 ) exit(0);
-	printf("Image size (x,y) = (%d,%d)\n", xsize, ysize);
-
 	/* set the initial camera parameters */
 	if( arParamLoad(cparam_name, 1, &wparam) < 0 ) {
 		printf("Camera parameter load error !!\n");
 		exit(0);
 	}
 	arParamChangeSize( &wparam, xsize, ysize, &cparam );
-	
-	//cparam = new ARParam;
-	//cparam->xsize = 640;
-	//cparam->ysize = 480;
 	arInitCparam( &cparam );
-	printf("*** Camera Parameter ***\n");
-	//arParamDisp( &cparam );
 
     if( (arLoadPatt(patt_name)) < 0 ) {
         printf("pattern load error !!\n");
@@ -425,7 +386,7 @@ void OpenCV::ARTInit()
     }
 }
 
-bool OpenCV::IsMarker2( IplImage* current_image )
+bool OpenCV::IsMarker( IplImage* current_image )
 {
     ARMarkerInfo    *marker_info;
     int             marker_num;

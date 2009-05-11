@@ -71,11 +71,8 @@ private:
 	bool IsMoveCam( IplImage* current_image, IplImage* previous_image );
 	void InitPart( IplImage* current_image );
 	void ComparePart( IplImage* gray );
-	bool IsMarker(IplImage* frame);
-
-	//
-	void OpenCV::ARTInit();
-	bool IsMarker2( IplImage* current_image );
+	void ARTInit();
+	bool IsMarker( IplImage* current_image );
 
 private:
 	bool _alert;
