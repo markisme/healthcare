@@ -208,7 +208,7 @@ void CTestApp::MonitorWebCamThreadDo()
 		// 프로그램 종료
 		AfxMessageBox("보안 모드 해제");
 		_isMonitorMode = false;
-		_dlg->DestroyWindow();
+		_dlg->SendMessage( WM_CLOSE );
 		PostQuitMessage(0);
 	}
 }
