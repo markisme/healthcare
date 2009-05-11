@@ -70,26 +70,4 @@ private:
 private:
 	bool _alert;
 	RegionList _regionList;
-
-	//
-	int   m_bBeingTracked; // Flag for traking object.
-
-	CvPoint m_cvPtOrigin;
-	CvRect  m_cvRtSelected; // Zone Selected.
-	CvRect	m_cvRtTracked; // Zone Tracked.
-	
-	CvBox2D	m_cvTrackBox;	// 2D Track Box
-	CvConnectedComp m_cvTrackComp;	//Track Connected Comp
-	CvHistogram* m_cvHist;	// Histogram
-
-	IplImage* m_iplImage;
-	IplImage* m_iplHsv;
-	IplImage* m_iplHue;
-	IplImage* m_iplMask;
-	IplImage* m_iplBackproject;
-	IplImage* m_iplHist;
-
-	int m_iSMin;
-	int m_iVMin;
-	int m_iVMax;
 };

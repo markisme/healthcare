@@ -2,13 +2,8 @@
 #include "OpenCV.h"
 #include <ctime>
 
-OpenCV::OpenCV() :
-m_iplImage( NULL )
+OpenCV::OpenCV()
 {
-	m_iSMin = 50;
-	m_iVMin = 10;
-	m_iVMax = 256;
-	m_bBeingTracked = 0;
 }
 
 OpenCV::~OpenCV()
@@ -359,108 +354,20 @@ void OpenCV::ComparePart( IplImage* current_image )
 	}
 }
 
-//
-int hdims = 16;
-float hranges_arr[] = {0,180};
-float* hranges = hranges_arr;
-
-//
-void OpenCV::CurrentFrame(IplImage* frame)
+void OpenCV::CurrentFrame( IplImage* current_image )
 {
-	if(!frame) return;
- 
-	m_cvRtSelected.x = 0;
-	m_cvRtSelected.y = 0;
-	m_cvRtSelected.width = 50;
-	m_cvRtSelected.height = 50;
+	double min, max;
+	CvPoint left_top;
 
-	// m_iplImage이 초기화되지 않았을 때  
-	if( m_iplImage == NULL )
-	{
-		// m_iplImage 초기화 
-		m_iplImage = cvCreateImage( cvGetSize(frame), 8, 3 );
-		m_iplImage->origin = frame->origin;
+	//
+	IplImage * marker = cvLoadImage("Stapler.jpg", -1);	// 스테이플러(B)를 읽는다.
+	IplImage* coeff = cvCreateImage( cvSize( current_image->width - marker->width+1, 
+		current_image->height - marker->height+1 ), IPL_DEPTH_32F, 1 );	// 상관계수를 구할 이미지(C)
 
-		// 여러가지 영상 데이터 초기화 
-		m_iplHsv = cvCreateImage( cvGetSize(frame), 8, 3 );
-		m_iplHue = cvCreateImage( cvGetSize(frame), 8, 1 );
-		m_iplMask = cvCreateImage( cvGetSize(frame), 8, 1 );
-		m_iplBackproject = cvCreateImage( cvGetSize(frame), 8, 1 );
-
-		// 히스토그램 초기화 
-		m_cvHist = cvCreateHist( 1, &hdims, CV_HIST_ARRAY, &hranges, 1 );
-	}
-
-	// 카메라에서 넘겨온 frame을 m_iplImage로 복사한 후, HSV 컬러 공간으로 변환한다.
-	cvCopy( frame, m_iplImage, 0 );
-	cvCvtColor( m_iplImage, m_iplHsv, CV_BGR2HSV );
-
-	// 추적이 시작되었다면
-	if( m_bBeingTracked )
-	{
-		// 주어진 3개( Value 채널의 max, min, Saturation 채널의 min )를 갖고
-		// 다시 HSV 컬러 공간내 범위를 줄인다.
-		cvInRangeS( m_iplHsv, cvScalar(0, m_iSMin, MIN(m_iVMin, m_iVMax),0),
-			cvScalar(180,256,MAX(m_iVMin,m_iVMax),0), m_iplMask );
-
-		// HSV 컬러 공간을 분할하여, Hue 채널만 가져온다.
-		cvSplit( m_iplHsv, m_iplHue, 0, 0, 0 );
-
-		if( m_bBeingTracked < 0 )
-		{
-			float max_val = 0.f;
-
-			// 객체 설정한 영역 정보를 갖고, 관심 영역으로 간주하여 추출한다.
-			cvSetImageROI( m_iplHue, m_cvRtSelected );
-			cvSetImageROI( m_iplMask, m_cvRtSelected );
-
-			// 관심 영역의 히스토그램을 계산한다.
-			cvCalcHist( &m_iplHue, m_cvHist, 0, m_iplMask );
-			cvGetMinMaxHistValue( m_cvHist, 0, &max_val, 0, 0 );
-
-			// 관심 영역의 히스토그램을 재계산한다.
-			cvConvertScale( m_cvHist->bins, m_cvHist->bins, 
-				max_val ? 255. / max_val : 0., 0 );
-
-			// 관심 영역을 다시 되돌려서 원래의 크기로 반환한다.
-			cvResetImageROI( m_iplHue );
-			cvResetImageROI( m_iplMask );
-
-			// 추적 대상의 영역 정보를 넘긴다.
-			m_cvRtTracked = m_cvRtSelected;
-
-			// Hue 채널 내 영역을 계속 재설정하는 논리적 오류를 방지한다.
-			m_bBeingTracked = 1;
-		}
-
-		// Hue 채널의 이미지와 히스토그램 값을 넣고 backproject한 영상을 반환한다.
-		cvCalcBackProject( &m_iplHue, m_iplBackproject, m_cvHist );
-
-		// backproject한 영상과 AND 연산해서 갱신한다.
-		cvAnd( m_iplBackproject, m_iplMask, m_iplBackproject, 0 );
-
-		// CAMSHIFT 알고리즘을 이용해 추적한다.
-		cvCamShift( m_iplBackproject, m_cvRtTracked,
-			cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ),
-			&m_cvTrackComp, &m_cvTrackBox );
-
-		// 새롭게 추적한 범위를 다시 할당한다.
-		m_cvRtTracked = m_cvTrackComp.rect;
-
-		if( m_iplImage->origin )
-			m_cvTrackBox.angle = -m_cvTrackBox.angle;
-
-		// 추적한 부분을 타원형으로 그려준다.
-		cvEllipseBox( frame, m_cvTrackBox, CV_RGB(255,0,0), 3, CV_AA, 0 );
-	}
-
-	// 할당한 메모리 해제한다.
-	if( m_iplImage == NULL )
-	{
-		cvReleaseHist( &m_cvHist );
-		cvReleaseImage( &m_iplHsv );
-		cvReleaseImage( &m_iplHue );
-		cvReleaseImage( &m_iplMask );
-		cvReleaseImage( &m_iplBackproject );
-	}
+	//
+	cvMatchTemplate(current_image, marker, coeff, CV_TM_CCOEFF_NORMED);	// 상관계수를 구하여 C 에 그린다.
+	cvMinMaxLoc(coeff, &min, &max, NULL, &left_top);	// 상관계수가 최대값을 값는 위치 찾기 
+	
+	//
+	cvRectangle(current_image, left_top, cvPoint(left_top.x + marker->width, left_top.y + marker->height), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
 }
