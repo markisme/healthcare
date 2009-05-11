@@ -369,6 +369,11 @@ void OpenCV::CurrentFrame(IplImage* frame)
 {
 	if(!frame) return;
 
+	m_cvRtSelected.x = 0;
+	m_cvRtSelected.y = 0;
+	m_cvRtSelected.width = 50;
+	m_cvRtSelected.height = 50;
+
 	// m_iplImage이 초기화되지 않았을 때  
 	if( m_iplImage == NULL )
 	{
