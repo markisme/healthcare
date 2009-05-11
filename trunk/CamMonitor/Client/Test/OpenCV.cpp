@@ -360,12 +360,12 @@ void OpenCV::CurrentFrame( IplImage* current_image )
 	CvPoint left_top;
 
 	//
-	IplImage * marker = cvLoadImage("Stapler.jpg", -1);	// 스테이플러(B)를 읽는다.
+	IplImage * marker = cvLoadImage("marker.jpg", -1);	// 스테이플러(B)를 읽는다.
 	IplImage* coeff = cvCreateImage( cvSize( current_image->width - marker->width+1, 
 		current_image->height - marker->height+1 ), IPL_DEPTH_32F, 1 );	// 상관계수를 구할 이미지(C)
 
 	//
-	cvMatchTemplate(current_image, marker, coeff, CV_TM_CCOEFF_NORMED);	// 상관계수를 구하여 C 에 그린다.
+	cvMatchTemplate(current_image, mar7ker, coeff, CV_TM_CCOEFF_NORMED);	// 상관계수를 구하여 C 에 그린다.
 	cvMinMaxLoc(coeff, &min, &max, NULL, &left_top);	// 상관계수가 최대값을 값는 위치 찾기 
 	
 	//
