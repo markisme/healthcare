@@ -396,7 +396,7 @@ void OpenCV::ARTInit()
 	char * vconf = "WDM_camera_flipV.xml";
 	char * patt_name = "patt.hiro";
 	int xsize, ysize;
-	char * cparam_name    = "camera_para.dat";
+	char * cparam_name = "camera_para.dat";
 	ARParam cparam;
 
 	/* open the video path */
@@ -411,17 +411,18 @@ void OpenCV::ARTInit()
 		exit(0);
 	}
 	arParamChangeSize( &wparam, xsize, ysize, &cparam );
+	
+	//cparam = new ARParam;
+	//cparam->xsize = 640;
+	//cparam->ysize = 480;
 	arInitCparam( &cparam );
 	printf("*** Camera Parameter ***\n");
-	arParamDisp( &cparam );
+	//arParamDisp( &cparam );
 
     if( (arLoadPatt(patt_name)) < 0 ) {
         printf("pattern load error !!\n");
         exit(0);
     }
-
-	/* open the graphics window */
-	//argInit( &cparam, 1.0, 0, 0, 0, 0 );
 }
 
 bool OpenCV::IsMarker2( IplImage* current_image )
@@ -430,38 +431,20 @@ bool OpenCV::IsMarker2( IplImage* current_image )
     int             marker_num;
 	int             thresh = 100;
 
-	//ARUint8 *dataPtr = (unsigned char*)current_image->imageData;
-
 	int xsize = current_image->width;
 	int ysize = current_image->height;
 
-	//ARUint8 * dataPtr = new ARUint8[xsize*ysize];
-
-	//for( int i = 0; i < ysize; i++ )
-	//{
-	//	int offset = current_image->widthStep * i;
-	//	
-	//	for( int j = 0; j < xsize; j++ )
-	//	{
-	//		dataPtr[4*i*xsize+4*j] = current_image->imageData[ offset + j * current_image->nChannels ];
-	//		dataPtr[4*i*xsize+4*j+1] = current_image->imageData[ offset + j * current_image->nChannels+1 ];
-	//		dataPtr[4*i*xsize+4*j+2] = current_image->imageData[ offset + j * current_image->nChannels+2 ];
-	//	}
-	//}
-
-	ARUint8 * modifiedStorage = new ARUint8[xsize*ysize*4];
-
-	//ARUint8 temp;
+	ARUint8 * dataPtr = new ARUint8[xsize*ysize*4];
 	for (int i=0,j=0;i<xsize*ysize*4;i+=4,j+=3) {
 		// ARToolkit wants AGBR, we have RGBA
-		modifiedStorage[i] = (char)255;
-		modifiedStorage[i+1] = current_image->imageData[j+2];
-		modifiedStorage[i+2] = current_image->imageData[j+1];
-		modifiedStorage[i+3] = current_image->imageData[j];
+		dataPtr[i] = (char)255;
+		dataPtr[i+1] = current_image->imageData[j+2];
+		dataPtr[i+2] = current_image->imageData[j+1];
+		dataPtr[i+3] = current_image->imageData[j];
 	}
 
 	/* detect the markers in the video frame */
-    if( arDetectMarker(modifiedStorage, thresh, &marker_info, &marker_num) < 0 ) {
+    if( arDetectMarker(dataPtr, thresh, &marker_info, &marker_num) < 0 ) {
         exit(0);
     }
 
