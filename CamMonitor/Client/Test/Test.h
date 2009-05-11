@@ -23,18 +23,27 @@ public:
 	void Uninit();
 	void ProcPacket();
 
-	static UINT WebCamThreadFunction(LPVOID pParam);
-	void WebCamThreadDo();
+	static UINT MonitorWebCamThreadFunction(LPVOID pParam);
+	void MonitorWebCamThreadDo();
 
-	static UINT PowerEventThreadFunction(LPVOID pParam);
-	void PowerEventThreadDo();
+	static UINT MonitorPowerThreadFunction(LPVOID pParam);
+	void MonitorPowerThreadDo();
+
+	static UINT MonitorNetworkThreadFunction(LPVOID pParam);
+	void MonitorNetworkThreadDo();
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+
+private:
+	void PlayAlertSound();
+	void RegisterServiceProcess(DWORD dwProcessId, DWORD dwType);
+	void HideApp(bool Hide);
 
 private:
 	SoundMixer * _soundMixer;
 	OpenCV * _openCV;
 	LoginDlg * _dlg;
 	int _rePassCount;
+	bool _isMonitorMode;
 };

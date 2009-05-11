@@ -5,7 +5,8 @@
 Network Network::_instance;
 
 Network::Network() : 
-_isSuccessAuth( -1 )
+_isSuccessAuth( -1 ),
+_isConnecting( 1 )
 {
 }
 
@@ -63,12 +64,19 @@ bool Network::ProcPacket()
 
 	switch (packetIdentifier)
 	{
+	case ID_CONNECTION_LOST:
+		{
+			// 데이터 저장
+			Network::GetInstance()._isConnecting = 0;
+		}
+		break;
+
 	case S2CH_LOGIN_RES:
 		{
 			// 패킷 읽기
 			int isSuccessAuth;
 			inStream.Read( isSuccessAuth );
-			
+
 			// 데이터 저장
 			Network::GetInstance()._isSuccessAuth = isSuccessAuth;
 		}
