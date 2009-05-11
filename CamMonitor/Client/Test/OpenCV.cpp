@@ -405,7 +405,24 @@ bool OpenCV::IsMarker2( IplImage* current_image )
     int             marker_num;
 	int             thresh = 100;
 
-	ARUint8 *dataPtr = (unsigned char*)current_image->imageData;
+	//ARUint8 *dataPtr = (unsigned char*)current_image->imageData;
+
+	int xsize = current_image->width;
+	int ysize = current_image->height;
+
+	ARUint8 * dataPtr = new ARUint8[xsize*ysize];
+
+	for( int i = 0; i < ysize; i++ )
+	{
+		int offset = current_image->widthStep * i;
+		
+		for( int j = 0; j < xsize; j++ )
+		{
+			dataPtr[4*i*xsize+4*j] = current_image->imageData[ offset + j * current_image->nChannels ];
+			dataPtr[4*i*xsize+4*j+1] = current_image->imageData[ offset + j * current_image->nChannels+1 ];
+			dataPtr[4*i*xsize+4*j+2] = current_image->imageData[ offset + j * current_image->nChannels+2 ];
+		}
+	}
 
 	/* detect the markers in the video frame */
     if( arDetectMarker(dataPtr, thresh, &marker_info, &marker_num) < 0 ) {
