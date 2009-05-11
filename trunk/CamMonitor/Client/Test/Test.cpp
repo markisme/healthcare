@@ -50,17 +50,17 @@ BOOL CTestApp::InitInstance()
 
 	// 프로그램 동작 로그인
 	_dlg = new LoginDlg;
-	if( _dlg->DoModal() != IDOK )
-	{
-		AfxMessageBox("프로그램을 종료 합니다.");
-		return -1;
-	}
+	//if( _dlg->DoModal() != IDOK )
+	//{
+	//	AfxMessageBox("프로그램을 종료 합니다.");
+	//	return -1;
+	//}
 
-	if(  Network::GetInstance()._isSuccessAuth == false )
-	{
-		AfxMessageBox("비밀번호가 틀렸습니다.");
-		return -1;
-	}
+	//if(  Network::GetInstance()._isSuccessAuth == false )
+	//{
+	//	AfxMessageBox("비밀번호가 틀렸습니다.");
+	//	return -1;
+	//}
 
 	// 주 MDI 프레임 창을 만듭니다.
 	m_pMainWnd = new CMainFrame;
