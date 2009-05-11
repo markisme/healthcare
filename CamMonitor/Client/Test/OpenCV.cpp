@@ -47,6 +47,8 @@ void OpenCV::StartMonitor()
 	cvNamedWindow( save_captureWidow, CV_WINDOW_AUTOSIZE );
 #endif
 
+	ARTInit();
+
 	// 초기화 설정
 	{
 		cvWaitKey(10);
@@ -96,7 +98,7 @@ void OpenCV::StartMonitor()
 
 		// 마커 매칭 테스트
 		{
-			IsMarker( current_image );
+			IsMarker2( current_image );
 			cvShowImage( diff_captureWidow, current_image );
 			continue;
 		}
