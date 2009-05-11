@@ -194,12 +194,22 @@ void CTestApp::MonitorWebCamThreadDo()
 #ifndef TEST
 	ScreenSaver::GetInstance().KillScreenSaver();
 #endif
-
-	// 보안모드 작동
-	PlayAlertSound();
 	
-	//
-	AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+	if( _openCV->GetAlert() )
+	{
+		// 보안모드 작동
+		PlayAlertSound();
+	
+		//
+		AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+	}
+	else
+	{
+		// 프로그램 종료
+		AfxMessageBox("보안 모드 해제");
+		_isMonitorMode = false;
+		PostQuitMessage(0);
+	}
 }
 
 UINT CTestApp::MonitorPowerThreadFunction(LPVOID pParam)

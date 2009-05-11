@@ -35,6 +35,9 @@ void OpenCV::StartMonitor()
 	time_t curTime;
 	time_t alertTime;
 
+	//
+	int checkMarkerCnt = 0;
+
 	// 카메라 캡쳐 초기화
 	// 0 번째 연결된 카메라로부터 연결 
 	CvCapture *capture = cvCaptureFromCAM(0);
@@ -47,10 +50,11 @@ void OpenCV::StartMonitor()
 	cvNamedWindow( save_captureWidow, CV_WINDOW_AUTOSIZE );
 #endif
 
-	ARTInit();
-
 	// 초기화 설정
 	{
+		// 마커 설정을 위한 초기화
+		ARTInit();
+
 		cvWaitKey(10);
 
 		// 카메라로부터 입력된 프레임을 잡는다.
@@ -96,11 +100,20 @@ void OpenCV::StartMonitor()
 		// 가져온 프레임으로부터 영상 데이터를 얻는다.
 		current_image = cvRetrieveFrame( capture );
 
-		// 마커 매칭 테스트
+		// 해제를 위한 마커 매칭
+		if( IsMarker( current_image ) )
 		{
-			IsMarker( current_image );
-			cvShowImage( diff_captureWidow, current_image );
-			continue;
+			checkMarkerCnt++;
+		}
+		else
+		{
+			checkMarkerCnt = 0;
+		}
+
+		// 마커 체크 해제 모드로
+		if( checkMarkerCnt > 10 )
+		{
+			break;
 		}
 
 #ifdef TEST
@@ -409,7 +422,13 @@ bool OpenCV::IsMarker( IplImage* current_image )
         exit(0);
     }
 
-	char buf[1024];
-	sprintf( buf, "markernum : %d , id : %d\n", marker_num, marker_info->id );
-	OutputDebugString( buf );
+	delete( dataPtr );
+	dataPtr = NULL;
+
+	if( marker_num > 0 )
+	{
+		return true;
+	}
+
+	return false;
 }
