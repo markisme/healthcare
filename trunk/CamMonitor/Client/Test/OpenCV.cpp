@@ -363,7 +363,7 @@ bool OpenCV::IsMarker( IplImage* current_image )
 	CvPoint left_top;
 
 	//
-	IplImage * marker = cvLoadImage("marker.jpg", -1);	// 마커를 읽는다.
+	IplImage * marker = cvLoadImage("marker.jpg", 1);	// 마커를 읽는다.
 	IplImage* coeff = cvCreateImage( cvSize( current_image->width - marker->width+1, 
 		current_image->height - marker->height+1 ), IPL_DEPTH_32F, 1 );	// 상관계수를 구할 이미지(C)
 	coeff->origin = current_image->origin;
@@ -380,7 +380,7 @@ bool OpenCV::IsMarker( IplImage* current_image )
 	OutputDebugString( buf );
 #endif
 
-	cvRectangle(current_image, left_top, cvPoint(left_top.x + 50, left_top.y + 50), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
+	cvRectangle(current_image, left_top, cvPoint(left_top.x + marker->width, left_top.y + marker->height), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
 	
 	if( max > 0.7f )
 		return true;
