@@ -107,7 +107,8 @@ BOOL CTestApp::OnIdle( LONG lCount )
 #ifndef TEST
 		// 스크린세이버 동작
 		m_pMainWnd->ShowWindow( TRUE );
-		HWND hwnd = GetActiveWindow();
+		LoginDlg * dlg = ((CMainFrame*)m_pMainWnd)->GetLoginDlg();
+		HWND hwnd = (HWND)dlg->GetActiveWindow();
 		ScreenSaver::GetInstance().StartScreenSaver( hwnd );
 		m_pMainWnd->ShowWindow( FALSE );
 #endif
