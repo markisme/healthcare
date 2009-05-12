@@ -28,7 +28,7 @@ void ScreenSaver::Init()
 	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "TextColor", "255 0 0" );
 	
 	// 스크린세이버 모드 실행으로 설정
-	//::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,TRUE,0,0);
+	::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,TRUE,0,0);
 }
 
 void ScreenSaver::Uninit()
@@ -65,6 +65,11 @@ void ScreenSaver::KillScreenSaver()
 	{
 		EnumDesktopWindows( hDesktop, (WNDENUMPROC)KillScreenSaverFunc , 0 );
 		CloseDesktop( hDesktop );
+		return;
+	}
+	else
+	{
+		::PostMessage (::GetForegroundWindow(), WM_CLOSE, 0L, 0L);
 	}
 }
 
