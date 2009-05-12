@@ -2,7 +2,10 @@
 #include "OpenCV.h"
 #include <ctime>
 
-OpenCV::OpenCV()
+OpenCV::OpenCV() : 
+_saveImage( NULL ),
+_checkMarkerCnt( 0 ),
+_alert( FALSE )
 {
 }
 
@@ -12,166 +15,143 @@ OpenCV::~OpenCV()
 
 void OpenCV::Init()
 {
-	_alert = false;
 	_regionList.clear();
+
+	// 마커 설정을 위한 초기화
+	ARTInit();
+
+	// 카메라 캡쳐 초기화
+	// 0 번째 연결된 카메라로부터 연결 
+	_capture = cvCaptureFromCAM(0);
+
+	// 카메라로부터 입력된 프레임을 잡는다.
+	// 만약에 실패할시 에러 메시지를 보여준다.
+	if( !cvGrabFrame( _capture ) ) 
+	{
+		AfxMessageBox("카메라가 연결되어 있지 않습니다.");
+		return;
+	}
+
+#ifdef TEST
+	cvNamedWindow( "diff_camera", CV_WINDOW_AUTOSIZE );
+	cvNamedWindow( "save_camera", CV_WINDOW_AUTOSIZE );
+#endif
+
+	// 가져온 프레임으로부터 영상 데이터를 얻는다.
+	IplImage * current_image = cvRetrieveFrame( _capture );
+
+	// 파트 설정
+	InitPart( current_image );
+
+	// 성공음
+	MessageBeep( MB_ICONASTERISK );
+
+	// 이미지 저장
+	_saveImage = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
+	cvCopy( current_image, _saveImage );
+	_saveImage->origin = current_image->origin;
+
+#ifdef TEST
+	cvShowImage( "save_camera", _saveImage );
+#endif
 }
 
 void OpenCV::Uninit()
 {
-	_alert = false;
 	_regionList.clear();
-}
-
-// 전체 화면 영역 변화 감지
-void OpenCV::StartMonitor()
-{
-	// 현재 프레임
-	IplImage *current_image = NULL;
-
-	// 저장 프레임
-	IplImage *save_image = NULL;
-
-	// 현재 시간
-	time_t curTime;
-	time_t alertTime;
-
-	//
-	int checkMarkerCnt = 0;
-
-	// 카메라 캡쳐 초기화
-	// 0 번째 연결된 카메라로부터 연결 
-	CvCapture *capture = cvCaptureFromCAM(0);
-
-#ifdef TEST
-	char *diff_captureWidow = "diff_camera";
-	cvNamedWindow( diff_captureWidow, CV_WINDOW_AUTOSIZE );
-
-	char *save_captureWidow = "save_camera";
-	cvNamedWindow( save_captureWidow, CV_WINDOW_AUTOSIZE );
-#endif
-
-	// 초기화 설정
-	{
-		// 마커 설정을 위한 초기화
-		ARTInit();
-
-		cvWaitKey(10);
-
-		// 카메라로부터 입력된 프레임을 잡는다.
-		// 만약에 실패할시 에러 메시지를 보여준다.
-		if( !cvGrabFrame( capture ) ) 
-		{
-			AfxMessageBox("카메라가 연결되어 있지 않습니다.");
-			return;
-		}
-
-		// 가져온 프레임으로부터 영상 데이터를 얻는다.
-		current_image = cvRetrieveFrame( capture );
-
-		// 파트 설정
-		InitPart( current_image );
-
-		// 성공음
-		MessageBeep(MB_ICONASTERISK);
-
-		// 이미지 저장
-		save_image = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
-		cvCopy( current_image, save_image );
-		save_image->origin = current_image->origin;
-
-#ifdef TEST
-		cvShowImage( save_captureWidow, save_image );
-#endif
-	}
-
-	while( true )
-	{
-		Sleep(100);
-		cvWaitKey(10);
-
-		// 카메라로부터 입력된 프레임을 잡는다.
-		// 만약에 실패할시 에러 메시지를 보여준다.
-		if( !cvGrabFrame( capture ) ) 
-		{
-			AfxMessageBox("카메라가 연결되어 있지 않습니다.");
-			break;
-		}
-
-		// 가져온 프레임으로부터 영상 데이터를 얻는다.
-		current_image = cvRetrieveFrame( capture );
-
-		// 해제를 위한 마커 매칭
-		if( IsMarker( current_image ) )
-		{
-			checkMarkerCnt++;
-		}
-		else
-		{
-			checkMarkerCnt = 0;
-		}
-
-		// 마커 체크 해제 모드로
-		if( checkMarkerCnt > 10 )
-		{
-			break;
-		}
-
-#ifdef TEST
-		cvShowImage( diff_captureWidow, current_image );
-#endif
-
-		// 캠 스테이트를 가져옴
-		bool isMoveCam = IsMoveCam( current_image, save_image );
-
-		// 경보 설정
-		if( !_alert )
-		{
-			// 캠이 움직이면 경보 설정
-			if( isMoveCam )
-			{
-				// 경고음
-				PlaySound("notify.wav",NULL,SND_APPLICATION | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
-
-				// 시간 기록
-				time( &alertTime );
-				_alert = true;
-			}
-		}
-		else
-		{
-			//
-			time( &curTime );
-			time_t diffTime = curTime - alertTime;
-
-			// 3초간 캠 움직임 판단
-			if( isMoveCam && diffTime >= 3.f )
-			{
-				OutputDebugString( "도난 경보\n" );
-				_alert = true;
-				break;
-			}
-			else if( !isMoveCam )
-			{
-				PlaySound(NULL, NULL, SND_PURGE);
-				_alert = false;
-			}
-		}
-	}
 
 	// 할당한 메모리 해제
-	if( save_image != NULL ) 
+	if( _saveImage != NULL ) 
 	{
-		cvReleaseImage( &save_image );
+		cvReleaseImage( &_saveImage );
 	}
-
-	// 카메라 연결 종료
-	cvReleaseCapture( &capture );
 
 #ifdef TEST
 	// 윈도우 해제
-	cvDestroyWindow( diff_captureWidow );
-	cvDestroyWindow( save_captureWidow );
+	cvDestroyWindow( "diff_camera" );
+	cvDestroyWindow( "save_camera" );
 #endif
+
+	// 카메라 연결 종료
+	cvReleaseCapture( &_capture );
+}
+
+// 전체 화면 영역 변화 감지
+BOOL OpenCV::UpdateMonitor()
+{
+	Sleep(100);
+	cvWaitKey(10);
+
+	// 카메라로부터 입력된 프레임을 잡는다.
+	// 만약에 실패할시 에러 메시지를 보여준다.
+	if( !cvGrabFrame( _capture ) ) 
+	{
+		AfxMessageBox("카메라가 연결되어 있지 않습니다.");
+		return FALSE;
+	}
+
+	// 가져온 프레임으로부터 영상 데이터를 얻는다.
+	IplImage * current_image = cvRetrieveFrame( _capture );
+
+	// 해제를 위한 마커 매칭
+	if( IsMarker( current_image ) )
+	{
+		_checkMarkerCnt++;
+	}
+	else
+	{
+		_checkMarkerCnt = 0;
+	}
+
+	// 마커 체크 해제 모드로
+	if( _checkMarkerCnt > 10 )
+	{
+		return FALSE;
+	}
+
+#ifdef TEST
+	cvShowImage( "diff_camera", current_image );
+#endif
+
+	// 캠 스테이트를 가져옴
+	bool isMoveCam = IsMoveCam( current_image, _saveImage );
+
+	// 경보 설정
+	if( !_alert )
+	{
+		// 캠이 움직이면 경보 설정
+		if( isMoveCam )
+		{
+			// 경고음
+			PlaySound("notify.wav",NULL,SND_APPLICATION | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+
+			// 시간 기록
+			time( &_alertTime );
+			_alert = true;
+		}
+	}
+	else
+	{
+		//
+		time_t curTime;
+		time( &curTime );
+		time_t diffTime = curTime - _alertTime;
+
+		// 3초간 캠 움직임 판단
+		if( isMoveCam && diffTime >= 3.f )
+		{
+			OutputDebugString( "도난 경보\n" );
+			_alert = true;
+			return FALSE;
+		}
+		else if( !isMoveCam )
+		{
+			PlaySound(NULL, NULL, SND_PURGE);
+			_alert = false;
+		}
+	}
+
+	return TRUE;
 }
 
 bool OpenCV::IsMoveCam( IplImage* current_image, IplImage* previous_image )

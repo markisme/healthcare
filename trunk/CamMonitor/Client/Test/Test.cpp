@@ -64,9 +64,6 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->MoveWindow( 0, 0, 0, 0 );
 	m_pMainWnd->ShowWindow( FALSE );
 
-	// 캠 제어 모듈 작동
-	CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
-
 	// 파워 제어 모듈 작동
 	//CWinThread * pThread2 = AfxBeginThread(MonitorPowerThreadFunction, this);
 
@@ -150,39 +147,28 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		}
 	}
 
-	return TRUE;
-}
-
-UINT CTestApp::MonitorWebCamThreadFunction(LPVOID pParam)
-{
-	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->MonitorWebCamThreadDo(); // 감시를 위한 쓰레드 시작
-	return 0;
-}
-
-void CTestApp::MonitorWebCamThreadDo()
-{
-	// 감시 모드 동작
-	_openCV->StartMonitor();
-
-	// 스크린 세이버 죽이기
+	if( _openCV->UpdateMonitor() == FALSE )
+	{
+		// 스크린 세이버 죽이기
 #ifndef TEST
-	ScreenSaver::GetInstance().KillScreenSaver();
+		ScreenSaver::GetInstance().KillScreenSaver();
 #endif
-	
-	if( _openCV->GetAlert() )
-	{
-		// 보안모드 작동
-		PlayAlertSound();
-		AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+		if( _openCV->GetAlert() )
+		{
+			// 보안모드 작동
+			PlayAlertSound();
+			AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+		}
+		else
+		{
+			// 프로그램 종료
+			AfxMessageBox("보안 모드 해제");
+			_isMonitorMode = false;
+			PostQuitMessage(0);
+		}
 	}
-	else
-	{
-		// 프로그램 종료
-		AfxMessageBox("보안 모드 해제");
-		_isMonitorMode = false;
-		PostQuitMessage(0);
-	}
+
+	return TRUE;
 }
 
 UINT CTestApp::MonitorPowerThreadFunction(LPVOID pParam)
