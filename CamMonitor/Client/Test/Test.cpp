@@ -37,8 +37,8 @@ BOOL CTestApp::InitInstance()
 	ScreenSaver::GetInstance().Init();
 
 	//// 웹캠 관련
-	//_openCV = new OpenCV;
-	//_openCV->Init();
+	_openCV = new OpenCV;
+	_openCV->Init();
 
 	// 사운드 관련
 	_soundMixer = new SoundMixer;
@@ -143,26 +143,26 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		}
 	}
 
-//	if( _openCV->UpdateMonitor() == FALSE )
-//	{
-//		// 스크린 세이버 죽이기
-//#ifndef TEST
-//		ScreenSaver::GetInstance().KillScreenSaver();
-//#endif
-//		if( _openCV->GetAlert() )
-//		{
-//			// 보안모드 작동
-//			PlayAlertSound();
-//			AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
-//		}
-//		else
-//		{
-//			// 프로그램 종료
-//			AfxMessageBox("보안 모드 해제");
-//			_isMonitorMode = false;
-//			PostQuitMessage(0);
-//		}
-//	}
+	if( _openCV->UpdateMonitor() == FALSE )
+	{
+		// 스크린 세이버 죽이기
+#ifndef TEST
+		ScreenSaver::GetInstance().KillScreenSaver();
+#endif
+		if( _openCV->GetAlert() )
+		{
+			// 보안모드 작동
+			PlayAlertSound();
+			AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+		}
+		else
+		{
+			// 프로그램 종료
+			AfxMessageBox("보안 모드 해제");
+			_isMonitorMode = false;
+			PostQuitMessage(0);
+		}
+	}
 
 	{
 		//
