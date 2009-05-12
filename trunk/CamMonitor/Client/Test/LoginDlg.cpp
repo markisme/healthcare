@@ -51,5 +51,6 @@ void LoginDlg::OnBnClickedOk()
 
 void LoginDlg::OnClose()
 {
-	ScreenSaver::GetInstance().StartScreenSaver();
+	HWND hwnd = (HWND)GetActiveWindow();
+	ScreenSaver::GetInstance().StartScreenSaver(hwnd);
 }
