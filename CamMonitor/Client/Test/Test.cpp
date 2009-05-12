@@ -64,6 +64,10 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->MoveWindow( 0, 0, 0, 0 );
 	m_pMainWnd->ShowWindow( FALSE );
 
+	// 캠 제어 모듈 작동
+	//CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
+
+
 	// 모니터 모드 시작
 	_isMonitorMode = true;
 
@@ -200,4 +204,36 @@ void CTestApp::PlayAlertSound()
 	std::string wav = "Test.wav";
 	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
+}
+
+UINT CTestApp::MonitorNetworkThreadFunction(LPVOID pParam)
+{
+	CTestApp *pthis = (CTestApp*)pParam;     
+	pthis->MonitorNetworkThreadDo(); // 감시를 위한 쓰레드 시작
+	return 0;
+}
+
+void CTestApp::MonitorNetworkThreadDo()
+{
+	// 감시 모드 동작
+	while( true )
+	{
+		//
+		Sleep(1000);
+		
+		//
+		if( Network::GetInstance()._isConnecting == 0 )
+		{
+			break;
+		}
+	}
+
+	// 스크린 세이버 죽이기
+#ifndef TEST
+	ScreenSaver::GetInstance().KillScreenSaver();
+#endif
+
+	// 보안모드 작동
+	PlayAlertSound();
+	AfxMessageBox("네트워크 연결 끊김!\n보안 모드 작동!");
 }
