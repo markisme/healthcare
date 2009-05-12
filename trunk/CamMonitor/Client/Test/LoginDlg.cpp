@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "LoginDlg.h"
-#include "Network.h"
 
 IMPLEMENT_DYNAMIC(LoginDlg, CDialog)
 LoginDlg::LoginDlg(CWnd* pParent /*=NULL*/)	: CDialog(LoginDlg::IDD, pParent)
@@ -48,4 +47,9 @@ void LoginDlg::OnBnClickedOk()
 
 	// 로긴 요청
 	Network::GetInstance().ReqLoginSend( idStr, passStr );
+}
+
+void LoginDlg::OnClose()
+{
+	ScreenSaver::GetInstance().StartScreenSaver();
 }

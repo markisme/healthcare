@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "ScreenSaver.h"
 
-#define REGISTRY_ADDRESS HKEY_CURRENT_USER\\Control Panel\\Desktop
-
 ScreenSaver ScreenSaver::_instance;
 
 BOOL CALLBACK KillScreenSaverFunc(HWND hWnd, LPARAM lParam);
@@ -17,18 +15,19 @@ ScreenSaver::~ScreenSaver()
 
 void ScreenSaver::Init()
 {
-	//// 문자 스크린 세이버 설정
-	//WriteRegVal( "Control Panel\\Desktop", "SCRNSAVE.EXE", "C:\\WINDOWS\system32\\ssmarque.scr" );
+	// 문자 스크린 세이버 설정
+	WriteRegVal( "Control Panel\\Desktop", "ScreenSaveActive", "1" );
+	WriteRegVal( "Control Panel\\Desktop", "SCRNSAVE.EXE", "C:\\WINDOWS\\system32\\ssmarque.scr" );
 
-	//// 스크린 세이버 세부 설정
-	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "BackgroundColor", "192 192 192" );
-	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Mode", "1" );
-	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Size", "26" );
-	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Speed", "1" );
-	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Text", "도난경보" );
-	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "TextColor", "255 0 0" );
-	//
-	//// 스크린세이버 모드 실행으로 설정
+	// 스크린 세이버 세부 설정
+	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "BackgroundColor", "192 192 192" );
+	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Mode", "1" );
+	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Size", "26" );
+	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Speed", "2" );
+	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Text", "도난 경보기 작동 중.." );
+	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "TextColor", "255 0 0" );
+	
+	// 스크린세이버 모드 실행으로 설정
 	//::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,TRUE,0,0);
 }
 
@@ -36,8 +35,9 @@ void ScreenSaver::Uninit()
 {
 }
 
-void ScreenSaver::StartScreenSaver( HWND hwnd )
+void ScreenSaver::StartScreenSaver()
 {
+	HWND hwnd = GetDesktopWindow();
 	if( IsScreenSaverRunning() == FALSE )
 	{
 		SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
@@ -66,10 +66,6 @@ void ScreenSaver::KillScreenSaver()
 		EnumDesktopWindows( hDesktop, (WNDENUMPROC)KillScreenSaverFunc , 0 );
 		CloseDesktop( hDesktop );
 	}
-	//else
-	//{
-	//	PostMessage( GetForegroundWindow(), WM_CLOSE, 0, 0 );
-	//}
 }
 
 BOOL CALLBACK KillScreenSaverFunc(HWND hWnd, LPARAM lParam)

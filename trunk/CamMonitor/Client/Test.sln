@@ -3,7 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcproj", "{C69AAA6F-FBEB-42D9-A97B-B7748219925A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA} = {85B65333-CD5F-4939-88AF-89A907F7BDFA}
 		{B55BD2B0-5F71-498F-9C4C-724374992E3B} = {B55BD2B0-5F71-498F-9C4C-724374992E3B}
 		{236069BB-EC76-40F1-93AA-416C1FB98993} = {236069BB-EC76-40F1-93AA-416C1FB98993}
 	EndProjectSection
@@ -11,8 +10,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "..\Common\Common.vcproj", "{236069BB-EC76-40F1-93AA-416C1FB98993}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibStatic", "..\LibStatic\LibStatic.vcproj", "{B55BD2B0-5F71-498F-9C4C-724374992E3B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlLib", "XMLLib\XmlLib.vcproj", "{85B65333-CD5F-4939-88AF-89A907F7BDFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,12 +36,6 @@ Global
 		{B55BD2B0-5F71-498F-9C4C-724374992E3B}.Final|Win32.Build.0 = Release|Win32
 		{B55BD2B0-5F71-498F-9C4C-724374992E3B}.Release|Win32.ActiveCfg = Release|Win32
 		{B55BD2B0-5F71-498F-9C4C-724374992E3B}.Release|Win32.Build.0 = Release|Win32
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Debug|Win32.Build.0 = Debug|Win32
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Final|Win32.ActiveCfg = Final|Win32
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Final|Win32.Build.0 = Final|Win32
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Release|Win32.ActiveCfg = Release|Win32
-		{85B65333-CD5F-4939-88AF-89A907F7BDFA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

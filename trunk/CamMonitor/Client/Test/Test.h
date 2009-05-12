@@ -27,9 +27,10 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	void PlayAlertSound();
-	void RegisterServiceProcess(DWORD dwProcessId, DWORD dwType);
-	void HideApp(bool Hide);
+	void OpenCVUpdate();
+	void ACPowerUpdate();
+	void OperatorMonitor( std::string text );
+	void ReleaseMonitor();
 
 private:
 	SoundMixer * _soundMixer;
