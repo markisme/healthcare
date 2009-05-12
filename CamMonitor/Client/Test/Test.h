@@ -23,12 +23,6 @@ public:
 	void Uninit();
 	void ProcPacket();
 
-	static UINT MonitorPowerThreadFunction(LPVOID pParam);
-	void MonitorPowerThreadDo();
-
-	static UINT MonitorNetworkThreadFunction(LPVOID pParam);
-	void MonitorNetworkThreadDo();
-
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 
@@ -42,6 +36,4 @@ private:
 	OpenCV * _openCV;
 	int _rePassCount;
 	bool _isMonitorMode;
-
-	bool _isShowLoginDlg;
 };
