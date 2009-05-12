@@ -130,17 +130,6 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	// 패킷 처리
 	if( Network::GetInstance().ProcPacket() == TRUE )
 	{
-		if( Network::GetInstance()._isSuccessAuth == 1 )
-		{
-			// 보안 모드 해제
-			ReleaseMonitor();
-		}
-		else if( Network::GetInstance()._isSuccessAuth == 0 )
-		{
-			AfxMessageBox("비밀번호가 틀렸습니다.");
-			_rePassCount++;
-		}
-
 		//
 		if( Network::GetInstance()._isConnecting == 0 )
 		{
@@ -150,6 +139,19 @@ BOOL CTestApp::OnIdle( LONG lCount )
 #endif
 			// 보안모드 작동
 			OperatorMonitor( "네트워크 연결 끊김!\n보안 모드 작동!" );
+			return TRUE;
+		}
+
+		if( Network::GetInstance()._isSuccessAuth == 1 )
+		{
+			// 보안 모드 해제
+			ReleaseMonitor();
+			return TRUE;
+		}
+		else if( Network::GetInstance()._isSuccessAuth == 0 )
+		{
+			AfxMessageBox("비밀번호가 틀렸습니다.");
+			_rePassCount++;
 		}
 	}
 
@@ -161,6 +163,11 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	if( Config::GetInstance()._isACPowerMode )
 	{
 		ACPowerUpdate();
+	}
+
+	if( Config::GetInstance()._isUSBMouseMode )
+	{
+		USBMouseUpdate();
 	}
 
 	return TRUE;
@@ -202,6 +209,20 @@ void CTestApp::ACPowerUpdate()
 #endif
 		// 보안모드 작동
 		OperatorMonitor( "베터리 모드 동작!\n보안 모드 작동!" );
+	}
+}
+
+void CTestApp::USBMouseUpdate()
+{
+	CMainFrame * mainWnd = (CMainFrame*)m_pMainWnd;
+	if( mainWnd->IsDeviceChange() == TRUE )
+	{
+#ifndef TEST
+		// 스크린 세이버 죽이기
+		ScreenSaver::GetInstance().KillScreenSaver();
+#endif
+		// 보안모드 작동
+		OperatorMonitor( "USB 장치 해제!\n보안 모드 작동!" );
 	}
 }
 
