@@ -65,7 +65,6 @@ void ScreenSaver::KillScreenSaver()
 	{
 		EnumDesktopWindows( hDesktop, (WNDENUMPROC)KillScreenSaverFunc , 0 );
 		CloseDesktop( hDesktop );
-		return;
 	}
 	else
 	{
