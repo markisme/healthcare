@@ -9,7 +9,7 @@ public:
 	void Init();
 	void Uninit();
 
-	void StartScreenSaver( HWND hwnd );
+	void StartScreenSaver( HWND hwnd = NULL );
 	void KillScreenSaver();
 	BOOL IsScreenSaverRunning();
 
