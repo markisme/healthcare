@@ -1,4 +1,5 @@
 #pragma once 
+#include "LoginDlg.h"
 
 class CMainFrame : public CMDIFrameWnd
 {
@@ -13,7 +14,11 @@ public:
 
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
 	DECLARE_MESSAGE_MAP()
+
+private:
+	LoginDlg _dlg;
 };
 
 

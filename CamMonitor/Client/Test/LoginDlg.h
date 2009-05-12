@@ -21,17 +21,11 @@ protected:
 
 public:
 	virtual BOOL OnInitDialog();
-	static UINT ThreadFunction(LPVOID pParam);
-	void ThreadDo();
-
+	
 private:
 	CEdit _editID;
 	CEdit _editPass;
 
 public:
-	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);	
-public:
 	afx_msg void OnBnClickedOk();
-	afx_msg void OnClose();
 };

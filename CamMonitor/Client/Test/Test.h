@@ -26,12 +26,6 @@ public:
 	static UINT MonitorWebCamThreadFunction(LPVOID pParam);
 	void MonitorWebCamThreadDo();
 
-	static UINT MonitorPowerThreadFunction(LPVOID pParam);
-	void MonitorPowerThreadDo();
-
-	static UINT MonitorNetworkThreadFunction(LPVOID pParam);
-	void MonitorNetworkThreadDo();
-
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 
@@ -43,7 +37,8 @@ private:
 private:
 	SoundMixer * _soundMixer;
 	OpenCV * _openCV;
-	LoginDlg * _dlg;
 	int _rePassCount;
 	bool _isMonitorMode;
+
+	bool _isShowLoginDlg;
 };
