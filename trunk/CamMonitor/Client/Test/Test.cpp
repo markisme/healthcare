@@ -127,13 +127,21 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	// 패킷 처리
 	if( Network::GetInstance().ProcPacket() == TRUE )
 	{
-		if( Network::GetInstance()._isSuccessAuth == 1 )
+		if( Network::GetInstance()._isSuccessAuth == 1 && _isMonitorMode == false )
+		{
+			_isMonitorMode = true;
+		}
+		else if( Network::GetInstance()._isSuccessAuth == 0 && _isMonitorMode == false )
+		{
+			AfxMessageBox("비밀번호가 틀렸습니다.");
+		}
+		else if( Network::GetInstance()._isSuccessAuth == 1 && _isMonitorMode == true )
 		{
 			AfxMessageBox("보안 모드 해제");
 			_isMonitorMode = false;
 			PostQuitMessage(0);
 		}
-		else if( Network::GetInstance()._isSuccessAuth == 0 )
+		else if( Network::GetInstance()._isSuccessAuth == 0 && _isMonitorMode == true )
 		{
 			AfxMessageBox("비밀번호가 틀렸습니다.");
 			_rePassCount++;
