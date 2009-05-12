@@ -11,6 +11,7 @@ public:
 
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	LoginDlg * GetLoginDlg() { return &_dlg; }
 
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
