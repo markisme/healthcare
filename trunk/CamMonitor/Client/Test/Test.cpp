@@ -65,7 +65,7 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->ShowWindow( FALSE );
 
 	// 캠 제어 모듈 작동
-	//CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
+	CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
 
 	// 파워 제어 모듈 작동
 	//CWinThread * pThread2 = AfxBeginThread(MonitorPowerThreadFunction, this);
