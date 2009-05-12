@@ -199,6 +199,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Config.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Config.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Network.cpp"
 				>
 			</File>
@@ -238,17 +246,17 @@
 				RelativePath=".\Test.h"
 				>
 			</File>
-			<File
-				RelativePath=".\TestCase.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TestCase.h"
-				>
-			</File>
 			<Filter
 				Name="Dialog"
 				>
+				<File
+					RelativePath=".\ConfigDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ConfigDlg.h"
+					>
+				</File>
 				<File
 					RelativePath=".\LoginDlg.cpp"
 					>

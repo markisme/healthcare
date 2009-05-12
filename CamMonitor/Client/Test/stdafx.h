@@ -46,6 +46,9 @@
 #include <vector>
 #include <algorithm>
 
+#include "Network.h"
+#include "ScreenSaver.h"
+
 #ifndef _AFX_NO_OLE_SUPPORT
 #include <afxdtctl.h>		// Internet Explorer 4 공용 컨트롤에 대한 MFC 지원입니다.
 #endif

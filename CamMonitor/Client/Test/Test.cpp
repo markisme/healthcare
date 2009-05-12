@@ -8,6 +8,8 @@
 #include "OpenCV.h"
 #include "SoundMixer.h"
 #include "ScreenSaver.h"
+#include "ConfigDlg.h"
+#include "Config.h"
 
 BEGIN_MESSAGE_MAP(CTestApp, CWinApp)
 END_MESSAGE_MAP()
@@ -36,16 +38,16 @@ BOOL CTestApp::InitInstance()
 	// 스크린 세이버 설정 초기화
 	ScreenSaver::GetInstance().Init();
 
-	//// 웹캠 관련
-	_openCV = new OpenCV;
-	_openCV->Init();
+	ConfigDlg dlg;
+	if( dlg.DoModal() != IDOK )
+	{
+		PostQuitMessage(0);
+		return FALSE;
+	}
 
 	// 사운드 관련
 	_soundMixer = new SoundMixer;
 	_soundMixer->Init();
-
-	_soundMixer->SetMute( FALSE );
-	_soundMixer->SetVolumn( 6000 );
 
 	// 주 MDI 프레임 창을 만듭니다.
 	m_pMainWnd = new CMainFrame;
@@ -64,8 +66,22 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->MoveWindow( 0, 0, 0, 0 );
 	m_pMainWnd->ShowWindow( FALSE );
 
+	//Config::GetInstance()._isWebcamMode
+	//Config::GetInstance()._isACPowerMode
+	//Config::GetInstance()._isUSBMouseMode
+
+	// 웹캠 관련
+	if( Config::GetInstance()._isWebcamMode )
+	{
+		_openCV = new OpenCV;
+		_openCV->Init();
+	}
+
 	// 모니터 모드 시작
 	_isMonitorMode = true;
+
+	// 스크린세이버 동작
+	ScreenSaver::GetInstance().StartScreenSaver();
 
 	return TRUE;
 }
@@ -76,13 +92,15 @@ int CTestApp::ExitInstance()
 	if( _isMonitorMode )
 	{
 		// 보안모드 작동
-		PlayAlertSound();
-		AfxMessageBox("강제 프로그램 종료!\n보안 모드 작동!");
+		OperatorMonitor( "강제 프로그램 종료!\n보안 모드 작동!" );
 		Sleep(9999999);
 	}
 
-	_openCV->Uninit();
-	delete( _openCV );
+	if( Config::GetInstance()._isWebcamMode )
+	{
+		_openCV->Uninit();
+		delete( _openCV );
+	}
 
 	_soundMixer->Uninit();
 	delete( _soundMixer );
@@ -102,16 +120,11 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	// 스크린세이버 동작
-	HWND hwnd = GetDesktopWindow();
-	ScreenSaver::GetInstance().StartScreenSaver( hwnd );
-
 	//
 	if( _rePassCount >= 3 )
 	{
 		// 보안모드 작동
-		PlayAlertSound();
-		AfxMessageBox("비밀번호 3회 오류!\n보안 모드 작동!");
+		OperatorMonitor( "비밀번호 3회 오류!\n보안 모드 작동!" );
 	}
 
 	// 패킷 처리
@@ -119,9 +132,8 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	{
 		if( Network::GetInstance()._isSuccessAuth == 1 )
 		{
-			AfxMessageBox("보안 모드 해제");
-			_isMonitorMode = false;
-			PostQuitMessage(0);
+			// 보안 모드 해제
+			ReleaseMonitor();
 		}
 		else if( Network::GetInstance()._isSuccessAuth == 0 )
 		{
@@ -132,64 +144,82 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		//
 		if( Network::GetInstance()._isConnecting == 0 )
 		{
-			// 스크린 세이버 죽이기
 #ifndef TEST
+			// 스크린 세이버 죽이기
 			ScreenSaver::GetInstance().KillScreenSaver();
 #endif
-
 			// 보안모드 작동
-			PlayAlertSound();
-			AfxMessageBox("네트워크 연결 끊김!\n보안 모드 작동!");
+			OperatorMonitor( "네트워크 연결 끊김!\n보안 모드 작동!" );
 		}
 	}
 
-	if( _openCV->UpdateMonitor() == FALSE )
+	if( Config::GetInstance()._isWebcamMode )
 	{
-		// 스크린 세이버 죽이기
-#ifndef TEST
-		ScreenSaver::GetInstance().KillScreenSaver();
-#endif
-		if( _openCV->GetAlert() )
-		{
-			// 보안모드 작동
-			PlayAlertSound();
-			AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
-		}
-		else
-		{
-			// 프로그램 종료
-			AfxMessageBox("보안 모드 해제");
-			_isMonitorMode = false;
-			PostQuitMessage(0);
-		}
+		OpenCVUpdate();
 	}
 
+	if( Config::GetInstance()._isACPowerMode )
 	{
-		//
-		SYSTEM_BATTERY_STATE sys_bat_state;
-		CallNtPowerInformation(SystemBatteryState, NULL, 0,	&sys_bat_state, sizeof(sys_bat_state));
-
-		//
-		if( sys_bat_state.AcOnLine == false )
-		{
-			// 스크린 세이버 죽이기
-#ifndef TEST
-			ScreenSaver::GetInstance().KillScreenSaver();
-#endif
-
-			// 보안모드 작동
-			PlayAlertSound();
-			AfxMessageBox("베터리 모드 동작!\n보안 모드 작동!");
-		}
+		ACPowerUpdate();
 	}
 
 	return TRUE;
 }
 
-void CTestApp::PlayAlertSound()
+void CTestApp::OpenCVUpdate()
+{
+	if( _openCV->UpdateMonitor() == FALSE )
+	{
+#ifndef TEST
+		// 스크린 세이버 죽이기
+		ScreenSaver::GetInstance().KillScreenSaver();
+#endif
+		if( _openCV->GetAlert() )
+		{
+			// 보안모드 작동
+			OperatorMonitor( "웹캠 동작!\n보안 모드 작동!" );
+		}
+		else
+		{
+			// 보안 모드 해제
+			ReleaseMonitor();
+		}
+	}
+}
+
+void CTestApp::ACPowerUpdate()
+{
+	//
+	SYSTEM_BATTERY_STATE sys_bat_state;
+	CallNtPowerInformation(SystemBatteryState, NULL, 0,	&sys_bat_state, sizeof(sys_bat_state));
+
+	//
+	if( sys_bat_state.AcOnLine == false )
+	{
+#ifndef TEST
+		// 스크린 세이버 죽이기
+		ScreenSaver::GetInstance().KillScreenSaver();
+#endif
+		// 보안모드 작동
+		OperatorMonitor( "베터리 모드 동작!\n보안 모드 작동!" );
+	}
+}
+
+void CTestApp::OperatorMonitor( std::string text )
 {
 #ifndef TEST
+	_soundMixer->SetMute( FALSE );
+	_soundMixer->SetVolumn( 6000 );
+
 	std::string wav = "Test.wav";
 	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
+	AfxMessageBox( text.c_str() );
+}
+
+void CTestApp::ReleaseMonitor()
+{
+	AfxMessageBox("보안 모드 해제");
+	_isMonitorMode = false;
+	PostQuitMessage(0);
 }
