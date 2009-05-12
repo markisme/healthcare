@@ -26,6 +26,12 @@ public:
 	static UINT MonitorWebCamThreadFunction(LPVOID pParam);
 	void MonitorWebCamThreadDo();
 
+	static UINT MonitorPowerThreadFunction(LPVOID pParam);
+	void MonitorPowerThreadDo();
+
+	static UINT MonitorNetworkThreadFunction(LPVOID pParam);
+	void MonitorNetworkThreadDo();
+
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 
