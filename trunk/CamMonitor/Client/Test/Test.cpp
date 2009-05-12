@@ -81,10 +81,7 @@ BOOL CTestApp::InitInstance()
 	_isMonitorMode = true;
 
 	// 스크린세이버 동작
-	m_pMainWnd->ShowWindow( TRUE );
-	HWND hwnd = (HWND)m_pMainWnd->GetActiveWindow();
-	ScreenSaver::GetInstance().StartScreenSaver(hwnd);
-	m_pMainWnd->ShowWindow( FALSE );
+	ScreenSaver::GetInstance().StartScreenSaver();
 
 	return TRUE;
 }
