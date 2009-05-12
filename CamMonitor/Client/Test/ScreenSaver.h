@@ -11,6 +11,7 @@ public:
 
 	void StartScreenSaver( HWND hwnd );
 	void KillScreenSaver();
+	BOOL IsScreenSaverRunning();
 
 	//
 	static ScreenSaver & GetInstance() { return _instance; }

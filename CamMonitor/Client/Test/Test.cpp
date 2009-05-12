@@ -36,9 +36,9 @@ BOOL CTestApp::InitInstance()
 	// 스크린 세이버 설정 초기화
 	ScreenSaver::GetInstance().Init();
 
-	// 웹캠 관련
-	_openCV = new OpenCV;
-	_openCV->Init();
+	//// 웹캠 관련
+	//_openCV = new OpenCV;
+	//_openCV->Init();
 
 	// 사운드 관련
 	_soundMixer = new SoundMixer;
@@ -63,10 +63,6 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->GetWindowRect( mainRect );
 	m_pMainWnd->MoveWindow( 0, 0, 0, 0 );
 	m_pMainWnd->ShowWindow( FALSE );
-
-	// 캠 제어 모듈 작동
-	//CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
-
 
 	// 모니터 모드 시작
 	_isMonitorMode = true;
@@ -106,17 +102,9 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	if( _rePassCount == 0 )
-	{
-#ifndef TEST
-		// 스크린세이버 동작
-		m_pMainWnd->ShowWindow( TRUE );
-		LoginDlg * dlg = ((CMainFrame*)m_pMainWnd)->GetLoginDlg();
-		HWND hwnd = (HWND)dlg->GetActiveWindow();
-		ScreenSaver::GetInstance().StartScreenSaver( hwnd );
-		m_pMainWnd->ShowWindow( FALSE );
-#endif
-	}
+	// 스크린세이버 동작
+	HWND hwnd = GetDesktopWindow();
+	ScreenSaver::GetInstance().StartScreenSaver( hwnd );
 
 	//
 	if( _rePassCount >= 3 )
@@ -155,26 +143,26 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		}
 	}
 
-	if( _openCV->UpdateMonitor() == FALSE )
-	{
-		// 스크린 세이버 죽이기
-#ifndef TEST
-		ScreenSaver::GetInstance().KillScreenSaver();
-#endif
-		if( _openCV->GetAlert() )
-		{
-			// 보안모드 작동
-			PlayAlertSound();
-			AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
-		}
-		else
-		{
-			// 프로그램 종료
-			AfxMessageBox("보안 모드 해제");
-			_isMonitorMode = false;
-			PostQuitMessage(0);
-		}
-	}
+//	if( _openCV->UpdateMonitor() == FALSE )
+//	{
+//		// 스크린 세이버 죽이기
+//#ifndef TEST
+//		ScreenSaver::GetInstance().KillScreenSaver();
+//#endif
+//		if( _openCV->GetAlert() )
+//		{
+//			// 보안모드 작동
+//			PlayAlertSound();
+//			AfxMessageBox("웹캠 동작!\n보안 모드 작동!");
+//		}
+//		else
+//		{
+//			// 프로그램 종료
+//			AfxMessageBox("보안 모드 해제");
+//			_isMonitorMode = false;
+//			PostQuitMessage(0);
+//		}
+//	}
 
 	{
 		//
@@ -204,36 +192,4 @@ void CTestApp::PlayAlertSound()
 	std::string wav = "Test.wav";
 	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
-}
-
-UINT CTestApp::MonitorNetworkThreadFunction(LPVOID pParam)
-{
-	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->MonitorNetworkThreadDo(); // 감시를 위한 쓰레드 시작
-	return 0;
-}
-
-void CTestApp::MonitorNetworkThreadDo()
-{
-	// 감시 모드 동작
-	while( true )
-	{
-		//
-		Sleep(1000);
-		
-		//
-		if( Network::GetInstance()._isConnecting == 0 )
-		{
-			break;
-		}
-	}
-
-	// 스크린 세이버 죽이기
-#ifndef TEST
-	ScreenSaver::GetInstance().KillScreenSaver();
-#endif
-
-	// 보안모드 작동
-	PlayAlertSound();
-	AfxMessageBox("네트워크 연결 끊김!\n보안 모드 작동!");
 }
