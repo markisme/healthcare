@@ -23,9 +23,6 @@ public:
 	void Uninit();
 	void ProcPacket();
 
-	static UINT MonitorWebCamThreadFunction(LPVOID pParam);
-	void MonitorWebCamThreadDo();
-
 	static UINT MonitorPowerThreadFunction(LPVOID pParam);
 	void MonitorPowerThreadDo();
 

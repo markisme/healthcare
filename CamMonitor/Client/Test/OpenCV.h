@@ -63,8 +63,7 @@ public:
 	void Init();
 	void Uninit();
 
-	void StartMonitor();
-	void StopMonitor();
+	BOOL UpdateMonitor();
 	bool GetAlert() { return _alert; }
 
 private:
@@ -77,4 +76,10 @@ private:
 private:
 	bool _alert;
 	RegionList _regionList;
+
+	CvCapture * _capture;
+	IplImage * _saveImage;
+
+	time_t _alertTime;
+	int _checkMarkerCnt;
 };
