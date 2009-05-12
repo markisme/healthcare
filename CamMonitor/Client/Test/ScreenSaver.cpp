@@ -35,9 +35,9 @@ void ScreenSaver::Uninit()
 {
 }
 
-void ScreenSaver::StartScreenSaver()
+void ScreenSaver::StartScreenSaver( HWND hwnd )
 {
-	HWND hwnd = GetDesktopWindow();
+	//HWND hwnd = GetDesktopWindow();
 	if( IsScreenSaverRunning() == FALSE )
 	{
 		SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
