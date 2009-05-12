@@ -17,19 +17,19 @@ ScreenSaver::~ScreenSaver()
 
 void ScreenSaver::Init()
 {
-	// 문자 스크린 세이버 설정
-	WriteRegVal( "Control Panel\\Desktop", "SCRNSAVE.EXE", "C:\\WINDOWS\system32\\ssmarque.scr" );
+	//// 문자 스크린 세이버 설정
+	//WriteRegVal( "Control Panel\\Desktop", "SCRNSAVE.EXE", "C:\\WINDOWS\system32\\ssmarque.scr" );
 
-	// 스크린 세이버 세부 설정
-	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "BackgroundColor", "192 192 192" );
-	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Mode", "1" );
-	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Size", "26" );
-	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Speed", "1" );
-	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Text", "도난경보" );
-	WriteRegVal( "Control Panel\\Screen Saver.Marquee", "TextColor", "255 0 0" );
-	
-	// 스크린세이버 모드 실행으로 설정
-	::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,TRUE,0,0);
+	//// 스크린 세이버 세부 설정
+	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "BackgroundColor", "192 192 192" );
+	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Mode", "1" );
+	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Size", "26" );
+	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Speed", "1" );
+	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "Text", "도난경보" );
+	//WriteRegVal( "Control Panel\\Screen Saver.Marquee", "TextColor", "255 0 0" );
+	//
+	//// 스크린세이버 모드 실행으로 설정
+	//::SystemParametersInfo(SPI_SETSCREENSAVEACTIVE,TRUE,0,0);
 }
 
 void ScreenSaver::Uninit()
@@ -38,7 +38,23 @@ void ScreenSaver::Uninit()
 
 void ScreenSaver::StartScreenSaver( HWND hwnd )
 {
-	SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
+	if( IsScreenSaverRunning() == FALSE )
+	{
+		SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
+	}
+}
+
+BOOL ScreenSaver::IsScreenSaverRunning()
+{
+	HDESK hDesktop = OpenDesktop( TEXT("screen-saver"), 0, FALSE, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS ); 
+
+	if( hDesktop != 0 )
+	{
+		CloseDesktop( hDesktop );
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 void ScreenSaver::KillScreenSaver()
