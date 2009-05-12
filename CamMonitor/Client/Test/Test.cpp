@@ -34,6 +34,7 @@ BOOL CTestApp::InitInstance()
 
 	// 네트워크 초기화
 	Network::GetInstance().Init( clientPort, ip, serverPort );
+	Sleep(100);
 
 	// 스크린 세이버 설정 초기화
 	ScreenSaver::GetInstance().Init();
@@ -230,7 +231,7 @@ void CTestApp::OperatorMonitor( std::string text )
 {
 #ifndef TEST
 	_soundMixer->SetMute( FALSE );
-	_soundMixer->SetVolumn( 6000 );
+	_soundMixer->SetVolumn( 600 );
 
 	std::string wav = "Test.wav";
 	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
