@@ -90,6 +90,8 @@ bool Network::ProcPacket()
 	}
 
 	_client->DeallocatePacket(p);
+
+	return TRUE;
 }
 
 void Network::ReqLoginSend( std::string id, std::string pass )

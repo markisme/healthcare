@@ -5,7 +5,6 @@
 #include "Test.h"
 #include "MainFrm.h"
 #include "Network.h"
-#include "LoginDlg.h"
 #include "OpenCV.h"
 #include "SoundMixer.h"
 #include "ScreenSaver.h"
@@ -48,20 +47,6 @@ BOOL CTestApp::InitInstance()
 	_soundMixer->SetMute( FALSE );
 	_soundMixer->SetVolumn( 6000 );
 
-	// 프로그램 동작 로그인
-	_dlg = new LoginDlg;
-	//if( _dlg->DoModal() != IDOK )
-	//{
-	//	AfxMessageBox("프로그램을 종료 합니다.");
-	//	return -1;
-	//}
-
-	//if(  Network::GetInstance()._isSuccessAuth == false )
-	//{
-	//	AfxMessageBox("비밀번호가 틀렸습니다.");
-	//	return -1;
-	//}
-
 	// 주 MDI 프레임 창을 만듭니다.
 	m_pMainWnd = new CMainFrame;
 	if (!m_pMainWnd || !((CMainFrame*)m_pMainWnd)->LoadFrame(IDR_MAINFRAME))
@@ -82,12 +67,6 @@ BOOL CTestApp::InitInstance()
 	// 캠 제어 모듈 작동
 	CWinThread * pThread1 = AfxBeginThread(MonitorWebCamThreadFunction, this);
 
-	// 파워 제어 모듈 작동
-	//CWinThread * pThread2 = AfxBeginThread(MonitorPowerThreadFunction, this);
-
-	// 네트워크 제어 모듈 작동
-	//CWinThread * pThread3 = AfxBeginThread(MonitorNetworkThreadFunction, this);
-
 	// 모니터 모드 시작
 	_isMonitorMode = true;
 
@@ -101,11 +80,7 @@ int CTestApp::ExitInstance()
 	{
 		// 보안모드 작동
 		PlayAlertSound();
-
-		//
 		AfxMessageBox("강제 프로그램 종료!\n보안 모드 작동!");
-
-		//
 		Sleep(9999999);
 	}
 
@@ -120,10 +95,6 @@ int CTestApp::ExitInstance()
 
 	//
 	Network::GetInstance().Uninit();
-
-	//
-	delete _dlg;
-	_dlg = NULL;
 
 	//
 	delete m_pMainWnd;
@@ -146,34 +117,49 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	}
 
 	//
-	if( _dlg->DoModal() == IDOK )
-	{
-		if( Network::GetInstance()._isSuccessAuth == true )
-		{
-			// 프로그램 종료
-			AfxMessageBox("보안 모드 해제");
-			_isMonitorMode = false;
-			PostQuitMessage(0);
-		}
-		else
-		{
-			AfxMessageBox("비밀번호가 틀렸습니다.");
-			_rePassCount++;
-		}
-	}
-
-	//
 	if( _rePassCount >= 3 )
 	{
 		// 보안모드 작동
 		PlayAlertSound();
-
-		//
 		AfxMessageBox("비밀번호 3회 오류!\n보안 모드 작동!");
 	}
 
-	//
-	Network::GetInstance().ProcPacket();
+	// 패킷 처리
+	if( Network::GetInstance().ProcPacket() == TRUE )
+	{
+		if( Network::GetInstance()._isSuccessAuth == 1 )
+		{
+			AfxMessageBox("보안 모드 해제");
+			_isMonitorMode = false;
+			PostQuitMessage(0);
+		}
+		else if( Network::GetInstance()._isSuccessAuth == 0 )
+		{
+			AfxMessageBox("비밀번호가 틀렸습니다.");
+			_rePassCount++;
+		}
+
+		if( Network::GetInstance()._isConnecting == 0 )
+		{
+			// 보안모드 작동
+			PlayAlertSound();
+			AfxMessageBox("네트워크 연결 끊김!\n보안 모드 작동!");
+		}
+	}
+
+	{
+		//
+		SYSTEM_BATTERY_STATE sys_bat_state;
+		CallNtPowerInformation(SystemBatteryState, NULL, 0,	&sys_bat_state, sizeof(sys_bat_state));
+
+		//
+		if( sys_bat_state.AcOnLine == false )
+		{
+			// 보안모드 작동
+			PlayAlertSound();
+			AfxMessageBox("베터리 모드 동작!\n보안 모드 작동!");
+		}
+	}
 
 	return TRUE;
 }
@@ -208,73 +194,9 @@ void CTestApp::MonitorWebCamThreadDo()
 		// 프로그램 종료
 		AfxMessageBox("보안 모드 해제");
 		_isMonitorMode = false;
-		_dlg->SendMessage( WM_CLOSE );
 		PostQuitMessage(0);
 	}
 }
-
-UINT CTestApp::MonitorPowerThreadFunction(LPVOID pParam)
-{
-	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->MonitorPowerThreadDo(); // 감시를 위한 쓰레드 시작
-	return 0;
-}
-
-void CTestApp::MonitorPowerThreadDo()
-{
-	// 감시 모드 동작
-	while( true )
-	{
-		//
-		Sleep(1000);
-		
-		//
-		SYSTEM_BATTERY_STATE sys_bat_state;
-		CallNtPowerInformation(SystemBatteryState, NULL, 0,	&sys_bat_state, sizeof(sys_bat_state));
-
-		//
-		if( sys_bat_state.AcOnLine == false )
-		{
-			break;
-		}
-	}
-
-	// 보안모드 작동
-	PlayAlertSound();
-
-	//
-	AfxMessageBox("베터리 모드 동작!\n보안 모드 작동!");
-}
-
-UINT CTestApp::MonitorNetworkThreadFunction(LPVOID pParam)
-{
-	CTestApp *pthis = (CTestApp*)pParam;     
-	pthis->MonitorNetworkThreadDo(); // 감시를 위한 쓰레드 시작
-	return 0;
-}
-
-void CTestApp::MonitorNetworkThreadDo()
-{
-	// 감시 모드 동작
-	while( true )
-	{
-		//
-		Sleep(1000);
-		
-		//
-		if( Network::GetInstance()._isConnecting == 0 )
-		{
-			break;
-		}
-	}
-
-	// 보안모드 작동
-	PlayAlertSound();
-
-	//
-	AfxMessageBox("네트워크 연결 끊김!\n보안 모드 작동!");
-}
-
 
 void CTestApp::PlayAlertSound()
 {
