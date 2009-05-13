@@ -37,7 +37,7 @@ void ScreenSaver::Uninit()
 
 void ScreenSaver::StartScreenSaver( HWND hwnd )
 {
-	hwnd = GetDesktopWindow();
+	hwnd = ::GetDesktopWindow();
 	if( IsScreenSaverRunning() == FALSE )
 	{
 		SendMessage(hwnd,WM_SYSCOMMAND, SC_SCREENSAVE,NULL);
@@ -45,16 +45,10 @@ void ScreenSaver::StartScreenSaver( HWND hwnd )
 }
 
 BOOL ScreenSaver::IsScreenSaverRunning()
-{
-	HDESK hDesktop = OpenDesktop( TEXT("screen-saver"), 0, FALSE, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS ); 
-
-	if( hDesktop != 0 )
-	{
-		CloseDesktop( hDesktop );
-		return TRUE;
-	}
-
-	return FALSE;
+{ 
+	BOOL bOn;
+	SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, NULL, &bOn, FALSE);
+	return bOn;
 }
 
 void ScreenSaver::KillScreenSaver()

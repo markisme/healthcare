@@ -26,6 +26,7 @@ private:
 	BOOL IsWebcamMode();
 	BOOL IsACPowerMode();
 	BOOL IsUSBMouseMode();
+	BOOL IsScreenSaverMode();
 	
 private:
 	CEdit _editID;
@@ -33,6 +34,7 @@ private:
 	CButton _c1Box;
 	CButton _c2Box;
 	CButton _c3Box;
+	CButton _c4Box;
 
 public:
 	afx_msg void OnBnClickedOk();

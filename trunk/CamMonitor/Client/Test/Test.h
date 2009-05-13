@@ -30,6 +30,7 @@ private:
 	void OpenCVUpdate();
 	void ACPowerUpdate();
 	void USBMouseUpdate();
+	void ScreenSaverUpdate();
 	void OperatorMonitor( std::string text );
 	void ReleaseMonitor();
 
