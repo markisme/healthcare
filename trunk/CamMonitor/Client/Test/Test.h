@@ -8,6 +8,14 @@ class SoundMixer;
 class OpenCV;
 class LoginDlg;
 
+enum ProgramState
+{
+	NONE_STATE = 0,
+	MONITOR_STATE,
+	ALERT_STATE,
+	EXIT_STATE
+};
+
 class CTestApp : public CWinApp
 {
 public:
@@ -38,5 +46,5 @@ private:
 	SoundMixer * _soundMixer;
 	OpenCV * _openCV;
 	int _rePassCount;
-	bool _isMonitorMode;
+	ProgramState _state;
 };

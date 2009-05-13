@@ -30,6 +30,9 @@ public:
 	void ReqLoginSend( std::string id, std::string pass );
 
 	//
+	void Disconnect();
+
+	//
 	RakPeerInterface * GetClient() { return _client; }
 
 	//

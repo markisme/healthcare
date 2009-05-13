@@ -16,7 +16,7 @@ END_MESSAGE_MAP()
 
 CTestApp::CTestApp() :
 _rePassCount( 0 ),
-_isMonitorMode( false )
+_state( NONE_STATE )
 {
 }
 
@@ -75,7 +75,7 @@ BOOL CTestApp::InitInstance()
 	}
 
 	// 모니터 모드 시작
-	_isMonitorMode = true;
+	_state = MONITOR_STATE;
 
 	// 스크린세이버 동작
 	ScreenSaver::GetInstance().StartScreenSaver();
@@ -86,8 +86,8 @@ BOOL CTestApp::InitInstance()
 
 int CTestApp::ExitInstance()
 {
-	// 모니터 모드 중 프로그램 종료
-	if( _isMonitorMode )
+	// 비 정상 프로그램 종료
+	if( _state != EXIT_STATE )
 	{
 		// 보안모드 작동
 		OperatorMonitor( "강제 프로그램 종료!\n보안 모드 작동!" );
@@ -240,6 +240,14 @@ void CTestApp::ScreenSaverUpdate()
 
 void CTestApp::OperatorMonitor( std::string text )
 {
+	if( _state == ALERT_STATE )
+	{
+		return;
+	}
+
+	// 서버와 접속 해제
+	Network::GetInstance().Disconnect();
+
 #ifndef TEST
 	//_soundMixer->SetMute( FALSE );
 	//_soundMixer->SetVolumn( 600 );
@@ -247,12 +255,13 @@ void CTestApp::OperatorMonitor( std::string text )
 	//std::string wav = "Test.wav";
 	//PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
+	_state = ALERT_STATE;
 	AfxMessageBox( text.c_str() );
 }
 
 void CTestApp::ReleaseMonitor()
 {
+	_state = EXIT_STATE;
 	AfxMessageBox("보안 모드 해제");
-	_isMonitorMode = false;
 	PostQuitMessage(0);
 }
