@@ -20,14 +20,41 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
+#include <map>
 
 #include "CommonType.h"
 #include "msgID.h"
 
 void SendMail();
 
+typedef std::map<std::string,std::string> UserList;
+
+class UserManager
+{
+public:
+	UserManager() {};
+	~UserManager() {};
+
+	inline void ConnectUser( std::string addr, std::string id )
+	{
+		// 유저 추가
+	}
+
+	inline void DisConnect( std::string addr )
+	{
+		// 유저 삭제
+	}
+
+private:
+	UserList userList;
+};
+
+
 int main(void)
 {
+	// 유저 관리자
+	UserManager userManager;
+	
 	// DB 초기화
 	DBConnector::GetInstance().Init();
 
@@ -79,6 +106,8 @@ int main(void)
 			case ID_DISCONNECTION_NOTIFICATION:
 				{
 					printf("ID_DISCONNECTION_NOTIFICATION\n");
+					// 정상 종료
+					userManager.DisConnect( p->systemAddress.ToString() );
 				}
 				break;
 		
@@ -91,6 +120,9 @@ int main(void)
 			case ID_CONNECTION_LOST:
 				{
 					printf("ID_CONNECTION_LOST\n");
+					// 비정상 종료 경고 발송
+					// 메일 발송
+					userManager.DisConnect( p->systemAddress.ToString() );
 				}
 				break;
 
@@ -113,6 +145,12 @@ int main(void)
 
 					// 패킷 보내기
 					server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+
+					// 인증 된 유저 접속
+					if( isAuth )
+					{
+						userManager.ConnectUser( p->systemAddress.ToString(), id );
+					}
 				}
 				break;
 

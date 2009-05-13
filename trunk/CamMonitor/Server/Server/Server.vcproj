@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="Server"
 	ProjectGUID="{F2CAFCB0-2D38-4009-8F53-56FCEDCE24C1}"
+	RootNamespace="Server"
 	>
 	<Platforms>
 		<Platform
@@ -18,6 +19,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
