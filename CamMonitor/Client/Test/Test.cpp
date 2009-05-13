@@ -67,10 +67,6 @@ BOOL CTestApp::InitInstance()
 	m_pMainWnd->MoveWindow( 0, 0, 0, 0 );
 	m_pMainWnd->ShowWindow( FALSE );
 
-	//Config::GetInstance()._isWebcamMode
-	//Config::GetInstance()._isACPowerMode
-	//Config::GetInstance()._isUSBMouseMode
-
 	// 웹캠 관련
 	if( Config::GetInstance()._isWebcamMode )
 	{
@@ -83,6 +79,7 @@ BOOL CTestApp::InitInstance()
 
 	// 스크린세이버 동작
 	ScreenSaver::GetInstance().StartScreenSaver();
+	Sleep(1000);
 
 	return TRUE;
 }
@@ -171,6 +168,11 @@ BOOL CTestApp::OnIdle( LONG lCount )
 		USBMouseUpdate();
 	}
 
+	if( Config::GetInstance()._isScreenSaverMode )
+	{
+		ScreenSaverUpdate();
+	}
+
 	return TRUE;
 }
 
@@ -227,14 +229,23 @@ void CTestApp::USBMouseUpdate()
 	}
 }
 
+void CTestApp::ScreenSaverUpdate()
+{
+	if( ScreenSaver::GetInstance().IsScreenSaverRunning() == FALSE )
+	{
+		// 보안모드 작동
+		OperatorMonitor( "스크린 세이버 모드 동작!\n보안 모드 작동!" );
+	}
+}
+
 void CTestApp::OperatorMonitor( std::string text )
 {
 #ifndef TEST
-	_soundMixer->SetMute( FALSE );
-	_soundMixer->SetVolumn( 600 );
+	//_soundMixer->SetMute( FALSE );
+	//_soundMixer->SetVolumn( 600 );
 
-	std::string wav = "Test.wav";
-	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+	//std::string wav = "Test.wav";
+	//PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
 	AfxMessageBox( text.c_str() );
 }

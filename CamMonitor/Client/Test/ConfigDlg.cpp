@@ -19,6 +19,7 @@ void ConfigDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK1, _c1Box);
 	DDX_Control(pDX, IDC_CHECK2, _c2Box);
 	DDX_Control(pDX, IDC_CHECK3, _c3Box);
+	DDX_Control(pDX, IDC_CHECK4, _c4Box);
 }
 
 BEGIN_MESSAGE_MAP(ConfigDlg, CDialog)
@@ -39,6 +40,7 @@ BOOL ConfigDlg::OnInitDialog()
 	_c1Box.SetCheck( TRUE );
 	_c2Box.SetCheck( TRUE );
 	_c3Box.SetCheck( TRUE );
+	_c4Box.SetCheck( TRUE );
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
@@ -80,6 +82,7 @@ void ConfigDlg::OnBnClickedOk()
 	Config::GetInstance()._isWebcamMode = IsWebcamMode();
 	Config::GetInstance()._isACPowerMode = IsACPowerMode();
 	Config::GetInstance()._isUSBMouseMode = IsUSBMouseMode();
+	Config::GetInstance()._isScreenSaverMode = IsScreenSaverMode();
 
 	//
 	OnOK();
@@ -111,6 +114,15 @@ BOOL ConfigDlg::IsACPowerMode()
 BOOL ConfigDlg::IsUSBMouseMode()
 {
 	if( _c3Box.GetCheck() )
+	{
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL ConfigDlg::IsScreenSaverMode()
+{
+	if( _c4Box.GetCheck() )
 	{
 		return TRUE;
 	}
