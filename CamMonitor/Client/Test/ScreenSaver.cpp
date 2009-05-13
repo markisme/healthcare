@@ -53,8 +53,13 @@ BOOL ScreenSaver::IsScreenSaverRunning()
 
 void ScreenSaver::KillScreenSaver()
 {
-	HDESK hDesktop = OpenDesktop( TEXT("screen-saver"), 0, FALSE, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS ); 
+	// 이미 꺼져 있으면 작동 안됨
+	if( IsScreenSaverRunning() == FALSE )
+	{
+		return;
+	}
 
+	HDESK hDesktop = OpenDesktop( TEXT("screen-saver"), 0, FALSE, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS ); 
 	if( hDesktop != 0 )
 	{
 		EnumDesktopWindows( hDesktop, (WNDENUMPROC)KillScreenSaverFunc , 0 );

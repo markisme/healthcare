@@ -102,9 +102,16 @@ void Network::ReqLoginSend( std::string id, std::string pass )
 	outBuffer.Write( id );
 	outBuffer.Write( pass );
 
-	RakPeerInterface * client = Network::GetInstance().GetClient();
-	if( client )
+	if( _client )
 	{
-		client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+		_client->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+	}
+}
+
+void Network::Disconnect()
+{
+	if( _client )
+	{
+		_client->Shutdown( 0 );
 	}
 }
