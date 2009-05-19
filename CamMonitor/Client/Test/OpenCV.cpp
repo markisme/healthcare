@@ -57,6 +57,7 @@ void OpenCV::Init()
 	_saveImage->origin = current_image->origin;
 	cvShowImage( "save_camera", _saveImage );
 #endif
+	cvReleaseImage( &cp );
 }
 
 void OpenCV::Uninit()
@@ -406,11 +407,11 @@ bool OpenCV::IsMarker( IplImage* current_image )
 	pos.y = marker_info->pos[1];
 	cvRectangle(current_image, pos, cvPoint(pos.x + 10, pos.y + 10), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
 
-#ifdef TEST
+//#ifdef TEST
 	char buf[1024];
 	sprintf( buf, "%d, %d\n", marker_num, marker_info[0].id );
 	OutputDebugString( buf );
-#endif
+//#endif
 
 	delete( dataPtr );
 	dataPtr = NULL;
