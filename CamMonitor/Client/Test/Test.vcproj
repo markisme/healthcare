@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../LibStatic;../../Common;../Include;../XMLLib"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;TEST"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -155,7 +155,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib powrprof.lib "
+				AdditionalDependencies="RakNetLibStatic.lib ws2_32.lib  Winmm.lib odbc32.lib odbccp32.lib cxcore.lib cv.lib highgui.lib cvcam.lib powrprof.lib  libARd.lib libARvideod.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Lib/;../Lib"
 				GenerateDebugInformation="true"

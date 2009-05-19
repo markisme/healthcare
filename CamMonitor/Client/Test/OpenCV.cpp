@@ -51,10 +51,9 @@ void OpenCV::Init()
 
 	// 이미지 저장
 	_saveImage = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
-	cvCopy( current_image, _saveImage );
+	cvFlip( current_image, _saveImage );
 
 #ifdef TEST
-	_saveImage->origin = current_image->origin;
 	cvShowImage( "save_camera", _saveImage );
 #endif
 	cvReleaseImage( &cp );
@@ -97,8 +96,11 @@ BOOL OpenCV::UpdateMonitor()
 	// 가져온 프레임으로부터 영상 데이터를 얻는다.
 	IplImage * current_image = cvRetrieveFrame( _capture );
 
+	IplImage* cp = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
+	cvFlip( current_image, cp, 0 );
+
 	// 해제를 위한 마커 매칭
-	if( IsMarker( current_image ) )
+	if( IsMarker( cp ) )
 	{
 		_checkMarkerCnt++;
 	}
@@ -114,11 +116,11 @@ BOOL OpenCV::UpdateMonitor()
 	}
 
 #ifdef TEST
-	cvShowImage( "diff_camera", current_image );
+	cvShowImage( "diff_camera", cp );
 #endif
 
 	// 캠 스테이트를 가져옴
-	bool isMoveCam = IsMoveCam( current_image, _saveImage );
+	bool isMoveCam = IsMoveCam( cp, _saveImage );
 
 	// 경보 설정
 	if( !_alert )
@@ -154,6 +156,8 @@ BOOL OpenCV::UpdateMonitor()
 			_alert = false;
 		}
 	}
+
+	cvReleaseImage( &cp );
 
 	return TRUE;
 }
