@@ -12,7 +12,7 @@
 #include "msgID.h"
 #include <map>
 
-typedef std::map<int,DataList> DataMap;
+//typedef std::map<int,DataList> DataMap;
 
 class Network
 {
@@ -20,7 +20,7 @@ public:
 	Network();
 	~Network();
 
-	void Init( int clientPort, std::string ip, int serverPort );
+	void Init();
 	void Uninit();
 
 	//
@@ -28,6 +28,9 @@ public:
 
 	//
 	void ReqLoginSend( std::string id, std::string pass );
+
+	//
+	BOOL IsConnected();
 
 	//
 	void Disconnect();
