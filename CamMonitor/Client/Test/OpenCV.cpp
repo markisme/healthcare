@@ -40,8 +40,11 @@ void OpenCV::Init()
 	// 가져온 프레임으로부터 영상 데이터를 얻는다.
 	IplImage * current_image = cvRetrieveFrame( _capture );
 
+	IplImage* cp = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
+	cvFlip( current_image, cp, 0 );
+
 	// 파트 설정
-	InitPart( current_image );
+	InitPart( cp );
 
 	// 성공음
 	MessageBeep( MB_ICONASTERISK );
@@ -49,9 +52,9 @@ void OpenCV::Init()
 	// 이미지 저장
 	_saveImage = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
 	cvCopy( current_image, _saveImage );
-	_saveImage->origin = current_image->origin;
 
 #ifdef TEST
+	_saveImage->origin = current_image->origin;
 	cvShowImage( "save_camera", _saveImage );
 #endif
 }
@@ -79,7 +82,7 @@ void OpenCV::Uninit()
 // 전체 화면 영역 변화 감지
 BOOL OpenCV::UpdateMonitor()
 {
-	Sleep(100);
+	//Sleep(200);
 	cvWaitKey(10);
 
 	// 카메라로부터 입력된 프레임을 잡는다.
@@ -104,7 +107,7 @@ BOOL OpenCV::UpdateMonitor()
 	}
 
 	// 마커 체크 해제 모드로
-	if( _checkMarkerCnt > 10 )
+	if( _checkMarkerCnt > 20 )
 	{
 		return FALSE;
 	}
@@ -173,10 +176,6 @@ bool OpenCV::IsMoveCam( IplImage* current_image, IplImage* previous_image )
 		RegionRect & rect = _regionList[ num ];
 		rect.DrawRegion( hDC );
 	}
-
-	char buf[1024];
-	sprintf( buf, "%d \n", _regionList.size() );
-	OutputDebugString( buf );
 #endif
 
 	// 체크 클리어
@@ -191,10 +190,8 @@ bool OpenCV::IsMoveCam( IplImage* current_image, IplImage* previous_image )
 	float CriticalValue = 20.0f;
 	for(int x=0; x<gray->width; x+=6) {  
 		for(int y=0; y<gray->height; y+=6) {   
-			uchar c1 = ((uchar*)(gray->imageData + 
-				gray->widthStep*y))[x];   
-			uchar c2 = ((uchar*)(oldgray->imageData +
-				oldgray->widthStep*y))[x];
+			uchar c1 = ((uchar*)(gray->imageData + gray->widthStep*y))[x];   
+			uchar c2 = ((uchar*)(oldgray->imageData + oldgray->widthStep*y))[x];
 
 			if(fabs(float((float)c1-(float)c2))>CriticalValue) 
 			{
@@ -335,7 +332,7 @@ void OpenCV::ComparePart( IplImage* current_image )
 		}
 
 		// 주변에 비슷한 영역이 있는지 판단
-		int diff = 20; // 같은 픽셀 140-diff / 다른 픽셀 diff
+		int diff = 10; // 같은 픽셀 140-diff / 다른 픽셀 diff
 		if( left < diff || right < diff || top < diff || bottom < diff )
 		{
 			// 현재 파트 삭제
@@ -373,11 +370,13 @@ void OpenCV::ARTInit()
 	arParamChangeSize( &wparam, xsize, ysize, &cparam );
 	arInitCparam( &cparam );
 
+	int id = arLoadPatt(patt_name);
+
     if( (arLoadPatt(patt_name)) < 0 ) {
         printf("pattern load error !!\n");
         exit(0);
     }
-}
+}	
 
 bool OpenCV::IsMarker( IplImage* current_image )
 {
@@ -401,6 +400,17 @@ bool OpenCV::IsMarker( IplImage* current_image )
     if( arDetectMarker(dataPtr, thresh, &marker_info, &marker_num) < 0 ) {
         exit(0);
     }
+
+	CvPoint pos;
+	pos.x = marker_info->pos[0]; 
+	pos.y = marker_info->pos[1];
+	cvRectangle(current_image, pos, cvPoint(pos.x + 10, pos.y + 10), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
+
+#ifdef TEST
+	char buf[1024];
+	sprintf( buf, "%d, %d\n", marker_num, marker_info[0].id );
+	OutputDebugString( buf );
+#endif
 
 	delete( dataPtr );
 	dataPtr = NULL;

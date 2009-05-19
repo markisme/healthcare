@@ -26,14 +26,8 @@ BOOL CTestApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
-	// 서버 설정
-	int clientPort = 200;
-	//std::string ip = "211.189.20.246";
-	std::string ip = "211.189.19.160";
-	int serverPort = 10000;
-
 	// 네트워크 초기화
-	Network::GetInstance().Init( clientPort, ip, serverPort );
+	Network::GetInstance().Init();
 	Sleep(100);
 
 	// 스크린 세이버 설정 초기화
@@ -240,7 +234,7 @@ void CTestApp::ScreenSaverUpdate()
 
 void CTestApp::OperatorMonitor( std::string text )
 {
-	if( _state == ALERT_STATE )
+	if( _state == ALERT_STATE || _state == EXIT_STATE )
 	{
 		return;
 	}

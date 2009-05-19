@@ -14,8 +14,14 @@ Network::~Network()
 {
 }
 
-void Network::Init( int clientPort, std::string ip, int serverPort )
+void Network::Init()
 {
+	// 서버 설정
+	int clientPort = 200;
+	//std::string ip = "211.189.20.246";
+	std::string ip = "211.189.19.160";
+	int serverPort = 10000;
+
 	//
 	RakNetStatistics *rss;
 	_client=RakNetworkFactory::GetRakPeerInterface();
@@ -30,6 +36,14 @@ void Network::Init( int clientPort, std::string ip, int serverPort )
 	{
 		exit(1);
 	}
+
+	_isConnecting = 1;
+	_isSuccessAuth = -1;
+}
+
+int Network::IsConnected()
+{
+	return _client->NumberOfConnections();
 }
 
 void Network::Uninit()
