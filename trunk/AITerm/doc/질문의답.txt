@@ -1,0 +1,33 @@
+  
+1. A (CPu-A) is compatible with (cpu-b).
+or) A (CPu-A) is not compatible with (cpu-b).
+
+2. The cost of (CPU-A) is (AA)\.
+
+3. The lowest selling store is ~~.
+or)                         are ~~1, ~~2, ~~3.
+
+4. The socket of (Cpu-A) is (AA).
+
+5. The manufacturer made (cpu-a) is (InTEL or AMD).
+
+6. The manufacturer made (mainboard) is (ASUS)
+
+7. The motherboards made by (제조사) is(are) (motherboard-A), (motherboard-B), (motherboard-c), ...
+
+8. The graphic interfaces supported by (motherboard-A) is (!~~~!)
+
+9. The type of (motherboard-B) is ~~.
+
+10. (pci-e 의 검색결과물)
+
+11. the latest cpu is ~~~
+
+12. Yes, (motherboard-A) supports (SATA2).
+or) No, (motherboard-A) does not support (SATA2).
+
+13. There is(are) (#)slots on (motherboard-A).
+
+14. The internal graphics on (motherboard-A) is(are) (~~~).
+
+15. The internal audio chipset on (motherboard-A) is(are) (~~~).
