@@ -114,6 +114,8 @@ int main(void)
 			case ID_NEW_INCOMING_CONNECTION:
 				{
 					printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
+					// 타임 아웃 설정
+					server->SetTimeoutTime( 1000, p->systemAddress );
 				}
 				break;
 
