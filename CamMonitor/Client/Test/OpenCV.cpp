@@ -41,7 +41,7 @@ void OpenCV::Init()
 	IplImage * current_image = cvRetrieveFrame( _capture );
 
 	IplImage* cp = cvCreateImage( cvGetSize(current_image), IPL_DEPTH_8U, current_image->nChannels);
-	cvFlip( current_image, cp, 0 );
+	cvFlip( current_image, cp );
 
 	// 파트 설정
 	InitPart( cp );
@@ -83,7 +83,7 @@ void OpenCV::Uninit()
 // 전체 화면 영역 변화 감지
 BOOL OpenCV::UpdateMonitor()
 {
-	//Sleep(200);
+	Sleep(50);
 	cvWaitKey(10);
 
 	// 카메라로부터 입력된 프레임을 잡는다.
@@ -108,7 +108,7 @@ BOOL OpenCV::UpdateMonitor()
 	}
 
 	// 마커 체크 해제 모드로
-	if( _checkMarkerCnt > 20 )
+	if( _checkMarkerCnt > 10 )
 	{
 		return FALSE;
 	}
@@ -370,8 +370,7 @@ void OpenCV::ARTInit()
 	}
 	arParamChangeSize( &wparam, xsize, ysize, &cparam );
 	arInitCparam( &cparam );
-
-	int id = arLoadPatt(patt_name);
+	arParamDisp( &cparam );
 
     if( (arLoadPatt(patt_name)) < 0 ) {
         printf("pattern load error !!\n");
@@ -402,21 +401,36 @@ bool OpenCV::IsMarker( IplImage* current_image )
         exit(0);
     }
 
-	CvPoint pos;
-	pos.x = marker_info->pos[0]; 
-	pos.y = marker_info->pos[1];
-	cvRectangle(current_image, pos, cvPoint(pos.x + 10, pos.y + 10), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
+	int detectMarkerCnt = 0;
+	for( int num = 0; num < marker_num; num++ )
+	{
+		if( marker_info[num].cf > 0.05f )
+		{
+			detectMarkerCnt++;
+		}
+	}
 
 //#ifdef TEST
-	char buf[1024];
-	sprintf( buf, "%d, %d\n", marker_num, marker_info[0].id );
-	OutputDebugString( buf );
+	for( int num = 0; num < marker_num; num++ )
+	{
+		if( marker_info[num].cf > 0.05f )
+		{
+			CvPoint pos;
+			pos.x = marker_info[num].pos[0]; 
+			pos.y = marker_info[num].pos[1];
+			cvRectangle(current_image, pos, cvPoint(pos.x + 10, pos.y + 10), CV_RGB(255,0,0));	// 찾은 물체에 사격형을 그린다.
+
+			char buf[1024];
+			sprintf( buf, "%d, %d, %f, %d, %d\n", marker_num, marker_info[num].id, marker_info[num].cf, marker_info[num].area, marker_info[num].dir);
+			OutputDebugString( buf );
+		}
+	}
 //#endif
 
 	delete( dataPtr );
 	dataPtr = NULL;
 
-	if( marker_num > 0 )
+	if( detectMarkerCnt > 0 )
 	{
 		return true;
 	}
