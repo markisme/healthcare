@@ -97,8 +97,6 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	SendSMS();
-
 	//
 	Packet* p;
 
@@ -142,6 +140,10 @@ BOOL CTestApp::OnIdle( LONG lCount )
 			case ID_CONNECTION_LOST:
 				{
 					printf("ID_CONNECTION_LOST\n");
+					// 비정상 유저 번호 찾기
+					std::string id = _userManager.GetUserID( p->systemAddress.ToString() );
+					std::string number;
+					BOOL ret = DBConnector::GetInstance().GetMobileNumber( id, number );
 					// 비정상 종료 경고 발송
 					// 메일 발송
 					_userManager.DisConnect( p->systemAddress.ToString() );
@@ -188,7 +190,7 @@ BOOL CTestApp::OnIdle( LONG lCount )
 	return TRUE;
 }
 
-void CTestApp::SendSMS()
+void CTestApp::SendSMS( std::string number )
 {
 	BOOL ret = FALSE;
 	CSMS sms;
@@ -196,7 +198,7 @@ void CTestApp::SendSMS()
 	CString userid("dmlgus77");	// 아이디
 	CString passwd("rladmlgus");	// 패스워드
 
-	CString rcvno("01196306210");		// 받는(수신)번호
+	CString rcvno(number.c_str());		// 받는(수신)번호
 	CString callback("01196306210");	// 보내는번호(회신번호)
 	CString message("노트북 경고!!!!");	// 메시지 내용 (80바이트 이하)
 	CString refname("경고");			// 참조용 이름

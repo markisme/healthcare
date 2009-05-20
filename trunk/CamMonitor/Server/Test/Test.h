@@ -18,15 +18,40 @@ public:
 	inline void ConnectUser( std::string addr, std::string id )
 	{
 		// 유저 추가
+		_userList[ addr ] = id;
 	}
 
 	inline void DisConnect( std::string addr )
 	{
 		// 유저 삭제
+		UserList::iterator it = _userList.begin();
+		for( ; it != _userList.end(); it++ )
+		{
+			std::string addrKey = it->first;
+			if( addrKey == addr )
+			{
+				_userList.erase( it );
+				break;
+			}
+		}
+	}
+
+	inline std::string GetUserID( std::string addr )
+	{
+		// 유저 찾기
+		UserList::iterator it = _userList.begin();
+		for( ; it != _userList.end(); it++ )
+		{
+			std::string addrKey = it->first;
+			if( addrKey == addr )
+			{
+				return it->second;
+			}
+		}
 	}
 
 private:
-	UserList userList;
+	UserList _userList;
 };
 
 
@@ -49,7 +74,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	void SendSMS();
+	void SendSMS( std::string number );
 
 private:
 	RakPeerInterface * _server;

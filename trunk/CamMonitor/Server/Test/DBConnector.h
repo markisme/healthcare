@@ -16,6 +16,8 @@ public:
 
 	bool ConfirmLogin( std::string id, std::string pass );
 
+	bool GetMobileNumber( std::string id, std::string & mobileNumber );
+
 	static DBConnector & GetInstance() { return _instance; }
 
 private:
