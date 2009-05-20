@@ -74,7 +74,9 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
+	BOOL ProcessPacket();
 	void SendSMS( std::string number );
+	void SendMail( std::string addr );
 
 private:
 	RakPeerInterface * _server;
