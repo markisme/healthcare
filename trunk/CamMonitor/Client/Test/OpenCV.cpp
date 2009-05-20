@@ -410,7 +410,7 @@ bool OpenCV::IsMarker( IplImage* current_image )
 		}
 	}
 
-//#ifdef TEST
+#ifdef TEST
 	for( int num = 0; num < marker_num; num++ )
 	{
 		if( marker_info[num].cf > 0.05f )
@@ -425,7 +425,7 @@ bool OpenCV::IsMarker( IplImage* current_image )
 			OutputDebugString( buf );
 		}
 	}
-//#endif
+#endif
 
 	delete( dataPtr );
 	dataPtr = NULL;

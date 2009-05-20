@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../LibStatic;../../Common;../Include;../XMLLib"
+				AdditionalIncludeDirectories="../../LibStatic;../../Common;../Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;TEST"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
