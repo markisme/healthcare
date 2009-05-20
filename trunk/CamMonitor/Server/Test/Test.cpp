@@ -145,12 +145,12 @@ BOOL CTestApp::ProcessPacket()
 			std::string id = _userManager.GetUserID( p->systemAddress.ToString() );
 			std::string number;
 			BOOL ret = DBConnector::GetInstance().GetMobileNumber( id, number );
-			std::string addr;
-			ret =  DBConnector::GetInstance().GetEmailAddress( id, addr );
+			//std::string addr;
+			//ret =  DBConnector::GetInstance().GetEmailAddress( id, addr );
 			// 비정상 종료 경고 발송
 			SendSMS( number );
 			// 메일 발송
-			SendMail( addr );
+			//SendMail( addr );
 			// 유저 접속 종료
 			_userManager.DisConnect( p->systemAddress.ToString() );
 		}
@@ -225,10 +225,11 @@ void CTestApp::SendMail( std::string addr )
 	CoInitialize(0);
 
 	CString sendaddr("naver01@naver.com");		// 보내는 사람 이메일 주소
-	CString name("보안솔루션");					// 보내는 사람 이름
+	CString name("한규혁");					// 보내는 사람 이름
 	CString recvaddr( addr.c_str() );			// 받는 사람 이메일 주소
 	CString subject("노트북 도난 경고!!!");		// 제목
 	CString text("노트북 도난 경고!!!!");		// 내용
+	CString smtp("smtp.naver.com");
 
 	CMimeMessage msg;
 	msg.SetSender( sendaddr );
@@ -238,7 +239,7 @@ void CTestApp::SendMail( std::string addr )
 	msg.AddText( text );
 
 	CSMTPConnection conn;
-	if(conn.Connect( _T("rcvmail7.naver.com") ))
+	if(conn.Connect( smtp ))
 	{
 		bool ret = conn.SendMessage(msg);
 		conn.Disconnect();  
