@@ -145,6 +145,7 @@ BOOL CTestApp::OnIdle( LONG lCount )
 					std::string number;
 					BOOL ret = DBConnector::GetInstance().GetMobileNumber( id, number );
 					// 비정상 종료 경고 발송
+					SendSMS( number );
 					// 메일 발송
 					_userManager.DisConnect( p->systemAddress.ToString() );
 				}
@@ -200,7 +201,7 @@ void CTestApp::SendSMS( std::string number )
 
 	CString rcvno(number.c_str());		// 받는(수신)번호
 	CString callback("01196306210");	// 보내는번호(회신번호)
-	CString message("노트북 경고!!!!");	// 메시지 내용 (80바이트 이하)
+	CString message("노트북 도난 경고!!!!");	// 메시지 내용 (80바이트 이하)
 	CString refname("경고");			// 참조용 이름
 	CString reserv("");					// 예약일시(YYYYMMDDHHMISS 형식, "" 이면 바로 전송)
 
