@@ -112,3 +112,38 @@ bool DBConnector::GetMobileNumber( std::string id, std::string & mobileNumber )
 
 	return FALSE;
 }
+
+bool DBConnector::GetEmailAddress( std::string id, std::string & addr )
+{
+	MYSQL_ROW row;
+	MYSQL_RES *sql_result;
+
+	char query[128];
+
+	mysql_init(&_mysql);
+	if (mysql_real_connect(&_mysql, MYSQL_HOST,MYSQL_USER,MYSQL_PWD,MYSQL_DB,3306,0,0))
+	{
+		sprintf(query,"SELECT * FROM usertbl where userid='%s';", id.c_str());
+		mysql_query(&_mysql, (const char *)query);
+
+		sql_result=mysql_store_result(&_mysql);
+		if( sql_result )
+		{
+			row=mysql_fetch_row(sql_result);
+			if( row == NULL )
+			{
+				return FALSE;
+			}
+
+			addr = (char*)row[4];
+		}
+		else
+		{
+			return FALSE;
+		}
+
+		mysql_close(&_mysql);
+	}
+
+	return FALSE;
+}

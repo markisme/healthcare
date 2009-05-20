@@ -11,6 +11,7 @@
 #include "BitStream.h"
 #include "RakSleep.h"
 #include "DBConnector.h"
+#include <atlsmtpconnection.h>
 
 #ifdef _WIN32
 #include "Kbhit.h"
@@ -97,96 +98,99 @@ int CTestApp::ExitInstance()
 
 BOOL CTestApp::OnIdle( LONG lCount )
 {
-	//
-	Packet* p;
+	ProcessPacket();
 
-	unsigned char packetIdentifier;
+	return TRUE;
+}
 
+BOOL CTestApp::ProcessPacket()
+{
 	//
 	char message[2048];
 
-	while (1)
+	//
+	RakSleep(30);
+
+	Packet * p = _server->Receive();
+	if (p==0)
+		return FALSE;
+
+	RakNet::BitStream inStream( p->data, p->length, false );
+
+	unsigned char packetIdentifier;
+	inStream.Read( packetIdentifier );
+
+	switch (packetIdentifier)
 	{
-		//
-		RakSleep(30);
-
-		p = _server->Receive();
-		if (p==0)
-			continue;
-
-		RakNet::BitStream inStream( p->data, p->length, false );
-		
-		unsigned char packetIdentifier;
-		inStream.Read( packetIdentifier );
-
-		switch (packetIdentifier)
+	case ID_DISCONNECTION_NOTIFICATION:
 		{
-			case ID_DISCONNECTION_NOTIFICATION:
-				{
-					printf("ID_DISCONNECTION_NOTIFICATION\n");
-					// 정상 종료
-					_userManager.DisConnect( p->systemAddress.ToString() );
-				}
-				break;
-		
-			case ID_NEW_INCOMING_CONNECTION:
-				{
-					printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
-					// 타임 아웃 설정
-					_server->SetTimeoutTime( 1000, p->systemAddress );
-				}
-				break;
-
-			case ID_CONNECTION_LOST:
-				{
-					printf("ID_CONNECTION_LOST\n");
-					// 비정상 유저 번호 찾기
-					std::string id = _userManager.GetUserID( p->systemAddress.ToString() );
-					std::string number;
-					BOOL ret = DBConnector::GetInstance().GetMobileNumber( id, number );
-					// 비정상 종료 경고 발송
-					SendSMS( number );
-					// 메일 발송
-					_userManager.DisConnect( p->systemAddress.ToString() );
-				}
-				break;
-
-			case CH2S_LOGIN:
-				{
-					// 패킷 읽기
-					std::string id;
-					inStream.Read( id );
-
-					std::string pass;
-					inStream.Read( pass );
-
-					// DB에서 데이터 확인
-					BOOL isAuth = DBConnector::GetInstance().ConfirmLogin( id, pass );
-
-					// 보낼 패킷 쓰기
-					RakNet::BitStream outBuffer;
-					outBuffer.Write( (unsigned char)MessageType::S2CH_LOGIN_RES );
-					outBuffer.Write( isAuth );
-
-					// 패킷 보내기
-					_server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
-
-					// 인증 된 유저 접속
-					if( isAuth )
-					{
-						_userManager.ConnectUser( p->systemAddress.ToString(), id );
-					}
-				}
-				break;
-
-			default:
-				{
-				}
-				break;
+			printf("ID_DISCONNECTION_NOTIFICATION\n");
+			// 정상 종료
+			_userManager.DisConnect( p->systemAddress.ToString() );
 		}
+		break;
 
-		_server->DeallocatePacket(p);
+	case ID_NEW_INCOMING_CONNECTION:
+		{
+			printf("ID_NEW_INCOMING_CONNECTION from %s\n", p->systemAddress.ToString());
+			// 타임 아웃 설정
+			_server->SetTimeoutTime( 1000, p->systemAddress );
+		}
+		break;
+
+	case ID_CONNECTION_LOST:
+		{
+			printf("ID_CONNECTION_LOST\n");
+			// 비정상 유저 번호 및 이메일 가져오기
+			std::string id = _userManager.GetUserID( p->systemAddress.ToString() );
+			std::string number;
+			BOOL ret = DBConnector::GetInstance().GetMobileNumber( id, number );
+			std::string addr;
+			ret =  DBConnector::GetInstance().GetEmailAddress( id, addr );
+			// 비정상 종료 경고 발송
+			SendSMS( number );
+			// 메일 발송
+			SendMail( addr );
+			// 유저 접속 종료
+			_userManager.DisConnect( p->systemAddress.ToString() );
+		}
+		break;
+
+	case CH2S_LOGIN:
+		{
+			// 패킷 읽기
+			std::string id;
+			inStream.Read( id );
+
+			std::string pass;
+			inStream.Read( pass );
+
+			// DB에서 데이터 확인
+			BOOL isAuth = DBConnector::GetInstance().ConfirmLogin( id, pass );
+
+			// 보낼 패킷 쓰기
+			RakNet::BitStream outBuffer;
+			outBuffer.Write( (unsigned char)MessageType::S2CH_LOGIN_RES );
+			outBuffer.Write( isAuth );
+
+			// 패킷 보내기
+			_server->Send(&outBuffer, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->systemAddress, false);
+
+			// 인증 된 유저 접속
+			if( isAuth )
+			{
+				_userManager.ConnectUser( p->systemAddress.ToString(), id );
+			}
+		}
+		break;
+
+	default:
+		{
+		}
+		break;
 	}
+
+	_server->DeallocatePacket(p);
 
 	return TRUE;
 }
@@ -196,14 +200,14 @@ void CTestApp::SendSMS( std::string number )
 	BOOL ret = FALSE;
 	CSMS sms;
 	RECT rc = { 0, 0, 0, 0};
-	CString userid("dmlgus77");	// 아이디
-	CString passwd("rladmlgus");	// 패스워드
+	CString userid("dmlgus77");					// 아이디
+	CString passwd("rladmlgus");				// 패스워드
 
-	CString rcvno(number.c_str());		// 받는(수신)번호
-	CString callback("01196306210");	// 보내는번호(회신번호)
+	CString rcvno(number.c_str());				// 받는(수신)번호
+	CString callback("01196306210");			// 보내는번호(회신번호)
 	CString message("노트북 도난 경고!!!!");	// 메시지 내용 (80바이트 이하)
-	CString refname("경고");			// 참조용 이름
-	CString reserv("");					// 예약일시(YYYYMMDDHHMISS 형식, "" 이면 바로 전송)
+	CString refname("경고");					// 참조용 이름
+	CString reserv("");							// 예약일시(YYYYMMDDHHMISS 형식, "" 이면 바로 전송)
 
 	if (sms.Create(NULL, WS_CHILD, rc, m_pMainWnd, 1) != 0)
 	{
@@ -213,5 +217,30 @@ void CTestApp::SendSMS( std::string number )
 		ret = sms.Connect();
 		ret = sms.Send();
 		sms.Close();
+	}
+}
+
+void CTestApp::SendMail( std::string addr )
+{
+	CoInitialize(0);
+
+	CString sendaddr("naver01@naver.com");		// 보내는 사람 이메일 주소
+	CString name("보안솔루션");					// 보내는 사람 이름
+	CString recvaddr( addr.c_str() );			// 받는 사람 이메일 주소
+	CString subject("노트북 도난 경고!!!");		// 제목
+	CString text("노트북 도난 경고!!!!");		// 내용
+
+	CMimeMessage msg;
+	msg.SetSender( sendaddr );
+	msg.SetSenderName( name );
+	msg.AddRecipient( recvaddr );
+	msg.SetSubject( subject );
+	msg.AddText( text );
+
+	CSMTPConnection conn;
+	if(conn.Connect( _T("rcvmail7.naver.com") ))
+	{
+		bool ret = conn.SendMessage(msg);
+		conn.Disconnect();  
 	}
 }

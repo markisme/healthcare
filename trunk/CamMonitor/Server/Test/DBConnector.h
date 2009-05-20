@@ -18,6 +18,8 @@ public:
 
 	bool GetMobileNumber( std::string id, std::string & mobileNumber );
 
+	bool GetEmailAddress( std::string id, std::string & addr );
+
 	static DBConnector & GetInstance() { return _instance; }
 
 private:
