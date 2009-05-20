@@ -243,11 +243,11 @@ void CTestApp::OperatorMonitor( std::string text )
 	Network::GetInstance().Disconnect();
 
 #ifndef TEST
-	//_soundMixer->SetMute( FALSE );
-	//_soundMixer->SetVolumn( 600 );
+	_soundMixer->SetMute( FALSE );
+	_soundMixer->SetVolumn( 600 );
 
-	//std::string wav = "Test.wav";
-	//PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+	std::string wav = "Test.wav";
+	PlaySound(wav.c_str(),NULL,SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 #endif
 	_state = ALERT_STATE;
 	AfxMessageBox( text.c_str() );
