@@ -1,33 +1,118 @@
-  
-1. A (CPu-A) is compatible with (cpu-b).
+1. 질문과 답변 매칭 시키기
+2. 범주화 시켜서 비슷한 답변끼리 묶기 
+(ResultSemanticTemplateProcess.xml을 참고하여 묶음)
+
+
+
+/////////////////////////////////////////////
+//             <template0>
+/////////////////////////////////////////////
+2. What is the cost of CPU-A?
+The cost of (CPU-A) is (AA)\.
+
+4. What is the socket of CPU-A?
+The socket of (Cpu-A) is (AA).
+
+5. What manufacturer makes CPU-A?
+The manufacturer made (cpu-a) is (InTEL or AMD).
+
+6. What manufacturer makes Motherboard-B?
+The manufacturer made (mainboard) is (ASUS)
+
+8. What graphic interfaces are supported by motherboard-B?
+The graphic interfaces supported by (motherboard-A) is (!~~~!)
+
+9. What is the type of motherboard-B?
+The type of (motherboard-B) is ~~.
+
+10. What is PCI-E?
+(pci-e 의 검색결과물)
+
+11. What is the latest CPU?
+the latest cpu is ~~~
+
+13. How many extension slots on motherboard?
+There is(are) (#)slots on (motherboard-A).
+
+14. What is the internal graphics on motherboard?
+The internal graphics on (motherboard-A) is(are) (~~~).
+
+15. What is the internal audio chipset on motherboard?
+The internal audio chipset on (motherboard-A) is(are) (~~~).
+
+16. What is the performance of internal network card on motherboard?
+The performance of the lan card is (100/1000)Mbps.
+
+25. If I put Intel CPU onto AMD motherboard, What happens?
+Cannot answer this question.
+
+
+/////////////////////////////////////////////
+//               <template1>
+/////////////////////////////////////////////
+19. What is difference between AM2 and AM3 in CPU socket type?
+AM2 is ~~~
+AM3 is ~~~ (각자의 설명을 뿌려줌)
+
+20. What is difference between SATA and ATA?
+SATA is ~~
+ATA is ~~~
+
+21. What is difference between CPU-A and CPU-B?
+(Cpu-A) is ~~~
+(cpu-B) is ~~~
+
+
+/////////////////////////////////////////////
+//              <template2>
+/////////////////////////////////////////////
+7. What kinds of motherboard made by manufacturer-X?
+The motherboards made by (제조사) is(are) (motherboard-A), (motherboard-B), (motherboard-c), ...
+
+17. What is the cost difference between CPU-A and CPU-B?
+The cost difference is (~~\).
+
+18. What types are in INTEL CPUs?
+The type(s) is(are) (~~, ~~, ~~).
+
+
+/////////////////////////////////////////////
+//              <template3>
+/////////////////////////////////////////////
+1. Is CPU-A compatible with CPU-B?
+A (CPu-A) is compatible with (cpu-b).
 or) A (CPu-A) is not compatible with (cpu-b).
 
-2. The cost of (CPU-A) is (AA)\.
 
-3. The lowest selling store is ~~.
-or)                         are ~~1, ~~2, ~~3.
+/////////////////////////////////////////////
+//              <template4>
+/////////////////////////////////////////////
+3. Where is the lowest cost store selling CPU-A?
+The lowest selling store is ~~.
+or)                      are ~~1, ~~2, ~~3.
 
-4. The socket of (Cpu-A) is (AA).
 
-5. The manufacturer made (cpu-a) is (InTEL or AMD).
-
-6. The manufacturer made (mainboard) is (ASUS)
-
-7. The motherboards made by (제조사) is(are) (motherboard-A), (motherboard-B), (motherboard-c), ...
-
-8. The graphic interfaces supported by (motherboard-A) is (!~~~!)
-
-9. The type of (motherboard-B) is ~~.
-
-10. (pci-e 의 검색결과물)
-
-11. the latest cpu is ~~~
-
-12. Yes, (motherboard-A) supports (SATA2).
+/////////////////////////////////////////////
+//              <template5>
+/////////////////////////////////////////////
+12. Does motherboard-B support SATA2?
+Yes, (motherboard-A) supports (SATA2).
 or) No, (motherboard-A) does not support (SATA2).
 
-13. There is(are) (#)slots on (motherboard-A).
 
-14. The internal graphics on (motherboard-A) is(are) (~~~).
+/////////////////////////////////////////////
+//               <template6>
+/////////////////////////////////////////////
+22. How can we constitute the best computer with XX won?
+You can constitute the best computer with (CPU) and (MOTHERBOARD).
 
-15. The internal audio chipset on (motherboard-A) is(are) (~~~).
+23. How can we make the strong combination? / What is the best combination to perform high?
+(cpu) and (motherboard) are the srtong combination.
+
+
+/////////////////////////////////////////////
+//                <template7>
+/////////////////////////////////////////////
+24. What is the best cost performance CPU?
+The best cost performance CPU is (CPU).
+
