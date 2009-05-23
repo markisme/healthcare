@@ -1,0 +1,422 @@
+// 2009.04.15.수
+// Template을 매칭하는 순서는 복잡한 것을 우선으로 매칭시킴.
+// 왜냐하면 복잡한 것과 매칭되지 않은 것은 간단한 것과 매칭될 가능성이 있지만,
+// 간단한 것과 매칭되지 않는 것은 복잡한 것과 매칭될 가능성이 없기 때문
+// (여기서 말하는 복잡한 것은, 같은 유형에 몇개의 slot이 더 추가된 것을 말함)
+
+
+0.
+What is the performance of internal network card on motherboard?
+
+<template no="0">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="be" need="true">
+		<tag name = "is"/>
+	</slot>
+	<slot type="focus1" need="true"> 
+		<tag name = "cpu_name" />
+		<tag name = "cpu_socket" />
+		<tag name = "performance" />
+		<tag name = "support" />
+		<tag name = "date" />
+		<tag name = "cpu_maker" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "mb_maker" />
+		<tag name = "mb_seller" />
+		<tag name = "board_type" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_interface" />
+		<tag name = "hdd_interface" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+		<tag name = "kind" />
+	</slot>
+	<slot type="focus2" need="true"> 
+		<tag name = "cpu_name" />
+		<tag name = "cpu_socket" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+	</slot>
+	<slot type="component" need="true"> 
+		<tag name = "cpu"/>
+		<tag name = "cpu_name"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+1.
+What is the cost of CPU-A?
+What is the socket of CPU-A?
+What is the type of motherboard-B?
+What is the internal graphics on motherboard?
+What is the internal audio chipset on motherboard?
+
+<template no="1">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="be" need="true">
+		<tag name = "is"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "price" />
+		<tag name = "cpu_socket" />
+		<tag name = "performance" />
+		<tag name = "support" />
+		<tag name = "date" />
+		<tag name = "cpu_maker" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "mb_maker" />
+		<tag name = "mb_seller" />
+		<tag name = "board_type" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_interface" />
+		<tag name = "hdd_interface" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+		<tag name = "kind" />
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+
+2.
+What is the latest CPU?
+What is PCI-E?
+
+<template no="2">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="be" need="true">
+		<tag name = "is"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "price" />
+		<tag name = "cpu_socket" />
+		<tag name = "performance" />
+		<tag name = "support" />
+		<tag name = "date" />
+		<tag name = "cpu_maker" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "mb_maker" />
+		<tag name = "mb_seller" />
+		<tag name = "board_type" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_interface" />
+		<tag name = "hdd_interface" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+		<tag name = "kind" />
+	</slot>
+</template>
+
+
+
+
+3. 
+// 이 질문은 be동사로서 앞에서 구분되므로 순서에서 매칭 순서에서 자유로울 수 있음.
+What manufacturer makes CPU-A?
+What manufacturer makes Motherboard-B?
+
+
+<template no="3">
+	<slot type="question" need="true"> 
+		<tag name = "What"/>
+	</slot>
+	<slot type="manufacturer" need="true">
+		<tag name = "manufacture"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "make" />
+	</slot>
+	<slot type="component" need="true"> 
+		<tag name = "cpu"/>
+		<tag name = "cpu_name"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+
+4.
+What graphic interfaces are supported by motherboard-B?
+
+
+
+
+
+
+
+2.
+What is the cost difference between CPU-A and CPU-B?
+What is difference between AM2 and AM3 in CPU socket type?
+What is difference between SATA and ATA?
+What is difference between CPU-A and CPU-B?
+
+<question> what </question>
+[<focus> cost, socket, perfomance, ... </focus>]
+<differnece> difference </differnece>
+<component> CPU-A, motherboard-A, ... </component>
+<component> CPU-A, motherboard-A, ... </component>
+
+<template no="2">
+	<slot type="question" need="true"> 
+		<tag name = "what"/>
+	</slot>
+	<slot type="focus" need="false"> 
+		<tag name = "price"/>
+		<tag name = "cpu_socket"/>
+		<tag name = "performance"/>
+		<tag name = "date" />
+		<tag name = "cpu_maker" />
+		<tag name = "cpu_core" />
+		<tag name = "core" />
+		<tag name = "mb_maker" />
+		<tag name = "mb_seller" />
+		<tag name = "board_type" />
+		<tag name = "board_chipset" />
+		<tag name = "graphic_interface" />
+		<tag name = "hdd_interface" />
+		<tag name = "graphic_card" />
+		<tag name = "audio_card info" />
+	</slot>
+	<slot type="difference" need="true">
+		<tag name = "difference"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+3. 
+What kinds of motherboard made by manufacturer-X?
+What types are in INTEL CPUs?
+
+<question> what </question>
+<focus> kinds, types, ... </focus>
+<manufacturer> manufacturer </manufacturer>
+<component> CPU-A, motherboard-A, ... </component>
+
+<template no="3">
+	<slot type="question" need="true"> 
+		<tag name = "what"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "kind"/>
+	</slot>
+	<slot type="manufacturer" need="true">
+		<tag name = "manufacture"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+4.
+Is CPU-A compatible with CPU-B?
+Does motherboard-B support SATA2?
+
+<focus> compatible </focus>
+<component> CPU-A, motherboard-A, ... </component>
+<component> CPU-A, motherboard-A, ... </component>
+
+<template no="4">
+	<slot type="focus" need="true"> 
+		<tag name = "comparison"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+5.
+Where is the lowest cost store selling CPU-A?
+
+<question> Where </question>
+<focus> lowest </focus>
+<target> price </target>
+<location> store, manufacturer </location>
+<component> CPU-A, motherboard-A, ... </component>
+
+<template no="5">
+	<slot type="question" need="true"> 
+		<tag name = "where"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "minimum"/>
+	</slot>
+	<slot type="target" need="true"> 
+		<tag name = "price"/>
+	</slot>
+	<slot type="location" need="true">
+		<tag name = "dealer"/>
+		<tag name = "manufature"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+
+6.
+How many extension slots on motherboard?
+
+<question> how many </question>
+<focus> extension slots </focus>
+<component> CPU-A, motherboard-A, ... </component>
+
+<template no="6">
+	<slot type="question" need="true"> 
+		<tag name = "how many"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "extension_slot"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+/////////////////////////////////////
+//
+// extension slots 없음
+//
+/////////////////////////////////////
+
+
+
+7. 
+How can we constitute the best computer with XX won?
+How can we make the strong combination?
+
+<question> how </question>
+<focus> constitute, make </focus>
+<target> strong, best ... </target>
+[<option> with XX won </option>]
+
+<template no="7">
+	<slot type="question" need="true"> 
+		<tag name = "how"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "constitution"/>
+		<tag name = "manufacture"/>
+	</slot>
+	<slot type="target" need="true"> 
+		<tag name = "maximum"/>
+	</slot>
+	<slot type="option" need="false">
+		<tag name = "XX won"/>
+	</slot>
+</template>
+
+/////////////////////////////////////
+//
+// option을 읽어들일 수 없음
+//
+/////////////////////////////////////
+
+
+8.
+What is the best combination to perform high?
+What is the best cost performance CPU?
+
+<question> What </question>
+<focus> best </focus>
+<target> combination, cost ... </target>
+[<target> performance </target>]
+[<component> CPU-A, motherboard-A, ... </component>]
+
+<template no="8">
+	<slot type="question" need="true"> 
+		<tag name = "what"/>
+	</slot>
+	<slot type="focus" need="true"> 
+		<tag name = "maximum"/>
+	</slot>
+	<slot type="target" need="true"> 
+		<tag name = "constitution"/>
+		<tag name = "price"/>
+	</slot>
+	<slot type="target" need="false"> 
+		<tag name = "performance"/>
+	</slot>
+	<slot type="component" need="true">
+		<tag name = "cpu"/>
+		<tag name = "mainboard"/>
+		<tag name = "graphic_interface"/>
+	</slot>
+</template>
+
+
+
+9.
+If I put Intel CPU onto AMD motherboard, What happens?
+<예외>
+
+
+
+
+
+
+class Template
+{
+	int _tempNo;
+	std::vector<Slot> _slotList;
+}
+
+class Slot
+{
+	bool _need;
+	std::string _type;
+	std::vector<std::string> _tagList;
+}
+
+typedef std::vector<Template> TemplateList;
