@@ -1,0 +1,57 @@
+템플릿0_호환0 // 단일 필드값 찾기 // 질문1, 질문3, 질문4, 질문5, 질문7, 질문8, 질문12, 질문13, 질문14, 질문15
+SELECT price FROM cpu WHERE cpu_name='E7400'
+SELECT cpu_socket FROM cpu WHERE cpu_name='E7400'
+SELECT cpu_maker FROM cpu WHERE cpu_name='E7400'
+SELECT mb_maker FROM mainboard WHERE mb_name='P5KPL/1600'
+SELECT graphic_interface FROM mainboard WHERE mb_name='P5KPL/1600'
+SELECT graphic_card FROM mainboard WHERE mb_name='P5KPL/1600'
+SELECT extension_slot FROM mainboard WHERE mb_name='P5KPL/1600'
+
+템플릿0_호환1 // 정보 찾는 쿼리 // 질문9
+SELECT info_text FROM info WHERE info_keyword='PCI-E'
+
+템플릿0_호환2 // 날짜 찾는 쿼리 // 질문10
+SELECT MAX(date_released) FROM cpu_core ORDER BY date_released DESC
+
+템플릿1_호환0 // 차이 구하기
+[질00]SELECT ABS((SELECT price FROM cpu WHERE cpu_name='E7400') - (SELECT price FROM cpu WHERE cpu_name='E5200') )
+
+템플릿1_호환1 // 정보 비교하기
+SELECT info_text FROM info WHERE info_keyword='AM2' OR info_keyword='AM3'
+SELECT info_text FROM info WHERE info_keyword='SATA' OR info_keyword='ATA'
+
+템플릿1_호환2 // 필드 비교하기
+SELECT * FROM cpu WHERE cpu_name='E5200' OR cpu_name='E7400'
+
+템플릿2_호환0 // 리스트 구하는 쿼리 // 질문6, 질문17
+[질06]SELECT DISTINCT mb_name FROM mainboard WHERE mb_maker='ASUS'
+[질17]SELECT DISTINCT cpu_socket FROM cpu WHERE cpu_maker='INTEL'
+
+템플릿3_호환0
+[질00]SELECT IF((SELECT cpu_socket FROM cpu WHERE cpu_name='E7400') = (SELECT cpu_socket FROM cpu WHERE cpu_name='I70 965'), 'TRUE', 'FALSE' )
+
+템플릿4_호환0
+SELECT shop_url FROM cpu WHERE cpu_name='E7400'
+
+템플릿5_호환0
+SELECT IF( SELECT COUNT(hdd_interface_1) FROM mainboard WHERE mb_name="P5KPL/1600", 'TRUE', 'FALSE' )
+
+템플릿6_호환0
+SELECT cpu_name, mb_name, cpu.price, mainboard.price FROM cpu, mainboard WHERE 
+cpu.price + mainboard.price < 100000
+ORDER BY cpu.clock_frequency DESC LIMIT 1
+
+템플릿6_호환1
+SELECT cpu_name, mb_name
+FROM cpu, mainboard
+WHERE cpu.cpu_socket = mainboard.cpu_socket AND
+      clock_frequency+l2_cache = (SELECT MAX(clock_frequency+l2_cache) FROM cpu )
+ORDER BY mainboard.price DESC LIMIT 1
+
+템플릿7_호환0
+SELECT cpu_name
+FROM cpu
+WHERE cpu.clock_frequency / cpu.price > 0
+ORDER BY cpu.clock_frequency / cpu.price DESC LIMIT 1
+
+
