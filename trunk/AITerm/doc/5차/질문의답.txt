@@ -9,39 +9,51 @@
 /////////////////////////////////////////////
 2. What is the cost of CPU-A?
 The cost of (CPU-A) is (AA)\.
+The (focus) of (component) is (result).
 
 4. What is the socket of CPU-A?
 The socket of (Cpu-A) is (AA).
-
-5. What manufacturer makes CPU-A?
-The manufacturer made (cpu-a) is (InTEL or AMD).
-
-6. What manufacturer makes Motherboard-B?
-The manufacturer made (mainboard) is (ASUS)
-
-8. What graphic interfaces are supported by motherboard-B?
-The graphic interfaces supported by (motherboard-A) is (!~~~!)
+The (focus) of (component) is (result).
 
 9. What is the type of motherboard-B?
 The type of (motherboard-B) is ~~.
+The (focus) of (component) is (result).
 
-10. What is PCI-E?
-(pci-e 의 검색결과물)
+5. What manufacturer makes CPU-A?
+The manufacturer made (cpu-a) is (InTEL or AMD).
+The (focus) made (component) is (result).
 
-11. What is the latest CPU?
-the latest cpu is ~~~
+6. What manufacturer makes Motherboard-B?
+The manufacturer made (mainboard) is (ASUS)
+The (focus) made (component) is (result).
 
-13. How many extension slots on motherboard?
-There is(are) (#)slots on (motherboard-A).
+8. What graphic interfaces are supported by motherboard-B?
+The graphic interfaces supported by (motherboard-A) is (!~~~!)
+The (focus) supported by (component) is (result).
 
 14. What is the internal graphics on motherboard?
 The internal graphics on (motherboard-A) is(are) (~~~).
+The (focus) on (component) is(are) (result).
 
 15. What is the internal audio chipset on motherboard?
 The internal audio chipset on (motherboard-A) is(are) (~~~).
+The (focus) on (component) is(are) (result).
+
+11. What is the latest CPU?
+the latest cpu is ~~~
+The (focus) (component) is (result).
+
+10. What is PCI-E?
+(pci-e 의 검색결과물)
+(result)
+
+13. How many extension slots on motherboard?
+There is(are) (#)slots on (motherboard-A).
+There is(are) (result) on (component).
 
 16. What is the performance of internal network card on motherboard?
 The performance of the lan card is (100/1000)Mbps.
+The performance of the (focus) is (result).
 
 25. If I put Intel CPU onto AMD motherboard, What happens?
 Cannot answer this question.
@@ -53,15 +65,20 @@ Cannot answer this question.
 19. What is difference between AM2 and AM3 in CPU socket type?
 AM2 is ~~~
 AM3 is ~~~ (각자의 설명을 뿌려줌)
+(component1) is (result1) and
+(component2) is (result2)
 
 20. What is difference between SATA and ATA?
 SATA is ~~
 ATA is ~~~
+(component1) is (result1) and
+(component2) is (result2)
 
 21. What is difference between CPU-A and CPU-B?
 (Cpu-A) is ~~~
 (cpu-B) is ~~~
-
+(component1) is (result1) and
+(component2) is (result2)
 
 /////////////////////////////////////////////
 //              <template2>
