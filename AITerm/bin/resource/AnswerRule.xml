@@ -12,7 +12,7 @@
 		<expression type="The %s %s is %s.">
 			<exp type="$f.va"/>
 			<exp type="$c1.va"/>
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 		</expression>
 	</ans>
 	<ans tempNo="0" no="1">
@@ -20,7 +20,7 @@
 			<slot type="focus" value="extension_slot" add=""/>
 		</need_slot_list>
 		<expression type="There is(are) %s on %s.">
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 			<exp type="$c1.va"/>
 		</expression>
 	</ans>
@@ -30,14 +30,14 @@
 		</need_slot_list>
 		<expression type="The performance of the %s is %s.">
 			<exp type="$f.va"/>
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 		</expression>
 	</ans>
 	<ans tempNo="0" no="3">
 		<need_slot_list>
 		</need_slot_list>
 		<expression type="%s">
-			<exp type="$r.va"/>
+			<exp type="$r.li"/>
 		</expression>
 	</ans>
 
@@ -46,9 +46,9 @@
 		</need_slot_list>
 		<expression type="%s is %s and %s is %s">
 			<exp type="$c1.va"/>
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 			<exp type="$c2.va"/>
-			<exp type="$r2.va"/>
+			<exp type="$r.va"/>
 		</expression>
 	</ans>
 
@@ -68,7 +68,7 @@
 		<expression type="The %s %s is %s.">
 			<exp type="$t.va"/>
 			<exp type="$f.va"/>
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 		</expression>
 	</ans>
 	<ans tempNo="2" no="2">
@@ -85,7 +85,7 @@
 		<need_slot_list>
 		</need_slot_list>
 		<expression type="%s">
-			<exp type="$r.va"/>
+			<exp type="$r.li"/>
 		</expression>
 	</ans>
 
@@ -94,7 +94,7 @@
 		</need_slot_list>
 		<expression type="The %s selling store is %s.">
 			<exp type="$f.va"/>
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 		</expression>
 	</ans>
 
@@ -102,28 +102,25 @@
 		<need_slot_list>
 		</need_slot_list>
 		<expression type="%s">
-			<exp type="$r.va"/>
+			<exp type="$r.li"/>
 		</expression>
 	</ans>
 
 	<ans tempNo="6" no="0">
 		<need_slot_list>
-			<slot type="target" value="best"/>
+			<slot type="option" value="number" add=""/>
 		</need_slot_list>
-		<expression type="You can constitute the best computer with %s and %s.">
-			<exp type="$r1.va"/>
-			<exp type="$r2.va"/>
+		<expression type="You can constitute the best computer with %s.">
+			<exp type="$r.li"/>
 		</expression>
 
 	</ans>
 
 	<ans tempNo="6" no="1">
 		<need_slot_list>
-			<slot type="target" value="strong"/>
 		</need_slot_list>
-		<expression type="%s and %s are the srtong combination.">
-			<exp type="$r1.va"/>
-			<exp type="$r2.va"/>
+		<expression type="%s are the srtong combination.">
+			<exp type="$r.li"/>
 		</expression>
 	</ans>
 
@@ -131,7 +128,7 @@
 		<need_slot_list>
 		</need_slot_list>
 		<expression type="The best cost performance CPU is %s.">
-			<exp type="$r1.va"/>
+			<exp type="$r.va"/>
 		</expression>
 	</ans>
 </resource>

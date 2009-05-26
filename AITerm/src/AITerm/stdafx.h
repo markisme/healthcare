@@ -15,7 +15,6 @@
 #include <string>
 #include <vector>
 
-#include "TestCase.h"
 #include "DBConnector.h"
 
 #include "SimpleMinipar.h"

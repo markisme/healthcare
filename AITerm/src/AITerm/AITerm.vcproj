@@ -168,6 +168,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\AnswerGenerator.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\AnswerGenerator.h"
+			>
+		</File>
+		<File
 			RelativePath=".\DBConnector.cpp"
 			>
 		</File>

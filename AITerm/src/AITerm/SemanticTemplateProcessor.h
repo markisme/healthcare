@@ -25,6 +25,7 @@ struct MatchedTemplate
 {
 	std::vector<MatchedSlot> _slotList;
 	int _tempNo;
+	int _questionNo;
 };
 
 typedef std::vector<MatchedTemplate> ResultMatchedTemplate;
@@ -35,8 +36,7 @@ public:
 	SemanticTemplateProcessor();
 	~SemanticTemplateProcessor();
 
-	void Init( ResultNamedEntityRecognition * resultNamedEntityRecognition );
-	void Uninit();
+	void Start( ResultNamedEntityRecognition * resultNamedEntityRecognition );
 
 	void LoadTemplateList( TemplateList & tempList );
 	void SaveResultSemanticTemplateProcess( ResultMatchedTemplate & inResultMatchedTemplate );

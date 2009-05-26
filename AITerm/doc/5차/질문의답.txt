@@ -7,53 +7,62 @@
 /////////////////////////////////////////////
 //             <template0>
 /////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
 2. What is the cost of CPU-A?
 The cost of (CPU-A) is (AA)\.
-The (focus) of (component) is (result).
+The (focus) of (component) is (result). : price
 
 4. What is the socket of CPU-A?
 The socket of (Cpu-A) is (AA).
-The (focus) of (component) is (result).
+The (focus) of (component) is (result). : cpu_socket
 
 9. What is the type of motherboard-B?
 The type of (motherboard-B) is ~~.
-The (focus) of (component) is (result).
+The (focus) of (component) is (result). : cpu_socket
 
 5. What manufacturer makes CPU-A?
-The manufacturer made (cpu-a) is (InTEL or AMD).
-The (focus) made (component) is (result).
+The manufacturer made (cpu-a) is (InTEL or AMD). 
+The (focus) made (component) is (result). : maker
 
 6. What manufacturer makes Motherboard-B?
 The manufacturer made (mainboard) is (ASUS)
-The (focus) made (component) is (result).
+The (focus) made (component) is (result). : maker
 
 8. What graphic interfaces are supported by motherboard-B?
 The graphic interfaces supported by (motherboard-A) is (!~~~!)
-The (focus) supported by (component) is (result).
+The (focus) supported by (component) is (result). : graphic_interface
 
 14. What is the internal graphics on motherboard?
 The internal graphics on (motherboard-A) is(are) (~~~).
-The (focus) on (component) is(are) (result).
+The (focus) on (component) is(are) (result). : graphic_card
 
 15. What is the internal audio chipset on motherboard?
 The internal audio chipset on (motherboard-A) is(are) (~~~).
-The (focus) on (component) is(are) (result).
+The (focus) on (component) is(are) (result). : audio_card
 
 11. What is the latest CPU?
 the latest cpu is ~~~
-The (focus) (component) is (result).
+The (focus) (component) is (result). : latest
+////////////////////////////////////////////////////////////////////////
 
 10. What is PCI-E?
 (pci-e 의 검색결과물)
-(result)
+(result) : ?
+
+////////////////////////////////////////////////////////////////////////
 
 13. How many extension slots on motherboard?
 There is(are) (#)slots on (motherboard-A).
-There is(are) (result) on (component).
+There is(are) (result) on (component). : extension_slot
+
+////////////////////////////////////////////////////////////////////////
 
 16. What is the performance of internal network card on motherboard?
 The performance of the lan card is (100/1000)Mbps.
-The performance of the (focus) is (result).
+The performance of the (focus) is (result). : lan_card
+
+////////////////////////////////////////////////////////////////////////
 
 25. If I put Intel CPU onto AMD motherboard, What happens?
 Cannot answer this question.
@@ -85,15 +94,15 @@ ATA is ~~~
 /////////////////////////////////////////////
 7. What kinds of motherboard made by manufacturer-X?
 The motherboards made by (제조사) is(are) (motherboard-A), (motherboard-B), (motherboard-c), ...
-The motherboards made by (focus) is(are) (result1), (result2) ...
+The motherboards made by (component1) is(are) (result1), (result2) ... : kind
 
 17. What is the cost difference between CPU-A and CPU-B?
 The cost difference is (~~\).
-The (target) (focus) is (result).
+The (target) (focus) is (result). : difference
 
 18. What types are in INTEL CPUs?
 The type(s) is(are) (~~, ~~, ~~).
-The (focus) is(are) (result1), (result2)...
+The (focus) is(are) (result1), (result2)... : cpu_socket
 
 /////////////////////////////////////////////
 //              <template3>
@@ -101,7 +110,8 @@ The (focus) is(are) (result1), (result2)...
 1. Is CPU-A compatible with CPU-B?
 A (CPu-A) is compatible with (cpu-b).
 or) A (CPu-A) is not compatible with (cpu-b).
-(result)
+TRUE : A (component1) is compatible with (component2).
+FALSE : A (component1) is not compatible with (component2).
 
 /////////////////////////////////////////////
 //              <template4>
@@ -109,7 +119,7 @@ or) A (CPu-A) is not compatible with (cpu-b).
 3. Where is the lowest cost store selling CPU-A?
 The lowest selling store is ~~.
 or)                      are ~~1, ~~2, ~~3.
-The (focus) selling (location) is (result).
+The (focus) selling store is (result).
 
 /////////////////////////////////////////////
 //              <template5>
@@ -117,15 +127,19 @@ The (focus) selling (location) is (result).
 12. Does motherboard-B support SATA2?
 Yes, (motherboard-A) supports (SATA2).
 or) No, (motherboard-A) does not support (SATA2).
+YES: Yes, (target) supports (component1).
+NO: No, (target) does not support (component1).
 
 /////////////////////////////////////////////
 //               <template6>
 /////////////////////////////////////////////
 22. How can we constitute the best computer with XX won?
 You can constitute the best computer with (CPU) and (MOTHERBOARD).
+You can constitute the best computer with (result1) and (result2). : t = best
 
 23. How can we make the strong combination? / What is the best combination to perform high?
 (cpu) and (motherboard) are the srtong combination.
+(result1) and (result2) are the srtong combination. : t = strong
 
 
 /////////////////////////////////////////////
@@ -133,4 +147,5 @@ You can constitute the best computer with (CPU) and (MOTHERBOARD).
 /////////////////////////////////////////////
 24. What is the best cost performance CPU?
 The best cost performance CPU is (CPU).
+The best cost performance CPU is (result).
 

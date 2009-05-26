@@ -10,7 +10,7 @@ QueryGenerator::~QueryGenerator()
 {
 }
 
-void QueryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic )
+void QueryGenerator::Start( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic )
 {
 	// 디비 사전 셋
 	_dbDic = dbDic;
@@ -19,26 +19,19 @@ void QueryGenerator::Init( ResultMatchedTemplate & resultMatchedTemplate, DBDict
 	QueryRuleList queryRuleList;
 	LoadQueryRule( queryRuleList );
 
-	// 쿼리 리스트 만들기
-	QueryList queryList;
-
 	int count = resultMatchedTemplate.size();
 	for( int num = 0; num < count; num++ )
 	{
 		MatchedTemplate & matchedTemplate = resultMatchedTemplate[ num ];
 		std::string result = GeneratorQuery( matchedTemplate, queryRuleList );
-		queryList.push_back( result );
+		_queryList.push_back( result );
 	}
 
 	// 쿼리 저장
-	SaveQuery( queryList );
+	SaveQuery( _queryList );
 
 	// 디비에 접속해서 쿼리 결과 얻어 오기
-	SaveResultQuery( queryList );	
-}
-
-void QueryGenerator::Uninit()
-{
+	// SaveResultQuery( _queryList );	
 }
 
 void QueryGenerator::LoadQueryRule( QueryRuleList & queryRuleList )
@@ -184,8 +177,6 @@ void QueryGenerator::SaveQuery( QueryList & queryList )
 
 void QueryGenerator::SaveResultQuery( QueryList & queryList )
 {
-	std::vector<DataList> dbResultList;
-
 	// 디비에 쿼리 날려서 결과 얻어 오기
 	int queryCount = queryList.size();
 	for( int num = 0; num < queryCount; num++)
@@ -195,14 +186,14 @@ void QueryGenerator::SaveResultQuery( QueryList & queryList )
 		DataList dataList;
 		DBConnector::GetInstance().MysqlQuery( sql.c_str(), dataList );
 
-		dbResultList.push_back( dataList );
+		_dbResultList.push_back( dataList );
 	}
 
 	// 결과 저장 하기
 	XmlDocument xmlDoc;
 	XmlNode * resNode = xmlDoc.AddNode( "resource" );
 
-	int count = dbResultList.size();
+	int count = _dbResultList.size();
 	for( int num = 0; num < count; num++ )
 	{
 		XmlNode * questionNode = resNode->AddNode( "question" );
@@ -210,7 +201,7 @@ void QueryGenerator::SaveResultQuery( QueryList & queryList )
 		char buf[8]; itoa(num, buf, 10);
 		questionNode->SetAttribute( "no", buf );
 
-		DataList & dataList = dbResultList[ num ];
+		DataList & dataList = _dbResultList[ num ];
 		
 		int dataCount = dataList.size();
 		for( int cnt = 0; cnt < dataCount; cnt++ )
@@ -317,7 +308,6 @@ std::string QueryGenerator::GetExpression( std::string expression, std::vector<s
 
 std::string QueryGenerator::GetElement( DataElement element, MatchedTemplate & matchedTemplate )
 {
-	//return "test";
 	switch( element )
 	{
 	case FOCUS_TABLE:
@@ -351,7 +341,7 @@ std::string QueryGenerator::GetElement( DataElement element, MatchedTemplate & m
 	case COMPONENT2_TEXT:
 		return GetWord( "component2", matchedTemplate );
 	}
-	return "test";
+	return "%?%";
 }
 
 std::string QueryGenerator::GetTableName( std::string slotType, MatchedTemplate & matchedTemplate )

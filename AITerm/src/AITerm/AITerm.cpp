@@ -1,11 +1,15 @@
 #include "stdafx.h"
+#include "TestCase.h"
 
 #include "NamedEntityRecognition.h"
 #include "SemanticTemplateProcessor.h"
 #include "QueryGenerator.h"
+#include "AnswerGenerator.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	TestCase testCase;
+
 	// DB 접속 정보
 	DBConnectInfo info;
 	info.ip = "211.189.19.160";
@@ -28,12 +32,21 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// 템플릿 매칭 처리
 	SemanticTemplateProcessor semanticTemplateProcessor;
-	semanticTemplateProcessor.Init( &resultNamedEntityRecognition );
+	semanticTemplateProcessor.Start( &resultNamedEntityRecognition );
 	ResultMatchedTemplate & resultMatchedTemplate = semanticTemplateProcessor.GetResultMatchedTemplate();
 
 	// 쿼리 생성기
 	QueryGenerator queryGenerator;
-	queryGenerator.Init( resultMatchedTemplate, dbDic );
+	queryGenerator.Start( resultMatchedTemplate, dbDic );
+	//const DBResultList & dbResultList = queryGenerator.GetDBResultList();
+
+	// db 결과 로드 (시간지연으로인한 테스트 코드)
+	DBResultList dbResultList;
+	testCase.LoadResultDB( dbResultList );
+
+	// 답변 생성기
+	AnswerGenerator answerGenerator;
+	answerGenerator.Start( resultMatchedTemplate, dbResultList );
 
 	// Just XML test
 	//TestCase testCase;
