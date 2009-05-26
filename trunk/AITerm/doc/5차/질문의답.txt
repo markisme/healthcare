@@ -85,13 +85,15 @@ ATA is ~~~
 /////////////////////////////////////////////
 7. What kinds of motherboard made by manufacturer-X?
 The motherboards made by (Á¦Á¶»ç) is(are) (motherboard-A), (motherboard-B), (motherboard-c), ...
+The motherboards made by (focus) is(are) (result1), (result2) ...
 
 17. What is the cost difference between CPU-A and CPU-B?
 The cost difference is (~~\).
+The (target) (focus) is (result).
 
 18. What types are in INTEL CPUs?
 The type(s) is(are) (~~, ~~, ~~).
-
+The (focus) is(are) (result1), (result2)...
 
 /////////////////////////////////////////////
 //              <template3>
@@ -99,7 +101,7 @@ The type(s) is(are) (~~, ~~, ~~).
 1. Is CPU-A compatible with CPU-B?
 A (CPu-A) is compatible with (cpu-b).
 or) A (CPu-A) is not compatible with (cpu-b).
-
+(result)
 
 /////////////////////////////////////////////
 //              <template4>
@@ -107,7 +109,7 @@ or) A (CPu-A) is not compatible with (cpu-b).
 3. Where is the lowest cost store selling CPU-A?
 The lowest selling store is ~~.
 or)                      are ~~1, ~~2, ~~3.
-
+The (focus) selling (location) is (result).
 
 /////////////////////////////////////////////
 //              <template5>
@@ -115,7 +117,6 @@ or)                      are ~~1, ~~2, ~~3.
 12. Does motherboard-B support SATA2?
 Yes, (motherboard-A) supports (SATA2).
 or) No, (motherboard-A) does not support (SATA2).
-
 
 /////////////////////////////////////////////
 //               <template6>
