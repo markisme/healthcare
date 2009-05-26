@@ -9,7 +9,7 @@ SemanticTemplateProcessor::~SemanticTemplateProcessor()
 {
 }
 
-void SemanticTemplateProcessor::Init( ResultNamedEntityRecognition * resultNamedEntityRecognition )
+void SemanticTemplateProcessor::Start( ResultNamedEntityRecognition * resultNamedEntityRecognition )
 {
 	// 템플릿 로드
 	TemplateList tempList;
@@ -21,16 +21,13 @@ void SemanticTemplateProcessor::Init( ResultNamedEntityRecognition * resultNamed
 	{
 		NamedEntityList & namedEntityList = (*resultNamedEntityRecognition)[ num ];
 		MatchedTemplate matchedTemplate;
+		matchedTemplate._questionNo = num;
 		CompareTagname( tempList, namedEntityList, matchedTemplate );
 		_resultMatchedTemplate.push_back( matchedTemplate );
 	}
 
 	// 저장
 	SaveResultSemanticTemplateProcess( _resultMatchedTemplate );
-}
-
-void SemanticTemplateProcessor::Uninit()
-{
 }
 
 void SemanticTemplateProcessor::LoadTemplateList( TemplateList & tempList )
@@ -141,6 +138,7 @@ void SemanticTemplateProcessor::CompareTagname( TemplateList & tempList, NamedEn
 		bool matchTemplate = false;
 		MatchedTemplate matchedTemplate;
 		matchedTemplate._tempNo = num;
+		matchedTemplate._questionNo = outMatchedTemplate._questionNo;
 
 		int size = temp.size();
 		for( int cnt = 0; cnt < size; cnt++ )

@@ -27,7 +27,9 @@ enum DataElement
 	COMPONENT1_TEXT,
 	COMPONENT2_TABLE,
 	COMPONENT2_TAG,
-	COMPONENT2_TEXT
+	COMPONENT2_TEXT,
+	RESULT_VALUE,
+	RESULT_LIST,
 };
 
 struct QueryRule
@@ -43,14 +45,17 @@ typedef std::vector<QueryRule> QueryRuleList;
 
 typedef std::vector<std::string> QueryList;
 
+typedef std::vector<DataList> DBResultList;
+
 class QueryGenerator
 {
 public:
 	QueryGenerator();
 	~QueryGenerator();
 
-	void Init( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic );
-	void Uninit();
+	void Start( ResultMatchedTemplate & resultMatchedTemplate, DBDictionary * dbDic );
+	const QueryList & GetQueryList() { return _queryList; }
+	const DBResultList & GetDBResultList() { return _dbResultList; }
 
 private:
 	void LoadQueryRule( QueryRuleList & queryRuleList );
@@ -65,4 +70,6 @@ private:
 
 private:
 	DBDictionary * _dbDic;
+	QueryList _queryList;
+	DBResultList _dbResultList;
 };

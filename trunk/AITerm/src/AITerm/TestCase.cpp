@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TestCase.h"
 #include "NamedEntityRecognition.h"
+#include "QueryGenerator.h"
 
 TestCase TestCase::_instance;
 
@@ -93,5 +94,51 @@ void TestCase::XMLLoadSaveTest()
 			std::string typeAtt = testNode->GetAttribute( "type" );
 			printf("%d= %s\n", num, typeAtt.c_str());
 		}
+	}
+}
+
+
+void TestCase::LoadResultDB( DBResultList & dbResultList )
+{
+	// 질문 템플릿 xml 로드
+	XmlDocument xmlDoc;
+	std::string path = "./resource/ResultDB.xml";
+	xmlDoc.LoadFile( path.c_str() );
+
+	const XmlNode *resNode = xmlDoc.GetNode( "resource");
+
+	//
+	int nodeCount = resNode->GetNodeCount( "question" );
+	for( int num = 0; num < nodeCount; num++ )
+	{	
+		//
+		const XmlNode * questionNode = resNode->GetNode( "question", num );
+		std::string qsNum = questionNode->GetAttribute( "no" );
+
+		//
+		DataList dataList;
+
+		// 만약 num번째 Question template에서,
+		int rowCount = questionNode->GetNodeCount( "row" );
+		for( int num2 = 0; num2 < rowCount; num2++ )
+		{	
+			const XmlNode * rowNode = questionNode->GetNode( "row", num2 );
+
+			//
+			RowData row;
+
+			int dataCount = rowNode->GetNodeCount( "data" );
+			for( int k = 0; k < dataCount; k++ )
+			{
+				const XmlNode * dataNode = rowNode->GetNode( "data", k );
+
+				std::string data = dataNode->GetText();
+				row._data.push_back( data );
+			}
+
+			dataList.push_back( row );
+		}
+
+		dbResultList.push_back( dataList );
 	}
 }
