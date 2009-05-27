@@ -1,6 +1,6 @@
 <resource>
     <question no="0">
-        <reference></reference>
+        <reference>TRUE </reference>
         <answer>It's the same as table.</answer>
     </question>
     <question no="1">
@@ -24,7 +24,7 @@
         <answer>The manufacturer made p5kpl/1600 is asus .</answer>
     </question>
     <question no="6">
-        <reference></reference>
+        <reference>p5kpl/1600 p5ld2-c/ipat p5q p5q pro p5kpl-am se p5gc-mx/1333 p5ql se p5kpl se p6t p5q3 p5ql p5sd2-tm m3a78 pro m3a78-em m2a-vm hdmi m3a78-vm m2n68-am se </reference>
         <answer>The motherboards made by asus is the same as table.</answer>
     </question>
     <question no="7">
@@ -36,15 +36,15 @@
         <answer>The type of p5kpl/1600 is 775 .</answer>
     </question>
     <question no="9">
-        <reference></reference>
-        <answer>Definition of the %s is the same as table</answer>
+        <reference>pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. </reference>
+        <answer>Definition of the pci-e is the same as table</answer>
     </question>
     <question no="10">
-        <reference></reference>
-        <answer>Definition of the %s is the same as table</answer>
+        <reference>2009-01-01 </reference>
+        <answer>Definition of the date is the same as table</answer>
     </question>
     <question no="11">
-        <reference></reference>
+        <reference>TRUE </reference>
         <answer>It's the same as table.</answer>
     </question>
     <question no="12">
@@ -68,7 +68,7 @@
         <answer>e7400 is 80210  and e5200 is 80210 </answer>
     </question>
     <question no="17">
-        <reference></reference>
+        <reference>775 </reference>
         <answer>The cpu_socket  is the same as table.</answer>
     </question>
     <question no="18">

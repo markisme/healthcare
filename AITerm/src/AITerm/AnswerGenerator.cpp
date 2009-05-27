@@ -76,57 +76,34 @@ void AnswerGenerator::LoadAnswerRule( AnswerRuleList & answerRuleList )
 			rule._needSlotList.push_back( slot );
 		}
 
-		const XmlNode * expressionNode = sqlNode->GetNode( "answer" );
-		std::string expression = expressionNode->GetAttribute( "exp" );
-		rule._answer._expression = expression;
+		const XmlNode * referenceNode = sqlNode->GetNode( "reference" );
+		std::string expression1 = referenceNode->GetAttribute( "exp" );
+		rule._reference._expression = expression1;
 
-		int expCount = expressionNode->GetNodeCount( "exp" );
+		int expCnt = referenceNode->GetNodeCount( "exp" );
+		for( int num2 = 0; num2 < expCnt; num2++ )
+		{	
+			//
+			const XmlNode * expNode = referenceNode->GetNode( "exp", num2 );
+			std::string expType = expNode->GetAttribute( "type" );
+
+			DataElement element = GetElement( expType );
+			rule._reference._elementList.push_back( element );
+		}
+
+		const XmlNode * answerNode = sqlNode->GetNode( "answer" );
+		std::string expression2 = answerNode->GetAttribute( "exp" );
+		rule._answer._expression = expression2;
+
+		int expCount = answerNode->GetNodeCount( "exp" );
 		for( int num2 = 0; num2 < expCount; num2++ )
 		{	
 			//
-			const XmlNode * expNode = expressionNode->GetNode( "exp", num2 );
+			const XmlNode * expNode = answerNode->GetNode( "exp", num2 );
 			std::string expType = expNode->GetAttribute( "type" );
 
-			if( expType == "$f.va" )
-			{
-				rule._answer._elementList.push_back(FOCUS_TAG);
-			}
-			else if( expType == "$f.tx" )
-			{
-				rule._answer._elementList.push_back(FOCUS_TEXT);
-			}
-			else if( expType == "$t.va" )
-			{
-				rule._answer._elementList.push_back(TARGET_TAG);
-			}
-			else if( expType == "$t.tx" )
-			{
-				rule._answer._elementList.push_back(TARGET_TEXT);
-			}
-			else if( expType == "$c1.va" )
-			{
-				rule._answer._elementList.push_back(COMPONENT1_TAG);
-			}
-			else if( expType == "$c1.tx" )
-			{
-				rule._answer._elementList.push_back(COMPONENT1_TEXT);
-			}
-			else if( expType == "$c2.va" )
-			{
-				rule._answer._elementList.push_back(COMPONENT2_TAG);
-			}
-			else if( expType == "$c2.tx" )
-			{
-				rule._answer._elementList.push_back(COMPONENT2_TEXT);
-			}
-			else if( expType == "$r.va" )
-			{
-				rule._answer._elementList.push_back(RESULT_VALUE);
-			}
-			else if( expType == "$r.li" )
-			{
-				rule._answer._elementList.push_back(RESULT_LIST);
-			}
+			DataElement element = GetElement( expType );
+			rule._answer._elementList.push_back( element );
 		}
 
 		answerRuleList.push_back( rule );
@@ -144,7 +121,7 @@ void AnswerGenerator::SaveAnswer( AnswerList & answerList )
 		AnswerData & answer = answerList[ num ];
 
 		std::string ans = answer._answer;
-		std::string ref = answer._ref;
+		std::string ref = answer._reference;
 
 		XmlNode * qsNode = resNode->AddNode( "question" );
 		
@@ -164,6 +141,8 @@ void AnswerGenerator::SaveAnswer( AnswerList & answerList )
 
 AnswerData AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList )
 {
+	AnswerData ans;
+
 	int count = answerRuleList.size();
 	for( int num = 0; num < count; num++)
 	{
@@ -212,35 +191,48 @@ AnswerData AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTempl
 		}
 
 		// 매치가 되었으면 진행
-		std::vector<std::string> valueList;
-
-		int elementCount = answerRule._answer._elementList.size();
-		for( int cnt = 0; cnt < elementCount; cnt++)
+		// 레퍼런스 식 채우기
 		{
-			DataElement element = answerRule._answer._elementList[ cnt ];
+			std::vector<std::string> valueList;
 
-			//if( element != RESULT_LIST )
+			int elementCount = answerRule._reference._elementList.size();
+			for( int cnt = 0; cnt < elementCount; cnt++)
 			{
+				DataElement element = answerRule._reference._elementList[ cnt ];
+
+				std::string value = GetElement( element, matchedTemplate, dbResultList );
+				valueList.push_back( value );
+			}
+
+			// 채운 리스트를 식에 대입
+			ans._reference = GetExpression( answerRule._reference._expression, valueList );
+		}
+
+		// 응답 식 채우기
+		{
+			std::vector<std::string> valueList;
+
+			int elementCount = answerRule._answer._elementList.size();
+			for( int cnt = 0; cnt < elementCount; cnt++)
+			{
+				DataElement element = answerRule._answer._elementList[ cnt ];
+
 				std::string value = GetElement( element, matchedTemplate, dbResultList ) + GetAddText( element, matchedSlot );
 				valueList.push_back( value );
 			}
-			//else
-			{
-			}
-		}
 
-		// 채운 리스트를 식에 대입
-		return GetExpression( answerRule._answer._expression, valueList );
+			// 채운 리스트를 식에 대입
+			ans._answer = GetExpression( answerRule._answer._expression, valueList );
+		}
+		break;
 	}
 
-	AnswerData ans;
 	return ans;
 }
 
-AnswerData AnswerGenerator::GetExpression( std::string expression, std::vector<std::string> valueList )
+std::string AnswerGenerator::GetExpression( std::string expression, std::vector<std::string> valueList )
 {
 	//
-	AnswerData ans;
 	std::string exp = expression;
 
 	//
@@ -257,8 +249,51 @@ AnswerData AnswerGenerator::GetExpression( std::string expression, std::vector<s
 		exp.insert(index,str);
 	}
 
-	ans._answer = exp;
-	return ans;
+	return exp;
+}
+
+DataElement AnswerGenerator::GetElement( std::string expType )
+{
+	if( expType == "$f.va" )
+	{
+		return FOCUS_TAG;
+	}
+	else if( expType == "$f.tx" )
+	{
+		return FOCUS_TEXT;
+	}
+	else if( expType == "$t.va" )
+	{
+		return TARGET_TAG;
+	}
+	else if( expType == "$t.tx" )
+	{
+		return TARGET_TEXT;
+	}
+	else if( expType == "$c1.va" )
+	{
+		return COMPONENT1_TAG;
+	}
+	else if( expType == "$c1.tx" )
+	{
+		return COMPONENT1_TEXT;
+	}
+	else if( expType == "$c2.va" )
+	{
+		return COMPONENT2_TAG;
+	}
+	else if( expType == "$c2.tx" )
+	{
+		return COMPONENT2_TEXT;
+	}
+	else if( expType == "$r.va" )
+	{
+		return RESULT_VALUE;
+	}
+	else if( expType == "$r.li" )
+	{
+		return RESULT_LIST;
+	}
 }
 
 std::string AnswerGenerator::GetElement( DataElement element, const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList )

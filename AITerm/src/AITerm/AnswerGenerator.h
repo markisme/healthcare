@@ -30,7 +30,7 @@ typedef std::vector<AnswerRule> AnswerRuleList;
 
 struct AnswerData
 {
-	std::string _ref;
+	std::string _reference;
 	std::string _answer;
 };
 
@@ -48,7 +48,8 @@ private:
 	void LoadAnswerRule( AnswerRuleList & answerRuleList );
 	void SaveAnswer( AnswerList & answerList );
 	AnswerData GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList );
-	AnswerData GetExpression( std::string expression, std::vector<std::string> valueList );
+	std::string GetExpression( std::string expression, std::vector<std::string> valueList );
+	DataElement GetElement( std::string expType );
 	std::string GetElement( DataElement element, const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList );
 	std::string GetAddText( DataElement element, AnswerNeedSlot & matchedSlot );
 	std::string GetTagName( std::string slotType, const MatchedTemplate & matchedTemplate );
