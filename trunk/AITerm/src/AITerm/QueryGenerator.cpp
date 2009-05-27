@@ -31,7 +31,7 @@ void QueryGenerator::Start( ResultMatchedTemplate & resultMatchedTemplate, DBDic
 	SaveQuery( _queryList );
 
 	// 디비에 접속해서 쿼리 결과 얻어 오기
-	// SaveResultQuery( _queryList );	
+	SaveResultQuery( _queryList );	
 }
 
 void QueryGenerator::LoadQueryRule( QueryRuleList & queryRuleList )
@@ -186,6 +186,7 @@ void QueryGenerator::SaveResultQuery( QueryList & queryList )
 		DataList dataList;
 		DBConnector::GetInstance().MysqlQuery( sql.c_str(), dataList );
 
+		printf( "Get DB Data : Question Number %d\n", num );
 		_dbResultList.push_back( dataList );
 	}
 
@@ -214,6 +215,9 @@ void QueryGenerator::SaveResultQuery( QueryList & queryList )
 			for( int k = 0; k < rowCount; k++ )
 			{
 				XmlNode * dataNode = rowNode->AddNode( "data" );
+
+				std::string name = row._col[ k ];
+				dataNode->SetAttribute( "name", name.c_str() );
 
 				std::string data = row._data[ k ];
 				dataNode->SetText( data.c_str(), XmlNode::NUMBER );

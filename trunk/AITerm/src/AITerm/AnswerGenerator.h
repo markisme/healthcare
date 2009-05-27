@@ -38,6 +38,7 @@ private:
 	std::string GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList );
 	std::string GetExpression( std::string expression, std::vector<std::string> valueList );
 	std::string GetElement( DataElement element, const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList );
+	std::string GetAddText( DataElement element, AnswerNeedSlot & matchedSlot );
 	std::string GetTagName( std::string slotType, const MatchedTemplate & matchedTemplate );
 	std::string GetWord( std::string slotType, const MatchedTemplate & matchedTemplate );
 	std::string GetResultData( int questionNo, const DBResultList & dbResultList );

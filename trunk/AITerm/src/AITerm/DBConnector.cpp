@@ -222,6 +222,7 @@ bool DBConnector::MysqlQuery( std::string query )
 bool DBConnector::MysqlQuery( std::string query, DataList & dataList )
 {
 	MYSQL_ROW row;
+	MYSQL_FIELD * field;
 	MYSQL_RES *sql_result;
 
 	int rowCount = 0;
@@ -235,6 +236,7 @@ bool DBConnector::MysqlQuery( std::string query, DataList & dataList )
 		if( sql_result )
 		{
 			row=mysql_fetch_row(sql_result);
+			field = mysql_fetch_field( sql_result );
 			while( row != NULL )
 			{
 				// row 구조체 만들기
@@ -246,13 +248,17 @@ bool DBConnector::MysqlQuery( std::string query, DataList & dataList )
 				for( int num = 0; num < count; num++ )
 				{
 					char * str = (char*)row[num];
+					char * name  = field[num].name;
+
 					if( str != NULL )
 					{
 						rowdata._data.push_back(str);
+						rowdata._col.push_back(name);
 					}
 					else
 					{
 						rowdata._data.push_back("");
+						rowdata._col.push_back("");
 					}
 				}
 
