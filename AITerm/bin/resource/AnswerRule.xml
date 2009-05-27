@@ -9,8 +9,8 @@
 			<slot type="focus" value="audio_card" add="on"/>
 			<slot type="focus" value="latest" add=""/>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="The %s %s is %s.">
 			<exp type="$f.tx"/>
 			<exp type="$c1.tx"/>
@@ -21,8 +21,8 @@
 		<need_slot_list>
 			<slot type="focus" value="extension_slot" add=""/>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="There is(are) %s on %s.">
 			<exp type="$r.va"/>
 			<exp type="$c1.tx"/>
@@ -32,8 +32,8 @@
 		<need_slot_list>
 			<slot type="focus" value="lan_card" add=""/>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="The performance of the %s is %s.">
 			<exp type="$f.va"/>
 			<exp type="$r.va"/>
@@ -42,9 +42,9 @@
 	<ans tempNo="0" no="3">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="%s">
+		<table exp="%s">
 			<exp type="$r.li"/>
-		</reference>
+		</table>
 		<answer exp="Definition of the %s is the same as table">
 			<exp type="$f.va"/>
 		</answer>
@@ -53,9 +53,9 @@
 	<ans tempNo="1" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="%s">
+		<table exp="%s">
 			<exp type="$r.li"/>
-		</reference>
+		</table>
 		<answer exp="The %s is the same as table">
 			<exp type="$f.va"/>
 		</answer>
@@ -65,9 +65,9 @@
 		<need_slot_list>
 			<slot type="focus" value="kind" add=""/>
 		</need_slot_list>
-		<reference exp="%s">
+		<table exp="%s">
 			<exp type="$r.li"/>
-		</reference>
+		</table>
 		<answer exp="The motherboards made by %s is the same as table.">
 			<exp type="$c1.tx"/>
 		</answer>
@@ -76,8 +76,8 @@
 		<need_slot_list>
 			<slot type="focus" value="difference" add=""/>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="The %s %s is %s.">
 			<exp type="$t.va"/>
 			<exp type="$f.va"/>
@@ -88,9 +88,9 @@
 		<need_slot_list>
 			<slot type="focus" value="cpu_socket" add=""/>
 		</need_slot_list>
-		<reference exp="%s">
+		<table exp="%s">
 			<exp type="$r.li"/>
-		</reference>
+		</table>
 		<answer exp="The %s is the same as table.">
 			<exp type="$f.va"/>
 			
@@ -100,9 +100,9 @@
 	<ans tempNo="3" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="%s">
+		<table exp="%s">
 			<exp type="$r.li"/>
-		</reference>
+		</table>
 		<answer exp="It's the same as table.">
 		</answer>
 	</ans>
@@ -110,8 +110,8 @@
 	<ans tempNo="4" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="The %s selling store is %s.">
 			<exp type="$f.va"/>
 			<exp type="$r.va"/>
@@ -121,9 +121,9 @@
 	<ans tempNo="5" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="%s">
+		<table exp="%s">
 			<exp type="$r.li"/>
-		</reference>
+		</table>
 		<answer exp="It's the same as table.">
 		</answer>
 	</ans>
@@ -132,8 +132,8 @@
 		<need_slot_list>
 			<slot type="option" value="number" add=""/>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="You can constitute the best computer with %s.">
 			<exp type="$r.va"/>
 		</answer>
@@ -143,8 +143,8 @@
 	<ans tempNo="6" no="1">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="%s are the srtong combination.">
 			<exp type="$r.va"/>
 		</answer>
@@ -153,8 +153,8 @@
 	<ans tempNo="7" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="">
-		</reference>
+		<table exp="">
+		</table>
 		<answer exp="The best cost performance CPU is %s.">
 			<exp type="$r.va"/>
 		</answer>
