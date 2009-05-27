@@ -76,9 +76,9 @@ void AnswerGenerator::LoadAnswerRule( AnswerRuleList & answerRuleList )
 			rule._needSlotList.push_back( slot );
 		}
 
-		const XmlNode * expressionNode = sqlNode->GetNode( "expression" );
-		std::string expression = expressionNode->GetAttribute( "type" );
-		rule._expression = expression;
+		const XmlNode * expressionNode = sqlNode->GetNode( "answer" );
+		std::string expression = expressionNode->GetAttribute( "exp" );
+		rule._answer._expression = expression;
 
 		int expCount = expressionNode->GetNodeCount( "exp" );
 		for( int num2 = 0; num2 < expCount; num2++ )
@@ -89,43 +89,43 @@ void AnswerGenerator::LoadAnswerRule( AnswerRuleList & answerRuleList )
 
 			if( expType == "$f.va" )
 			{
-				rule._elementList.push_back(FOCUS_TAG);
+				rule._answer._elementList.push_back(FOCUS_TAG);
 			}
 			else if( expType == "$f.tx" )
 			{
-				rule._elementList.push_back(FOCUS_TEXT);
+				rule._answer._elementList.push_back(FOCUS_TEXT);
 			}
 			else if( expType == "$t.va" )
 			{
-				rule._elementList.push_back(TARGET_TAG);
+				rule._answer._elementList.push_back(TARGET_TAG);
 			}
 			else if( expType == "$t.tx" )
 			{
-				rule._elementList.push_back(TARGET_TEXT);
+				rule._answer._elementList.push_back(TARGET_TEXT);
 			}
 			else if( expType == "$c1.va" )
 			{
-				rule._elementList.push_back(COMPONENT1_TAG);
+				rule._answer._elementList.push_back(COMPONENT1_TAG);
 			}
 			else if( expType == "$c1.tx" )
 			{
-				rule._elementList.push_back(COMPONENT1_TEXT);
+				rule._answer._elementList.push_back(COMPONENT1_TEXT);
 			}
 			else if( expType == "$c2.va" )
 			{
-				rule._elementList.push_back(COMPONENT2_TAG);
+				rule._answer._elementList.push_back(COMPONENT2_TAG);
 			}
 			else if( expType == "$c2.tx" )
 			{
-				rule._elementList.push_back(COMPONENT2_TEXT);
+				rule._answer._elementList.push_back(COMPONENT2_TEXT);
 			}
 			else if( expType == "$r.va" )
 			{
-				rule._elementList.push_back(RESULT_VALUE);
+				rule._answer._elementList.push_back(RESULT_VALUE);
 			}
 			else if( expType == "$r.li" )
 			{
-				rule._elementList.push_back(RESULT_LIST);
+				rule._answer._elementList.push_back(RESULT_LIST);
 			}
 		}
 
@@ -214,16 +214,23 @@ AnswerData AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTempl
 		// 매치가 되었으면 진행
 		std::vector<std::string> valueList;
 
-		int elementCount = answerRule._elementList.size();
+		int elementCount = answerRule._answer._elementList.size();
 		for( int cnt = 0; cnt < elementCount; cnt++)
 		{
-			DataElement element = answerRule._elementList[ cnt ];
-			std::string value = GetElement( element, matchedTemplate, dbResultList ) + GetAddText( element, matchedSlot );
-			valueList.push_back( value );
+			DataElement element = answerRule._answer._elementList[ cnt ];
+
+			//if( element != RESULT_LIST )
+			{
+				std::string value = GetElement( element, matchedTemplate, dbResultList ) + GetAddText( element, matchedSlot );
+				valueList.push_back( value );
+			}
+			//else
+			{
+			}
 		}
 
 		// 채운 리스트를 식에 대입
-		return GetExpression( answerRule._expression, valueList );
+		return GetExpression( answerRule._answer._expression, valueList );
 	}
 
 	AnswerData ans;
