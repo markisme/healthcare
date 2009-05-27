@@ -1,102 +1,102 @@
 <resource>
     <question no="0">
-        <reference>@:TRUE/ </reference>
+        <table>@:TRUE/ </table>
         <answer>It's the same as table.</answer>
     </question>
     <question no="1">
-        <reference></reference>
+        <table></table>
         <answer>The cost of e7400 is 186480 .</answer>
     </question>
     <question no="2">
-        <reference></reference>
+        <table></table>
         <answer>The minimum selling store is http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= .</answer>
     </question>
     <question no="3">
-        <reference></reference>
+        <table></table>
         <answer>The socket of e7400 is 775 .</answer>
     </question>
     <question no="4">
-        <reference></reference>
+        <table></table>
         <answer>The manufacturer made e7400 is intel .</answer>
     </question>
     <question no="5">
-        <reference></reference>
+        <table></table>
         <answer>The manufacturer made p5kpl/1600 is asus .</answer>
     </question>
     <question no="6">
-        <reference>@mb_name:p5kpl/1600/ @mb_name:p5ld2-c/ipat/ @mb_name:p5q/ @mb_name:p5q pro/ @mb_name:p5kpl-am se/ @mb_name:p5gc-mx/1333/ @mb_name:p5ql se/ @mb_name:p5kpl se/ @mb_name:p6t/ @mb_name:p5q3/ @mb_name:p5ql/ @mb_name:p5sd2-tm/ @mb_name:m3a78 pro/ @mb_name:m3a78-em/ @mb_name:m2a-vm hdmi/ @mb_name:m3a78-vm/ @mb_name:m2n68-am se/ </reference>
+        <table>@mb_name:p5kpl/1600/ @mb_name:p5ld2-c/ipat/ @mb_name:p5q/ @mb_name:p5q pro/ @mb_name:p5kpl-am se/ @mb_name:p5gc-mx/1333/ @mb_name:p5ql se/ @mb_name:p5kpl se/ @mb_name:p6t/ @mb_name:p5q3/ @mb_name:p5ql/ @mb_name:p5sd2-tm/ @mb_name:m3a78 pro/ @mb_name:m3a78-em/ @mb_name:m2a-vm hdmi/ @mb_name:m3a78-vm/ @mb_name:m2n68-am se/ </table>
         <answer>The motherboards made by asus is the same as table.</answer>
     </question>
     <question no="7">
-        <reference></reference>
+        <table></table>
         <answer>The graphic interfaces supported by p5kpl/1600 is pci-e .</answer>
     </question>
     <question no="8">
-        <reference></reference>
+        <table></table>
         <answer>The type of p5kpl/1600 is 775 .</answer>
     </question>
     <question no="9">
-        <reference>@info_text:pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. / </reference>
+        <table>@info_text:pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. / </table>
         <answer>Definition of the pci-e is the same as table</answer>
     </question>
     <question no="10">
-        <reference>@:2009-01-01/ </reference>
+        <table>@:2009-01-01/ </table>
         <answer>Definition of the date is the same as table</answer>
     </question>
     <question no="11">
-        <reference>@:TRUE/ </reference>
+        <table>@:TRUE/ </table>
         <answer>It's the same as table.</answer>
     </question>
     <question no="12">
-        <reference></reference>
+        <table></table>
         <answer>There is(are) 4  on p5kpl/1600.</answer>
     </question>
     <question no="13">
-        <reference></reference>
+        <table></table>
         <answer>The internal graphics on p5kpl/1600 is gma3100 .</answer>
     </question>
     <question no="14">
-        <reference></reference>
+        <table></table>
         <answer>The internal audio on p5kpl/1600 is viavt1708b .</answer>
     </question>
     <question no="15">
-        <reference></reference>
+        <table></table>
         <answer>The performance of the lan_card  is 1000 .</answer>
     </question>
     <question no="16">
-        <reference>@:80210/ </reference>
+        <table>@:80210/ </table>
         <answer>The difference is the same as table</answer>
     </question>
     <question no="17">
-        <reference>@cpu_socket:775/ </reference>
+        <table>@cpu_socket:775/ </table>
         <answer>The cpu_socket  is the same as table.</answer>
     </question>
     <question no="18">
-        <reference>@info_text:the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors./ @info_text:socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it/ </reference>
+        <table>@info_text:the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors./ @info_text:socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it/ </table>
         <answer>The difference is the same as table</answer>
     </question>
     <question no="19">
-        <reference>@info_text:the serial ata(sata, ipa: /se?t?/, /st?/ or /s?t?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives)./ @info_text:at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13./ </reference>
+        <table>@info_text:the serial ata(sata, ipa: /se?t?/, /st?/ or /s?t?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives)./ @info_text:at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13./ </table>
         <answer>The difference is the same as table</answer>
     </question>
     <question no="20">
-        <reference>@product_id:1/ @cpu_name:e5200/ @maker:intel/ @core_id:17/ @clock_frequency:2500/ @processor_system:64/ @frontside_bus:800/ @cpu_socket:775/ @fabrication_process:45/ @l2_cache:2048/ @tdp:65/ @price:106270/ @shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods=/ @product_id:2/ @cpu_name:e7400/ @maker:intel/ @core_id:17/ @clock_frequency:2800/ @processor_system:64/ @frontside_bus:1066/ @cpu_socket:775/ @fabrication_process:45/ @l2_cache:3072/ @tdp:65/ @price:186480/ @shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=/ </reference>
+        <table>@product_id:1/ @cpu_name:e5200/ @maker:intel/ @core_id:17/ @clock_frequency:2500/ @processor_system:64/ @frontside_bus:800/ @cpu_socket:775/ @fabrication_process:45/ @l2_cache:2048/ @tdp:65/ @price:106270/ @shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods=/ @product_id:2/ @cpu_name:e7400/ @maker:intel/ @core_id:17/ @clock_frequency:2800/ @processor_system:64/ @frontside_bus:1066/ @cpu_socket:775/ @fabrication_process:45/ @l2_cache:3072/ @tdp:65/ @price:186480/ @shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=/ </table>
         <answer>The difference is the same as table</answer>
     </question>
     <question no="21">
-        <reference></reference>
+        <table></table>
         <answer>You can constitute the best computer with e6750 and gf6100p no.5 and 23500 and 61840 .</answer>
     </question>
     <question no="22">
-        <reference></reference>
+        <table></table>
         <answer>qx9770 and p5q3  are the srtong combination.</answer>
     </question>
     <question no="23">
-        <reference></reference>
+        <table></table>
         <answer>The best cost performance CPU is e6750 .</answer>
     </question>
     <question no="24">
-        <reference></reference>
+        <table></table>
         <answer>The intel made cpu is .</answer>
     </question>
 </resource>

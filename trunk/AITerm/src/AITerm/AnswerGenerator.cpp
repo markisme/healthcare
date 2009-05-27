@@ -76,15 +76,15 @@ void AnswerGenerator::LoadAnswerRule( AnswerRuleList & answerRuleList )
 			rule._needSlotList.push_back( slot );
 		}
 
-		const XmlNode * referenceNode = sqlNode->GetNode( "reference" );
-		std::string expression1 = referenceNode->GetAttribute( "exp" );
+		const XmlNode * tableNode = sqlNode->GetNode( "table" );
+		std::string expression1 = tableNode->GetAttribute( "exp" );
 		rule._reference._expression = expression1;
 
-		int expCnt = referenceNode->GetNodeCount( "exp" );
+		int expCnt = tableNode->GetNodeCount( "exp" );
 		for( int num2 = 0; num2 < expCnt; num2++ )
 		{	
 			//
-			const XmlNode * expNode = referenceNode->GetNode( "exp", num2 );
+			const XmlNode * expNode = tableNode->GetNode( "exp", num2 );
 			std::string expType = expNode->GetAttribute( "type" );
 
 			DataElement element = GetElement( expType );
@@ -128,7 +128,7 @@ void AnswerGenerator::SaveAnswer( AnswerList & answerList )
 		char buf[8]; itoa(num, buf, 10);
 		qsNode->SetAttribute( "no", buf );
 
-		XmlNode * referenceNode = qsNode->AddNode( "reference" );
+		XmlNode * referenceNode = qsNode->AddNode( "table" );
 		referenceNode->SetText( ref.c_str(), XmlNode::NUMBER );
 
 		XmlNode * answerNode = qsNode->AddNode( "answer" );
