@@ -9,126 +9,155 @@
 			<slot type="focus" value="audio_card" add="on"/>
 			<slot type="focus" value="latest" add=""/>
 		</need_slot_list>
-		<expression type="The %s %s is %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="The %s %s is %s.">
 			<exp type="$f.tx"/>
 			<exp type="$c1.tx"/>
 			<exp type="$r.va"/>
-		</expression>
+		</answer>
 	</ans>
 	<ans tempNo="0" no="1">
 		<need_slot_list>
 			<slot type="focus" value="extension_slot" add=""/>
 		</need_slot_list>
-		<expression type="There is(are) %s on %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="There is(are) %s on %s.">
 			<exp type="$r.va"/>
 			<exp type="$c1.tx"/>
-		</expression>
+		</answer>
 	</ans>
 	<ans tempNo="0" no="2">
 		<need_slot_list>
 			<slot type="focus" value="lan_card" add=""/>
 		</need_slot_list>
-		<expression type="The performance of the %s is %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="The performance of the %s is %s.">
 			<exp type="$f.va"/>
 			<exp type="$r.va"/>
-		</expression>
+		</answer>
 	</ans>
 	<ans tempNo="0" no="3">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="%s">
+		<reference exp="%s">
 			<exp type="$r.li"/>
-		</expression>
+		</reference>
+		<answer exp="Definition of the %s is the same as table">
+		</answer>
 	</ans>
 
 	<ans tempNo="1" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="%s is %s and %s is %s">
+		<reference exp="">
+		</reference>
+		<answer exp="%s is %s and %s is %s">
 			<exp type="$c1.tx"/>
 			<exp type="$r.va"/>
 			<exp type="$c2.tx"/>
 			<exp type="$r.va"/>
-		</expression>
+		</answer>
 	</ans>
 
 	<ans tempNo="2" no="0">
 		<need_slot_list>
 			<slot type="focus" value="kind" add=""/>
 		</need_slot_list>
-		<expression type="The motherboards made by %s is(are) %s">
-			<exp type="$c1.tx"/>
+		<reference exp="%s">
 			<exp type="$r.li"/>
-		</expression>
+		</reference>
+		<answer exp="The motherboards made by %s is the same as table.">
+			<exp type="$c1.tx"/>
+		</answer>
 	</ans>
 	<ans tempNo="2" no="1">
 		<need_slot_list>
 			<slot type="focus" value="difference" add=""/>
 		</need_slot_list>
-		<expression type="The %s %s is %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="The %s %s is %s.">
 			<exp type="$t.va"/>
 			<exp type="$f.va"/>
 			<exp type="$r.va"/>
-		</expression>
+		</answer>
 	</ans>
 	<ans tempNo="2" no="2">
 		<need_slot_list>
 			<slot type="focus" value="cpu_socket" add=""/>
 		</need_slot_list>
-		<expression type="The %s is(are) %s ">
-			<exp type="$f.va"/>
+		<reference exp="%s">
 			<exp type="$r.li"/>
-		</expression>
+		</reference>
+		<answer exp="The %s is the same as table.">
+			<exp type="$f.va"/>
+			
+		</answer>
 	</ans>
 
 	<ans tempNo="3" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="%s">
+		<reference exp="%s">
 			<exp type="$r.li"/>
-		</expression>
+		</reference>
+		<answer exp="It's the same as table.">
+		</answer>
 	</ans>
 
 	<ans tempNo="4" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="The %s selling store is %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="The %s selling store is %s.">
 			<exp type="$f.va"/>
 			<exp type="$r.va"/>
-		</expression>
+		</answer>
 	</ans>
 
 	<ans tempNo="5" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="%s">
+		<reference exp="%s">
 			<exp type="$r.li"/>
-		</expression>
+		</reference>
+		<answer exp="It's the same as table.">
+		</answer>
 	</ans>
 
 	<ans tempNo="6" no="0">
 		<need_slot_list>
 			<slot type="option" value="number" add=""/>
 		</need_slot_list>
-		<expression type="You can constitute the best computer with %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="You can constitute the best computer with %s.">
 			<exp type="$r.li"/>
-		</expression>
+		</answer>
 
 	</ans>
 
 	<ans tempNo="6" no="1">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="%s are the srtong combination.">
+		<reference exp="">
+		</reference>
+		<answer exp="%s are the srtong combination.">
 			<exp type="$r.li"/>
-		</expression>
+		</answer>
 	</ans>
 
 	<ans tempNo="7" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<expression type="The best cost performance CPU is %s.">
+		<reference exp="">
+		</reference>
+		<answer exp="The best cost performance CPU is %s.">
 			<exp type="$r.va"/>
-		</expression>
+		</answer>
 	</ans>
 </resource>
