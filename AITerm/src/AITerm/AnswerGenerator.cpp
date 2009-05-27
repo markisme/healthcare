@@ -160,6 +160,7 @@ std::string AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemp
 	for( int num = 0; num < count; num++)
 	{
 		bool matched = false;
+		AnswerNeedSlot matchedSlot;
 		AnswerRule & answerRule = answerRuleList[ num ];
 		if( matchedTemplate._tempNo == answerRule._tempNo )
 		{
@@ -178,6 +179,7 @@ std::string AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemp
 					{
 						// 응답 매치
 						matched = true;
+						matchedSlot = slot;
 						break;
 					}
 				}
@@ -208,7 +210,7 @@ std::string AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemp
 		for( int cnt = 0; cnt < elementCount; cnt++)
 		{
 			DataElement element = answerRule._elementList[ cnt ];
-			std::string value = GetElement( element, matchedTemplate, dbResultList );
+			std::string value = GetElement( element, matchedTemplate, dbResultList ) + GetAddText( element, matchedSlot );
 			valueList.push_back( value );
 		}
 
@@ -267,6 +269,19 @@ std::string AnswerGenerator::GetElement( DataElement element, const MatchedTempl
 		return GetResultDataList( matchedTemplate._questionNo, dbResultList );
 	}
 	return "%?%";
+}
+
+std::string AnswerGenerator::GetAddText( DataElement element, AnswerNeedSlot & matchedSlot )
+{
+	if( ( matchedSlot._slotType == "focus" && ( element == FOCUS_TAG || element == FOCUS_TEXT ) ) ||
+		( matchedSlot._slotType == "target" && ( element == TARGET_TAG || element == TARGET_TEXT ) ) ||
+		( matchedSlot._slotType == "component1" && ( element == COMPONENT1_TAG || element == COMPONENT1_TEXT ) ) ||
+		( matchedSlot._slotType == "component2" && ( element == COMPONENT2_TAG || element == COMPONENT2_TEXT ) ) )
+	{
+		return " " + matchedSlot._addText;
+	}
+
+	return "";
 }
 
 std::string AnswerGenerator::GetTagName( std::string slotType, const MatchedTemplate & matchedTemplate )
@@ -356,7 +371,7 @@ std::string AnswerGenerator::GetResultDataList( int questionNo, const DBResultLi
 		for( int cnt = 0; cnt < dataSize; cnt++ )
 		{
 			std::string data = rowData._data[ cnt ];
-			ret += data + " "; 
+			ret += data + " ";
 		}
 	}
 

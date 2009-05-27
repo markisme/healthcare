@@ -22,6 +22,7 @@ struct ColData
 struct RowData
 {
 	int _rowNum;
+	std::vector<std::string> _col;
 	std::vector<std::string> _data;
 };
 

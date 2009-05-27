@@ -48,11 +48,11 @@
 	</sql>
 	<sql tempNo="1" no="1"> // 질문18, 질문19
 		<need_slot_list>
-			<slot type="component" value="info_keyword"/>
+			<slot type="component1" value="info_keyword"/>
 		</need_slot_list>
 		<expression type="SELECT info_text FROM info WHERE info_keyword='%s' OR info_keyword='%s'">
-			<exp type="$c1.va"/>
-			<exp type="$c2.va"/>
+			<exp type="$c1.tx"/>
+			<exp type="$c2.tx"/>
 		</expression>
 	</sql>
 	<sql tempNo="1" no="2"> // 질문20,

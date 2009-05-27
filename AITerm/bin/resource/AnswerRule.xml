@@ -10,8 +10,8 @@
 			<slot type="focus" value="latest" add=""/>
 		</need_slot_list>
 		<expression type="The %s %s is %s.">
-			<exp type="$f.va"/>
-			<exp type="$c1.va"/>
+			<exp type="$f.tx"/>
+			<exp type="$c1.tx"/>
 			<exp type="$r.va"/>
 		</expression>
 	</ans>
@@ -21,7 +21,7 @@
 		</need_slot_list>
 		<expression type="There is(are) %s on %s.">
 			<exp type="$r.va"/>
-			<exp type="$c1.va"/>
+			<exp type="$c1.tx"/>
 		</expression>
 	</ans>
 	<ans tempNo="0" no="2">
@@ -45,9 +45,9 @@
 		<need_slot_list>
 		</need_slot_list>
 		<expression type="%s is %s and %s is %s">
-			<exp type="$c1.va"/>
+			<exp type="$c1.tx"/>
 			<exp type="$r.va"/>
-			<exp type="$c2.va"/>
+			<exp type="$c2.tx"/>
 			<exp type="$r.va"/>
 		</expression>
 	</ans>
@@ -57,7 +57,7 @@
 			<slot type="focus" value="kind" add=""/>
 		</need_slot_list>
 		<expression type="The motherboards made by %s is(are) %s">
-			<exp type="$c1.va"/>
+			<exp type="$c1.tx"/>
 			<exp type="$r.li"/>
 		</expression>
 	</ans>
