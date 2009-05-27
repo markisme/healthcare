@@ -22,7 +22,13 @@ struct AnswerRule
 
 typedef std::vector<AnswerRule> AnswerRuleList;
 
-typedef std::vector<std::string> AnswerList;
+struct AnswerData
+{
+	std::string _ref;
+	std::string _answer;
+};
+
+typedef std::vector<AnswerData> AnswerList;
 
 class AnswerGenerator
 {
@@ -35,8 +41,8 @@ public:
 private:
 	void LoadAnswerRule( AnswerRuleList & answerRuleList );
 	void SaveAnswer( AnswerList & answerList );
-	std::string GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList );
-	std::string GetExpression( std::string expression, std::vector<std::string> valueList );
+	AnswerData GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList );
+	AnswerData GetExpression( std::string expression, std::vector<std::string> valueList );
 	std::string GetElement( DataElement element, const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList );
 	std::string GetAddText( DataElement element, AnswerNeedSlot & matchedSlot );
 	std::string GetTagName( std::string slotType, const MatchedTemplate & matchedTemplate );

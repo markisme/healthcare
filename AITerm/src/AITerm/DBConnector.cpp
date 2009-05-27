@@ -247,10 +247,10 @@ bool DBConnector::MysqlQuery( std::string query, DataList & dataList )
 				int count = mysql_num_fields(sql_result); // row Å©±â
 				for( int num = 0; num < count; num++ )
 				{
-					char * str = (char*)row[num];
-					char * name  = field[num].name;
+					std::string str = row[num];
+					std::string name  = field[num].org_name;
 
-					if( str != NULL )
+					if( str.length() > 0 )
 					{
 						rowdata._data.push_back(str);
 						rowdata._col.push_back(name);
