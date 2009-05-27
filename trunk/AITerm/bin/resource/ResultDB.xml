@@ -1,7 +1,7 @@
 <resource>
     <question no="0">
         <row>
-            <data name="IF((SELECT cpu_socket FROM cpu WHERE cpu_name='e7400') = (SELECT cpu_socket FROM cpu WHERE cpu_name='e5200'), 'TRUE', 'FALSE' )">TRUE</data>
+            <data name="">TRUE</data>
         </row>
     </question>
     <question no="1">
@@ -87,7 +87,11 @@
             <data name="graphic_interface">pci-e</data>
         </row>
     </question>
-    <question no="8" />
+    <question no="8">
+        <row>
+            <data name="cpu_socket">775</data>
+        </row>
+    </question>
     <question no="9">
         <row>
             <data name="info_text">pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. </data>
@@ -95,12 +99,12 @@
     </question>
     <question no="10">
         <row>
-            <data name="MAX(date_released)">2009-01-01</data>
+            <data name="">2009-01-01</data>
         </row>
     </question>
     <question no="11">
         <row>
-            <data name="IF( (SELECT COUNT(hdd_interface_1) FROM mainboard WHERE mb_name='p5kpl/1600')>0, 'TRUE', 'FALSE' )">TRUE</data>
+            <data name="">TRUE</data>
         </row>
     </question>
     <question no="12">
@@ -125,7 +129,7 @@
     </question>
     <question no="16">
         <row>
-            <data name="ABS((SELECT price FROM cpu WHERE cpu_name='e7400') - (SELECT price FROM cpu WHERE cpu_name='e5200') )">80210</data>
+            <data name="">80210</data>
         </row>
     </question>
     <question no="17">

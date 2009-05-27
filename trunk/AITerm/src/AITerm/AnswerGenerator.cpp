@@ -23,7 +23,7 @@ void AnswerGenerator::Start( const ResultMatchedTemplate & resultMatchedTemplate
 	for( int num = 0; num < count; num++ )
 	{
 		const MatchedTemplate & matchedTemplate = resultMatchedTemplate[ num ];
-		std::string result = GenerateAnswer( matchedTemplate, dbResultList, answerRuleList );
+		AnswerData result = GenerateAnswer( matchedTemplate, dbResultList, answerRuleList );
 		answerList.push_back( result );
 	}
 
@@ -141,20 +141,28 @@ void AnswerGenerator::SaveAnswer( AnswerList & answerList )
 	int count = answerList.size();
 	for( int num = 0; num < count; num++ )
 	{
-		std::string ans = answerList[ num ];
+		AnswerData & answer = answerList[ num ];
 
-		XmlNode * answerNode = resNode->AddNode( "answer" );
-		answerNode->SetText( ans.c_str(), XmlNode::NUMBER );
+		std::string ans = answer._answer;
+		std::string ref = answer._ref;
 
+		XmlNode * qsNode = resNode->AddNode( "question" );
+		
 		char buf[8]; itoa(num, buf, 10);
-		answerNode->SetAttribute( "no", buf );
+		qsNode->SetAttribute( "no", buf );
+
+		XmlNode * referenceNode = qsNode->AddNode( "reference" );
+		referenceNode->SetText( ref.c_str(), XmlNode::NUMBER );
+
+		XmlNode * answerNode = qsNode->AddNode( "answer" );
+		answerNode->SetText( ans.c_str(), XmlNode::NUMBER );
 	}
 
 	std::string path = "./resource/ResultAnswer.xml";
 	xmlDoc.SaveFile( path.c_str() );
 }
 
-std::string AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList )
+AnswerData AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList, AnswerRuleList & answerRuleList )
 {
 	int count = answerRuleList.size();
 	for( int num = 0; num < count; num++)
@@ -218,12 +226,14 @@ std::string AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTemp
 		return GetExpression( answerRule._expression, valueList );
 	}
 
-	return "";
+	AnswerData ans;
+	return ans;
 }
 
-std::string AnswerGenerator::GetExpression( std::string expression, std::vector<std::string> valueList )
+AnswerData AnswerGenerator::GetExpression( std::string expression, std::vector<std::string> valueList )
 {
 	//
+	AnswerData ans;
 	std::string exp = expression;
 
 	//
@@ -240,7 +250,8 @@ std::string AnswerGenerator::GetExpression( std::string expression, std::vector<
 		exp.insert(index,str);
 	}
 
-	return exp;
+	ans._answer = exp;
+	return ans;
 }
 
 std::string AnswerGenerator::GetElement( DataElement element, const MatchedTemplate & matchedTemplate, const DBResultList & dbResultList )

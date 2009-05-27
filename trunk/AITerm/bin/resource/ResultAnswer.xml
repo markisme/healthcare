@@ -1,27 +1,102 @@
 <resource>
-    <answer no="0">TRUE </answer>
-    <answer no="1">The cost of e7400 is 186480 .</answer>
-    <answer no="2">The minimum selling store is http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= .</answer>
-    <answer no="3">The socket of e7400 is 775 .</answer>
-    <answer no="4">The manufacturer made e7400 is intel .</answer>
-    <answer no="5">The manufacturer made p5kpl/1600 is asus .</answer>
-    <answer no="6">The motherboards made by asus is(are) p5kpl/1600 p5ld2-c/ipat p5q p5q pro p5kpl-am se p5gc-mx/1333 p5ql se p5kpl se p6t p5q3 p5ql p5sd2-tm m3a78 pro m3a78-em m2a-vm hdmi m3a78-vm m2n68-am se </answer>
-    <answer no="7">The graphic interfaces supported by p5kpl/1600 is pci-e .</answer>
-    <answer no="8">The type of p5kpl/1600 is .</answer>
-    <answer no="9">pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. </answer>
-    <answer no="10">2009-01-01 </answer>
-    <answer no="11">TRUE </answer>
-    <answer no="12">There is(are) 4  on p5kpl/1600.</answer>
-    <answer no="13">The internal graphics on p5kpl/1600 is gma3100 .</answer>
-    <answer no="14">The internal audio on p5kpl/1600 is viavt1708b .</answer>
-    <answer no="15">The performance of the lan_card  is 1000 .</answer>
-    <answer no="16">e7400 is 80210  and e5200 is 80210 </answer>
-    <answer no="17">The cpu_socket  is(are) 775  </answer>
-    <answer no="18">am2 is the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors. socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it  and am3 is the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors. socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it </answer>
-    <answer no="19">sata is the serial ata(sata, ipa: /se?t?/, /st?/ or /s?t?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives). at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13.  and ata is the serial ata(sata, ipa: /se?t?/, /st?/ or /s?t?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives). at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13. </answer>
-    <answer no="20">e7400 is 1 e5200 intel 17 2500 64 800 775 45 2048 65 106270 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods= 2 e7400 intel 17 2800 64 1066 775 45 3072 65 186480 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=  and e5200 is 1 e5200 intel 17 2500 64 800 775 45 2048 65 106270 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods= 2 e7400 intel 17 2800 64 1066 775 45 3072 65 186480 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= </answer>
-    <answer no="21">You can constitute the best computer with e6750 gf6100p no.5 23500 61840 .</answer>
-    <answer no="22">qx9770 p5q3  are the srtong combination.</answer>
-    <answer no="23">The best cost performance CPU is e6750 .</answer>
-    <answer no="24">The intel made cpu is .</answer>
+    <question no="0">
+        <reference></reference>
+        <answer>TRUE </answer>
+    </question>
+    <question no="1">
+        <reference></reference>
+        <answer>The cost of e7400 is 186480 .</answer>
+    </question>
+    <question no="2">
+        <reference></reference>
+        <answer>The minimum selling store is http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= .</answer>
+    </question>
+    <question no="3">
+        <reference></reference>
+        <answer>The socket of e7400 is 775 .</answer>
+    </question>
+    <question no="4">
+        <reference></reference>
+        <answer>The manufacturer made e7400 is intel .</answer>
+    </question>
+    <question no="5">
+        <reference></reference>
+        <answer>The manufacturer made p5kpl/1600 is asus .</answer>
+    </question>
+    <question no="6">
+        <reference></reference>
+        <answer>The motherboards made by asus is(are) p5kpl/1600 p5ld2-c/ipat p5q p5q pro p5kpl-am se p5gc-mx/1333 p5ql se p5kpl se p6t p5q3 p5ql p5sd2-tm m3a78 pro m3a78-em m2a-vm hdmi m3a78-vm m2n68-am se </answer>
+    </question>
+    <question no="7">
+        <reference></reference>
+        <answer>The graphic interfaces supported by p5kpl/1600 is pci-e .</answer>
+    </question>
+    <question no="8">
+        <reference></reference>
+        <answer>The type of p5kpl/1600 is 775 .</answer>
+    </question>
+    <question no="9">
+        <reference></reference>
+        <answer>pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. </answer>
+    </question>
+    <question no="10">
+        <reference></reference>
+        <answer>2009-01-01 </answer>
+    </question>
+    <question no="11">
+        <reference></reference>
+        <answer>TRUE </answer>
+    </question>
+    <question no="12">
+        <reference></reference>
+        <answer>There is(are) 4  on p5kpl/1600.</answer>
+    </question>
+    <question no="13">
+        <reference></reference>
+        <answer>The internal graphics on p5kpl/1600 is gma3100 .</answer>
+    </question>
+    <question no="14">
+        <reference></reference>
+        <answer>The internal audio on p5kpl/1600 is viavt1708b .</answer>
+    </question>
+    <question no="15">
+        <reference></reference>
+        <answer>The performance of the lan_card  is 1000 .</answer>
+    </question>
+    <question no="16">
+        <reference></reference>
+        <answer>e7400 is 80210  and e5200 is 80210 </answer>
+    </question>
+    <question no="17">
+        <reference></reference>
+        <answer>The cpu_socket  is(are) 775  </answer>
+    </question>
+    <question no="18">
+        <reference></reference>
+        <answer>am2 is the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors. socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it  and am3 is the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors. socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it </answer>
+    </question>
+    <question no="19">
+        <reference></reference>
+        <answer>sata is the serial ata(sata, ipa: /se?t?/, /st?/ or /s?t?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives). at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13.  and ata is the serial ata(sata, ipa: /se?t?/, /st?/ or /s?t?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives). at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13. </answer>
+    </question>
+    <question no="20">
+        <reference></reference>
+        <answer>e7400 is 1 e5200 intel 17 2500 64 800 775 45 2048 65 106270 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods= 2 e7400 intel 17 2800 64 1066 775 45 3072 65 186480 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=  and e5200 is 1 e5200 intel 17 2500 64 800 775 45 2048 65 106270 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods= 2 e7400 intel 17 2800 64 1066 775 45 3072 65 186480 http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G付南^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= </answer>
+    </question>
+    <question no="21">
+        <reference></reference>
+        <answer>You can constitute the best computer with e6750 gf6100p no.5 23500 61840 .</answer>
+    </question>
+    <question no="22">
+        <reference></reference>
+        <answer>qx9770 p5q3  are the srtong combination.</answer>
+    </question>
+    <question no="23">
+        <reference></reference>
+        <answer>The best cost performance CPU is e6750 .</answer>
+    </question>
+    <question no="24">
+        <reference></reference>
+        <answer>The intel made cpu is .</answer>
+    </question>
 </resource>
