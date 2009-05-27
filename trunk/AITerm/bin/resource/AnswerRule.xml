@@ -53,13 +53,11 @@
 	<ans tempNo="1" no="0">
 		<need_slot_list>
 		</need_slot_list>
-		<reference exp="">
+		<reference exp="%s">
+			<exp type="$r.li"/>
 		</reference>
-		<answer exp="%s is %s and %s is %s">
-			<exp type="$c1.tx"/>
-			<exp type="$r.va"/>
-			<exp type="$c2.tx"/>
-			<exp type="$r.va"/>
+		<answer exp="The %s is the same as table">
+			<exp type="$f.va"/>
 		</answer>
 	</ans>
 
@@ -137,7 +135,7 @@
 		<reference exp="">
 		</reference>
 		<answer exp="You can constitute the best computer with %s.">
-			<exp type="$r.li"/>
+			<exp type="$r.va"/>
 		</answer>
 
 	</ans>
@@ -148,7 +146,7 @@
 		<reference exp="">
 		</reference>
 		<answer exp="%s are the srtong combination.">
-			<exp type="$r.li"/>
+			<exp type="$r.va"/>
 		</answer>
 	</ans>
 
