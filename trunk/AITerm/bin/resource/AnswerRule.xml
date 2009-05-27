@@ -46,6 +46,7 @@
 			<exp type="$r.li"/>
 		</reference>
 		<answer exp="Definition of the %s is the same as table">
+			<exp type="$f.va"/>
 		</answer>
 	</ans>
 
