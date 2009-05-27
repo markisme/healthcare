@@ -11,13 +11,19 @@ struct AnswerNeedSlot
 	std::string _addText;
 };
 
+struct Expression
+{
+	std::string _expression;
+	std::vector<DataElement> _elementList;
+};
+
 struct AnswerRule
 {
 	int _tempNo;
 	int _subNo;
 	std::vector<AnswerNeedSlot> _needSlotList;
-	std::string _expression;
-	std::vector<DataElement> _elementList;
+	Expression _reference;
+	Expression _answer;
 };
 
 typedef std::vector<AnswerRule> AnswerRuleList;
