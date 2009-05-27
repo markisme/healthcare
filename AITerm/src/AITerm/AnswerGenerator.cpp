@@ -378,10 +378,6 @@ std::string AnswerGenerator::GetResultData( int questionNo, const DBResultList &
 	}
 
 	const DataList & dataList = dbResultList[ questionNo ];
-	//if( dataList.size() < 1 )
-	//{
-	//	return "%?%";
-	//}
 
 	int count = dataList.size();
 	for( int num = 0; num < count; num++)
@@ -392,6 +388,10 @@ std::string AnswerGenerator::GetResultData( int questionNo, const DBResultList &
 		for( int cnt = 0; cnt < dataSize; cnt++ )
 		{
 			std::string data = rowData._data[ cnt ];
+			if( cnt != 0 )
+			{
+				ret += "and ";
+			}
 			ret += data + " "; 
 		}
 	}
@@ -410,10 +410,6 @@ std::string AnswerGenerator::GetResultDataList( int questionNo, const DBResultLi
 	}
 
 	const DataList & dataList = dbResultList[ questionNo ];
-	//if( dataList.size() < 2 )
-	//{
-	//	return "%?%";
-	//}
 
 	int count = dataList.size();
 	for( int num = 0; num < count; num++)
@@ -423,8 +419,9 @@ std::string AnswerGenerator::GetResultDataList( int questionNo, const DBResultLi
 		int dataSize = rowData._data.size();
 		for( int cnt = 0; cnt < dataSize; cnt++ )
 		{
+			std::string col = rowData._col[ cnt ];
 			std::string data = rowData._data[ cnt ];
-			ret += data + " ";
+			ret += "@" + col + ":" + data + "/ ";
 		}
 	}
 
