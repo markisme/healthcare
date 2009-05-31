@@ -421,7 +421,10 @@ std::string AnswerGenerator::GetResultDataList( int questionNo, const DBResultLi
 		{
 			std::string col = rowData._col[ cnt ];
 			std::string data = rowData._data[ cnt ];
-			ret += "@" + col + ":" + data + "# ";
+			char buf[8]; itoa(rowData._rowNum, buf, 10);
+			std::string num = buf;
+
+			ret += "@"+ num + "$" + col + ":" + data + "# ";
 		}
 	}
 
