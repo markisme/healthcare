@@ -4,23 +4,23 @@
         <answer>It's the same as table.</answer>
     </question>
     <question no="1">
-        <table></table>
+        <table>""</table>
         <answer>The cost of e7400 is 186480 .</answer>
     </question>
     <question no="2">
-        <table></table>
+        <table>""</table>
         <answer>The minimum selling store is http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G¸¶ÄÏ^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= .</answer>
     </question>
     <question no="3">
-        <table></table>
+        <table>""</table>
         <answer>The socket of e7400 is 775 .</answer>
     </question>
     <question no="4">
-        <table></table>
+        <table>""</table>
         <answer>The manufacturer made e7400 is intel .</answer>
     </question>
     <question no="5">
-        <table></table>
+        <table>""</table>
         <answer>The manufacturer made p5kpl/1600 is asus .</answer>
     </question>
     <question no="6">
@@ -28,15 +28,15 @@
         <answer>The motherboards made by asus is the same as table.</answer>
     </question>
     <question no="7">
-        <table></table>
+        <table>""</table>
         <answer>The graphic interfaces supported by p5kpl/1600 is pci-e .</answer>
     </question>
     <question no="8">
-        <table></table>
+        <table>""</table>
         <answer>The type of p5kpl/1600 is 775 .</answer>
     </question>
     <question no="9">
-        <table>@info_text:pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards. / </table>
+        <table>@info_text:pci express (peripheral component interconnect express), officially abbreviated as pcie, is a computer expansion card standard designed to replace the older pci, pci-x, and agp standards./ </table>
         <answer>Definition of the pci-e is the same as table</answer>
     </question>
     <question no="10">
@@ -48,19 +48,19 @@
         <answer>It's the same as table.</answer>
     </question>
     <question no="12">
-        <table></table>
+        <table>""</table>
         <answer>There is(are) 4  on p5kpl/1600.</answer>
     </question>
     <question no="13">
-        <table></table>
+        <table>""</table>
         <answer>The internal graphics on p5kpl/1600 is gma3100 .</answer>
     </question>
     <question no="14">
-        <table></table>
+        <table>""</table>
         <answer>The internal audio on p5kpl/1600 is viavt1708b .</answer>
     </question>
     <question no="15">
-        <table></table>
+        <table>""</table>
         <answer>The performance of the lan_card  is 1000 .</answer>
     </question>
     <question no="16">
@@ -84,19 +84,19 @@
         <answer>The difference is the same as table</answer>
     </question>
     <question no="21">
-        <table></table>
+        <table>""</table>
         <answer>You can constitute the best computer with e6750 and gf6100p no.5 and 23500 and 61840 .</answer>
     </question>
     <question no="22">
-        <table></table>
+        <table>""</table>
         <answer>qx9770 and p5q3  are the srtong combination.</answer>
     </question>
     <question no="23">
-        <table></table>
+        <table>""</table>
         <answer>The best cost performance CPU is e6750 .</answer>
     </question>
     <question no="24">
-        <table></table>
+        <table>""</table>
         <answer>The intel made cpu is .</answer>
     </question>
 </resource>

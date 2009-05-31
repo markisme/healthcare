@@ -29,13 +29,13 @@ public:
 	void Init();
 	void Uninit();
 
+	void LoadQuestions( std::string path );
 	void ProcessQuestion( ResultNamedEntityRecognition & resultNamedEntityRecognition );
 
 	DBDictionary * GetDBDic() { return &_dbDic;}
 	WNDictionary * GetWNDic() { return &_wnDic;}
 
 private:
-	void LoadQuestions( QuestionList & qsList );
 	void SaveResultNamedEntityRecognition( ResultNamedEntityRecognition & resultNamedEntityRecognition );
 	void GenerateTag( std::string question, NamedEntityList & namedEntityList );
 	std::string GetAdjective( int curPos );
@@ -44,4 +44,5 @@ private:
 	CSimpleMinipar _Minipar;
 	DBDictionary _dbDic;
 	WNDictionary _wnDic;
+	QuestionList _qsList;
 };

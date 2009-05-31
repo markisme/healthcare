@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "TestCase.h"
+
 #include "NamedEntityRecognition.h"
+#include "SemanticTemplateProcessor.h"
 #include "QueryGenerator.h"
+#include "AnswerGenerator.h"
 
 TestCase TestCase::_instance;
 
@@ -19,6 +22,37 @@ void TestCase::Init()
 
 void TestCase::Uninit()
 {
+}
+
+void TestCase::TestStart( std::string path )
+{
+	// 개체명 인식기 초기화
+	NamedEntityRecognition namedEntityRecognition;
+	namedEntityRecognition.Init();
+	DBDictionary * dbDic = namedEntityRecognition.GetDBDic();
+
+	// 개체명 인식 처리
+	ResultNamedEntityRecognition resultNamedEntityRecognition;
+	namedEntityRecognition.LoadQuestions( path/*"./resource/Questions.xml"*/ );
+	namedEntityRecognition.ProcessQuestion( resultNamedEntityRecognition );
+
+	// 템플릿 매칭 처리
+	SemanticTemplateProcessor semanticTemplateProcessor;
+	semanticTemplateProcessor.Start( &resultNamedEntityRecognition );
+	ResultMatchedTemplate & resultMatchedTemplate = semanticTemplateProcessor.GetResultMatchedTemplate();
+
+	// 쿼리 생성기
+	QueryGenerator queryGenerator;
+	queryGenerator.Start( resultMatchedTemplate, dbDic );
+	//const DBResultList & dbResultList = queryGenerator.GetDBResultList();
+
+	// db 결과 로드 (시간지연으로인한 테스트 코드)
+	DBResultList dbResultList;
+	LoadResultDB( dbResultList );
+
+	// 답변 생성기
+	AnswerGenerator answerGenerator;
+	answerGenerator.Start( resultMatchedTemplate, dbResultList );
 }
 
 void TestCase::WordnetTest()
@@ -134,6 +168,9 @@ void TestCase::LoadResultDB( DBResultList & dbResultList )
 
 				std::string data = dataNode->GetText();
 				row._data.push_back( data );
+
+				std::string col = dataNode->GetAttribute( "name" );
+				row._col.push_back( col );
 			}
 
 			dataList.push_back( row );

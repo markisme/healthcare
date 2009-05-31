@@ -31,7 +31,7 @@ void QueryGenerator::Start( ResultMatchedTemplate & resultMatchedTemplate, DBDic
 	SaveQuery( _queryList );
 
 	// 디비에 접속해서 쿼리 결과 얻어 오기
-	SaveResultQuery( _queryList );	
+	//SaveResultQuery( _queryList );	
 }
 
 void QueryGenerator::LoadQueryRule( QueryRuleList & queryRuleList )

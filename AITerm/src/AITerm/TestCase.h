@@ -13,6 +13,7 @@ public:
 	void Init();
 	void Uninit();
 	
+	void TestStart( std::string path );
 	void WordnetTest();
 	void XMLLoadSaveTest();
 	void LoadResultDB( DBResultList & dbResultList );

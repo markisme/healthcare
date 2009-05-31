@@ -26,14 +26,14 @@ void NamedEntityRecognition::Uninit()
 void NamedEntityRecognition::ProcessQuestion( ResultNamedEntityRecognition & resultNamedEntityRecognition )
 {
 	// 질문 로드
-	QuestionList qsList;
-	LoadQuestions( qsList );
+	//QuestionList qsList;
+	//LoadQuestions( "./resource/Questions.xml" );
 
 	// 질문 분석
-	int size = qsList.size();
+	int size = _qsList.size();
 	for( int num = 0; num < size; num++ )
 	{
-		std::string question = qsList[ num ];
+		std::string question = _qsList[ num ];
 		printf( "Process Question %d: %s\n", num, question.c_str() );
 
 		NamedEntityList namedEntityList;
@@ -45,10 +45,11 @@ void NamedEntityRecognition::ProcessQuestion( ResultNamedEntityRecognition & res
 	SaveResultNamedEntityRecognition( resultNamedEntityRecognition );
 }
 
-void NamedEntityRecognition::LoadQuestions( QuestionList & qsList )
+void NamedEntityRecognition::LoadQuestions( std::string path )
 {
+	_qsList.clear();
+
 	XmlDocument xmlDoc;
-	std::string path = "./resource/Questions.xml";
 	xmlDoc.LoadFile( path.c_str() );
 
 	const XmlNode * resNode = xmlDoc.GetNode( "resource" );
@@ -58,7 +59,7 @@ void NamedEntityRecognition::LoadQuestions( QuestionList & qsList )
 	{
 		const XmlNode * questionNode = resNode->GetNode( "question", num );
 		std::string question = questionNode->GetText();
-		qsList.push_back( question );		
+		_qsList.push_back( question );		
 	}
 }
 

@@ -101,7 +101,7 @@ const char * XmlNode::GetText() const
 void XmlNode::SetText( const char * srcText, TextType textType )
 {
 	std::string text = srcText;
-	if ( textType == STRING )
+	if ( textType == STRING || text.length() == 0)
 	{
 		text = '"' + text;
 		text += '"';
