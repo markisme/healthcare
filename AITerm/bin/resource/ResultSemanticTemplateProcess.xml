@@ -1,30 +1,31 @@
 <resource>
     <question questionno="0" templateno="3">
         <slot type="focus" tagname="comparison">compatible</slot>
-        <slot type="component1" tagname="cpu_name">e7400</slot>
-        <slot type="component2" tagname="cpu_name">e5200</slot>
+        <slot type="component1" tagname="cpu_name">e5200</slot>
+        <slot type="component2" tagname="mb_name">p5kpl/1600</slot>
     </question>
     <question questionno="1" templateno="0">
         <slot type="question" tagname="what">what</slot>
         <slot type="focus" tagname="price">cost</slot>
         <slot type="component1" tagname="cpu_name">e7400</slot>
     </question>
-    <question questionno="2" templateno="4">
-        <slot type="question" tagname="where">where</slot>
-        <slot type="focus" tagname="minimum">lowest</slot>
+    <question questionno="2" templateno="2">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="kind">kind</slot>
+        <slot type="target" tagname="maker">made</slot>
+        <slot type="component1" tagname="maker">asus</slot>
+    </question>
+    <question questionno="3" templateno="1">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="difference">difference</slot>
         <slot type="target" tagname="price">cost</slot>
-        <slot type="location" tagname="dealer">store</slot>
         <slot type="component1" tagname="cpu_name">e7400</slot>
+        <slot type="component2" tagname="cpu_name">e5200</slot>
     </question>
-    <question questionno="3" templateno="0">
-        <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="cpu_socket">socket</slot>
-        <slot type="component1" tagname="cpu_name">e7400</slot>
-    </question>
-    <question questionno="4" templateno="0">
-        <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="maker">manufacturer</slot>
-        <slot type="target" tagname="maker">make</slot>
-        <slot type="component1" tagname="cpu_name">e7400</slot>
+    <question questionno="4" templateno="6">
+        <slot type="question" tagname="how">how</slot>
+        <slot type="focus" tagname="constitution">constitute</slot>
+        <slot type="target" tagname="maximum">best</slot>
+        <slot type="option" tagname="number">300000</slot>
     </question>
 </resource>
