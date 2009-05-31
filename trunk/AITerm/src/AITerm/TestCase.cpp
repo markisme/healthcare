@@ -44,11 +44,11 @@ void TestCase::TestStart( std::string path )
 	// 쿼리 생성기
 	QueryGenerator queryGenerator;
 	queryGenerator.Start( resultMatchedTemplate, dbDic );
-	//const DBResultList & dbResultList = queryGenerator.GetDBResultList();
+	const DBResultList & dbResultList = queryGenerator.GetDBResultList();
 
 	// db 결과 로드 (시간지연으로인한 테스트 코드)
-	DBResultList dbResultList;
-	LoadResultDB( dbResultList );
+	//DBResultList dbResultList;
+	//LoadResultDB( dbResultList );
 
 	// 답변 생성기
 	AnswerGenerator answerGenerator;
