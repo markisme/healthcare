@@ -1,26 +1,6 @@
 <resource>
     <question no="0">
         <row>
-            <data name="">TRUE</data>
-        </row>
-    </question>
-    <question no="1">
-        <row>
-            <data name="price">186480</data>
-        </row>
-    </question>
-    <question no="2">
-        <row>
-            <data name="shop_url">http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G¸¶ÄÏ^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=</data>
-        </row>
-    </question>
-    <question no="3">
-        <row>
-            <data name="cpu_socket">775</data>
-        </row>
-    </question>
-    <question no="4">
-        <row>
             <data name="maker">intel</data>
         </row>
     </question>
