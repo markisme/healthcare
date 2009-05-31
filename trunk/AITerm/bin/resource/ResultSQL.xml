@@ -1,3 +1,7 @@
 <resource>
-    <question no="0">""</question>
+    <question no="0">SELECT IF((SELECT cpu_socket FROM cpu WHERE cpu_name='e7400') = (SELECT cpu_socket FROM cpu WHERE cpu_name='e5200'), 'TRUE', 'FALSE' )</question>
+    <question no="1">SELECT price FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="2">SELECT shop_url FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="3">SELECT cpu_socket FROM cpu WHERE cpu_name='e7400'</question>
+    <question no="4">SELECT maker FROM cpu WHERE cpu_name='e7400'</question>
 </resource>

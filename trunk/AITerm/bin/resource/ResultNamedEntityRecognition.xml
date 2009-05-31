@@ -1,10 +1,41 @@
 <resource>
     <question no="0">
+        <tag name="N/A" curpos="1" deppos="2" part="U">is</tag>
+        <tag name="cpu_name" curpos="2" deppos="*" part="N">e7400</tag>
+        <tag name="comparison" curpos="3" deppos="2" part="A">compatible</tag>
+        <tag name="N/A" curpos="4" deppos="3" part="Prep">with</tag>
+        <tag name="cpu_name" curpos="5" deppos="4" part="N">e5200</tag>
+    </question>
+    <question no="1">
         <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
         <tag name="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
         <tag name="N/A" curpos="3" deppos="4" part="Det">the</tag>
-        <tag name="N/A" curpos="4" deppos="2" part="N">price</tag>
+        <tag name="price" curpos="4" deppos="2" part="N">cost</tag>
         <tag name="N/A" curpos="5" deppos="4" part="Prep">of</tag>
-        <tag name="mb_name" curpos="6" deppos="5" part="N">p5kpl/1600</tag>
+        <tag name="cpu_name" curpos="6" deppos="5" part="N">e7400</tag>
+    </question>
+    <question no="2">
+        <tag name="where" curpos="1" deppos="E0" part="A">where</tag>
+        <tag name="N/A" curpos="2" deppos="E0" part="be">is</tag>
+        <tag name="N/A" curpos="3" deppos="6" part="Det">the</tag>
+        <tag name="minimum" curpos="4" deppos="6" part="A">lowest</tag>
+        <tag name="price" curpos="5" deppos="6" part="N">cost</tag>
+        <tag name="dealer" curpos="6" deppos="7" part="N">store</tag>
+        <tag name="dealer" curpos="7" deppos="E0" part="V">selling</tag>
+        <tag name="cpu_name" curpos="8" deppos="7" part="N">e7400</tag>
+    </question>
+    <question no="3">
+        <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
+        <tag name="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag name="N/A" curpos="3" deppos="4" part="Det">the</tag>
+        <tag name="cpu_socket" curpos="4" deppos="2" part="N">socket</tag>
+        <tag name="N/A" curpos="5" deppos="4" part="Prep">of</tag>
+        <tag name="cpu_name" curpos="6" deppos="5" part="N">e7400</tag>
+    </question>
+    <question no="4">
+        <tag name="what" curpos="1" deppos="2" part="Det">what</tag>
+        <tag name="maker" curpos="2" deppos="E0" part="N">manufacturer</tag>
+        <tag name="maker" curpos="3" deppos="E0" part="V">make</tag>
+        <tag name="cpu_name" curpos="4" deppos="3" part="N">e7400</tag>
     </question>
 </resource>
