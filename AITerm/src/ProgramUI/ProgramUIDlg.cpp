@@ -115,6 +115,9 @@ void CProgramUIDlg::RefreshAnswer()
 	_table.DeleteAllItems();
 	while(_table.DeleteColumn(0)) {} 
 
+	// 정답 초기화
+	_answer.SetWindowText( "" );
+
 	// 질문 xml 로드
 	{
 		XmlDocument xmlDoc;
