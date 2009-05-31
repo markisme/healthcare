@@ -1,21 +1,5 @@
 <resource>
     <question no="0">
-        <table>@0$:TRUE# </table>
-        <answer>It's the same as table.</answer>
-    </question>
-    <question no="1">
-        <table>""</table>
-        <answer>The cost of e7400 is 186480 .</answer>
-    </question>
-    <question no="2">
-        <table>""</table>
-        <answer>The minimum selling store is http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G¸¶ÄÏ^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= .</answer>
-    </question>
-    <question no="3">
-        <table>""</table>
-        <answer>The socket of e7400 is 775 .</answer>
-    </question>
-    <question no="4">
         <table>""</table>
         <answer>The manufacturer made e7400 is intel .</answer>
     </question>
