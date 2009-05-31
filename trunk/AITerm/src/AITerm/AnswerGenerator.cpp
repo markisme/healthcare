@@ -421,7 +421,7 @@ std::string AnswerGenerator::GetResultDataList( int questionNo, const DBResultLi
 		{
 			std::string col = rowData._col[ cnt ];
 			std::string data = rowData._data[ cnt ];
-			ret += "@" + col + ":" + data + "/ ";
+			ret += "@" + col + ":" + data + "# ";
 		}
 	}
 
