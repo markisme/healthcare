@@ -22,6 +22,7 @@ void SemanticTemplateProcessor::Start( ResultNamedEntityRecognition * resultName
 		NamedEntityList & namedEntityList = (*resultNamedEntityRecognition)[ num ];
 		MatchedTemplate matchedTemplate;
 		matchedTemplate._questionNo = num;
+		matchedTemplate._tempNo = 0;
 		CompareTagname( tempList, namedEntityList, matchedTemplate );
 		_resultMatchedTemplate.push_back( matchedTemplate );
 	}

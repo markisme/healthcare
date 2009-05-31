@@ -143,6 +143,16 @@ AnswerData AnswerGenerator::GenerateAnswer( const MatchedTemplate & matchedTempl
 {
 	AnswerData ans;
 
+	int qsNo = matchedTemplate._questionNo;
+	const DataList & dataList = dbResultList[ qsNo ];
+	int dbSize = dataList.size();
+	if( dbSize <= 0 )
+	{
+		ans._reference = "";
+		ans._answer = "Cannot answer this question.";
+		return ans;
+	}
+
 	int count = answerRuleList.size();
 	for( int num = 0; num < count; num++)
 	{
