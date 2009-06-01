@@ -41,12 +41,10 @@
 		<slot type="component1" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
-			<tag name = "info_keyword"/>
 		</slot>
 		<slot type="component2" need="true">
 			<tag name = "cpu_name"/>
 			<tag name = "mb_name"/>
-			<tag name = "info_keyword"/>
 		</slot>
 	</template>
 
@@ -131,6 +129,7 @@
 		</slot>
 		<slot type="component1" need="true">
 			<tag name = "product"/>
+			<tag name = "maker"/>
 		</slot>
 	</template>
 	
@@ -163,9 +162,13 @@
 			<tag name = "difference"/>
 		</slot>
 		<slot type="component1" need="true">
+			<tag name = "cpu_name"/>
+			<tag name = "mb_name"/>
 			<tag name = "info_keyword"/>
 		</slot>
 		<slot type="component2" need="true">
+			<tag name = "cpu_name"/>
+			<tag name = "mb_name"/>
 			<tag name = "info_keyword"/>
 		</slot>
 	</template>

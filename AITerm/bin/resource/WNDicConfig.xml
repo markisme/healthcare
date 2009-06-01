@@ -1,6 +1,7 @@
 <resource create="true">
     <!-- 질문에 필요한 카테고리 -->
     <tag name="comparison">
+    	<keyword name="comparison" sense="0"/>
     	<keyword name="compatible" sense="0"/>
     </tag>
     <tag name="difference">
@@ -14,30 +15,36 @@
     	<keyword name="performance" sense="2"/>
     </tag>
     <tag name="constitution">
+    	<keyword name="constitution" sense="0"/>
     	<keyword name="constitute" sense="3"/>
 	<keyword name="combination" sense="0"/>
     </tag>
     <tag name="exception">
+    	<keyword name="exception" sense="0"/>
     	<keyword name="happen" sense="0"/>
 	<keyword name="occur" sense="0"/>
     </tag>
     <tag name="price">
+    	<keyword name="price" sense="1"/>
     	<keyword name="cost" sense="2"/>
     	<keyword name="won" sense="1"/>
-    	<keyword name="price" sense="1"/>
     </tag>
     <tag name="minimum">
+    	<keyword name="minimum" sense="0"/>
     	<keyword name="lowest" sense="0"/>
     </tag>
     <tag name="maximum">
+    	<keyword name="maximum" sense="0"/>
     	<keyword name="best" sense="0"/>
     	<keyword name="strong" sense="6"/>
     </tag>
     <tag name="dealer">
+    	<keyword name="dealer" sense="0"/>
     	<keyword name="store" sense="1"/>
     	<keyword name="selling" sense="1"/>
     </tag>
     <tag name="maker">
+    	<keyword name="maker" sense="0"/>
     	<keyword name="manufacturer" sense="1"/>
     	<keyword name="make" sense="0"/>
     	<keyword name="made" sense="0"/>
@@ -46,9 +53,11 @@
     	<keyword name="kind" sense="1"/>
     </tag>
     <tag name="date">
+    	<keyword name="date" sense="0"/>
     	<keyword name="latest" sense="0"/>
     </tag>
     <tag name="product">
+    	<keyword name="product" sense="1"/>
     	<keyword name="computer" sense="1"/>
     </tag>
    
@@ -75,10 +84,12 @@
 
     <!-- 고유 명사 -->
     <tag name="cpu_socket">
+    	<keyword name="cpu socket" sense="0"/>
     	<keyword name="socket" sense="0"/>
     	<keyword name="type" sense="0"/>
     </tag>
     <tag name="mainboard">
+    	<keyword name="mainboard" sense="0"/>
     	<keyword name="motherboard" sense="0"/>
     </tag>
     <tag name="cpu">
@@ -91,15 +102,18 @@
     	<keyword name="internal graphics" sense="0"/>
     </tag>
     <tag name="lan_card">
+	<keyword name="lan card" sense="0"/>
 	<keyword name="internal network card" sense="0"/>
     </tag>
     <tag name="audio_card">
+    	<keyword name="audio card" sense="0"/>
     	<keyword name="internal audio" sense="0"/>
     </tag>
     <tag name="pci-e">
     	<keyword name="pci - e" sense="0"/>
     </tag>
 	<tag name="extension_slot">
+    	<keyword name="pci slots" sense="0"/>
     	<keyword name="extension slots" sense="0"/>
     </tag>
 </resource>
