@@ -1,78 +1,10 @@
 <resource>
     <question no="0">
         <row>
-            <data name="">TRUE</data>
-        </row>
-    </question>
-    <question no="1">
-        <row>
-            <data name="price">186480</data>
-        </row>
-    </question>
-    <question no="2">
-        <row>
-            <data name="mb_name">p5kpl/1600</data>
+            <data name="info_text">the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors.</data>
         </row>
         <row>
-            <data name="mb_name">p5ld2-c/ipat</data>
-        </row>
-        <row>
-            <data name="mb_name">p5q</data>
-        </row>
-        <row>
-            <data name="mb_name">p5q pro</data>
-        </row>
-        <row>
-            <data name="mb_name">p5kpl-am se</data>
-        </row>
-        <row>
-            <data name="mb_name">p5gc-mx/1333</data>
-        </row>
-        <row>
-            <data name="mb_name">p5ql se</data>
-        </row>
-        <row>
-            <data name="mb_name">p5kpl se</data>
-        </row>
-        <row>
-            <data name="mb_name">p6t</data>
-        </row>
-        <row>
-            <data name="mb_name">p5q3</data>
-        </row>
-        <row>
-            <data name="mb_name">p5ql</data>
-        </row>
-        <row>
-            <data name="mb_name">p5sd2-tm</data>
-        </row>
-        <row>
-            <data name="mb_name">m3a78 pro</data>
-        </row>
-        <row>
-            <data name="mb_name">m3a78-em</data>
-        </row>
-        <row>
-            <data name="mb_name">m2a-vm hdmi</data>
-        </row>
-        <row>
-            <data name="mb_name">m3a78-vm</data>
-        </row>
-        <row>
-            <data name="mb_name">m2n68-am se</data>
-        </row>
-    </question>
-    <question no="3">
-        <row>
-            <data name="">80210</data>
-        </row>
-    </question>
-    <question no="4">
-        <row>
-            <data name="cpu_name">e6750</data>
-            <data name="mb_name">p5ql se</data>
-            <data name="price">23500</data>
-            <data name="price">132960</data>
+            <data name="info_text">socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it</data>
         </row>
     </question>
 </resource>

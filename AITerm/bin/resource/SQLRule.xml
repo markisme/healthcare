@@ -46,16 +46,7 @@
 			<exp type="$c2.tx"/>
 		</expression>
 	</sql>
-	<sql tempNo="1" no="1"> // 질문18, 질문19
-		<need_slot_list>
-			<slot type="component1" value="info_keyword"/>
-		</need_slot_list>
-		<expression type="SELECT info_text FROM info WHERE info_keyword='%s' OR info_keyword='%s'">
-			<exp type="$c1.tx"/>
-			<exp type="$c2.tx"/>
-		</expression>
-	</sql>
-	<sql tempNo="1" no="2"> // 질문20,
+	<sql tempNo="1" no="1"> // 질문20,
 		<need_slot_list>
 			<slot type="focus" value="difference"/>
 		</need_slot_list>
@@ -151,6 +142,16 @@
 			<slot type="question" value="what"/>
 		</need_slot_list>
 		<expression type="SELECT cpu_name FROM cpu WHERE cpu.clock_frequency / cpu.price > 0 ORDER BY cpu.clock_frequency / cpu.price DESC LIMIT 1">
+		</expression>
+	</sql>
+
+	<sql tempNo="8" no="0"> // 질문18, 질문19
+		<need_slot_list>
+			<slot type="component1" value="info_keyword"/>
+		</need_slot_list>
+		<expression type="SELECT info_text FROM info WHERE info_keyword='%s' OR info_keyword='%s'">
+			<exp type="$c1.tx"/>
+			<exp type="$c2.tx"/>
 		</expression>
 	</sql>
 </resource>

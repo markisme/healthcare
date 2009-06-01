@@ -24,6 +24,7 @@
     <tag name="price">
     	<keyword name="cost" sense="2"/>
     	<keyword name="won" sense="1"/>
+    	<keyword name="price" sense="1"/>
     </tag>
     <tag name="minimum">
     	<keyword name="lowest" sense="0"/>
