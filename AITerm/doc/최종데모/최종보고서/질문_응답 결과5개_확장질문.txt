@@ -1,0 +1,59 @@
+<resource>
+    <question no="0">Is P5KPL/1600 compatible with E5200?</question>
+    <question no="1">What is the cost of E7400?</question>
+    <question no="2">What kinds of motherboard made by ASUS?</question>
+    <question no="3">What is the cost difference between E7400 and E5200?</question>
+    <question no="4">how can we constitute the best computer with 300000 won?</question>
+</resource>
+
+//<question no="0"></question>
+
+<!-- 질문 0 확장 질문
+<resource>
+  <question no="0">could you tell me, E5200 is compatible with P5KPL/1600?</question>
+  <question no="0">Is g31mx-k compatible with E5200?</question>
+  <question no="0">Is p5q compatible with RUNY?</question>
+  <question no="0">해당사항 없음</question>
+  <question no="0">Is p5q compatible with P5KPL/1600?</question>
+</resource>
+-->
+
+<!-- 질문 1 확장 질문
+<resource>
+  <question no="1">what is the price of E7400?</question>
+  <question no="1">what is the maker of E7400?</question>
+  <question no="1">who is the best player in the manchester united?</question>
+  <question no="1">해당사항 없음</question>
+  <question no="1">what is the internal graphic card of E7400?</question>
+</resource>
+-->
+
+<!-- 질문 2 확장 질문
+<resource>
+  <question no="2">what mainboards are made by ASUS?</question>
+  <question no="2">what kinds of cpu made by INTEL?</question>
+  <question no="2">What kinds of ABC made by ASUS?</question>
+  <question no="2">해당사항 없음</question>
+  <question no="2">what kinds of mainboards are made by RUNY?</question>
+</resource>
+-->
+
+<!-- 질문 3 확장 질문
+<resource>
+    <question no="3">what is the price difference between E7400 and E5200?</question>
+    <question no="3">what is the cost difference between p5q and q3lmx-k?</question>
+    <question no="3">What is the ABC difference between E7400 and E5200?</question>
+    <question no="3">해당사항 없음</question>
+    <question no="3">what is the cost difference between morning and genesis?</question>
+</resource>
+-->
+
+<!-- 질문 4 확장 질문
+<resource>
+    <question no="4">how can we make the best computer with 300000 won?</question>
+    <question no="4">해당사항 없음</question>
+    <question no="4">how can we constitute the best PHONE with 300000 won?</question>
+    <question no="4">해당사항 없음</question>
+    <question no="4">how can we constitute the best printer with 300000 won?</question>
+</resource>
+-->
