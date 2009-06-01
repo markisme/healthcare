@@ -25,9 +25,9 @@
 - 0) could you tell me, E5200 is compatible with P5KPL/1600? -> ','무시 수정필요
     (여기서 ','를 포함하면 답변을 못하고, 쉼표를 없애면 답변함)
     ( 그 밖에 would you등의 표현 변화에는 잘 답함.)
-- 1) what is the price of E7400? -> bad : 대답할 수 없다고 나옴. cost는 잘 대답.
-- 2) what mainboards are made by ASUS? -> bad : 답할 수 없음.
-- 3) what is the price difference between E7400 and E5200? -> bad : price를 cost로 인식 못함.
+- 1) what is the price of E7400? -> good 
+- 2) what mainboards are made by ASUS? -> bad : 답할 수 없음
+- 3) what is the price difference between E7400 and E5200? -> good
 - 4) how can we 'make' the best computer with 300000 won? -> good : 원래 답의 형태가 조금 이상함. and the prices are ~~ and ~~ won. 으로 수정 필요
 
 2. 엔터티를 변경하여 질문
