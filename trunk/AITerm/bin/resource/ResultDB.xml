@@ -1,3 +1,7 @@
 <resource>
-    <question no="0" />
+    <question no="0">
+        <row>
+            <data name="price">184300</data>
+        </row>
+    </question>
 </resource>

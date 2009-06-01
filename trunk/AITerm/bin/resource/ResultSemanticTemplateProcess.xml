@@ -1,3 +1,7 @@
 <resource>
-    <question questionno="0" templateno="0" />
+    <question questionno="0" templateno="0">
+        <slot type="question" tagname="what">what</slot>
+        <slot type="focus" tagname="price">cost</slot>
+        <slot type="component1" tagname="mb_name">p5q</slot>
+    </question>
 </resource>

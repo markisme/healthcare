@@ -1,5 +1,12 @@
 <resource>
     <question no="0">
-        <tag name="mb_name" curpos="1" deppos="5" part="U">ga-p43-es3g</tag>
+        <tag name="what" curpos="1" deppos="E0" part="N">what</tag>
+        <tag name="N/A" curpos="2" deppos="E0" part="VBE">is</tag>
+        <tag name="N/A" curpos="3" deppos="5" part="Det">the</tag>
+        <tag name="price" curpos="4" deppos="5" part="N">cost</tag>
+        <tag name="difference" curpos="5" deppos="2" part="N">difference</tag>
+        <tag name="N/A" curpos="6" deppos="5" part="Prep">between</tag>
+        <tag name="mb_name" curpos="7" deppos="6" part="N">p5q</tag>
+        <tag name="N/A" curpos="9" deppos="7" part="N">genesis</tag>
     </question>
 </resource>
