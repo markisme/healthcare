@@ -8,15 +8,95 @@
         <answer>The cost of e7400 is 186480 .</answer>
     </question>
     <question no="2">
-        <table>@0$mb_name:p5kpl/1600# @1$mb_name:p5ld2-c/ipat# @2$mb_name:p5q# @3$mb_name:p5q pro# @4$mb_name:p5kpl-am se# @5$mb_name:p5gc-mx/1333# @6$mb_name:p5ql se# @7$mb_name:p5kpl se# @8$mb_name:p6t# @9$mb_name:p5q3# @10$mb_name:p5ql# @11$mb_name:p5sd2-tm# @12$mb_name:m3a78 pro# @13$mb_name:m3a78-em# @14$mb_name:m2a-vm hdmi# @15$mb_name:m3a78-vm# @16$mb_name:m2n68-am se# </table>
-        <answer>The motherboards made by asus is the same as table.</answer>
+        <table>""</table>
+        <answer>The minimum selling store is http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods= .</answer>
     </question>
     <question no="3">
-        <table>@0$:80210# </table>
-        <answer>The difference is the same as table</answer>
+        <table>""</table>
+        <answer>The socket of e7400 is 775 .</answer>
     </question>
     <question no="4">
         <table>""</table>
-        <answer>You can constitute the best computer with e6750 and i865gv-478 and 23500 and 57420 .</answer>
+        <answer>The manufacturer made e7400 is intel .</answer>
+    </question>
+    <question no="5">
+        <table>""</table>
+        <answer>The manufacturer made p5kpl/1600 is asus .</answer>
+    </question>
+    <question no="6">
+        <table>@0$mb_name:p5kpl/1600# @1$mb_name:p5ld2-c/ipat# @2$mb_name:p5q# @3$mb_name:p5q pro# @4$mb_name:p5kpl-am se# @5$mb_name:p5gc-mx/1333# @6$mb_name:p5ql se# @7$mb_name:p5kpl se# @8$mb_name:p6t# @9$mb_name:p5q3# @10$mb_name:p5ql# @11$mb_name:p5sd2-tm# @12$mb_name:m3a78 pro# @13$mb_name:m3a78-em# @14$mb_name:m2a-vm hdmi# @15$mb_name:m3a78-vm# @16$mb_name:m2n68-am se# </table>
+        <answer>The motherboards made by asus is the same as table.</answer>
+    </question>
+    <question no="7">
+        <table>""</table>
+        <answer>The graphic interfaces supported by p5kpl/1600 is pci-e .</answer>
+    </question>
+    <question no="8">
+        <table>""</table>
+        <answer>The type of p5kpl/1600 is 775 .</answer>
+    </question>
+    <question no="9">
+        <table>""</table>
+        <answer>Cannot answer this question.</answer>
+    </question>
+    <question no="10">
+        <table>@0$MAX(date_released):2009-01-01# </table>
+        <answer>Definition of the date is the same as table</answer>
+    </question>
+    <question no="11">
+        <table>@0$:TRUE# </table>
+        <answer>It's the same as table.</answer>
+    </question>
+    <question no="12">
+        <table>""</table>
+        <answer>There is(are) 4  on p5kpl/1600.</answer>
+    </question>
+    <question no="13">
+        <table>""</table>
+        <answer>The internal graphics on p5kpl/1600 is gma3100 .</answer>
+    </question>
+    <question no="14">
+        <table>""</table>
+        <answer>The internal audio on p5kpl/1600 is viavt1708b .</answer>
+    </question>
+    <question no="15">
+        <table>""</table>
+        <answer>The performance of the lan_card  is 1000 .</answer>
+    </question>
+    <question no="16">
+        <table>@0$:80210# </table>
+        <answer>The difference is the same as table</answer>
+    </question>
+    <question no="17">
+        <table>@0$cpu_socket:775# @1$cpu_socket:1366# </table>
+        <answer>The cpu_socket  is the same as table.</answer>
+    </question>
+    <question no="18">
+        <table>@0$info_text:the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors.# @1$info_text:socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it# </table>
+        <answer>The difference is the same as table</answer>
+    </question>
+    <question no="19">
+        <table>@0$info_text:the serial ata(sata, ipa: /se?t?/, /sæt?/ or /s?ːt?/) computer bus is a storage-interface for connecting host bus adapters (most commonly integrated into laptop computers and desktop motherboards) to mass storage devices (such as hard disk drives and optical drives).# @1$info_text:at attachment (ata) and at attachment packet interface (atapi) are interface standards for the connection of storage devices such as hard disks, solid-state drives, and cd-rom drives in computers. the standard is maintained by x3/incits committee t13.# </table>
+        <answer>The difference is the same as table</answer>
+    </question>
+    <question no="20">
+        <table>@0$product_id:1# @0$cpu_name:e5200# @0$maker:intel# @0$core_id:17# @0$clock_frequency:2500# @0$processor_system:64# @0$frontside_bus:800# @0$cpu_socket:775# @0$fabrication_process:45# @0$l2_cache:2048# @0$tdp:65# @0$price:106270# @0$shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods=# @1$product_id:2# @1$cpu_name:e7400# @1$maker:intel# @1$core_id:17# @1$clock_frequency:2800# @1$processor_system:64# @1$frontside_bus:1066# @1$cpu_socket:775# @1$fabrication_process:45# @1$l2_cache:3072# @1$tdp:65# @1$price:186480# @1$shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=# </table>
+        <answer>The difference is the same as table</answer>
+    </question>
+    <question no="21">
+        <table>""</table>
+        <answer>You can constitute the best computer with e6750 and geforce6100pm-m2 v2.0 and 23500 and 63360 .</answer>
+    </question>
+    <question no="22">
+        <table>""</table>
+        <answer>qx9770 and p5q3  are the srtong combination.</answer>
+    </question>
+    <question no="23">
+        <table>""</table>
+        <answer>The best cost performance CPU is e6750 .</answer>
+    </question>
+    <question no="24">
+        <table>""</table>
+        <answer>Cannot answer this question.</answer>
     </question>
 </resource>
