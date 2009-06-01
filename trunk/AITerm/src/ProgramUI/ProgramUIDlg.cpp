@@ -48,13 +48,21 @@ BOOL CProgramUIDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 큰 아이콘을 설정합니다.
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
+	//// DB 접속 정보
+	//DBConnectInfo info;
+	//info.ip = "211.189.19.160";
+	//info.user = "root";
+	//info.pass = "1234";
+	//info.port = 3306;
+	//info.dbName = "AITerm";
+
 	// DB 접속 정보
 	DBConnectInfo info;
-	info.ip = "211.189.19.160";
-	info.user = "root";
-	info.pass = "1234";
+	info.ip = "211.239.163.46";
+	info.user = "naid";
+	info.pass = "rbgur0834#!";
 	info.port = 3306;
-	info.dbName = "AITerm";
+	info.dbName = "aiterm";
 
 	// DB 정보 초기화(싱글턴)
 	DBConnector::GetInstance().Init( info );

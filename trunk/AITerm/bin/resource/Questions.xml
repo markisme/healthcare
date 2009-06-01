@@ -1,3 +1,33 @@
 <resource>
-    <question no="0">what is the cost difference between p5q and genesis?</question>
+    <question no="0">Is P5KPL/1600 compatible with E5200?</question>
+    <question no="1">What is the cost of E7400?</question>
+    <question no="2">What kinds of motherboard made by ASUS?</question>
+    <question no="3">What is the cost difference between E7400 and E5200?</question>
+    <question no="4">how can we constitute the best computer with 300000 won?</question>
 </resource>
+
+<!-- 질문 0 확장 질문
+<resource>
+</resource>
+-->
+
+<!-- 질문 1 확장 질문
+<resource>
+</resource>
+-->
+
+<!-- 질문 2 확장 질문
+<resource>
+</resource>
+-->
+
+<!-- 질문 3 확장 질문
+<resource>
+	<question no="3">What is the ABC difference between E7400 and E5200?</question>
+</resource>
+-->
+
+<!-- 질문 4 확장 질문
+<resource>
+</resource>
+-->
