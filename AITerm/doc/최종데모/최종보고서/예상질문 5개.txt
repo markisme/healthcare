@@ -26,14 +26,14 @@
     (여기서 ','를 포함하면 답변을 못하고, 쉼표를 없애면 답변함)
     ( 그 밖에 would you등의 표현 변화에는 잘 답함.)
 - 1) what is the price of E7400? -> good 
-- 2) what mainboards are made by ASUS? -> bad : 답할 수 없음
+- 2) what mainboards are made by ASUS? -> bad : 답할 수 없음. kind가 없을 경우 처리 못함. (안고쳐도 될듯)
 - 3) what is the price difference between E7400 and E5200? -> good
 - 4) how can we 'make' the best computer with 300000 won? -> good : 원래 답의 형태가 조금 이상함. and the prices are ~~ and ~~ won. 으로 수정 필요
 
 2. 엔터티를 변경하여 질문
-- 0) Is g31mx-k compatible with E5200? -> bad : TRUE가 아닌경우, 대답할 수 없다고 나옴. 대답할 수 없는 것과 FALSE인 것의 구분 필요.
+- 0) Is g31mx-k compatible with E5200? -> bad : '-'처리 때문인듯
 - 1) what is the maker of E7400? -> good
-- 2) what kinds of cpu made by INTEL? -> bad : 무응답
+- 2) what kinds of cpu made by INTEL? -> good
 - 3) what is the cost difference between p5q and q3lmx-k? -> 띄어쓰기나 '-'가 들어간 것은 인식하지 못함.
      what is the cost difference between p5q and p6t? -> good
 - 4) 해당사항 없음
@@ -46,14 +46,14 @@
 - 4) how can we constitute the best PHONE with 300000 won? -> good : 답할 수 없음
 
 4. 도메인 내에서 정답이 여러 개가 나올 수 있는 질문
-- 0) what mainboards are compatible with E5200? -> bad : 답할 수 없음
+- 0) what mainboards are compatible with E5200? -> bad : 답할 수 없음.
 - 1) 해당사항 없음
 - 2) good
 - 3) 해당사항 없음
 - 4) 해당사항 없음
 
 5. 도메인 내에서 정답이 없는 질문
-- 0) Is p5q compatible with P5KPL/1600? -> bad : mainboard끼리는 비교하지 말아야 하는데 비교됨
+- 0) Is p5q compatible with P5KPL/1600? -> good : mainboard끼리는 비교하지 말아야 되지만, cpu_socket이 일치할 경우 mainboard끼리도 호환된다고 할 수 있으므로, good으로 보아도 될 듯.
 - 1) what is the internal graphic card of E7400? -> good : 답할 수 없음
 - 2) what kinds of mainboards are made by RUNY? -> good : 답할 수 없음
 - 3) what is the cost difference between p5q and genesis? -> bad : 질문을 p5q의 가격을 묻는 것으로 잘못 인식함.
