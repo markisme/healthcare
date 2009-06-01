@@ -46,18 +46,6 @@
 			<exp type="$c2.tx"/>
 		</expression>
 	</sql>
-	<sql tempNo="1" no="1"> // 질문20,
-		<need_slot_list>
-			<slot type="focus" value="difference"/>
-		</need_slot_list>
-		<expression type="SELECT * FROM %s WHERE %s='%s' OR %s='%s'">
-			<exp type="$c1.tb"/>
-			<exp type="$c1.va"/>
-			<exp type="$c1.tx"/>
-			<exp type="$c2.va"/>
-			<exp type="$c2.tx"/>
-		</expression>
-	</sql>
 
 	<sql tempNo="2" no="0"> // 질문6
 		<need_slot_list>
@@ -141,6 +129,19 @@
 			<exp type="$c2.tx"/>
 		</expression>
 	</sql>
+	<sql tempNo="8" no="1"> // 질문20,
+		<need_slot_list>
+			<slot type="focus" value="difference"/>
+		</need_slot_list>
+		<expression type="SELECT * FROM %s WHERE %s='%s' OR %s='%s'">
+			<exp type="$c1.tb"/>
+			<exp type="$c1.va"/>
+			<exp type="$c1.tx"/>
+			<exp type="$c2.va"/>
+			<exp type="$c2.tx"/>
+		</expression>
+	</sql>
+
 
 	<sql tempNo="9" no="0"> // 질문6
 		<need_slot_list>

@@ -1,5 +1,6 @@
 <resource>
     <tag name="comparison">
+        <keyword name="comparison" />
         <keyword name="compatible" />
     </tag>
     <tag name="difference">
@@ -16,6 +17,7 @@
         <keyword name="show" />
     </tag>
     <tag name="constitution">
+        <keyword name="constitution" />
         <keyword name="constitute" />
         <keyword name="represent" />
         <keyword name="make_up" />
@@ -24,10 +26,15 @@
         <keyword name="combination" />
     </tag>
     <tag name="exception">
+        <keyword name="exception" />
         <keyword name="happen" />
         <keyword name="occur" />
     </tag>
     <tag name="price">
+        <keyword name="price" />
+        <keyword name="terms" />
+        <keyword name="damage" />
+        <keyword name="cost" />
         <keyword name="cost" />
         <keyword name="outgo" />
         <keyword name="expenditure" />
@@ -35,19 +42,18 @@
         <keyword name="South_Korean_won" />
         <keyword name="won" />
         <keyword name="South_Korean_monetary_unit" />
-        <keyword name="price" />
-        <keyword name="terms" />
-        <keyword name="damage" />
-        <keyword name="cost" />
     </tag>
     <tag name="minimum">
+        <keyword name="minimum" />
         <keyword name="lowest" />
     </tag>
     <tag name="maximum">
+        <keyword name="maximum" />
         <keyword name="best" />
         <keyword name="strong" />
     </tag>
     <tag name="dealer">
+        <keyword name="dealer" />
         <keyword name="shop" />
         <keyword name="store" />
         <keyword name="mercantile_establishment" />
@@ -62,6 +68,7 @@
         <keyword name="mercantilism" />
     </tag>
     <tag name="maker">
+        <keyword name="maker" />
         <keyword name="manufacturer" />
         <keyword name="maker" />
         <keyword name="manufacturing_business" />
@@ -81,9 +88,16 @@
         <keyword name="category" />
     </tag>
     <tag name="date">
+        <keyword name="date" />
         <keyword name="latest" />
     </tag>
     <tag name="product">
+        <keyword name="merchandise" />
+        <keyword name="ware" />
+        <keyword name="product" />
+        <keyword name="commodity" />
+        <keyword name="trade_good" />
+        <keyword name="good" />
         <keyword name="computer" />
         <keyword name="computing_machine" />
         <keyword name="computing_device" />
@@ -112,10 +126,12 @@
         <keyword name="who" />
     </tag>
     <tag name="cpu_socket">
+        <keyword name="cpu socket" />
         <keyword name="socket" />
         <keyword name="type" />
     </tag>
     <tag name="mainboard">
+        <keyword name="mainboard" />
         <keyword name="motherboard" />
     </tag>
     <tag name="cpu">
@@ -128,15 +144,18 @@
         <keyword name="internal graphics" />
     </tag>
     <tag name="lan_card">
+        <keyword name="lan card" />
         <keyword name="internal network card" />
     </tag>
     <tag name="audio_card">
+        <keyword name="audio card" />
         <keyword name="internal audio" />
     </tag>
     <tag name="pci-e">
         <keyword name="pci - e" />
     </tag>
     <tag name="extension_slot">
+        <keyword name="pci slots" />
         <keyword name="extension slots" />
     </tag>
 </resource>
