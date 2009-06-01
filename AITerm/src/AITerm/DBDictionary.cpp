@@ -164,6 +164,109 @@ bool DBDictionary::SaveToXML( XmlNode * resNode )
 	return true;
 }
 
+int DBDictionary::GetTagName( const std::vector<std::string> & inDataList, std::string & outTagName, std::string & outWords )
+{
+	// 단어인 경우
+	int size = _dic.size();
+	for( int num = 0; num < size; num++ )
+	{
+		const TableDataForDic & tableDataList = _dic[num];
+
+		int colSize = tableDataList._dataList.size();
+		for( int cnt = 0; cnt < colSize; cnt++ )
+		{
+			const ColDataForDic & colDataList = tableDataList._dataList[ cnt ];
+			std::string colName = colDataList._colName;
+
+			int dataSize = colDataList._dataList.size();
+			for( int k = 0; k < dataSize; k++ )
+			{
+				const std::string & data = colDataList._dataList[ k ];
+				std::string word = ToLowerCase( (char*)data.c_str() );
+
+				int count = IsSameWords( inDataList, word, outWords );
+				if( count >= 0 )
+				{
+					outTagName = colName;
+					return count;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+int DBDictionary::IsSameWords( const std::vector<std::string> & lWordList, std::string rWord, std::string & outWords )
+{
+	// 연속된 단어 비교
+	std::string words;
+
+	int count = lWordList.size();
+	for( int num = 0; num < count; num++ )
+	{
+		std::string word = lWordList[ num ];
+		if( words.length() > 0 )
+		{
+			char prefix = words[words.length()-1];
+			if( word == "-" || prefix == '-')
+			{
+				words += word;
+			}
+			else
+			{
+				words += " ";
+				words += word;
+			}
+		}
+		else
+		{
+			words = word;
+		}
+		
+		if( words == rWord )
+		{
+			outWords = words;
+			return num;
+		}
+	}
+
+	std::string lWord = lWordList[ 0 ];
+
+	//
+	int length = lWord.size();
+	if( length < 3 )
+	{
+		return -1;
+	}
+
+	// 복수 비교 (s)
+	if( lWord[length-1] == 's' )
+	{
+		lWord.erase(length-1);
+		
+		if( lWord == rWord )
+		{
+			outWords = lWord;
+			return 0;
+		}
+	}
+
+	// 복수 비교 (es)
+	if( lWord[length-1] == 's' && lWord[length-2] == 'e' )
+	{
+		lWord.erase(length-1);
+		lWord.erase(length-2);
+		
+		if( lWord == rWord )
+		{
+			outWords = lWord;
+			return 0;
+		}
+	}
+
+	return -1;
+}
+
 std::string DBDictionary::GetTagName( const std::string & inData )
 {
 	return GetColName( inData );

@@ -124,13 +124,6 @@ void NamedEntityRecognition::GenerateTag( std::string question, NamedEntityList 
 		namedEntityElement._dependencePos = _Minipar.GetAt( num )->szDependence;
 		namedEntityElement._word = word;
 
-		namedEntityElement._name = _dbDic.GetTagName( word );
-		if( namedEntityElement._name.length() != 0 )
-		{
-			namedEntityList.push_back( namedEntityElement );
-			continue;
-		}
-
 		// 자신의 뒤 단어들을 리스트로 조합
 		std::vector<std::string> words;
 		for( int cnt = num; cnt < count; cnt++)
@@ -139,7 +132,16 @@ void NamedEntityRecognition::GenerateTag( std::string question, NamedEntityList 
 			words.push_back( word );
 		}
 
-		int count = _wnDic.GetTagName( words, namedEntityElement._name, namedEntityElement._word );
+		//namedEntityElement._name = _dbDic.GetTagName( word );
+		int count = _dbDic.GetTagName( words, namedEntityElement._name, namedEntityElement._word );
+		if( namedEntityElement._name.length() != 0 )
+		{
+			namedEntityList.push_back( namedEntityElement );
+			num += count;
+			continue;
+		}
+
+		count = _wnDic.GetTagName( words, namedEntityElement._name, namedEntityElement._word );
 		if( namedEntityElement._name.length() != 0 )
 		{
 			namedEntityList.push_back( namedEntityElement );

@@ -1,6 +1,6 @@
 <resource>
     <question no="0">
-        <table>@0$product_id:1# @0$cpu_name:e5200# @0$maker:intel# @0$core_id:17# @0$clock_frequency:2500# @0$processor_system:64# @0$frontside_bus:800# @0$cpu_socket:775# @0$fabrication_process:45# @0$l2_cache:2048# @0$tdp:65# @0$price:106270# @0$shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods=# @1$product_id:2# @1$cpu_name:e7400# @1$maker:intel# @1$core_id:17# @1$clock_frequency:2800# @1$processor_system:64# @1$frontside_bus:1066# @1$cpu_socket:775# @1$fabrication_process:45# @1$l2_cache:3072# @1$tdp:65# @1$price:186480# @1$shop_url:http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=# </table>
-        <answer>The difference is the same as table</answer>
+        <table>""</table>
+        <answer>Cannot answer this question.</answer>
     </question>
 </resource>

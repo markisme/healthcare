@@ -210,8 +210,16 @@ int WNDictionary::IsSameWords( const std::vector<std::string> & lWordList, std::
 		std::string word = lWordList[ num ];
 		if( words.length() > 0 )
 		{
-			words += " ";
-			words += word;
+			char prefix = words[words.length()-1];
+			if( word == "-" || prefix == '-')
+			{
+				words += word;
+			}
+			else
+			{
+				words += " ";
+				words += word;
+			}
 		}
 		else
 		{

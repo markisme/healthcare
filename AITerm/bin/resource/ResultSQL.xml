@@ -1,3 +1,3 @@
 <resource>
-    <question no="0">SELECT * FROM cpu WHERE cpu_name='e7400' OR cpu_name='e5200'</question>
+    <question no="0">""</question>
 </resource>
