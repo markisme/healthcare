@@ -316,6 +316,18 @@ int CProgramUIDlg::GetFieldNo( std::string fieldName, std::vector<std::string> &
 //
 void CProgramUIDlg::OnBnClickedButtonQuestion()
 {
+	// 콤보박스 초기화
+	int index = _questionCombo.GetCurSel();
+	if( index < 0 ) index = 0;
+	_questionCombo.ResetContent();
+
+	// 테이블 초기화
+	_table.DeleteAllItems();
+	while(_table.DeleteColumn(0)) {} 
+
+	// 정답 초기화
+	_answer.SetWindowText( "" );
+
 	//
 	CString question;
 	_question.GetWindowText( question );
