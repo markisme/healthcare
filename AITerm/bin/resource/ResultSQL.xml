@@ -1,3 +1,3 @@
 <resource>
-    <question no="0">""</question>
+    <question no="0">SELECT price FROM mainboard WHERE mb_name='p5q'</question>
 </resource>
