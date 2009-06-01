@@ -34,13 +34,13 @@
 - 0) Is g31mx-k compatible with E5200? -> bad : '-'처리 때문인듯
 - 1) what is the maker of E7400? -> good
 - 2) what kinds of cpu made by INTEL? -> good
-- 3) what is the cost difference between p5q and q3lmx-k? -> 띄어쓰기나 '-'가 들어간 것은 인식하지 못함.
+- 3) what is the cost difference between p5q and q3lmx-k? -> bad : 띄어쓰기나 '-'가 들어간 것은 인식하지 못함.
      what is the cost difference between p5q and p6t? -> good
 - 4) 해당사항 없음
 
 3. 도메인 외의 질문( 도메인이 다른 조에 대한 질문)
 - 0) Is p5q compatible with RUNY? -> good : 답할 수 없음
-- 1) who is the best player in the manchester unuted? -> good : 답할 수 없음
+- 1) who is the best player in the manchester united? -> good : 답할 수 없음
 - 2) What kinds of ABC made by ASUS? -> good : 답할 수 없음
 - 3) What is the ABC difference between E7400 and E5200? -> good : 답할 수 없음
 - 4) how can we constitute the best PHONE with 300000 won? -> good : 답할 수 없음
