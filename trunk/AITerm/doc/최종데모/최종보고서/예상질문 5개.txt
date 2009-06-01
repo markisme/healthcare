@@ -1,0 +1,69 @@
+1. 단, 질문의 형태가 완전히 변형되는 경우는 처리가 힘드므로 이런 경우는 고려하지 않음.
+2. 단어의 영역만 바뀌거나 하는 경우만 고려함.
+예를들어 cpu가 mainboard로 바뀌는 식으로
+3. what이 없어질 경우, 처리가 안되는 문제가 있으므로 이런 경우는 어떻게 
+처리할 것인지에 대한 대비책 필요.
+
+데모 프로그램의 출력에 대해서 상의할 것
+
+
+선택한 질문 다섯 개는 다음과 같다.
+0. Is P5KPL/1600 compatible with E5200?
+1. What is the cost of E7400?
+2. What kinds of motherboard made by ASUS?
+3. What is the cost difference between E7400 and E5200?
+4. how can we constitute the best computer with 300000 won?
+
+< 개선하면 좋을 점 >
+1. 질문에서 엔터키를 누르면 프로그램이 종료함
+2. 기존의 답변을 지울 수가 없어서 답변이 새로 갱신된 것인지 확인이 어려움.
+3. 2번질문에서 테이블의 탭 사이즈를 넓히면 더 좋을 듯
+
+
+이는 다음과 같이 다섯 개의 형식으로 변형되어 질문된다.
+1. 작성된 예문 표현을 다르게 하여 질문
+- 0) could you tell me, E5200 is compatible with P5KPL/1600? -> ','무시 수정필요
+    (여기서 ','를 포함하면 답변을 못하고, 쉼표를 없애면 답변함)
+    ( 그 밖에 would you등의 표현 변화에는 잘 답함.)
+- 1) what is the price of E7400? -> bad : 대답할 수 없다고 나옴. cost는 잘 대답.
+- 2) what mainboards are made by ASUS? -> bad : 답할 수 없음.
+- 3) what is the price difference between E7400 and E5200? -> bad : price를 cost로 인식 못함.
+- 4) how can we 'make' the best computer with 300000 won? -> good : 원래 답의 형태가 조금 이상함. and the prices are ~~ and ~~ won. 으로 수정 필요
+
+2. 엔터티를 변경하여 질문
+- 0) Is g31mx-k compatible with E5200? -> bad : TRUE가 아닌경우, 대답할 수 없다고 나옴. 대답할 수 없는 것과 FALSE인 것의 구분 필요.
+- 1) what is the maker of E7400? -> good
+- 2) what kinds of cpu made by INTEL? -> bad : 무응답
+- 3) what is the cost difference between p5q and q3lmx-k? -> 띄어쓰기나 '-'가 들어간 것은 인식하지 못함.
+     what is the cost difference between p5q and p6t? -> good
+- 4) 해당사항 없음
+
+3. 도메인 외의 질문( 도메인이 다른 조에 대한 질문)
+- 0) Is p5q compatible with RUNY? -> good : 답할 수 없음
+- 1) who is the best player in the manchester unuted? -> good : 답할 수 없음
+- 2) What kinds of ABC made by ASUS? -> BAD : ABC를 컴퓨터 인식
+- 3) What is the ABC difference between E7400 and E5200? -> BAD : 그냥 차이로 인식
+- 4) how can we constitute the best PHONE with 300000 won? -> BAD : 전화기를 컴퓨터로 인식하고 답변함
+
+4. 도메인 내에서 정답이 여러 개가 나올 수 있는 질문
+- 0) what mainboards are compatible with E5200? -> bad : 답할 수 없음
+- 1) 해당사항 없음
+- 2) good
+- 3) 해당사항 없음
+- 4) 해당사항 없음
+
+5. 도메인 내에서 정답이 없는 질문
+- 0) Is p5q compatible with P5KPL/1600? -> bad : 무응답
+- 1) what is the internal graphic card of E7400? -> good : 답할 수 없음
+- 2) what kinds of mainboards are made by RUNY? -> good : 답할 수 없음
+- 3) what is the cost difference between p5q and genesis? -> bad : 질문을 p5q의 가격을 묻는 것으로 잘못 인식함.
+- 4) how can we constitute the best PHONE with 300000 won? -> BAD : 전화기도 컴퓨터로 인식.
+
+
+
+
+
+
+
+
+
