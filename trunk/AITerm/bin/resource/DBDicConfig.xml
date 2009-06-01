@@ -1,7 +1,7 @@
 <resource create="false">
     <table name="cpu">
 	<col name="cpu_name"/>
-	<col name="cpu_maker"/>
+	<col name="maker"/>
     </table>
     <table name="cpu_core">
 	<col name="code_name"/>

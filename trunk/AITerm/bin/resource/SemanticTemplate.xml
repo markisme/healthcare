@@ -56,14 +56,15 @@
 		</slot>
 		<slot type="focus" need="true"> 
 			<tag name = "kind"/>
-			<tag name = "cpu_socket"/>
 		</slot>
 		<slot type="target" need="true">
 			<tag name = "maker"/>
 		</slot>
 		<slot type="component1" need="true">
 			<tag name = "maker"/>
-			<tag name = "cpu"/>
+		</slot>
+		<slot type="component2" need="true">
+			<tag name = "mainboard"/>
 		</slot>
 	</template>
 	
@@ -81,8 +82,7 @@
 			<tag name = "mb_name"/>
 		</slot>
 	</template>
-	
-	
+		
 	<template no="4">
 		<slot type="question" need="true"> 
 			<tag name = "where"/>
@@ -129,6 +129,9 @@
 		<slot type="option" need="false">
 			<tag name = "number"/>
 		</slot>
+		<slot type="component1" need="true">
+			<tag name = "product"/>
+		</slot>
 	</template>
 	
 	<template no="7">
@@ -164,6 +167,40 @@
 		</slot>
 		<slot type="component2" need="true">
 			<tag name = "info_keyword"/>
+		</slot>
+	</template>
+
+	<template no="9">
+		<slot type="question" need="true"> 
+			<tag name = "what"/>
+		</slot>
+		<slot type="focus" need="true"> 
+			<tag name = "kind"/>
+		</slot>
+		<slot type="target" need="true">
+			<tag name = "maker"/>
+		</slot>
+		<slot type="component1" need="true">
+			<tag name = "maker"/>
+		</slot>
+		<slot type="component2" need="true">
+			<tag name = "cpu"/>
+		</slot>
+	</template>
+
+	<template no="10">
+		<slot type="question" need="true"> 
+			<tag name = "what"/>
+		</slot>
+		<slot type="focus" need="true"> 
+			<tag name = "cpu_socket"/>
+		</slot>
+		<slot type="target" need="true">
+			<tag name = "maker"/>
+		</slot>
+		<slot type="component1" need="true">
+			<tag name = "mainboard"/>
+			<tag name = "cpu"/>
 		</slot>
 	</template>
 </resource>

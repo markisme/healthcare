@@ -63,22 +63,9 @@
 		<need_slot_list>
 			<slot type="focus" value="kind"/>
 		</need_slot_list>
-		<expression type="SELECT DISTINCT mb_name FROM %s WHERE %s='%s'">
-			// <exp type="$c.na"/>  // 포커스로 바꾸는 방법을 고려
-			<exp type="$c1.tb"/>
+		<expression type="SELECT DISTINCT mb_name FROM mainboard WHERE %s='%s'">
 			<exp type="$c1.va"/>
 			<exp type="$c1.tx"/>
-		</expression>
-	</sql>
-	<sql tempNo="2" no="1"> // 질문17
-		<need_slot_list>
-			<slot type="focus" value="cpu_socket"/>
-		</need_slot_list>
-		<expression type="SELECT DISTINCT %s FROM %s WHERE %s='%s'">
-			<exp type="$f.va"/>
-			<exp type="$t.tb"/>
-			<exp type="$t.va"/>
-			<exp type="$t.tx"/>
 		</expression>
 	</sql>
 
@@ -152,6 +139,28 @@
 		<expression type="SELECT info_text FROM info WHERE info_keyword='%s' OR info_keyword='%s'">
 			<exp type="$c1.tx"/>
 			<exp type="$c2.tx"/>
+		</expression>
+	</sql>
+
+	<sql tempNo="9" no="0"> // 질문6
+		<need_slot_list>
+			<slot type="focus" value="kind"/>
+		</need_slot_list>
+		<expression type="SELECT DISTINCT cpu_name FROM cpu WHERE %s='%s'">
+			<exp type="$c1.va"/>
+			<exp type="$c1.tx"/>
+		</expression>
+	</sql>
+
+	<sql tempNo="10" no="0"> // 질문17
+		<need_slot_list>
+			<slot type="focus" value="cpu_socket"/>
+		</need_slot_list>
+		<expression type="SELECT DISTINCT %s FROM %s WHERE %s='%s'">
+			<exp type="$f.va"/>
+			<exp type="$t.tb"/>
+			<exp type="$t.va"/>
+			<exp type="$t.tx"/>
 		</expression>
 	</sql>
 </resource>

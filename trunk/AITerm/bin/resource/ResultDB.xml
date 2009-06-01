@@ -1,10 +1,10 @@
 <resource>
     <question no="0">
         <row>
-            <data name="info_text">the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors.</data>
+            <data name="cpu_socket">AM2</data>
         </row>
         <row>
-            <data name="info_text">socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it</data>
+            <data name="cpu_socket">AM3</data>
         </row>
     </question>
 </resource>

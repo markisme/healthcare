@@ -1,8 +1,8 @@
 <resource>
-    <question questionno="0" templateno="8">
+    <question questionno="0" templateno="10">
         <slot type="question" tagname="what">what</slot>
-        <slot type="focus" tagname="difference">difference</slot>
-        <slot type="component1" tagname="info_keyword">am2</slot>
-        <slot type="component2" tagname="info_keyword">am3</slot>
+        <slot type="focus" tagname="cpu_socket">type</slot>
+        <slot type="target" tagname="maker">amd</slot>
+        <slot type="component1" tagname="cpu">cpu</slot>
     </question>
 </resource>
