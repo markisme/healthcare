@@ -168,7 +168,6 @@
 		</table>
 		<answer exp="The %s is the same as table.">
 			<exp type="$f.va"/>
-			
 		</answer>
 	</ans>
 </resource>
