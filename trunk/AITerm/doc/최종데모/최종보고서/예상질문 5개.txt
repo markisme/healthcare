@@ -41,9 +41,9 @@
 3. 도메인 외의 질문( 도메인이 다른 조에 대한 질문)
 - 0) Is p5q compatible with RUNY? -> good : 답할 수 없음
 - 1) who is the best player in the manchester unuted? -> good : 답할 수 없음
-- 2) What kinds of ABC made by ASUS? -> BAD : ABC를 컴퓨터 인식
-- 3) What is the ABC difference between E7400 and E5200? -> BAD : 그냥 차이로 인식
-- 4) how can we constitute the best PHONE with 300000 won? -> BAD : 전화기를 컴퓨터로 인식하고 답변함
+- 2) What kinds of ABC made by ASUS? -> good : 답할 수 없음
+- 3) What is the ABC difference between E7400 and E5200? -> good : 답할 수 없음
+- 4) how can we constitute the best PHONE with 300000 won? -> good : 답할 수 없음
 
 4. 도메인 내에서 정답이 여러 개가 나올 수 있는 질문
 - 0) what mainboards are compatible with E5200? -> bad : 답할 수 없음
@@ -53,11 +53,11 @@
 - 4) 해당사항 없음
 
 5. 도메인 내에서 정답이 없는 질문
-- 0) Is p5q compatible with P5KPL/1600? -> bad : 무응답
+- 0) Is p5q compatible with P5KPL/1600? -> bad : mainboard끼리는 비교하지 말아야 하는데 비교됨
 - 1) what is the internal graphic card of E7400? -> good : 답할 수 없음
 - 2) what kinds of mainboards are made by RUNY? -> good : 답할 수 없음
 - 3) what is the cost difference between p5q and genesis? -> bad : 질문을 p5q의 가격을 묻는 것으로 잘못 인식함.
-- 4) how can we constitute the best PHONE with 300000 won? -> BAD : 전화기도 컴퓨터로 인식.
+- 4) how can we constitute the best PHONE with 300000 won? -> good : 답할 수 없음
 
 
 
