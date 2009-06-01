@@ -28,7 +28,7 @@
 - 1) what is the price of E7400? -> good 
 - 2) what mainboards are made by ASUS? -> bad : 답할 수 없음. kind가 없을 경우 처리 못함. (안고쳐도 될듯)
 - 3) what is the price difference between E7400 and E5200? -> good
-- 4) how can we 'make' the best computer with 300000 won? -> good : 원래 답의 형태가 조금 이상함. and the prices are ~~ and ~~ won. 으로 수정 필요
+- 4) how can we make the best computer with 300000 won? -> good : 원래 답의 형태가 조금 이상함. You can constitute the best computer with e6750 and legend n61s and the prices are 23500 and 65000 won. 으로 수정 필요
 
 2. 엔터티를 변경하여 질문
 - 0) Is g31mx-k compatible with E5200? -> bad : '-'처리 때문인듯
