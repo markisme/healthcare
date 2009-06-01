@@ -35,6 +35,10 @@
         <keyword name="South_Korean_won" />
         <keyword name="won" />
         <keyword name="South_Korean_monetary_unit" />
+        <keyword name="price" />
+        <keyword name="terms" />
+        <keyword name="damage" />
+        <keyword name="cost" />
     </tag>
     <tag name="minimum">
         <keyword name="lowest" />

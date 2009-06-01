@@ -159,4 +159,15 @@
 			<exp type="$r.va"/>
 		</answer>
 	</ans>
+
+	<ans tempNo="8" no="0">
+		<need_slot_list>
+		</need_slot_list>
+		<table exp="%s">
+			<exp type="$r.li"/>
+		</table>
+		<answer exp="The %s is the same as table">
+			<exp type="$f.va"/>
+		</answer>
+	</ans>
 </resource>

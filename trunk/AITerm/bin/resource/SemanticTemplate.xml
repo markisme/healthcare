@@ -33,7 +33,7 @@
 		<slot type="focus" need="true">
 			<tag name = "difference"/>
 		</slot>
-		<slot type="target" need="false"> 
+		<slot type="target" need="true"> 
 			<tag name = "price"/>
 			<tag name = "performance"/>
 
@@ -49,7 +49,7 @@
 			<tag name = "info_keyword"/>
 		</slot>
 	</template>
-	
+
 	<template no="2">
 		<slot type="question" need="true"> 
 			<tag name = "what"/>
@@ -149,6 +149,21 @@
 			<tag name = "cpu"/>
 			<tag name = "cpu_name"/>
 			<tag name = "mainboard"/>
+		</slot>
+	</template>
+
+	<template no="8">
+		<slot type="question" need="true"> 
+			<tag name = "what"/>
+		</slot>
+		<slot type="focus" need="true">
+			<tag name = "difference"/>
+		</slot>
+		<slot type="component1" need="true">
+			<tag name = "info_keyword"/>
+		</slot>
+		<slot type="component2" need="true">
+			<tag name = "info_keyword"/>
 		</slot>
 	</template>
 </resource>

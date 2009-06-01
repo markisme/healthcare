@@ -1,22 +1,6 @@
 <resource>
     <question no="0">
-        <table>@0$:TRUE# </table>
-        <answer>It's the same as table.</answer>
-    </question>
-    <question no="1">
-        <table>""</table>
-        <answer>The cost of e7400 is 186480 .</answer>
-    </question>
-    <question no="2">
-        <table>@0$mb_name:p5kpl/1600# @1$mb_name:p5ld2-c/ipat# @2$mb_name:p5q# @3$mb_name:p5q pro# @4$mb_name:p5kpl-am se# @5$mb_name:p5gc-mx/1333# @6$mb_name:p5ql se# @7$mb_name:p5kpl se# @8$mb_name:p6t# @9$mb_name:p5q3# @10$mb_name:p5ql# @11$mb_name:p5sd2-tm# @12$mb_name:m3a78 pro# @13$mb_name:m3a78-em# @14$mb_name:m2a-vm hdmi# @15$mb_name:m3a78-vm# @16$mb_name:m2n68-am se# </table>
-        <answer>The motherboards made by asus is the same as table.</answer>
-    </question>
-    <question no="3">
-        <table>@0$:80210# </table>
+        <table>@0$info_text:the socket am2, renamed from socket m2 (to prevent using the same name as cyrix mii processors), is a cpu socket designed by amd for desktop processors.# @1$info_text:socket am3 is a cpu socket for amd processors. it follows directly from socket am2+. am3 was launched on february 9th, 2009, alongside the initial grouping of phenom ii processors designed for it# </table>
         <answer>The difference is the same as table</answer>
-    </question>
-    <question no="4">
-        <table>""</table>
-        <answer>You can constitute the best computer with e6750 and p5ql se and 23500 and 132960 .</answer>
     </question>
 </resource>
