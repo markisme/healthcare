@@ -1,34 +1,3 @@
 <resource>
-    <question no="0">
-        <row>
-            <data name="product_id">1</data>
-            <data name="cpu_name">e5200</data>
-            <data name="maker">intel</data>
-            <data name="core_id">17</data>
-            <data name="clock_frequency">2500</data>
-            <data name="processor_system">64</data>
-            <data name="frontside_bus">800</data>
-            <data name="cpu_socket">775</data>
-            <data name="fabrication_process">45</data>
-            <data name="l2_cache">2048</data>
-            <data name="tdp">65</data>
-            <data name="price">106270</data>
-            <data name="shop_url">http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1598322&price=106270&multiflag=N&pl_no=235570164&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1598322^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=106270^frmmultiflag=N^frmpl_no=235570164^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=1&newgoods=</data>
-        </row>
-        <row>
-            <data name="product_id">2</data>
-            <data name="cpu_name">e7400</data>
-            <data name="maker">intel</data>
-            <data name="core_id">17</data>
-            <data name="clock_frequency">2800</data>
-            <data name="processor_system">64</data>
-            <data name="frontside_bus">1066</data>
-            <data name="cpu_socket">775</data>
-            <data name="fabrication_process">45</data>
-            <data name="l2_cache">3072</data>
-            <data name="tdp">65</data>
-            <data name="price">186480</data>
-            <data name="shop_url">http://enuriap.gmarket.co.kr/move/Redirect.jsp?cmd=move_link&vcode=536&modelno=1778494&price=186480&multiflag=N&pl_no=229732200&factory=%C0%CE%C5%DA&modelnm=&escrow_url=/escrow/EsFrmOrderMain.jsp?cmd=move_link^frmshopcode=536^frmshopnm=G마켓^frmmodelno=1778494^frmmodelnm=^frmfactory=%C0%CE%C5%DA^frmmprice=186480^frmmultiflag=N^frmpl_no=229732200^frmpl_goodsnm=^deliveryinfo=&cate=07070102&urltype=0&coupon=0&porder=2&newgoods=</data>
-        </row>
-    </question>
+    <question no="0" />
 </resource>
