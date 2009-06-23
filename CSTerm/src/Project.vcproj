@@ -166,10 +166,6 @@
 				/>
 			</FileConfiguration>
 		</File>
-		<File
-			RelativePath=".\student.inc"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
