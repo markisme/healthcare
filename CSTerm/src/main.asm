@@ -97,7 +97,7 @@ InputData ENDP
 ;데이터 출력 프로시저
 PrintData PROC USES eax ecx edi edx
 	;출력 메세지 출력
-	mov edx, offset inputText
+	mov edx, offset printText
 	call writestring
 	call crlf
 	
