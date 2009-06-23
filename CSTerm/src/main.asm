@@ -208,6 +208,7 @@ Deviation PROC USES eax ecx edi edx
 	mov ecx, dataSize
 	mov edi, offset studentData
 	mov edx, 0
+	mov eax, 0
 
 CALCULATION1:
 	push ecx
@@ -231,6 +232,7 @@ CALCULATION1:
 	mov ecx, dataSize
 	mov edi, offset studentData
 	mov edx, 0
+	mov eax, 0
 
 CALCULATION2:
 	push ecx
@@ -273,6 +275,7 @@ CALCULATION3:
 	;ÃÊ±â °ª
 	mov edi, 1			; n = 0
 	mov edx, 0			; sigma
+	mov eax, 0
 
 CALCULATION4:
 	;¥Ò(2n-1)
