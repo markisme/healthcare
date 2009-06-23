@@ -20,7 +20,7 @@ studentData StudentInfo 100 dup(<>)	;## 100개 구조체 선언
 main PROC
 	call Clrscr
 
-	mov	 edx,OFFSET myMessage
+	;##mov	 edx,OFFSET myMessage
 	call WriteString
 
 	exit

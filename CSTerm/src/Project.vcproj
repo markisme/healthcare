@@ -58,7 +58,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="user32.lib irvine32.lib"
-				AdditionalLibraryDirectories="c:\Irvine"
+				AdditionalLibraryDirectories="../lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
@@ -157,6 +157,14 @@
 		<File
 			RelativePath=".\main.asm"
 			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="MASM"
+					IncludePaths="../include"
+				/>
+			</FileConfiguration>
 		</File>
 		<File
 			RelativePath=".\student.inc"
