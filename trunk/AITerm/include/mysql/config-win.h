@@ -20,7 +20,7 @@
 #ifdef __WIN2000__
 /* We have to do this define before including windows.h to get the AWE API
 functions */
-#define _WIN32_WINNT     0x0500
+#define _WI  0x0500
 #else
 /* Get NT 4.0 functions */
 #define _WIN32_WINNT     0x0400
